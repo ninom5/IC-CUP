@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -24,7 +23,7 @@ model User {
   img            String
   role           Role
   isVerified     Boolean  @default(false)
-  driverLicence  String
+  driverLicense  String
   idCard         String
   phoneNumber    String
   address        String
