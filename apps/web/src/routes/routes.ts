@@ -1,4 +1,4 @@
-import { RouteType } from "../types/routeType";
+import { RouteType } from "types/index";
 
 export const routes: RouteType = {
   HOME: "/",
@@ -8,4 +8,5 @@ export const routes: RouteType = {
   CARS: "/cars",
   CAR_PAGE: "/car/:id",
   ADD_CAR: "/createCar",
+  NOT_FOUND: "*",
 };

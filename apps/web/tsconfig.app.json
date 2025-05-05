@@ -33,7 +33,8 @@
       "@constants/*": ["constants/*"],
       "@utils/*": ["utils/*"],
       "@layouts/*": ["layouts/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@context": ["context/*"]
     }
   },
   "include": ["src"]

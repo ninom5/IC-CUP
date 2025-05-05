@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { routes } from "./routes/routes";
-import { HomePage, LoginPage, RegisterPage } from "@pages/index";
-import { AdminRoutes } from "@routes/adminRoutes";
+import { HomePage, LoginPage, NotFoundPage, RegisterPage } from "@pages/index";
+// import { AdminRoutes } from "@routes/adminRoutes";
 
 export const Router = () => {
   return (
@@ -12,7 +12,10 @@ export const Router = () => {
         <Route path={routes.REGISTER} element={<RegisterPage />} />
 
         {/* <AdminRoutes>
+
         </AdminRoutes> */}
+
+        <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
