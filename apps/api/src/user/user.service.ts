@@ -1,0 +1,65 @@
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
+import { PrismaService } from 'src/prisma.service';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { ResponseUserDto } from './dto/response-user.dto';
+
+@Injectable()
+export class UserService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async getAll() {
+    return this.prisma.user.findMany();
+  }
+
+  async getById(id: string) {
+    return this.prisma.user.findUnique({ where: { id } });
+  }
+
+  async getByEmail(email: string) {
+    return this.prisma.user.findUnique({ where: { email } });
+  }
+
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<ResponseUserDto> {
+    delete updateUserDto.email;
+
+    return this.prisma.user.update({
+      where: { id },
+      data: updateUserDto,
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+      },
+    });
+  }
+
+  async suspend(id: string) {
+    try {
+      const user = await this.prisma.user.findUnique({ where: { id } });
+
+      if (!user) throw new NotFoundException('User not found');
+
+      return this.prisma.user.update({
+        where: { id },
+        data: { isSuspended: !user?.isSuspended },
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          isSuspended: true,
+        },
+      });
+    } catch (error) {
+      throw new error() instanceof NotFoundException
+        ? error
+        : new InternalServerErrorException(`Error suspending user: ${error}`);
+    }
+  }
+}
