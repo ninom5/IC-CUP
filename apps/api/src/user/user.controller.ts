@@ -85,4 +85,14 @@ export class UserController {
   ): Promise<ResponseUserDto> {
     return this.userService.update(id, updateUserDto);
   }
+
+  @Patch('suspend/:id')
+  @UseGuards(AdminAuthGuard)
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully suspended/unsuspended user',
+  })
+  suspendUser(@Param('id') id: string) {
+    return this.userService.suspend(id);
+  }
 }

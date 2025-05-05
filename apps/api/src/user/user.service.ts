@@ -3,6 +3,7 @@ import {
   ForbiddenException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { PrismaService } from 'src/prisma.service';
@@ -106,5 +107,28 @@ export class UserService {
         lastName: true,
       },
     });
+  }
+
+  async suspend(id: string) {
+    try {
+      const user = await this.prisma.user.findUnique({ where: { id } });
+
+      if (!user) throw new NotFoundException('User not found');
+
+      return this.prisma.user.update({
+        where: { id },
+        data: { isSuspended: !user?.isSuspended },
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          isSuspended: true,
+        },
+      });
+    } catch (error) {
+      throw new error() instanceof NotFoundException
+        ? error
+        : new InternalServerErrorException(`Error suspending user: ${error}`);
+    }
   }
 }
