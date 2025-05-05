@@ -15,6 +15,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { AdminAuthGuard } from './admin-auth.guard';
 import { UserAuthGuard } from './user-auth.guard';
 import { ApiResponse } from '@nestjs/swagger';
+import { LoginDto } from './dto/login.dto';
 
 @Controller('user')
 export class UserController {
@@ -42,7 +43,7 @@ export class UserController {
     return this.userService.getById(id);
   }
 
-  @Get()
+  @Get('email')
   @UseGuards(UserAuthGuard)
   @ApiResponse({ status: 200, description: 'Return user by id' })
   @ApiResponse({
@@ -53,7 +54,7 @@ export class UserController {
     return this.userService.getByEmail(email);
   }
 
-  @Post()
+  @Post('/auth/register')
   @ApiResponse({ status: 201, description: 'Successfully registered user' })
   @ApiResponse({
     status: 400,
@@ -63,13 +64,19 @@ export class UserController {
     return this.userService.register(createUserDto);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-  //   return this.userService.update(+id, updateUserDto);
-  // }
-  //
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.userService.remove(+id);
-  // }
+  @Post('/auth/login')
+  @ApiResponse({
+    status: 200,
+    description: 'Successfully logged in, returns token',
+  })
+  @ApiResponse({ status: 400, description: 'Invalid data provided' })
+  login(@Body() loginData: LoginDto) {
+    return this.userService.login(loginData.email, loginData.password);
+  }
+
+  @Patch(':id')
+  // @UseGuards(UserAuthGuard)
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.update(id, updateUserDto);
+  }
 }

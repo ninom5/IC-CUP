@@ -3,7 +3,6 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { User } from '../user/entities/user.entity';
 import { UserService } from '../user/user.service';
 
 @ValidatorConstraint({ name: 'isEmailUniques' })

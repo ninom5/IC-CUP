@@ -7,8 +7,9 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { PrismaService } from 'src/prisma.service';
 import { JwtService } from '@nestjs/jwt';
-import { hash } from 'bcrypt';
+import { compare, hash } from 'bcrypt';
 import { Prisma } from '@prisma/client';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -42,6 +43,9 @@ export class UserService {
         data: userData,
       });
     } catch (error) {
+      if (error instanceof Prisma.PrismaClientValidationError)
+        throw new BadRequestException(`Validation failed: ${error.message}`);
+
       throw error instanceof BadRequestException ||
         error instanceof ForbiddenException
         ? error
@@ -51,11 +55,38 @@ export class UserService {
     }
   }
 
-  // update(id: number, updateUserDto: UpdateUserDto) {
-  //   return `This action updates a #${id} user`;
-  // }
-  //
-  // remove(id: number) {
-  //   return `This action removes a #${id} user`;
-  // }
+  async login(email: string, password: string) {
+    try {
+      const user = await this.prisma.user.findFirst({
+        where: { email },
+      });
+
+      if (!user) throw new BadRequestException('Invalid email or password');
+
+      const isValidPassword = await compare(password, user?.password);
+      if (!isValidPassword)
+        throw new BadRequestException('Invalid email or password');
+
+      const payload = {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+      };
+
+      return {
+        token: this.jwtService.sign(payload),
+      };
+    } catch (error) {
+      throw error instanceof BadRequestException
+        ? error
+        : new InternalServerErrorException(
+            `Server error trying to login: ${error}`,
+          );
+    }
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    delete updateUserDto.email;
+    return this.prisma.user.update({ where: { id }, data: updateUserDto });
+  }
 }

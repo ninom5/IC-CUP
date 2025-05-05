@@ -21,14 +21,14 @@ model User {
   password       String
   dateOfBirth    DateTime
   img            String
-  role           Role
+  role           Role     @default(USER)
   isVerified     Boolean  @default(false)
   driverLicense  String
   idCard         String
   phoneNumber    String
   address        String
   bankAccount    String
-  totalEarnings  Float
+  totalEarnings  Float    @default(0.0)
   createdAt      DateTime @default(now())
   lastModifiedAt DateTime @default(now())
 }
