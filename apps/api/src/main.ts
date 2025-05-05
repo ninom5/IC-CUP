@@ -7,9 +7,10 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Kolo')
-    .setDescription('kolo backend swagger') //prominit
+    .setDescription('kolo backend swagger')
     .setVersion('1.0')
     .addTag('User')
+    .addTag('Auth')
     .addBearerAuth()
     .build();
 

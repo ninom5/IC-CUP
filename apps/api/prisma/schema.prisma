@@ -27,11 +27,11 @@ model User {
   idCard         String
   phoneNumber    String
   address        String
-  bankAccount    String   @unique
+  bankAccount    String?  @unique
   totalEarnings  Float    @default(0.0)
   isSuspended    Boolean  @default(false)
   createdAt      DateTime @default(now())
-  lastModifiedAt DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model Country {

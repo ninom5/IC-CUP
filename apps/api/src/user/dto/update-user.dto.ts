@@ -1,5 +1,5 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
-import { CreateUserDto } from './create-user.dto';
+import { CreateUserDto } from '../../auth/dto/create-user.dto';
 import { PartialType } from '@nestjs/mapped-types';
 import { Transform } from 'class-transformer';
 
