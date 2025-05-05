@@ -65,8 +65,4 @@ export class CreateUserDto {
   @IsNotEmpty()
   @ApiProperty({ example: 'Rudera Boskovica 30' })
   address: string;
-
-  @IsString()
-  @ApiProperty({ example: 'HR000000000000000000' })
-  bankAccount: string;
 }

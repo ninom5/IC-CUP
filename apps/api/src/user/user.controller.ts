@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
@@ -9,12 +8,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AdminAuthGuard } from './admin-auth.guard';
-import { UserAuthGuard } from './user-auth.guard';
+import { AdminAuthGuard } from 'src/auth/admin-auth.guard';
+import { UserAuthGuard } from 'src/auth/user-auth.guard';
 import { ApiResponse, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { LoginUserDto } from './dto/login-user.dto';
 import { ResponseUserDto } from './dto/response-user.dto';
 
 @Controller('user')
@@ -54,26 +51,6 @@ export class UserController {
   })
   getByEmail(@Query('email') email: string) {
     return this.userService.getByEmail(email);
-  }
-
-  @Post('/auth/register')
-  @ApiResponse({ status: 201, description: 'Successfully registered user' })
-  @ApiResponse({
-    status: 400,
-    description: 'Some data field is missing or is invalid',
-  })
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.register(createUserDto);
-  }
-
-  @Post('/auth/login')
-  @ApiResponse({
-    status: 201,
-    description: 'Successfully logged in, returns token',
-  })
-  @ApiResponse({ status: 400, description: 'Invalid data provided' })
-  login(@Body() loginData: LoginUserDto) {
-    return this.userService.login(loginData.email, loginData.password);
   }
 
   @Patch(':id')
