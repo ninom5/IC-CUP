@@ -10,6 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 import { compare, hash } from 'bcrypt';
 import { Prisma } from '@prisma/client';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ResponseUserDto } from './dto/response-user.dto';
 
 @Injectable()
 export class UserService {
@@ -41,6 +42,11 @@ export class UserService {
 
       return await this.prisma.user.create({
         data: userData,
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+        },
       });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientValidationError)
@@ -85,8 +91,20 @@ export class UserService {
     }
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto) {
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<ResponseUserDto> {
     delete updateUserDto.email;
-    return this.prisma.user.update({ where: { id }, data: updateUserDto });
+
+    return this.prisma.user.update({
+      where: { id },
+      data: updateUserDto,
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+      },
+    });
   }
 }

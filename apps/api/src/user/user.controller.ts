@@ -5,7 +5,6 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
   Query,
   UseGuards,
 } from '@nestjs/common';
@@ -14,10 +13,13 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AdminAuthGuard } from './admin-auth.guard';
 import { UserAuthGuard } from './user-auth.guard';
-import { ApiResponse } from '@nestjs/swagger';
-import { LoginDto } from './dto/login.dto';
+import { ApiResponse, ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { LoginUserDto } from './dto/login-user.dto';
+import { ResponseUserDto } from './dto/response-user.dto';
 
 @Controller('user')
+@ApiBearerAuth()
+@ApiTags('User')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
@@ -66,17 +68,21 @@ export class UserController {
 
   @Post('/auth/login')
   @ApiResponse({
-    status: 200,
+    status: 201,
     description: 'Successfully logged in, returns token',
   })
   @ApiResponse({ status: 400, description: 'Invalid data provided' })
-  login(@Body() loginData: LoginDto) {
+  login(@Body() loginData: LoginUserDto) {
     return this.userService.login(loginData.email, loginData.password);
   }
 
   @Patch(':id')
-  // @UseGuards(UserAuthGuard)
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  @UseGuards(UserAuthGuard)
+  @ApiResponse({ status: 200, type: ResponseUserDto })
+  update(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<ResponseUserDto> {
     return this.userService.update(id, updateUserDto);
   }
 }

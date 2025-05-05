@@ -27,7 +27,7 @@ model User {
   idCard         String
   phoneNumber    String
   address        String
-  bankAccount    String
+  bankAccount    String   @unique
   totalEarnings  Float    @default(0.0)
   createdAt      DateTime @default(now())
   lastModifiedAt DateTime @default(now())
