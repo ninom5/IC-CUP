@@ -27,11 +27,11 @@ model User {
   idCard         String
   phoneNumber    String
   address        String
-  bankAccount    String   @unique
+  bankAccount    String?  @default(null)
   totalEarnings  Float    @default(0.0)
   isSuspended    Boolean  @default(false)
   createdAt      DateTime @default(now())
-  lastModifiedAt DateTime @default(now())
+  lastModifiedAt DateTime @default(now()) @updatedAt
 }
 
 model Country {
@@ -54,11 +54,74 @@ model Location {
   cityId  String
   city    City   @relation(fields: [cityId], references: [id], onDelete: Cascade)
   address String
-  zipCode Int    @unique
+  zipCode String
+}
+
+model VehicleType {
+  id    String @id @default(uuid())
+  type  String @unique
+}
+
+model Car {
+  id              String @id @default(uuid())
+  vehicleTypeId   String
+  vehicleType     VehicleType @relation(fields: [vehicleTypeId], references: [id], onDelete: Cascade)
+  licensePlate    String @unique
+  fuelType        FuelType
+  isAutomatic     Boolean
+  category        CarCategory
+}
+
+model Vehicle {
+  id              String @id @default(uuid())
+  ownerId         String
+  owner           User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  brand           String
+  model           String
+  images          String[]
+  productionYear  Int
+  dailyPrice      Float
+  isAvailable     Boolean @default(true)
+  description     String
+  isVerified      Boolean @default(false)
+  registration    String
+  locationId      String
+  location        Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  vehicleTypeId   String
+  vehicleType     VehicleType @relation(fields: [vehicleTypeId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id            String @id @default(uuid())
+  reviewerId    String 
+  reviewer      User @relation(fields: [reviewerId], references: [id], onDelete: Cascade)
+  revieweeId    String
+  reviewee      User @relation(fields: [revieweeId], references: [id], onDelete: Cascade)
+  vehicleId     String
+  vehicle       Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  rating        Int
+  comment       String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now()) @updatedAt
 }
 
 enum Role {
   ADMIN
   USER
   BOTH
+}
+
+enum FuelType {
+  PETROL
+  DIESEL
+  ELECTRIC
+  HYBRID
+}
+
+enum CarCategory {
+  SMALL
+  MEDIUM
+  SUV
+  VAN
+  LUXURY
 }
