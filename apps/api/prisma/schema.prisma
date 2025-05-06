@@ -53,7 +53,7 @@ model Vehicle {
   productionYear  Int
   dailyPrice      Float
   isAvailable     Boolean  @default(true)
-  description     String
+  description     String?
   isVerified      Boolean  @default(false)
   registration    String
   locationId      String
