@@ -12,27 +12,12 @@ export class RentalService {
   }
 
   async findAll() {
-    return this.prisma.rental.findMany({
-      include: {
-        renter: { select: { id: true, firstName: true, lastName: true } },
-        vehicle: true,
-        review: true,
-        payment: true,
-        incidents: true,
-      },
-    });
+    return this.prisma.rental.findMany();
   }
 
   async findOne(id: string) {
     const rental = await this.prisma.rental.findUnique({
       where: { id },
-      include: {
-        renter: { select: { id: true, firstName: true, lastName: true } },
-        vehicle: true,
-        review: true,
-        payment: true,
-        incidents: true,
-      },
     });
 
     if (!rental) throw new NotFoundException('Rental not found');

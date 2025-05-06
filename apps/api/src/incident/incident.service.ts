@@ -12,22 +12,11 @@ export class IncidentService {
   }
 
   async findAll() {
-    return this.prisma.incident.findMany({
-      include: {
-        rental: true,
-        reporter: { select: { id: true, firstName: true, lastName: true } },
-      },
-    });
+    return this.prisma.incident.findMany();
   }
 
   async findOne(id: string) {
-    const incident = await this.prisma.incident.findUnique({
-      where: { id },
-      include: {
-        rental: true,
-        reporter: { select: { id: true, firstName: true, lastName: true } },
-      },
-    });
+    const incident = await this.prisma.incident.findUnique({ where: { id } });
 
     if (!incident) throw new NotFoundException('Incident not found');
     return incident;

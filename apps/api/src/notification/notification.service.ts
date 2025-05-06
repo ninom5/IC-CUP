@@ -12,21 +12,12 @@ export class NotificationService {
   }
 
   async findAll() {
-    return this.prisma.notification.findMany({
-      include: {
-        rental: true,
-        user: { select: { id: true, firstName: true, lastName: true } },
-      },
-    });
+    return this.prisma.notification.findMany();
   }
 
   async findOne(id: string) {
     const notification = await this.prisma.notification.findUnique({
       where: { id },
-      include: {
-        rental: true,
-        user: { select: { id: true, firstName: true, lastName: true } },
-      },
     });
 
     if (!notification) throw new NotFoundException('Notification not found');

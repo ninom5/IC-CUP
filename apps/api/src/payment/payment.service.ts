@@ -12,17 +12,12 @@ export class PaymentService {
   }
 
   async findAll() {
-    return this.prisma.payment.findMany({
-      include: {
-        rental: true,
-      },
-    });
+    return this.prisma.payment.findMany();
   }
 
   async findOne(id: string) {
     const payment = await this.prisma.payment.findUnique({
       where: { id },
-      include: { rental: true },
     });
 
     if (!payment) throw new NotFoundException('Payment not found');
