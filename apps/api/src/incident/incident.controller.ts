@@ -25,8 +25,8 @@ export class IncidentController {
   @UseGuards(UserAuthGuard)
   @ApiResponse({ status: 201, description: 'Incident created' })
   @ApiResponse({ status: 400, description: 'Validation failed' })
-  create(@Body() createIncidentDto: CreateIncidentDto) {
-    return this.incidentService.create(createIncidentDto);
+  create(@Body() dto: CreateIncidentDto) {
+    return this.incidentService.create(dto);
   }
 
   @Get()
@@ -48,11 +48,8 @@ export class IncidentController {
   @UseGuards(UserAuthGuard)
   @ApiResponse({ status: 200, description: 'Incident updated successfully.' })
   @ApiResponse({ status: 404, description: 'Incident not found.' })
-  update(
-    @Param('id') id: string,
-    @Body() updateIncidentDto: UpdateIncidentDto,
-  ) {
-    return this.incidentService.update(id, updateIncidentDto);
+  update(@Param('id') id: string, @Body() dto: UpdateIncidentDto) {
+    return this.incidentService.update(id, dto);
   }
 
   @Delete(':id')

@@ -33,13 +33,13 @@ export class IncidentService {
     return incident;
   }
 
-  async update(id: string, updateIncidentDto: UpdateIncidentDto) {
+  async update(id: string, dto: UpdateIncidentDto) {
     const existing = await this.prisma.incident.findUnique({ where: { id } });
     if (!existing) throw new NotFoundException('Incident not found');
 
     return this.prisma.incident.update({
       where: { id },
-      data: updateIncidentDto,
+      data: dto,
     });
   }
 
