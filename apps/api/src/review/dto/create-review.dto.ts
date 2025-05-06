@@ -1,5 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 
 export class CreateReviewDto {
   @IsNotEmpty({ message: 'Rental ID is required' })
@@ -14,13 +21,21 @@ export class CreateReviewDto {
   @IsNotEmpty({
     message: 'Rating is required',
   })
-  @IsString({
-    message: 'Rating must be a number',
-  })
+  @IsNumber(
+    { allowNaN: false, allowInfinity: false, maxDecimalPlaces: 1 },
+    {
+      message: 'Ocjena mora biti broj (do 1 decimalnog mjesta)',
+    },
+  )
+  @Min(1, { message: 'Ocjena ne može biti manja od 1' })
+  @Max(5, { message: 'Ocjena ne može biti veća od 5' })
   @ApiProperty({
-    description: 'Rating',
+    description: 'Ocjena vozila od 1 do 5 sa decimalnim vrijednostima',
     example: 4.5,
     type: 'number',
+    format: 'float',
+    minimum: 1,
+    maximum: 5,
   })
   rating: number;
 

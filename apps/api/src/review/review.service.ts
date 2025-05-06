@@ -1,21 +1,77 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateReviewDto } from './dto/create-review.dto';
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class ReviewService {
-  create(createReviewDto: CreateReviewDto) {
-    return 'This action adds a new review';
+  constructor(private readonly prisma: PrismaService) {}
+  async create(createReviewDto: CreateReviewDto) {
+    return this.prisma.review.create({
+      data: createReviewDto,
+    });
   }
 
-  findAll() {
-    return `This action returns all review`;
+  async findVehicleReviews(vehicleId: string) {
+    const vehicleExists = await this.prisma.vehicle.findUnique({
+      where: { id: vehicleId },
+    });
+
+    if (!vehicleExists) {
+      throw new NotFoundException('Vehicle not found');
+    }
+
+    const reviews = await this.prisma.review.findMany({
+      where: {
+        rental: {
+          vehicleId: vehicleId,
+        },
+      },
+      select: {
+        id: true,
+        rating: true,
+        comment: true,
+        createdAt: true,
+        rental: {
+          select: {
+            renter: {
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                img: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    return reviews.map((review) => ({
+      id: review.id,
+      rating: review.rating,
+      comment: review.comment,
+      createdAt: review.createdAt,
+      user: {
+        id: review.rental.renter.id,
+        firstName: review.rental.renter.firstName,
+        lastName: review.rental.renter.lastName,
+        img: review.rental.renter.img,
+      },
+    }));
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} review`;
+  async findOne(id: string) {
+    return this.prisma.review.findUnique({
+      where: { id },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} review`;
+  async remove(id: string) {
+    return this.prisma.review.delete({
+      where: { id },
+    });
   }
 }
