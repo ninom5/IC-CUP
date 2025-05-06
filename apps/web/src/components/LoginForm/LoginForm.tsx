@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 export const LoginForm = () => {
-  const [loinData, setLoginData] = useState({
+  const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
 
   const handleChange = (e: any) => {
-    setLoginData({ ...loinData, [e.target.name]: e.target.value });
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
   return (
@@ -15,8 +15,18 @@ export const LoginForm = () => {
       <h1>Login Form</h1>
 
       <form>
-        <input type="text" placeholder="email" onChange={handleChange} />
-        <input type="text" placeholder="password" onChange={handleChange} />
+        <input
+          type="text"
+          placeholder="email"
+          value={loginData.email}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          placeholder="password"
+          value={loginData.password}
+          onChange={handleChange}
+        />
 
         <button type="submit">Submit</button>
       </form>
