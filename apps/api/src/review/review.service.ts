@@ -6,6 +6,12 @@ import { PrismaService } from 'src/prisma.service';
 export class ReviewService {
   constructor(private readonly prisma: PrismaService) {}
   async create(createReviewDto: CreateReviewDto) {
+    const rentalExists = await this.prisma.rental.findUnique({
+      where: { id: createReviewDto.rentalId },
+    });
+
+    if (!rentalExists) throw new NotFoundException('Rental not found');
+
     return this.prisma.review.create({
       data: createReviewDto,
     });
@@ -64,12 +70,22 @@ export class ReviewService {
   }
 
   async findOne(id: string) {
-    return this.prisma.review.findUnique({
+    const review = await this.prisma.review.findUnique({
       where: { id },
     });
+
+    if (!review) throw new NotFoundException('Review not found');
+
+    return review;
   }
 
   async remove(id: string) {
+    const reviewExists = await this.prisma.review.findUnique({
+      where: { id },
+    });
+
+    if (!reviewExists) throw new NotFoundException('Review not found');
+
     return this.prisma.review.delete({
       where: { id },
     });

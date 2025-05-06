@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { VehicleType } from '@prisma/client';
 import {
+  IsArray,
   IsBoolean,
   IsEnum,
   IsNotEmpty,
@@ -48,13 +49,12 @@ export class CreateVehicleDto {
   @IsNotEmpty({
     message: 'Images is required',
   })
-  @IsString({
-    message: 'Images must be a string',
-  })
+  @IsArray({ message: 'Images must be an array' })
+  @IsString({ each: true, message: 'Each image must be a string URL' })
   @ApiProperty({
     description: 'Image',
-    example: 'https://example.com/image.jpg',
-    type: 'string',
+    example: ['https://example.com/image.jpg'],
+    type: [String],
   })
   images: string[];
 
