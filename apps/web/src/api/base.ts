@@ -9,11 +9,6 @@ export const axiosInstanceAPI = () => {
     data: { token, isExpired },
   } = useToken();
 
-  if (!token || isExpired) {
-    toast.error("Token is expired or not found");
-    return null;
-  }
-
   const axiosInstance = useMemo(() => {
     return axios.create({
       withCredentials: true,

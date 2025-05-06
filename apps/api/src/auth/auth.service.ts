@@ -5,7 +5,6 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Prisma } from '@prisma/client';
 import { compare, hash } from 'bcrypt';
 import { PrismaService } from 'src/prisma.service';
 import { CreateUserDto } from 'src/auth/dto/create-user.dto';
@@ -17,27 +16,26 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async register(payload: CreateUserDto) {
+  async register(registerData: CreateUserDto) {
     try {
-      const hashedPassword = await hash(payload.password, 10);
+      const hashedPassword = await hash(registerData.password, 10);
 
-      const userData = {
-        ...payload,
-        password: hashedPassword,
-      } as Prisma.UserCreateArgs['data'];
-
-      return await this.prisma.user.create({
-        data: userData,
-        select: {
-          id: true,
-          firstName: true,
-          lastName: true,
+      const user = await this.prisma.user.create({
+        data: {
+          ...registerData,
+          password: hashedPassword,
         },
       });
-    } catch (error) {
-      if (error instanceof Prisma.PrismaClientValidationError)
-        throw new BadRequestException(`Validation failed: ${error.message}`);
 
+      const payload = {
+        id: user.id,
+        email: user.email,
+        role: user.email,
+        isSuspended: user.isSuspended,
+      };
+
+      return { token: this.jwtService.sign(payload) };
+    } catch (error) {
       throw error instanceof BadRequestException ||
         error instanceof ForbiddenException
         ? error
