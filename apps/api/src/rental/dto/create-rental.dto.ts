@@ -1,14 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { RentalStatus } from '@prisma/client';
 import { Type } from 'class-transformer';
-import { IsDate, IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
+import {
+  IsDate,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsUUID,
+  Min,
+} from 'class-validator';
 
 export class CreateRentalDto {
-  @IsString()
+  @IsUUID()
   @IsNotEmpty()
   @ApiProperty({ example: 'user-uuid' })
   renterId: string;
 
-  @IsString()
+  @IsUUID()
   @IsNotEmpty()
   @ApiProperty({ example: 'vehicle-uuid' })
   vehicleId: string;
@@ -30,4 +39,9 @@ export class CreateRentalDto {
   @IsNotEmpty()
   @ApiProperty({ example: 250 })
   totalPrice: number;
+
+  @IsEnum(RentalStatus)
+  @IsOptional()
+  @ApiProperty({ example: 'PENDING', enum: RentalStatus })
+  status?: RentalStatus;
 }

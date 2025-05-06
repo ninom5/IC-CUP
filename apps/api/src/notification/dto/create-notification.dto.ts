@@ -1,13 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+} from 'class-validator';
 
 export class CreateNotificationDto {
-  @IsString()
+  @IsUUID()
   @IsNotEmpty()
   @ApiProperty({ example: 'rental-uuid' })
   rentalId: string;
 
-  @IsString()
+  @IsUUID()
   @IsNotEmpty()
   @ApiProperty({ example: 'user-uuid' })
   userId: string;
@@ -16,4 +22,9 @@ export class CreateNotificationDto {
   @IsNotEmpty()
   @ApiProperty({ example: 'Your rental has been approved.' })
   message: string;
+
+  @IsBoolean()
+  @IsOptional()
+  @ApiProperty({ example: false })
+  isRead?: boolean;
 }
