@@ -10,7 +10,10 @@ import {
 import { CarService } from './car.service';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('Car')
 @Controller('car')
 export class CarController {
   constructor(private readonly carService: CarService) {}

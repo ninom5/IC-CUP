@@ -43,25 +43,6 @@ model Location {
   vehicles  Vehicle[]
 }
 
-model VehicleType {
-  id        String   @id @default(uuid())
-  type      String   @unique
-
-  cars      Car[]
-  vehicles  Vehicle[]
-}
-
-model Car {
-  id              String @id @default(uuid())
-  vehicleTypeId   String
-  vehicleType     VehicleType @relation(fields: [vehicleTypeId], references: [id], onDelete: Cascade)
-
-  licensePlate    String @unique
-  fuelType        FuelType
-  isAutomatic     Boolean
-  category        CarCategory
-}
-
 model Vehicle {
   id              String   @id @default(uuid())
   ownerId         String
@@ -77,14 +58,12 @@ model Vehicle {
   registration    String
   locationId      String
   location        Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
-  vehicleTypeId   String
-  vehicleType     VehicleType @relation(fields: [vehicleTypeId], references: [id], onDelete: Cascade)
-
+  vehicleType     VehicleType
+  details         Json
   rentals         Rental[]
 
   @@index([ownerId])
   @@index([locationId])
-  @@index([vehicleTypeId])
 }
 
 model Review {
@@ -172,4 +151,11 @@ enum RentalStatus {
   REJECTED
   COMPLETED
   CANCELLED
+}
+
+enum VehicleType {
+  CAR
+  MOTORCYCLE
+  BICYCLE
+  SCOOTER
 }
