@@ -7,7 +7,7 @@ import {
 import { CloudinaryService } from './cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('cloudinary')
 @ApiTags('Cloudinary')
@@ -17,6 +17,6 @@ export class CloudinaryController {
 
   @Post('upload')
   async uploadImageToCloudinary(@UploadedFile() file: Express.Multer.File) {
-    return this.cloudinaryService.uploadImageToCloudinary(file.path);
+    return this.cloudinaryService.uploadImageToCloudinary(file);
   }
 }
