@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { axiosInstanceAPI } from "@api/base";
 import { toast } from "react-toastify";
 import { useToken } from "@hooks/useToken";
 import { routes } from "@routes/routes";
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "@api/useLogin";
 
 export const LoginForm = () => {
-  const axiosInstance = axiosInstanceAPI();
   const { updateToken } = useToken();
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
+  const login = useLogin(loginData, updateToken);
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,16 +22,7 @@ export const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axiosInstance.post("/auth/login", loginData);
-      const token = response.data?.token;
-
-      if (!token) {
-        toast.error("Invalid username or password");
-        return;
-      }
-
-      localStorage.setItem("jwt", token);
-      updateToken();
+      login();
 
       toast.success("Successfully logged in");
       setLoginData({
