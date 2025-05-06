@@ -5,6 +5,7 @@ import {
   IsOptional,
   IsString,
   IsUUID,
+  MaxLength,
 } from 'class-validator';
 
 export class CreateNotificationDto {
@@ -20,7 +21,8 @@ export class CreateNotificationDto {
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty({ example: 'Your rental has been approved.' })
+  @MaxLength(500)
+  @ApiProperty({ example: 'Your rental has been approved.', maxLength: 500 })
   message: string;
 
   @IsBoolean()
