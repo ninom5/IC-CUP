@@ -1,8 +1,18 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger';
 import { CreateVehicleDto } from './create-vehicle.dto';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsNumber,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { Type } from 'class-transformer';
+import { CarDetailsDto } from './car-details.dto';
+import { CarCategory, FuelType } from '../enums/vehicle.enums';
 
-export class UpdateVehicleDto extends PartialType(CreateVehicleDto) {
+export class UpdateVehicleDto extends PartialType(
+  OmitType(CreateVehicleDto, ['details'] as const),
+) {
   @IsString({ message: 'Brand must be a string' })
   @IsOptional()
   @ApiProperty({
@@ -98,14 +108,19 @@ export class UpdateVehicleDto extends PartialType(CreateVehicleDto) {
   })
   locationId?: string;
 
-  @IsString({
-    message: 'Vehicle type ID must be a string',
-  })
   @IsOptional()
+  @ValidateNested()
+  @Type(() => CarDetailsDto)
   @ApiProperty({
-    description: 'Vehicle type ID',
-    example: '12345678-1234-1234-1234-123456789012',
-    type: 'string',
+    description: 'Updated vehicle details',
+    type: CarDetailsDto,
+    example: {
+      licensePlate: 'ABC1234',
+      fuelType: FuelType.PETROL,
+      isAutomatic: true,
+      category: CarCategory.SMALL,
+    },
+    required: false,
   })
-  vehicleTypeId?: string;
+  details?: Partial<CarDetailsDto>;
 }
