@@ -1,11 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { VehicleType } from '@prisma/client';
 import {
   IsBoolean,
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
+  ValidateNested,
 } from 'class-validator';
+import { CarDetailsDto } from './car-details.dto';
+import { Type } from 'class-transformer';
+import { CarCategory, FuelType } from '../enums/vehicle.enums';
 
 export class CreateVehicleDto {
   @IsNotEmpty({ message: 'Owner ID is required' })
@@ -125,15 +131,32 @@ export class CreateVehicleDto {
   locationId: string;
 
   @IsNotEmpty({
-    message: 'Vehicle type ID is required',
+    message: 'Vehicle type is required',
   })
-  @IsString({
-    message: 'Vehicle type ID must be a string',
+  @IsEnum(VehicleType, {
+    message: `Vehicle type must be one of the following: ${Object.values(
+      VehicleType,
+    ).join(', ')}`,
   })
   @ApiProperty({
-    description: 'Vehicle type ID',
-    example: '12345678-1234-1234-1234-123456789012',
-    type: 'string',
+    description: 'Vehicle type',
+    enum: VehicleType,
+    example: VehicleType.CAR,
   })
-  vehicleTypeId: string;
+  vehicleType: VehicleType;
+
+  @IsNotEmpty({ message: 'Details are required' })
+  @ValidateNested()
+  @Type(() => CarDetailsDto)
+  @ApiProperty({
+    description: 'Additional vehicle details',
+    type: CarDetailsDto,
+    example: {
+      licensePlate: 'ABC1234',
+      fuelType: FuelType.PETROL,
+      isAutomatic: true,
+      category: CarCategory.SMALL,
+    },
+  })
+  details: CarDetailsDto;
 }

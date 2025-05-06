@@ -130,21 +130,6 @@ enum Role {
   BOTH
 }
 
-enum FuelType {
-  PETROL
-  DIESEL
-  ELECTRIC
-  HYBRID
-}
-
-enum CarCategory {
-  SMALL
-  MEDIUM
-  SUV
-  VAN
-  LUXURY
-}
-
 enum RentalStatus {
   PENDING
   APPROVED
@@ -158,4 +143,19 @@ enum VehicleType {
   MOTORCYCLE
   BICYCLE
   SCOOTER
+}
+
+enum FuelType {
+  PETROL
+  DIESEL
+  ELECTRIC
+  HYBRID
+}
+
+enum CarCategory {
+  SMALL
+  MEDIUM
+  SUV
+  VAN
+  LUXURY
 }

@@ -1,71 +1,45 @@
-/*
-  Warnings:
-
-  - You are about to drop the column `cityId` on the `Location` table. All the data in the column will be lost.
-  - You are about to drop the column `zipCode` on the `Location` table. All the data in the column will be lost.
-  - You are about to drop the column `updatedAt` on the `User` table. All the data in the column will be lost.
-  - You are about to drop the `City` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Country` table. If the table is not empty, all the data it contains will be lost.
-  - Added the required column `latitude` to the `Location` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `longitude` to the `Location` table without a default value. This is not possible if the table is not empty.
-
-*/
 -- CreateEnum
-CREATE TYPE "FuelType" AS ENUM ('PETROL', 'DIESEL', 'ELECTRIC', 'HYBRID');
-
--- CreateEnum
-CREATE TYPE "CarCategory" AS ENUM ('SMALL', 'MEDIUM', 'SUV', 'VAN', 'LUXURY');
+CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER', 'BOTH');
 
 -- CreateEnum
 CREATE TYPE "RentalStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED', 'COMPLETED', 'CANCELLED');
 
--- DropForeignKey
-ALTER TABLE "City" DROP CONSTRAINT "City_countryId_fkey";
-
--- DropForeignKey
-ALTER TABLE "Location" DROP CONSTRAINT "Location_cityId_fkey";
-
--- DropIndex
-DROP INDEX "Location_zipCode_key";
-
--- DropIndex
-DROP INDEX "User_bankAccount_key";
-
--- AlterTable
-ALTER TABLE "Location" DROP COLUMN "cityId",
-DROP COLUMN "zipCode",
-ADD COLUMN     "city" TEXT,
-ADD COLUMN     "latitude" DECIMAL(65,30) NOT NULL,
-ADD COLUMN     "longitude" DECIMAL(65,30) NOT NULL;
-
--- AlterTable
-ALTER TABLE "User" DROP COLUMN "updatedAt",
-ADD COLUMN     "lastModifiedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
-
--- DropTable
-DROP TABLE "City";
-
--- DropTable
-DROP TABLE "Country";
+-- CreateEnum
+CREATE TYPE "VehicleType" AS ENUM ('CAR', 'MOTORCYCLE', 'BICYCLE', 'SCOOTER');
 
 -- CreateTable
-CREATE TABLE "VehicleType" (
+CREATE TABLE "User" (
     "id" TEXT NOT NULL,
-    "type" TEXT NOT NULL,
+    "firstName" TEXT NOT NULL,
+    "lastName" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "dateOfBirth" TIMESTAMP(3) NOT NULL,
+    "img" TEXT NOT NULL,
+    "role" "Role" NOT NULL DEFAULT 'USER',
+    "isVerified" BOOLEAN NOT NULL DEFAULT false,
+    "driverLicense" TEXT NOT NULL,
+    "idCard" TEXT NOT NULL,
+    "phoneNumber" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
+    "bankAccount" TEXT,
+    "totalEarnings" DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+    "isSuspended" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "lastModifiedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "VehicleType_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Car" (
+CREATE TABLE "Location" (
     "id" TEXT NOT NULL,
-    "vehicleTypeId" TEXT NOT NULL,
-    "licensePlate" TEXT NOT NULL,
-    "fuelType" "FuelType" NOT NULL,
-    "isAutomatic" BOOLEAN NOT NULL,
-    "category" "CarCategory" NOT NULL,
+    "address" TEXT NOT NULL,
+    "city" TEXT,
+    "longitude" DECIMAL(65,30) NOT NULL,
+    "latitude" DECIMAL(65,30) NOT NULL,
 
-    CONSTRAINT "Car_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Location_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -82,7 +56,8 @@ CREATE TABLE "Vehicle" (
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
     "registration" TEXT NOT NULL,
     "locationId" TEXT NOT NULL,
-    "vehicleTypeId" TEXT NOT NULL,
+    "vehicleType" "VehicleType" NOT NULL,
+    "details" JSONB NOT NULL,
 
     CONSTRAINT "Vehicle_pkey" PRIMARY KEY ("id")
 );
@@ -148,10 +123,7 @@ CREATE TABLE "Notification" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "VehicleType_type_key" ON "VehicleType"("type");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Car_licensePlate_key" ON "Car"("licensePlate");
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE INDEX "Vehicle_ownerId_idx" ON "Vehicle"("ownerId");
@@ -160,25 +132,16 @@ CREATE INDEX "Vehicle_ownerId_idx" ON "Vehicle"("ownerId");
 CREATE INDEX "Vehicle_locationId_idx" ON "Vehicle"("locationId");
 
 -- CreateIndex
-CREATE INDEX "Vehicle_vehicleTypeId_idx" ON "Vehicle"("vehicleTypeId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Review_rentalId_key" ON "Review"("rentalId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Payment_rentalId_key" ON "Payment"("rentalId");
 
 -- AddForeignKey
-ALTER TABLE "Car" ADD CONSTRAINT "Car_vehicleTypeId_fkey" FOREIGN KEY ("vehicleTypeId") REFERENCES "VehicleType"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Vehicle" ADD CONSTRAINT "Vehicle_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Vehicle" ADD CONSTRAINT "Vehicle_locationId_fkey" FOREIGN KEY ("locationId") REFERENCES "Location"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Vehicle" ADD CONSTRAINT "Vehicle_vehicleTypeId_fkey" FOREIGN KEY ("vehicleTypeId") REFERENCES "VehicleType"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Review" ADD CONSTRAINT "Review_rentalId_fkey" FOREIGN KEY ("rentalId") REFERENCES "Rental"("id") ON DELETE CASCADE ON UPDATE CASCADE;
