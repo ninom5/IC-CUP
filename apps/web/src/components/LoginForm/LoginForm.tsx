@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useToken } from "@hooks/useToken";
 import { routes } from "@routes/routes";
 import { useNavigate } from "react-router-dom";
-import { useLogin } from "@api/useLogin";
+import { useLogin } from "@api/index";
 
 export const LoginForm = () => {
   const { updateToken } = useToken();

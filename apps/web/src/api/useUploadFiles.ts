@@ -1,27 +1,42 @@
-import { axiosInstanceAPI } from "@api/base";
+import { axiosInstanceAPI } from "@api/index";
+import { CloudinaryFileResponseType } from "types/cloudinaryTypes";
 import { useEffect, useState } from "react";
 
-export const useUploadImages = (file: File | null) => {
+export const useUploadFiles = (
+  file: File | File[],
+  type: "image" | "raw" = "image"
+) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<
+    CloudinaryFileResponseType | CloudinaryFileResponseType[] | null
+  >(null);
 
   const axiosInstance = axiosInstanceAPI();
   useEffect(() => {
-    const uploadImages = async () => {
+    const uploadFiles = async () => {
       if (!file) return;
       setIsLoading(true);
 
       try {
         const formData = new FormData();
-        formData.append("file", file);
-        console.log("FormData:", formData.get("file"));
+
+        if (Array.isArray(file)) {
+          formData.append("idPdf", file[0]);
+          formData.append("driverPdf", file[1]);
+          console.log("idPdf: ", formData.get("idPdf"));
+          console.log("driverPdf: ", formData.get("driverPdf"));
+        } else {
+          formData.append("file", file);
+
+          console.log("FormData:", formData.get("file"));
+        }
         for (let [key, value] of formData.entries()) {
           console.log(key, value);
         }
 
         const response = await axiosInstance.post(
-          "/cloudinary/upload",
+          `/cloudinary/upload/${type}`,
           formData,
           {
             headers: {
@@ -40,7 +55,7 @@ export const useUploadImages = (file: File | null) => {
       }
     };
 
-    uploadImages();
+    uploadFiles();
   }, [file]);
 
   return { data, error, isLoading };
