@@ -31,7 +31,13 @@ export class VehicleService {
   }
 
   async findAll() {
-    return this.prisma.vehicle.findMany();
+    const vehicles = await this.prisma.vehicle.findMany({
+      include: {
+        location: true,
+      },
+    });
+
+    return vehicles;
   }
 
   async findOne(id: string) {
