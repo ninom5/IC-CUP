@@ -3,6 +3,7 @@ import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 import { PrismaService } from 'src/prisma.service';
 import { instanceToPlain } from 'class-transformer';
+import { VehicleFiltersDto } from 'src/location/dto/vehicle-filters.dto';
 
 @Injectable()
 export class VehicleService {
@@ -30,19 +31,40 @@ export class VehicleService {
     });
   }
 
-  async findAll() {
-    const vehicles = await this.prisma.vehicle.findMany({
+  async findAvailable(vehicleFiltersDto: VehicleFiltersDto) {
+    const filtersStartDate = new Date(vehicleFiltersDto.startDate);
+    const filtersEndDate = new Date(vehicleFiltersDto.endDate);
+    filtersEndDate.setHours(23, 59, 59, 999);
+
+    return this.prisma.vehicle.findMany({
+      where: {
+        rentals: {
+          none: {
+            AND: [
+              {
+                startDate: { lte: filtersEndDate },
+                endDate: { gte: filtersStartDate },
+                status: {
+                  in: ['APPROVED', 'PENDING', 'COMPLETED'],
+                },
+              },
+            ],
+          },
+        },
+      },
       include: {
         location: true,
       },
     });
-
-    return vehicles;
   }
 
   async findOne(id: string) {
     const vehicle = this.prisma.vehicle.findUnique({
       where: { id },
+      include: {
+        location: true,
+        owner: true,
+      },
     });
 
     if (!vehicle) throw new NotFoundException('Vehicle not found');
