@@ -11,19 +11,22 @@ export const isRegisterDataValid = (fullRegisterData: RegisterDataType) => {
     confirmPassword,
     phoneNumber,
     address,
-    personPhoto,
-    idCard,
-    driverLicense,
+    // personPhoto,
+    // idCard,
+    // driverLicense,
   } = fullRegisterData;
 
   const message = validateTextFields({
     "first name": firstName,
     "last name": lastName,
-    email: email,
-    password: password,
+    " email": email,
+    " password": password,
     "confirm password": confirmPassword,
     "phone number": phoneNumber,
-    address: address,
+    " address": address,
+    // "person photo": personPhoto,
+    // "driver license": driverLicense,
+    // "id card": idCard,
   });
   if (message) return message;
 
@@ -35,14 +38,14 @@ export const isRegisterDataValid = (fullRegisterData: RegisterDataType) => {
   )
     return "You must be at least 18 years old to register";
 
-  if (personPhoto === null)
-    return "Person photo is required and can not be empty";
+  // if (personPhoto === null)
+  //   return "Person photo is required and can not be empty";
 
-  if (idCard === null || idCard.length < 2)
-    return "ID card is required and you must upload front and back side";
+  // if (idCard === null || idCard.length < 2)
+  //   return "ID card is required and you must upload front and back side";
 
-  if (driverLicense === null || driverLicense.length < 2)
-    return "Driver license is required and you must upload front and back side";
+  // if (driverLicense === null || driverLicense.length < 2)
+  //   return "Driver license is required and you must upload front and back side";
 
   return null;
 };

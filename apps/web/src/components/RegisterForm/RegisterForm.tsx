@@ -1,11 +1,13 @@
-import { useUploadFiles } from "@api/index";
-import { generatePDF } from "@utils/generatePdf";
-import { isRegisterDataValid } from "@utils/isRegisterDataValid";
-import { AxiosError } from "axios";
+import { uploadFiles, isRegisterDataValid, generatePDF } from "@utils/index";
+import { routes } from "@routes/routes";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { axiosInstanceAPI, useRegister } from "@api/index";
 
 export const RegisterForm = () => {
+  const axiosInstance = axiosInstanceAPI();
+  const register = useRegister();
   const [registerData, setRegisterData] = useState({
     firstName: "",
     lastName: "",
@@ -15,18 +17,23 @@ export const RegisterForm = () => {
     confirmPassword: "",
     phoneNumber: "",
     address: "",
+    personPhoto: "",
+    driverLicense: "",
+    idCard: "",
   });
-  const [personPhoto, setPersonPhoto] = useState<File | null>(null);
-  const [idCard, setIdCard] = useState<File[]>([]);
-  const [driverLicense, setDriverLicense] = useState<File[]>([]);
-  // const [driverPdf, setDriverPdf] = useState<Blob | null>(null);
-  // const [idCardPdf, setIdCardPdf] = useState<Blob | null>(null);
+  const [personPhotoFile, setPersonPhotoFile] = useState<File | null>(null);
+  const [idCardFile, setIdCardFile] = useState<File[]>([]);
+  const [driverLicenseFile, setDriverLicenseFile] = useState<File[]>([]);
+
+  const [aa, setAa] = useState<string[]>([]);
+
+  const navigate = useNavigate();
 
   const handlePersonPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files ? e.target.files[0] : null;
-    if (!files) return;
+    const file = e.target.files ? e.target.files[0] : null;
+    if (!file) return;
 
-    setPersonPhoto(files);
+    setPersonPhotoFile(file);
   };
 
   const handleIdCardChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +43,7 @@ export const RegisterForm = () => {
       return;
     }
 
-    setIdCard(images);
+    setIdCardFile(images);
   };
 
   const handleDriverLicenseChange = (
@@ -48,7 +55,7 @@ export const RegisterForm = () => {
       return;
     }
 
-    setDriverLicense(images);
+    setDriverLicenseFile(images);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,26 +65,28 @@ export const RegisterForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const fullRegisterData = {
-      ...registerData,
-      personPhoto,
-      idCard,
-      driverLicense,
-    };
-
-    const isValidMessage = isRegisterDataValid(fullRegisterData);
-    if (isValidMessage) {
-      toast.error(isValidMessage);
+    if (!personPhotoFile) {
+      toast.error("You must upload your photo");
       return;
     }
 
-    const licensePdf = await generatePDF(driverLicense[0], driverLicense[1]);
-    const idPdf = await generatePDF(idCard[0], idCard[1]);
+    if (!driverLicenseFile) {
+      toast.error("You must upload driver license");
+      return;
+    }
+
+    if (!idCardFile) {
+      toast.error("You must upload id card");
+      return;
+    }
+
+    const licensePdf = await generatePDF(
+      driverLicenseFile[0],
+      driverLicenseFile[1]
+    );
+    const idPdf = await generatePDF(idCardFile[0], idCardFile[1]);
 
     if (licensePdf && idPdf) {
-      // setDriverPdf(licensePdf);
-      // setIdCardPdf(idPdf);
-
       const idFile = new File([idPdf], "idCard.pdf", {
         type: "application/pdf",
         lastModified: Date.now(),
@@ -88,30 +97,29 @@ export const RegisterForm = () => {
         lastModified: Date.now(),
       });
 
-      const { data, error, isLoading } = useUploadFiles(
+      const response = await uploadFiles(
         [idFile, driverFile],
+        axiosInstance,
         "raw"
       );
 
-      if (isLoading) toast.loading("Uploading files...");
-      if (error) {
-        toast.error(
-          `Error uploading files: ${(error as AxiosError).response?.data}`
-        );
-        return;
-      }
-
-      if (!data) {
+      if (!response) {
         toast.error("Response data is empty");
         return;
       }
 
-      if (!Array.isArray(data)) {
-        toast.error("Response data is not in expected format");
-        return;
-      }
+      console.log(typeof response);
+      // if (!Array.isArray(response)) {
+      //   toast.error("Response data is not in expected format");
+      //   return;
+      // }
 
-      const pdfUrls = data.map((file: any) => file.secure_url);
+      const pdfUrls = Object.entries(response).map(
+        ([key, value]: [string, any]) => {
+          return value.secure_url;
+        }
+      );
+      setAa(pdfUrls);
 
       if (pdfUrls.length === 2) toast.success("Files uploaded successfully");
       else {
@@ -119,6 +127,52 @@ export const RegisterForm = () => {
         return;
       }
     }
+
+    const personPhotoResponse = await uploadFiles(
+      personPhotoFile,
+      axiosInstance
+    );
+
+    if (!personPhotoResponse) {
+      toast.error("Response link is empty");
+      return;
+    }
+    if (Array.isArray(personPhotoResponse)) {
+      toast.error("Unexpected person photo cloudinary response");
+      return;
+    }
+
+    const personPhotoLink = personPhotoResponse.secure_url;
+    console.log(personPhotoLink, aa[0], aa[1]);
+    setRegisterData({
+      ...registerData,
+      idCard: aa[0],
+      driverLicense: aa[1],
+      personPhoto: personPhotoLink,
+    });
+
+    const isValidMessage = isRegisterDataValid(registerData);
+    if (isValidMessage) {
+      toast.error(isValidMessage);
+      return;
+    }
+
+    register(registerData); // ovde dodat error handling // img prominit u personPhoto
+
+    setRegisterData({
+      firstName: "",
+      lastName: "",
+      dateOfBirth: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      phoneNumber: "",
+      address: "",
+      personPhoto: "",
+      driverLicense: "",
+      idCard: "",
+    });
+    navigate(routes.LOGIN);
   };
 
   return (
@@ -192,7 +246,7 @@ export const RegisterForm = () => {
 
         <label htmlFor="personPhoto">Person Photo</label>
         <input
-          type="image"
+          type="file"
           id="personPhoto"
           name="personPhoto"
           onChange={handlePersonPhotoChange}
@@ -200,7 +254,7 @@ export const RegisterForm = () => {
 
         <label htmlFor="driverLicense">Driver License</label>
         <input
-          type="image"
+          type="file"
           id="driverLicense"
           name="driverLicense"
           multiple
@@ -209,7 +263,7 @@ export const RegisterForm = () => {
 
         <label htmlFor="idCard"></label>
         <input
-          type="image"
+          type="file"
           id="idCard"
           name="idCard"
           multiple

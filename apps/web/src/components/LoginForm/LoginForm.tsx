@@ -21,21 +21,15 @@ export const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      login();
+    login();
 
-      toast.success("Successfully logged in");
-      setLoginData({
-        email: "",
-        password: "",
-      });
+    toast.success("Successfully logged in");
+    setLoginData({
+      email: "",
+      password: "",
+    });
 
-      navigate(routes.CARS);
-    } catch (error: any) {
-      console.error(`Error trying to log in: ${error}`);
-
-      toast.error(`Error trying to login: ${error.response?.data?.message}`);
-    }
+    navigate(routes.CARS);
   };
 
   return (

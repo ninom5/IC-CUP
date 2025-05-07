@@ -1,15 +1,6 @@
-/*
-  Warnings:
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER', 'BOTH');
 
-  - You are about to drop the column `cityId` on the `Location` table. All the data in the column will be lost.
-  - You are about to drop the column `zipCode` on the `Location` table. All the data in the column will be lost.
-  - You are about to drop the column `updatedAt` on the `User` table. All the data in the column will be lost.
-  - You are about to drop the `City` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Country` table. If the table is not empty, all the data it contains will be lost.
-  - Added the required column `latitude` to the `Location` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `longitude` to the `Location` table without a default value. This is not possible if the table is not empty.
-
-*/
 -- CreateEnum
 CREATE TYPE "FuelType" AS ENUM ('PETROL', 'DIESEL', 'ELECTRIC', 'HYBRID');
 
@@ -19,34 +10,40 @@ CREATE TYPE "CarCategory" AS ENUM ('SMALL', 'MEDIUM', 'SUV', 'VAN', 'LUXURY');
 -- CreateEnum
 CREATE TYPE "RentalStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED', 'COMPLETED', 'CANCELLED');
 
--- DropForeignKey
-ALTER TABLE "City" DROP CONSTRAINT "City_countryId_fkey";
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "firstName" TEXT NOT NULL,
+    "lastName" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "dateOfBirth" TIMESTAMP(3) NOT NULL,
+    "img" TEXT NOT NULL,
+    "role" "Role" NOT NULL DEFAULT 'USER',
+    "isVerified" BOOLEAN NOT NULL DEFAULT false,
+    "driverLicense" TEXT NOT NULL,
+    "idCard" TEXT NOT NULL,
+    "phoneNumber" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
+    "bankAccount" TEXT,
+    "totalEarnings" DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+    "isSuspended" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "lastModifiedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
--- DropForeignKey
-ALTER TABLE "Location" DROP CONSTRAINT "Location_cityId_fkey";
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
 
--- DropIndex
-DROP INDEX "Location_zipCode_key";
+-- CreateTable
+CREATE TABLE "Location" (
+    "id" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
+    "city" TEXT,
+    "longitude" DECIMAL(65,30) NOT NULL,
+    "latitude" DECIMAL(65,30) NOT NULL,
 
--- DropIndex
-DROP INDEX "User_bankAccount_key";
-
--- AlterTable
-ALTER TABLE "Location" DROP COLUMN "cityId",
-DROP COLUMN "zipCode",
-ADD COLUMN     "city" TEXT,
-ADD COLUMN     "latitude" DECIMAL(65,30) NOT NULL,
-ADD COLUMN     "longitude" DECIMAL(65,30) NOT NULL;
-
--- AlterTable
-ALTER TABLE "User" DROP COLUMN "updatedAt",
-ADD COLUMN     "lastModifiedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
-
--- DropTable
-DROP TABLE "City";
-
--- DropTable
-DROP TABLE "Country";
+    CONSTRAINT "Location_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "VehicleType" (
@@ -146,6 +143,9 @@ CREATE TABLE "Notification" (
 
     CONSTRAINT "Notification_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "VehicleType_type_key" ON "VehicleType"("type");
