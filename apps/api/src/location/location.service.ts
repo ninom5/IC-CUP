@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { PrismaService } from 'src/prisma.service';
+import { UpdateLocationDto } from './dto/update-location.dto';
 
 @Injectable()
 export class LocationService {
@@ -26,7 +27,7 @@ export class LocationService {
     return location;
   }
 
-  async update(id: string, updateLocationDto: CreateLocationDto) {
+  async update(id: string, updateLocationDto: UpdateLocationDto) {
     const locationExists = await this.prisma.location.findUnique({
       where: { id },
     });

@@ -52,7 +52,7 @@ model Vehicle {
   images          String[]
   productionYear  Int
   dailyPrice      Float
-  isAvailable     Boolean  @default(true)
+  isAvailable     Boolean  @default(false)
   description     String?
   isVerified      Boolean  @default(false)
   registration    String

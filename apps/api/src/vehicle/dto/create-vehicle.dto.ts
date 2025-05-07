@@ -2,7 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { VehicleType } from '@prisma/client';
 import {
   IsArray,
-  IsBoolean,
   IsEnum,
   IsNotEmpty,
   IsNumber,

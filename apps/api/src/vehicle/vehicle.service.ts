@@ -30,11 +30,11 @@ export class VehicleService {
     });
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.vehicle.findMany();
   }
 
-  findOne(id: string) {
+  async findOne(id: string) {
     const vehicle = this.prisma.vehicle.findUnique({
       where: { id },
     });
@@ -44,20 +44,31 @@ export class VehicleService {
     return vehicle;
   }
 
-  update(id: string, updateVehicleDto: UpdateVehicleDto) {
-    const vehicleExists = this.prisma.vehicle.findUnique({
+  async update(id: string, updateVehicleDto: UpdateVehicleDto) {
+    const vehicleExists = await this.prisma.vehicle.findUnique({
       where: { id },
     });
 
     if (!vehicleExists) throw new NotFoundException('Vehicle not found');
 
+    if (updateVehicleDto.locationId !== undefined) {
+      const locationExists = await this.prisma.location.findUnique({
+        where: { id: updateVehicleDto.locationId },
+      });
+      if (!locationExists) throw new NotFoundException('Location not found');
+    }
+
+    const cleanData = Object.fromEntries(
+      Object.entries(updateVehicleDto).filter(([_, v]) => v !== undefined),
+    );
+
     return this.prisma.vehicle.update({
       where: { id },
-      data: updateVehicleDto,
+      data: cleanData,
     });
   }
 
-  remove(id: string) {
+  async remove(id: string) {
     const vehicleExists = this.prisma.vehicle.findUnique({
       where: { id },
     });
