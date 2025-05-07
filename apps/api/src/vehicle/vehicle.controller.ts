@@ -27,6 +27,11 @@ export class VehicleController {
     return this.vehicleService.findAvailable(vehicleFiltersDto);
   }
 
+  @Get('user/:id')
+  findAllUserVehicles(@Param('id') id: string) {
+    return this.vehicleService.findAllUserVehicles(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.vehicleService.findOne(id);

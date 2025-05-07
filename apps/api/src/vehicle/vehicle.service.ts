@@ -31,6 +31,21 @@ export class VehicleService {
     });
   }
 
+  async findAllUserVehicles(userId: string) {
+    const userExists = await this.prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!userExists) throw new NotFoundException('User not found');
+
+    return this.prisma.vehicle.findMany({
+      where: { ownerId: userId },
+      include: {
+        location: true,
+      },
+    });
+  }
+
   async findAvailable(vehicleFiltersDto: VehicleFiltersDto) {
     const filtersStartDate = new Date(vehicleFiltersDto.startDate);
     const filtersEndDate = new Date(vehicleFiltersDto.endDate);
