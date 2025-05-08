@@ -3,13 +3,13 @@ import { routes } from "@routes/routes";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useRegister, useUploadFiles, useUploadImages } from "@api/index";
+import { useRegister, useUploadImages } from "@api/index";
 import { useGetUserByEmail } from "@api/useGetUserByEmail";
 
 export const RegisterForm = () => {
   const { mutate: register } = useRegister();
   const { mutateAsync: uploadImages } = useUploadImages();
-  const { mutateAsync: uploadFiles } = useUploadFiles();
+  // const { mutateAsync: uploadFiles } = useUploadFiles();
   const { mutateAsync: getUserByEmail } = useGetUserByEmail();
 
   const [registerData, setRegisterData] = useState({
@@ -113,7 +113,7 @@ export const RegisterForm = () => {
         lastModified: Date.now(),
       });
 
-      const response = uploadFiles([idFile, driverFile]);
+      const response = await uploadImages([idFile, driverFile]);
 
       if (!response) {
         toast.error("Response data is empty");
@@ -128,6 +128,7 @@ export const RegisterForm = () => {
 
       if (pdfUrls.length === 2) toast.success("Files uploaded successfully");
       else {
+        console.log(pdfUrls);
         toast.error("Error uploading both files");
         return;
       }

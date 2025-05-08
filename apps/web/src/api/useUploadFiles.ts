@@ -23,7 +23,7 @@ const uploadFiles = async (
     } else {
       formData.append("file", file);
     }
-
+    console.log(formData);
     const response = await api.post(`/cloudinary/upload/${type}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -51,19 +51,19 @@ export const useUploadImages = () => {
   });
 };
 
-export const useUploadFiles = () => {
-  return useMutation<
-    CloudinaryFileResponseType | CloudinaryFileResponseType[] | null,
-    Error,
-    File | File[]
-  >({
-    mutationFn: (file) => uploadFiles({ file, type: "raw" }),
-    onError: (error) => {
-      toast.error("Error uploading file(s)");
-      console.error(error);
-    },
-    onSuccess: () => {
-      toast.success("File(s) uploaded successfully!");
-    },
-  });
-};
+// export const useUploadFiles = () => {
+//   return useMutation<
+//     CloudinaryFileResponseType | CloudinaryFileResponseType[] | null,
+//     Error,
+//     File | File[]
+//   >({
+//     mutationFn: (file) => uploadFiles({ file, type: "raw" }),
+//     onError: (error) => {
+//       toast.error("Error uploading file(s)");
+//       console.error(error);
+//     },
+//     onSuccess: () => {
+//       toast.success("File(s) uploaded successfully!");
+//     },
+//   });
+// };

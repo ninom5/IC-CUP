@@ -21,7 +21,7 @@ api.interceptors.request.use(async (config) => {
 });
 
 api.interceptors.response.use(
-  (response) => response.data,
+  (response) => response,
   (error: ErrorResponseType) => {
     if (error.response)
       return Promise.reject(error.response.data.message || error.message);

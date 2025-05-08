@@ -2,8 +2,9 @@ import { LoginType } from "types";
 import { api } from "./base";
 import { useMutation } from "@tanstack/react-query";
 
-const loginUser = async (loginData: LoginType): Promise<string> => {
-  return (await api.post("/auth/login", loginData)).config.data.token;
+const loginUser = async (loginData: LoginType) => {
+  const token = (await api.post("/auth/login", loginData)).data?.token;
+  localStorage.setItem("jwt", token);
 };
 
 export const useLogin = () => {
