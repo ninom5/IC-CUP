@@ -4,6 +4,7 @@ import { useToken } from "@hooks/useToken";
 import { routes } from "@routes/routes";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "@api/index";
+import axios from "axios";
 
 export const LoginForm = () => {
   const { updateToken } = useToken();
@@ -11,7 +12,7 @@ export const LoginForm = () => {
     email: "",
     password: "",
   });
-  const login = useLogin(loginData, updateToken);
+  const login = useLogin(loginData);
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +23,15 @@ export const LoginForm = () => {
     e.preventDefault();
 
     try {
-      await login();
+      const token = await login();
+
+      if (!token) {
+        toast.error("Invalid username or password");
+        return;
+      }
+
+      localStorage.setItem("jwt", token);
+      updateToken();
 
       toast.success("Successfully logged in");
       setLoginData({
@@ -31,8 +40,16 @@ export const LoginForm = () => {
       });
 
       navigate(routes.CARS);
-    } catch (error) {
-      console.error(`Error logging in: ${error}`);
+    } catch (error: Error | any) {
+      if (axios.isAxiosError(error)) {
+        console.error("Axios error response:", error.response);
+        const errorMessage =
+          error.response?.data?.message || "Unknown error occurred";
+        toast.error(`Error logging in: ${errorMessage}`);
+      } else {
+        console.error(`Error logging in: ${error}`);
+        toast.error("An unexpected error occurred. Please try again.");
+      }
     }
   };
 

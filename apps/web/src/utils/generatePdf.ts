@@ -19,8 +19,7 @@ export const generatePDF = async (frontImage: File, backImage: File) => {
   doc.addImage(frontData, "JPEG", 10, 10, 180, 80);
   doc.addImage(backData, "JPEG", 10, 100, 180, 80);
 
-  //   doc.save("driver-license.pdf");
   const pdfBlob = doc.output("blob");
-  //   console.log(pdfBlob);
+
   return pdfBlob;
 };

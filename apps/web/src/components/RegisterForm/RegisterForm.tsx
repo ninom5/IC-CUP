@@ -84,7 +84,6 @@ export const RegisterForm = () => {
       toast.error("You must upload front and back side of id card");
       return;
     }
-    console.log(registerData);
 
     const isValidMessage = isRegisterDataValid(registerData);
     if (isValidMessage) {
@@ -126,11 +125,10 @@ export const RegisterForm = () => {
         return;
       }
 
-      const pdfUrls = Object.entries(response).map(
-        ([key, value]: [string, any]) => {
-          return value.secure_url;
-        }
+      const pdfUrls = Object.values(response).map(
+        (value: any) => value.secure_url
       );
+
       setPdfFiles(pdfUrls);
 
       if (pdfUrls.length === 2) toast.success("Files uploaded successfully");
@@ -155,7 +153,6 @@ export const RegisterForm = () => {
     }
 
     const personPhotoLink = personPhotoResponse.secure_url;
-    console.log(personPhotoLink, pdfFiles[0], pdfFiles[1]);
     setRegisterData({
       ...registerData,
       idCard: pdfFiles[0],
@@ -164,7 +161,6 @@ export const RegisterForm = () => {
     });
 
     try {
-      console.log(registerData);
       await register(registerData);
 
       setRegisterData({

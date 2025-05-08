@@ -17,22 +17,12 @@ export const uploadFiles = async (
   try {
     const formData = new FormData();
 
-    console.log("Files being uploaded:", file);
-
     if (Array.isArray(file)) {
       formData.append("pdfs", file[0]);
       formData.append("pdfs", file[1]);
-
-      console.log("idPdf appended to formData:", formData.get("pdfs"));
-      console.log("driverPdf appended to formData:", formData.get("pdfs"));
     } else {
       formData.append("file", file);
-      console.log("File appended to formData:", formData.get("file"));
     }
-
-    const formDataEntries = Array.from(formData.entries());
-    console.log("FormData entries:", formDataEntries);
-    console.log("Axios base URL:", axiosInstance.defaults.baseURL);
 
     const response = await axiosInstance.post(
       `/cloudinary/upload/${type}`,
@@ -43,9 +33,6 @@ export const uploadFiles = async (
         },
       }
     );
-
-    console.log("Response status:", response.status);
-    console.log("Response data:", response.data);
 
     if (response.status !== 201) throw new Error("File upload failed");
 
