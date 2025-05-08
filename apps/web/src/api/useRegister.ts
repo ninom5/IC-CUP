@@ -1,19 +1,20 @@
 import { RegisterDataType } from "types/registerDataType";
-import { axiosInstanceAPI } from "./base";
-import { toast } from "react-toastify";
+import { api } from "./base";
+import { useMutation, UseMutationResult } from "@tanstack/react-query";
 
-export const useRegister = () => {
-  const axiosInstance = axiosInstanceAPI();
+const registerUser = async (registerData: RegisterDataType) => {
+  const response = await api.post("/auth/register", registerData);
 
-  const register = async (registerData: RegisterDataType) => {
-    const registerResponse = await axiosInstance.post(
-      "/auth/register",
-      registerData
-    );
-    if (registerResponse.status !== 201) throw new Error("Error registering");
+  if (response.status !== 201) throw new Error("Error registering user");
+};
 
-    toast.success("Successfully registered. Now you can login");
-  };
-
-  return register;
+export const useRegister = (): UseMutationResult<
+  void,
+  Error,
+  RegisterDataType,
+  unknown
+> => {
+  return useMutation({
+    mutationFn: registerUser,
+  });
 };

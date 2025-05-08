@@ -1,18 +1,17 @@
-import {
-  uploadFiles,
-  isRegisterDataValid,
-  generatePDF,
-  doesEmailExist,
-} from "@utils/index";
+import { isRegisterDataValid, generatePDF } from "@utils/index";
 import { routes } from "@routes/routes";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { axiosInstanceAPI, useRegister } from "@api/index";
+import { useRegister, useUploadFiles, useUploadImages } from "@api/index";
+import { useGetUserByEmail } from "@api/useGetUserByEmail";
 
 export const RegisterForm = () => {
-  const axiosInstance = axiosInstanceAPI();
-  const register = useRegister();
+  const { mutate: register } = useRegister();
+  const { mutateAsync: uploadImages } = useUploadImages();
+  const { mutateAsync: uploadFiles } = useUploadFiles();
+  const { mutateAsync: getUserByEmail } = useGetUserByEmail();
+
   const [registerData, setRegisterData] = useState({
     firstName: "",
     lastName: "",
@@ -26,10 +25,10 @@ export const RegisterForm = () => {
     driverLicense: "",
     idCard: "",
   });
+
   const [personPhotoFile, setPersonPhotoFile] = useState<File | null>(null);
   const [idCardFile, setIdCardFile] = useState<File[]>([]);
   const [driverLicenseFile, setDriverLicenseFile] = useState<File[]>([]);
-
   const [pdfFiles, setPdfFiles] = useState<string[]>([]);
 
   const navigate = useNavigate();
@@ -91,8 +90,8 @@ export const RegisterForm = () => {
       return;
     }
 
-    const emailExists = await doesEmailExist(registerData.email, axiosInstance);
-    if (emailExists) {
+    const user = await getUserByEmail(registerData.email);
+    if (user) {
       toast.error("User with provided email already exists");
       return;
     }
@@ -114,11 +113,7 @@ export const RegisterForm = () => {
         lastModified: Date.now(),
       });
 
-      const response = await uploadFiles(
-        [idFile, driverFile],
-        axiosInstance,
-        "raw"
-      );
+      const response = uploadFiles([idFile, driverFile]);
 
       if (!response) {
         toast.error("Response data is empty");
@@ -138,10 +133,7 @@ export const RegisterForm = () => {
       }
     }
 
-    const personPhotoResponse = await uploadFiles(
-      personPhotoFile,
-      axiosInstance
-    );
+    const personPhotoResponse = await uploadImages(personPhotoFile);
 
     if (!personPhotoResponse) {
       toast.error("Response link is empty");
@@ -161,23 +153,30 @@ export const RegisterForm = () => {
     });
 
     try {
-      await register(registerData);
+      register(registerData, {
+        onSuccess: () => {
+          toast.success("Successfully registered. Now you can login.");
 
-      setRegisterData({
-        firstName: "",
-        lastName: "",
-        dateOfBirth: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        phoneNumber: "",
-        address: "",
-        personPhoto: "",
-        driverLicense: "",
-        idCard: "",
+          setRegisterData({
+            firstName: "",
+            lastName: "",
+            dateOfBirth: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            phoneNumber: "",
+            address: "",
+            personPhoto: "",
+            driverLicense: "",
+            idCard: "",
+          });
+
+          navigate(routes.LOGIN);
+        },
+        onError: (error) => {
+          toast.error(error.message || "Registration failed");
+        },
       });
-
-      navigate(routes.LOGIN);
     } catch (error: Error | any) {
       console.error(`Error registering: ${error}`);
       toast.error(`Error while registering: ${error?.response?.data?.message}`);

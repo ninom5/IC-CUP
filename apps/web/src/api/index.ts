@@ -1,4 +1,4 @@
 export * from "./base";
 export * from "./useLogin";
 export * from "./useRegister";
-export * from "../utils/doesEmailExist";
+export * from "./useUploadFiles";

@@ -1,15 +1,19 @@
-import { axiosInstanceAPI } from "./base";
+import { api } from "./base";
+import { useMutation } from "@tanstack/react-query";
 
-export const useLogin = (loginData: { email: string; password: string }) => {
-  const axiosInstance = axiosInstanceAPI();
+const loginUser = async (loginData: {
+  email: string;
+  password: string;
+}): Promise<string> => {
+  const response = await api.post("/auth/login", loginData);
 
-  const login = async () => {
-    const response = await axiosInstance.post("/auth/login", loginData);
+  if (response.status !== 201) throw new Error("Login failed");
 
-    if (response.status !== 201) throw new Error("Error logging in");
+  return response.data.token;
+};
 
-    return response.data?.token;
-  };
-
-  return login;
+export const useLogin = () => {
+  return useMutation({
+    mutationFn: loginUser,
+  });
 };
