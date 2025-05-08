@@ -10,4 +10,5 @@ export const routes: RouteType = {
   ADD_CAR: "/createCar",
   NOT_FOUND: "*",
   BECOME_HOST: "/become-host",
+  ADD_VEHICLE: "/add-vehicle",
 };
