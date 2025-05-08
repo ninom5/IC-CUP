@@ -18,7 +18,7 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "dateOfBirth" TIMESTAMP(3) NOT NULL,
-    "img" TEXT NOT NULL,
+    "personPhoto" TEXT NOT NULL,
     "role" "Role" NOT NULL DEFAULT 'USER',
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
     "driverLicense" TEXT NOT NULL,

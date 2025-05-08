@@ -7,12 +7,10 @@ export const doesEmailExist = async (
 ): Promise<boolean> => {
   try {
     const response = await axiosInstance.get(`/user/email/${email}`);
-    if (response.status === 404) return false;
 
     if (response.status !== 200) throw new Error("Error getting user by email");
-    console.log(response.data);
 
-    return true;
+    return response.data;
   } catch (error: Error | any) {
     console.error(`Error getting user by email: ${error}`);
     toast.error(

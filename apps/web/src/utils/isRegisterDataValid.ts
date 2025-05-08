@@ -1,12 +1,7 @@
 import { RegisterDataType } from "types/registerDataType";
 import { validateTextFields } from "./validateTextFields";
-// import { doesEmailExist } from "./doesEmailExist";
-// import { AxiosInstance } from "axios";
 
-export const isRegisterDataValid = async (
-  fullRegisterData: RegisterDataType
-  // axiosInstance: AxiosInstance
-) => {
+export const isRegisterDataValid = (fullRegisterData: RegisterDataType) => {
   const {
     firstName,
     lastName,
@@ -39,6 +34,5 @@ export const isRegisterDataValid = async (
 
   if (password !== confirmPassword) return "Passwords must match";
 
-  // const emailExist = await doesEmailExist(email, axiosInstance);
-  // if (emailExist) return "User account with provided email already exist";
+  return null;
 };

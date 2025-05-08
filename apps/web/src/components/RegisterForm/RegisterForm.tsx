@@ -1,4 +1,9 @@
-import { uploadFiles, isRegisterDataValid, generatePDF } from "@utils/index";
+import {
+  uploadFiles,
+  isRegisterDataValid,
+  generatePDF,
+  doesEmailExist,
+} from "@utils/index";
 import { routes } from "@routes/routes";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -79,10 +84,17 @@ export const RegisterForm = () => {
       toast.error("You must upload id card");
       return;
     }
+    console.log(registerData);
 
     const isValidMessage = isRegisterDataValid(registerData);
     if (isValidMessage) {
       toast.error(isValidMessage);
+      return;
+    }
+
+    const emailExists = await doesEmailExist(registerData.email, axiosInstance);
+    if (emailExists) {
+      toast.error("User with provided email already exists");
       return;
     }
 
