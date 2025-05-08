@@ -4,19 +4,19 @@ import { toast } from "react-toastify";
 import { CloudinaryFileResponseType } from "types/index";
 
 const uploadFiles = async (
-  file: File[]
-): Promise<CloudinaryFileResponseType[] | null> => {
-  if (!Array.isArray(file) || file.length < 2) {
+  file: File
+): Promise<CloudinaryFileResponseType | null> => {
+  if (!file) {
     toast.error("File can't be empty");
     return null;
   }
 
   const formData = new FormData();
 
-  file.forEach((f) => formData.append("pdfs", f));
+  formData.append("file", file);
 
   console.log(formData);
-  const response = await api.post(`/cloudinary/upload/raw`, formData, {
+  const response = await api.post(`/cloudinary/upload/image`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -25,15 +25,15 @@ const uploadFiles = async (
   return response.data;
 };
 
-export const useUploadFiles = () => {
-  return useMutation<CloudinaryFileResponseType[] | null, Error, File[]>({
+export const useUploadImages = () => {
+  return useMutation({
     mutationFn: uploadFiles,
     onError: (error) => {
-      toast.error("Error uploading file(s)");
+      toast.error("Error uploading image(s)");
       console.error(error);
     },
     onSuccess: () => {
-      toast.success("File(s) uploaded successfully!");
+      toast.success("Image(s) uploaded successfully!");
     },
   });
 };

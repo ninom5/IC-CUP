@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { UserType } from "types";
 
 const getUserByEmail = async (email: string): Promise<UserType | null> => {
-  return await api.get(`/user/email/${email}`);
+  return (await api.get(`/user/email/${email}`)).data;
 };
 
 export const useGetUserByEmail = () => {

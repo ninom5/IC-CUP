@@ -3,13 +3,14 @@ import { routes } from "@routes/routes";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useRegister, useUploadImages } from "@api/index";
+import { useRegister, useUploadFiles } from "@api/index";
 import { useGetUserByEmail } from "@api/useGetUserByEmail";
+import { useUploadImages } from "@api/useUploadImages";
 
 export const RegisterForm = () => {
   const { mutate: register } = useRegister();
   const { mutateAsync: uploadImages } = useUploadImages();
-  // const { mutateAsync: uploadFiles } = useUploadFiles();
+  const { mutateAsync: uploadFiles } = useUploadFiles();
   const { mutateAsync: getUserByEmail } = useGetUserByEmail();
 
   const [registerData, setRegisterData] = useState({
@@ -91,6 +92,7 @@ export const RegisterForm = () => {
     }
 
     const user = await getUserByEmail(registerData.email);
+    console.log(user);
     if (user) {
       toast.error("User with provided email already exists");
       return;
@@ -113,7 +115,7 @@ export const RegisterForm = () => {
         lastModified: Date.now(),
       });
 
-      const response = await uploadImages([idFile, driverFile]);
+      const response = await uploadFiles([idFile, driverFile]);
 
       if (!response) {
         toast.error("Response data is empty");
