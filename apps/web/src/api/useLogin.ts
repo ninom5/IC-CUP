@@ -1,15 +1,9 @@
+import { LoginType } from "types";
 import { api } from "./base";
 import { useMutation } from "@tanstack/react-query";
 
-const loginUser = async (loginData: {
-  email: string;
-  password: string;
-}): Promise<string> => {
-  const response = await api.post("/auth/login", loginData);
-
-  if (response.status !== 201) throw new Error("Login failed");
-
-  return response.data.token;
+const loginUser = async (loginData: LoginType): Promise<string> => {
+  return (await api.post("/auth/login", loginData)).config.data.token;
 };
 
 export const useLogin = () => {

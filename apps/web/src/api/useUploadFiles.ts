@@ -1,12 +1,11 @@
 import { api } from "@api/base";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { CloudinaryFileResponseType } from "types/cloudinaryTypes";
+import { CloudinaryFileResponseType, UploadFilesParamsType } from "types/index";
 
-const uploadFiles = async (params: {
-  file: File | File[];
-  type?: "image" | "raw";
-}): Promise<
+const uploadFiles = async (
+  params: UploadFilesParamsType
+): Promise<
   CloudinaryFileResponseType | CloudinaryFileResponseType[] | null
 > => {
   const { file, type = "image" } = params;
@@ -30,8 +29,6 @@ const uploadFiles = async (params: {
         "Content-Type": "multipart/form-data",
       },
     });
-
-    if (response.status !== 201) throw new Error("File upload failed");
 
     return response.data;
   } catch (error: any) {

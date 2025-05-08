@@ -1,5 +1,5 @@
-import { RegisterDataType } from "types/registerDataType";
-import { validateTextFields } from "./validateTextFields";
+import { RegisterDataType } from "types";
+import { validateTextFields } from "./validateTextFields.util";
 
 export const isRegisterDataValid = (fullRegisterData: RegisterDataType) => {
   const {
