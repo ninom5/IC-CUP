@@ -43,7 +43,7 @@ export class CarDetailsDto {
   @IsNotEmpty({
     message: 'Car Category is required',
   })
-  @IsEnum({
+  @IsEnum(CarCategory, {
     message: `Car Category must be one of the following: ${Object.values(CarCategory).join(', ')}`,
   })
   @ApiProperty({

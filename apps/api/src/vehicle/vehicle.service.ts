@@ -74,7 +74,7 @@ export class VehicleService {
   }
 
   async findOne(id: string) {
-    const vehicle = this.prisma.vehicle.findUnique({
+    const vehicle = await this.prisma.vehicle.findUnique({
       where: { id },
       include: {
         location: true,
