@@ -15,7 +15,6 @@ const uploadFiles = async (
 
   file.forEach((f) => formData.append("pdfs", f));
 
-  console.log(formData);
   const response = await api.post(`/cloudinary/upload/raw`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
