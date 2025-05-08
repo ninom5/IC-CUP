@@ -12,18 +12,44 @@ export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getAll() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        isSuspended: true,
+        isVerified: true,
+      },
+    });
   }
 
   async getById(id: string) {
-    const user = this.prisma.user.findUnique({ where: { id } });
+    const user = this.prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        isSuspended: true,
+        isVerified: true,
+      },
+    });
     if (!user) throw new NotFoundException('User with provided id not found');
 
     return user;
   }
 
   async getByEmail(email: string) {
-    const user = this.prisma.user.findUnique({ where: { email } });
+    const user = this.prisma.user.findUnique({
+      where: { email },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        isSuspended: true,
+        isVerified: true,
+      },
+    });
     if (!user)
       throw new NotFoundException('User with provided email not found');
 
