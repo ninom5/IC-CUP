@@ -6,6 +6,7 @@ import {
 import { PrismaService } from 'src/prisma.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ResponseUserDto } from './dto/response-user.dto';
+import { hash } from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -61,6 +62,8 @@ export class UserService {
     updateUserDto: UpdateUserDto,
   ): Promise<ResponseUserDto> {
     delete updateUserDto.email;
+    if (updateUserDto.password)
+      updateUserDto.password = await hash(updateUserDto.password, 10);
 
     return this.prisma.user.update({
       where: { id },

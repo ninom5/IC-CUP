@@ -30,7 +30,7 @@ export const RegisterForm = () => {
   const [idCardFile, setIdCardFile] = useState<File[]>([]);
   const [driverLicenseFile, setDriverLicenseFile] = useState<File[]>([]);
 
-  const [aa, setAa] = useState<string[]>([]);
+  const [pdfFiles, setPdfFiles] = useState<string[]>([]);
 
   const navigate = useNavigate();
 
@@ -75,13 +75,13 @@ export const RegisterForm = () => {
       return;
     }
 
-    if (!driverLicenseFile) {
-      toast.error("You must upload driver license");
+    if (!driverLicenseFile || driverLicenseFile.length !== 2) {
+      toast.error("You must upload front and back side of driver license");
       return;
     }
 
-    if (!idCardFile) {
-      toast.error("You must upload id card");
+    if (!idCardFile || idCardFile.length !== 2) {
+      toast.error("You must upload front and back side of id card");
       return;
     }
     console.log(registerData);
@@ -131,7 +131,7 @@ export const RegisterForm = () => {
           return value.secure_url;
         }
       );
-      setAa(pdfUrls);
+      setPdfFiles(pdfUrls);
 
       if (pdfUrls.length === 2) toast.success("Files uploaded successfully");
       else {
@@ -155,11 +155,11 @@ export const RegisterForm = () => {
     }
 
     const personPhotoLink = personPhotoResponse.secure_url;
-    console.log(personPhotoLink, aa[0], aa[1]);
+    console.log(personPhotoLink, pdfFiles[0], pdfFiles[1]);
     setRegisterData({
       ...registerData,
-      idCard: aa[0],
-      driverLicense: aa[1],
+      idCard: pdfFiles[0],
+      driverLicense: pdfFiles[1],
       personPhoto: personPhotoLink,
     });
 
