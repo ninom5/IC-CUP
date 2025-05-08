@@ -1,0 +1,25 @@
+.vehicle-card {
+  display: flex;
+  width: 40%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid lightslategray;
+  margin: 10px;
+  font-family: "Nunito-sans"; /*provjerit jel radi*/
+}
+.vehicle-image-wrapper {
+  width: 30%;
+  padding: 5px;
+}
+.vehicle-image {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.vehicle-info {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
