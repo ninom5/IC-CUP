@@ -38,18 +38,19 @@ export class UserController {
     status: 401,
     description: 'You are not logged in',
   })
+  @ApiResponse({ status: 404, description: 'User not found' })
   findOne(@Param('id') id: string) {
     return this.userService.getById(id);
   }
 
-  @Get('email')
-  @UseGuards(UserAuthGuard)
+  @Get('email/:email')
+  @UseGuards()
   @ApiResponse({ status: 200, description: 'Return user by id' })
   @ApiResponse({
-    status: 401,
-    description: 'You are not logged in',
+    status: 404,
+    description: 'User not found',
   })
-  getByEmail(@Query('email') email: string) {
+  getByEmail(@Param('email') email: string) {
     return this.userService.getByEmail(email);
   }
 

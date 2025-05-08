@@ -80,6 +80,12 @@ export const RegisterForm = () => {
       return;
     }
 
+    const isValidMessage = isRegisterDataValid(registerData);
+    if (isValidMessage) {
+      toast.error(isValidMessage);
+      return;
+    }
+
     const licensePdf = await generatePDF(
       driverLicenseFile[0],
       driverLicenseFile[1]
@@ -107,12 +113,6 @@ export const RegisterForm = () => {
         toast.error("Response data is empty");
         return;
       }
-
-      console.log(typeof response);
-      // if (!Array.isArray(response)) {
-      //   toast.error("Response data is not in expected format");
-      //   return;
-      // }
 
       const pdfUrls = Object.entries(response).map(
         ([key, value]: [string, any]) => {
@@ -151,28 +151,29 @@ export const RegisterForm = () => {
       personPhoto: personPhotoLink,
     });
 
-    const isValidMessage = isRegisterDataValid(registerData);
-    if (isValidMessage) {
-      toast.error(isValidMessage);
-      return;
+    try {
+      console.log(registerData);
+      await register(registerData);
+
+      setRegisterData({
+        firstName: "",
+        lastName: "",
+        dateOfBirth: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        phoneNumber: "",
+        address: "",
+        personPhoto: "",
+        driverLicense: "",
+        idCard: "",
+      });
+
+      navigate(routes.LOGIN);
+    } catch (error: Error | any) {
+      console.error(`Error registering: ${error}`);
+      toast.error(`Error while registering: ${error?.response?.data?.message}`);
     }
-
-    register(registerData); // ovde dodat error handling // img prominit u personPhoto
-
-    setRegisterData({
-      firstName: "",
-      lastName: "",
-      dateOfBirth: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      phoneNumber: "",
-      address: "",
-      personPhoto: "",
-      driverLicense: "",
-      idCard: "",
-    });
-    navigate(routes.LOGIN);
   };
 
   return (

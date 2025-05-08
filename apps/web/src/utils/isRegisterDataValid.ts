@@ -1,7 +1,12 @@
 import { RegisterDataType } from "types/registerDataType";
 import { validateTextFields } from "./validateTextFields";
+// import { doesEmailExist } from "./doesEmailExist";
+// import { AxiosInstance } from "axios";
 
-export const isRegisterDataValid = (fullRegisterData: RegisterDataType) => {
+export const isRegisterDataValid = async (
+  fullRegisterData: RegisterDataType
+  // axiosInstance: AxiosInstance
+) => {
   const {
     firstName,
     lastName,
@@ -11,9 +16,6 @@ export const isRegisterDataValid = (fullRegisterData: RegisterDataType) => {
     confirmPassword,
     phoneNumber,
     address,
-    // personPhoto,
-    // idCard,
-    // driverLicense,
   } = fullRegisterData;
 
   const message = validateTextFields({
@@ -24,28 +26,19 @@ export const isRegisterDataValid = (fullRegisterData: RegisterDataType) => {
     "confirm password": confirmPassword,
     "phone number": phoneNumber,
     " address": address,
-    // "person photo": personPhoto,
-    // "driver license": driverLicense,
-    // "id card": idCard,
   });
   if (message) return message;
 
   if (dateOfBirth > new Date().toISOString().split("T")[0])
     return "Date of birth can not be in the future";
   if (
-    new Date(dateOfBirth).getTime() <
+    new Date(dateOfBirth).getTime() >
     new Date().getTime() - 18 * 365 * 24 * 60 * 60 * 1000
   )
     return "You must be at least 18 years old to register";
 
-  // if (personPhoto === null)
-  //   return "Person photo is required and can not be empty";
+  if (password !== confirmPassword) return "Passwords must match";
 
-  // if (idCard === null || idCard.length < 2)
-  //   return "ID card is required and you must upload front and back side";
-
-  // if (driverLicense === null || driverLicense.length < 2)
-  //   return "Driver license is required and you must upload front and back side";
-
-  return null;
+  // const emailExist = await doesEmailExist(email, axiosInstance);
+  // if (emailExist) return "User account with provided email already exist";
 };
