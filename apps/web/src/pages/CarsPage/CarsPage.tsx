@@ -1,3 +1,9 @@
+import { VehicleList } from "@components/index";
+
 export const CarsPage = () => {
-  return <div>cars</div>;
+  return (
+    <div>
+      <VehicleList />
+    </div>
+  );
 };

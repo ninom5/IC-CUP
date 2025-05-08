@@ -23,6 +23,11 @@ export class VehicleController {
   }
 
   @Get()
+  getAll() {
+    return this.vehicleService.getAll();
+  }
+
+  @Get('by-date')
   findAll(@Query() vehicleFiltersDto: VehicleFiltersDto) {
     return this.vehicleService.findAvailable(vehicleFiltersDto);
   }

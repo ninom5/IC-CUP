@@ -31,6 +31,10 @@ export class VehicleService {
     });
   }
 
+  async getAll() {
+    return this.prisma.vehicle.findMany();
+  }
+
   async findAllUserVehicles(userId: string) {
     const userExists = await this.prisma.user.findUnique({
       where: { id: userId },
