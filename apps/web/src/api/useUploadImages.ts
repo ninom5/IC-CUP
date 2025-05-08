@@ -15,7 +15,6 @@ const uploadFiles = async (
 
   formData.append("file", file);
 
-  console.log(formData);
   const response = await api.post(`/cloudinary/upload/image`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",

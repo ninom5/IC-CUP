@@ -51,7 +51,6 @@ export class UserController {
     description: 'User not found',
   })
   getByEmail(@Param('email') email: string) {
-    console.log(email);
     return this.userService.getByEmail(email);
   }
 

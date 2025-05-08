@@ -92,7 +92,6 @@ export const RegisterForm = () => {
     }
 
     const user = await getUserByEmail(registerData.email);
-    console.log(user);
     if (user) {
       toast.error("User with provided email already exists");
       return;
@@ -128,12 +127,12 @@ export const RegisterForm = () => {
 
       setPdfFiles(pdfUrls);
 
-      if (pdfUrls.length === 2) toast.success("Files uploaded successfully");
-      else {
-        console.log(pdfUrls);
+      if (pdfUrls.length !== 2) {
         toast.error("Error uploading both files");
         return;
       }
+
+      toast.success("Files uploaded successfully");
     }
 
     const personPhotoResponse = await uploadImages(personPhotoFile);
