@@ -43,25 +43,6 @@ model Location {
   vehicles  Vehicle[]
 }
 
-model VehicleType {
-  id        String   @id @default(uuid())
-  type      String   @unique
-
-  cars      Car[]
-  vehicles  Vehicle[]
-}
-
-model Car {
-  id              String @id @default(uuid())
-  vehicleTypeId   String
-  vehicleType     VehicleType @relation(fields: [vehicleTypeId], references: [id], onDelete: Cascade)
-
-  licensePlate    String @unique
-  fuelType        FuelType
-  isAutomatic     Boolean
-  category        CarCategory
-}
-
 model Vehicle {
   id              String   @id @default(uuid())
   ownerId         String
@@ -71,30 +52,27 @@ model Vehicle {
   images          String[]
   productionYear  Int
   dailyPrice      Float
-  isAvailable     Boolean  @default(true)
-  description     String
+  isAvailable     Boolean  @default(false)
+  description     String?
   isVerified      Boolean  @default(false)
   registration    String
   locationId      String
   location        Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
-  vehicleTypeId   String
-  vehicleType     VehicleType @relation(fields: [vehicleTypeId], references: [id], onDelete: Cascade)
-
+  vehicleType     VehicleType
+  details         Json
   rentals         Rental[]
 
   @@index([ownerId])
   @@index([locationId])
-  @@index([vehicleTypeId])
 }
 
 model Review {
   id            String   @id @default(uuid())
   rentalId      String   @unique
   rental        Rental   @relation(fields: [rentalId], references: [id], onDelete: Cascade)
-  rating        Int
-  comment       String
+  rating        Float
+  comment       String?
   createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
 }
 
 model Rental {
@@ -151,6 +129,21 @@ enum Role {
   BOTH
 }
 
+enum RentalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  COMPLETED
+  CANCELLED
+}
+
+enum VehicleType {
+  CAR
+  MOTORCYCLE
+  BICYCLE
+  SCOOTER
+}
+
 enum FuelType {
   PETROL
   DIESEL
@@ -164,12 +157,4 @@ enum CarCategory {
   SUV
   VAN
   LUXURY
-}
-
-enum RentalStatus {
-  PENDING
-  APPROVED
-  REJECTED
-  COMPLETED
-  CANCELLED
 }
