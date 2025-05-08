@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formInputContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.modelBrandContainer {
+  display: flex;
+  gap: 20px;
+}
