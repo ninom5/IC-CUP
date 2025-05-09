@@ -157,13 +157,6 @@ export const RegisterForm = () => {
       personPhoto: personPhotoLink,
     }));
 
-    // const updatedRegisterData = {
-    //   ...registerData,
-    //   idCard: pdfFiles[0],
-    //   driverLicense: pdfFiles[1],
-    //   personPhoto: personPhotoLink,
-    // };
-
     try {
       register(registerData, {
         onSuccess: () => {
