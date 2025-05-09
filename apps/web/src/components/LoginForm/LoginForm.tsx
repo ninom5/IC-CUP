@@ -27,8 +27,6 @@ export const LoginForm = () => {
       onSuccess: () => {
         updateToken();
 
-        toast.success("Successfully logged in");
-
         setLoginData({
           email: "",
           password: "",
