@@ -5,7 +5,7 @@ import {
 } from 'class-validator';
 import { UserService } from '../user/user.service';
 
-@ValidatorConstraint({ name: 'isEmailUniques' })
+@ValidatorConstraint({ name: 'isEmailUnique' })
 export class IsEmailUnique implements ValidatorConstraintInterface {
   constructor(private readonly userService: UserService) {}
 

@@ -1,24 +1,26 @@
-import { axiosInstanceAPI } from "./base";
+import { LoginType } from "types";
+import { api } from "./base";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-export const useLogin = (
-  loginData: { email: string; password: string },
-  updateToken: () => void
-) => {
-  const axiosInstance = axiosInstanceAPI();
+export type JwtResponse = {
+  access_token: string;
+};
 
-  const login = async () => {
-    const response = await axiosInstance.post("/auth/login", loginData);
-    const token = response.data?.token;
+const loginUser = async (loginData: LoginType) => {
+  return api.post<LoginType, JwtResponse>("/auth/login", loginData);
+};
 
-    if (!token) {
-      toast.error("Invalid username or password");
-      return;
-    }
-
-    localStorage.setItem("jwt", token);
-    updateToken();
-  };
-
-  return login;
+export const useLogin = () => {
+  return useMutation({
+    mutationFn: loginUser,
+    mutationKey: ["login-user"],
+    onSuccess: (data: JwtResponse) => {
+      localStorage.setItem("jwt", JSON.stringify(data));
+      toast.success("Successfully logged in");
+    },
+    onError(error: string) {
+      toast.error(`Error logging in: ${error}`);
+    },
+  });
 };

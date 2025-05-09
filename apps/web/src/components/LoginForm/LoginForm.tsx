@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
 import { useToken } from "@hooks/useToken";
-import { routes } from "@routes/routes";
 import { useNavigate } from "react-router-dom";
-import { useLogin } from "@api/useLogin";
+import { useLogin } from "@api/index";
+import { toast } from "react-toastify";
+import { routes } from "@routes/routes";
+import axios from "axios";
 
 export const LoginForm = () => {
   const { updateToken } = useToken();
@@ -11,7 +12,8 @@ export const LoginForm = () => {
     email: "",
     password: "",
   });
-  const login = useLogin(loginData, updateToken);
+  const { mutate: login } = useLogin();
+
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,21 +23,31 @@ export const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      login();
+    login(loginData, {
+      onSuccess: () => {
+        updateToken();
 
-      toast.success("Successfully logged in");
-      setLoginData({
-        email: "",
-        password: "",
-      });
+        toast.success("Successfully logged in");
 
-      navigate(routes.CARS);
-    } catch (error: any) {
-      console.error(`Error trying to log in: ${error}`);
+        setLoginData({
+          email: "",
+          password: "",
+        });
 
-      toast.error(`Error trying to login: ${error.response?.data?.message}`);
-    }
+        navigate(routes.CARS);
+      },
+      onError: (error: unknown) => {
+        if (axios.isAxiosError(error)) {
+          const message =
+            error.response?.data?.message || "Unknown error occurred";
+          toast.error(`Error logging in: ${message}`);
+          console.error("Axios error:", error.response);
+        } else {
+          toast.error("An unexpected error occurred. Please try again.");
+          console.error("Login error:", error);
+        }
+      },
+    });
   };
 
   return (

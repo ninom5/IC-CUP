@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { TokenDataType } from "types/tokenDataType";
+import { TokenDataType } from "types";
 
 export interface TokenContextType {
   data: TokenDataType;

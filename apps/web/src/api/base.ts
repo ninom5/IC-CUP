@@ -1,37 +1,31 @@
 import { API_URL } from "@constants/urls";
 import axios from "axios";
-import { useEffect, useMemo } from "react";
-import { useToken } from "hooks/useToken";
-import { toast } from "react-toastify";
+import { ErrorResponseType } from "types/index";
 
-export const axiosInstanceAPI = () => {
-  const {
-    data: { token, isExpired },
-  } = useToken();
+export const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-  const axiosInstance = useMemo(() => {
-    return axios.create({
-      withCredentials: true,
-      baseURL: API_URL,
-    });
-  }, []);
+api.interceptors.request.use(async (config) => {
+  const tokenItem = localStorage.getItem("jwt");
 
-  useEffect(() => {
-    const requestInterceptor = axiosInstance.interceptors.request.use(
-      (config) => {
-        if (token && !isExpired)
-          config.headers.Authorization = `Bearer ${token}`;
+  if (tokenItem) {
+    const token = JSON.parse(tokenItem);
+    config.headers.Authorization = `Bearer ${token}`;
+  }
 
-        return config;
-      },
-      (error) => {
-        toast.error(`Request error: ${error.message}`);
-        return Promise.reject(error);
-      }
-    );
+  return config;
+});
 
-    return axiosInstance.interceptors.request.eject(requestInterceptor);
-  }, [axiosInstance, token, isExpired]);
+api.interceptors.response.use(
+  (response) => response.data,
+  (error: ErrorResponseType) => {
+    if (error.response)
+      return Promise.reject(error.response.data.message || error.message);
 
-  return axiosInstance;
-};
+    return Promise.reject("Network error");
+  }
+);
