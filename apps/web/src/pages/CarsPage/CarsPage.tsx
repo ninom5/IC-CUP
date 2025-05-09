@@ -1,7 +1,7 @@
 import { VehicleList, CarsMap } from "@components/index";
-import { APIProvider } from "@vis.gl/react-google-maps";
 import { toast } from "react-toastify";
 import "./carsPage.css";
+import { APIProvider } from "@vis.gl/react-google-maps";
 
 export const CarsPage = () => {
   return (
@@ -10,7 +10,7 @@ export const CarsPage = () => {
 
       <APIProvider
         apiKey={import.meta.env.VITE_APP_MAPS_API}
-        onLoad={() => console.log("Successfully loded map")}
+        onLoad={() => console.log("Successfully loaded map")}
         onError={(error: Error | any) => {
           console.error(`Error loading map: ${error}`);
           toast.error(`Error loading map: ${error?.message}`);

@@ -11,6 +11,8 @@ export const useFetchAllVehicles = () => {
   return useQuery({
     queryKey: ["vehicle"],
     queryFn: getAllVehicles,
+    // staleTime: 1000 * 60 * 3,
     staleTime: 0,
+    refetchOnWindowFocus: false,
   });
 };

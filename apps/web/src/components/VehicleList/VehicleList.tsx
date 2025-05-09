@@ -10,7 +10,6 @@ export const VehicleList = () => {
   const [filteredData, setFilteredData] = useState<VehicleType[]>([]);
 
   useEffect(() => {
-    console.log(data);
     setFilteredData(
       Array.isArray(data)
         ? data.filter((v) => v.isAvailable && v.isVerified)
@@ -28,9 +27,7 @@ export const VehicleList = () => {
       )}
 
       {filteredData.map((vehicle) => {
-        console.log(vehicle);
-
-        return <VehicleCard vehicle={vehicle} />;
+        return <VehicleCard key={vehicle.id} vehicle={vehicle} />;
       })}
     </section>
   );

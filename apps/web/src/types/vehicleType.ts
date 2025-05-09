@@ -1,3 +1,5 @@
+import { LocationType } from "./location.type";
+
 export type VehicleType = {
   id: string;
   ownerId: string;
@@ -10,6 +12,6 @@ export type VehicleType = {
   description: string;
   isVerified: boolean;
   registration: string;
-  locationId: string;
   vehicleTypeId: string;
+  location: LocationType;
 };

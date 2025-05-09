@@ -63,7 +63,9 @@ async function main() {
       ownerId: user1.id,
       brand: 'Toyota',
       model: 'Corolla',
-      images: ['https://example.com/toyota.jpg'],
+      images: [
+        'https://th.bing.com/th/id/OIP.xfIg1mDKOR34XxxLYKgZywHaE8?w=240&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
       productionYear: 2020,
       dailyPrice: 50.0,
       isAvailable: true,
@@ -83,7 +85,9 @@ async function main() {
       ownerId: user2.id,
       brand: 'Honda',
       model: 'Civic',
-      images: ['https://example.com/honda.jpg'],
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
       productionYear: 2022,
       dailyPrice: 60.0,
       isAvailable: true,
