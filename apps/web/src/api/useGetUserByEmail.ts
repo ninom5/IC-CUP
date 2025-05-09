@@ -1,15 +1,15 @@
 import { api } from "@api/base";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+import { useQuery } from "@tanstack/react-query";
 import { UserType } from "types";
 
 const getUserByEmail = async (email: string): Promise<UserType | null> => {
-  return (await api.get(`/user/email/${email}`)).data;
+  return await api.get<never, UserType>(`/user/email/${email}`);
 };
 
-export const useGetUserByEmail = () => {
-  return useMutation<UserType | null, Error, string>({
-    mutationFn: getUserByEmail,
-    onError: (error) => toast.error(`Error getting user by email: ${error}`),
+export const useGetUserByEmail = (email: string) => {
+  return useQuery<UserType | null>({
+    queryKey: ["get-user-by-email", email],
+    queryFn: () => getUserByEmail(email),
+    enabled: !!email,
   });
 };
