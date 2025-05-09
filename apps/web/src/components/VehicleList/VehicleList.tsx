@@ -3,22 +3,22 @@ import { VehicleCard } from "@components/index";
 import { VehicleType } from "types/vehicleType";
 import { useEffect, useState } from "react";
 import "./vehicleList.css";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 export const VehicleList = () => {
   const { data, error, isLoading } = useFetchAllVehicles();
   const [filteredData, setFilteredData] = useState<VehicleType[]>([]);
 
-  if (error) return <div>{error.message}</div>;
-
   useEffect(() => {
-    if (!data) {
-      toast.error("No data available");
-      return;
-    }
-
-    setFilteredData(data.filter((v) => v.isAvailable && v.isVerified));
+    console.log(data);
+    setFilteredData(
+      Array.isArray(data)
+        ? data.filter((v) => v.isAvailable && v.isVerified)
+        : []
+    );
   }, [data]);
+
+  if (error) return <div>{error.message}</div>;
 
   return (
     <section>

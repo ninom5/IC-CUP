@@ -16,7 +16,7 @@ export const VehicleCard = ({ vehicle }: { vehicle: VehicleType }) => {
           {vehicle.brand} {vehicle.model}
         </h2>
         <p>
-          {/*ovde ide rating*/} &star; {/*broj recenzija*/}
+          {/*ovde ide rating*/} &#9733; {/*broj recenzija*/}
         </p>
         <b>{vehicle.dailyPrice}</b> / per day
       </div>

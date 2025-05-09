@@ -44,7 +44,7 @@ export class ReviewService {
                 id: true,
                 firstName: true,
                 lastName: true,
-                img: true,
+                personPhoto: true,
               },
             },
           },
@@ -64,7 +64,7 @@ export class ReviewService {
         id: review.rental.renter.id,
         firstName: review.rental.renter.firstName,
         lastName: review.rental.renter.lastName,
-        img: review.rental.renter.img,
+        img: review.rental.renter.personPhoto,
       },
     }));
   }

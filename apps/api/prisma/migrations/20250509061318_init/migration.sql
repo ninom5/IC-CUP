@@ -1,25 +1,17 @@
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER', 'BOTH');
 
-<<<<<<<< HEAD:apps/api/prisma/migrations/20250508222102_init/migration.sql
 -- CreateEnum
 CREATE TYPE "RentalStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED', 'COMPLETED', 'CANCELLED');
 
 -- CreateEnum
 CREATE TYPE "VehicleType" AS ENUM ('CAR', 'MOTORCYCLE', 'BICYCLE', 'SCOOTER');
 
-========
->>>>>>>> ee60eff9d51f9f65430d91cd714ec6834644c934:apps/api/prisma/migrations/20250508111212_init/migration.sql
 -- CreateEnum
 CREATE TYPE "FuelType" AS ENUM ('PETROL', 'DIESEL', 'ELECTRIC', 'HYBRID');
 
 -- CreateEnum
 CREATE TYPE "CarCategory" AS ENUM ('SMALL', 'MEDIUM', 'SUV', 'VAN', 'LUXURY');
-
-<<<<<<<< HEAD:apps/api/prisma/migrations/20250508222102_init/migration.sql
-========
--- CreateEnum
-CREATE TYPE "RentalStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED', 'COMPLETED', 'CANCELLED');
 
 -- CreateTable
 CREATE TABLE "User" (
@@ -30,42 +22,6 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "dateOfBirth" TIMESTAMP(3) NOT NULL,
     "personPhoto" TEXT NOT NULL,
-    "role" "Role" NOT NULL DEFAULT 'USER',
-    "isVerified" BOOLEAN NOT NULL DEFAULT false,
-    "driverLicense" TEXT NOT NULL,
-    "idCard" TEXT NOT NULL,
-    "phoneNumber" TEXT NOT NULL,
-    "address" TEXT NOT NULL,
-    "bankAccount" TEXT,
-    "totalEarnings" DOUBLE PRECISION NOT NULL DEFAULT 0.0,
-    "isSuspended" BOOLEAN NOT NULL DEFAULT false,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "lastModifiedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Location" (
-    "id" TEXT NOT NULL,
-    "address" TEXT NOT NULL,
-    "city" TEXT,
-    "longitude" DECIMAL(65,30) NOT NULL,
-    "latitude" DECIMAL(65,30) NOT NULL,
-
-    CONSTRAINT "Location_pkey" PRIMARY KEY ("id")
-);
-
->>>>>>>> ee60eff9d51f9f65430d91cd714ec6834644c934:apps/api/prisma/migrations/20250508111212_init/migration.sql
--- CreateTable
-CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
-    "firstName" TEXT NOT NULL,
-    "lastName" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
-    "dateOfBirth" TIMESTAMP(3) NOT NULL,
-    "img" TEXT NOT NULL,
     "role" "Role" NOT NULL DEFAULT 'USER',
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
     "driverLicense" TEXT NOT NULL,
@@ -173,15 +129,6 @@ CREATE TABLE "Notification" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
-<<<<<<<< HEAD:apps/api/prisma/migrations/20250508222102_init/migration.sql
-========
-
--- CreateIndex
-CREATE UNIQUE INDEX "VehicleType_type_key" ON "VehicleType"("type");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Car_licensePlate_key" ON "Car"("licensePlate");
->>>>>>>> ee60eff9d51f9f65430d91cd714ec6834644c934:apps/api/prisma/migrations/20250508111212_init/migration.sql
 
 -- CreateIndex
 CREATE INDEX "Vehicle_ownerId_idx" ON "Vehicle"("ownerId");

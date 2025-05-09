@@ -3,13 +3,14 @@ import { api } from "./base";
 import { VehicleType } from "types/vehicleType";
 
 const getAllVehicles = async (): Promise<VehicleType[]> => {
-  const response = await api.get(`/vehicle`);
-  return response?.data;
+  const response = await api.get<never, VehicleType[]>("/vehicle");
+  return response;
 };
 
 export const useFetchAllVehicles = () => {
-  return useQuery<VehicleType[]>({
+  return useQuery({
+    queryKey: ["vehicle"],
     queryFn: getAllVehicles,
-    queryKey: ["vehicles"],
+    staleTime: 0,
   });
 };
