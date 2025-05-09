@@ -3,15 +3,17 @@ import { routes } from "@routes/routes";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useRegister, useUploadFiles } from "@api/index";
-import { useGetUserByEmail } from "@api/useGetUserByEmail";
-import { useUploadImages } from "@api/useUploadImages";
+import {
+  useRegister,
+  useUploadFiles,
+  getUserByEmail,
+  useUploadImages,
+} from "@api/index";
 
 export const RegisterForm = () => {
   const { mutate: register } = useRegister();
   const { mutateAsync: uploadImages } = useUploadImages();
   const { mutateAsync: uploadFiles } = useUploadFiles();
-  const { mutateAsync: getUserByEmail } = useGetUserByEmail();
 
   const [registerData, setRegisterData] = useState({
     firstName: "",
@@ -115,7 +117,7 @@ export const RegisterForm = () => {
       });
 
       const response = await uploadFiles([idFile, driverFile]);
-
+      console.log(response);
       if (!response) {
         toast.error("Response data is empty");
         return;
@@ -147,15 +149,23 @@ export const RegisterForm = () => {
     }
 
     const personPhotoLink = personPhotoResponse.secure_url;
-    setRegisterData({
+
+    setRegisterData((prev) => ({
+      ...prev,
+      idCard: pdfFiles[0],
+      driverLicense: pdfFiles[1],
+      personPhoto: personPhotoLink,
+    }));
+
+    const updatedRegisterData = {
       ...registerData,
       idCard: pdfFiles[0],
       driverLicense: pdfFiles[1],
       personPhoto: personPhotoLink,
-    });
+    };
 
     try {
-      register(registerData, {
+      register(updatedRegisterData, {
         onSuccess: () => {
           toast.success("Successfully registered. Now you can login.");
 

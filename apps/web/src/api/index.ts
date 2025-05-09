@@ -3,3 +3,5 @@ export * from "./base";
 export * from "./useLogin";
 export * from "./useRegister";
 export * from "./useUploadFiles";
+export * from "./useGetUserByEmail";
+export * from "./useUploadImages";
