@@ -6,6 +6,7 @@
   border: 1px solid lightslategray;
   margin: 10px;
   font-family: "Nunito-sans"; /*provjerit jel radi*/
+  cursor: pointer;
 }
 .vehicle-image-wrapper {
   width: 35%;

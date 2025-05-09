@@ -3,7 +3,6 @@ import { VehicleCard } from "@components/index";
 import { VehicleType } from "types/vehicleType";
 import { useEffect, useState } from "react";
 import "./vehicleList.css";
-// import { toast } from "react-toastify";
 
 export const VehicleList = () => {
   const { data, error, isLoading } = useFetchAllVehicles();

@@ -15,6 +15,7 @@ export const CarsPage = () => {
           console.error(`Error loading map: ${error}`);
           toast.error(`Error loading map: ${error?.message}`);
         }}
+        libraries={["places"]}
       >
         <CarsMap />
       </APIProvider>
