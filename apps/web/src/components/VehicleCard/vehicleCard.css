@@ -1,6 +1,6 @@
 .vehicle-card {
   display: flex;
-  width: 40%;
+  width: 90%;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid lightslategray;
@@ -8,8 +8,11 @@
   font-family: "Nunito-sans"; /*provjerit jel radi*/
 }
 .vehicle-image-wrapper {
-  width: 30%;
+  width: 35%;
   padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .vehicle-image {
   object-fit: cover;
