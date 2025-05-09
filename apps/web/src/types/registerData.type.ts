@@ -7,7 +7,7 @@ export type RegisterDataType = {
   confirmPassword: string;
   phoneNumber: string;
   address: string;
-  personPhoto: File | null;
-  idCard: File[] | null;
-  driverLicense: File[] | null;
+  personPhoto: string;
+  idCard: string;
+  driverLicense: string;
 };

@@ -6,21 +6,55 @@ import {
 import { PrismaService } from 'src/prisma.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ResponseUserDto } from './dto/response-user.dto';
+import { hash } from 'bcrypt';
 
 @Injectable()
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getAll() {
-    return this.prisma.user.findMany();
+    return this.prisma.user.findMany({
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        isSuspended: true,
+        isVerified: true,
+      },
+    });
   }
 
   async getById(id: string) {
-    return this.prisma.user.findUnique({ where: { id } });
+    const user = this.prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        isSuspended: true,
+        isVerified: true,
+      },
+    });
+    if (!user) throw new NotFoundException('User with provided id not found');
+
+    return user;
   }
 
   async getByEmail(email: string) {
-    return this.prisma.user.findUnique({ where: { email } });
+    const user = this.prisma.user.findUnique({
+      where: { email },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        isSuspended: true,
+        isVerified: true,
+      },
+    });
+    if (!user)
+      throw new NotFoundException('User with provided email not found');
+
+    return user;
   }
 
   async update(
@@ -28,6 +62,8 @@ export class UserService {
     updateUserDto: UpdateUserDto,
   ): Promise<ResponseUserDto> {
     delete updateUserDto.email;
+    if (updateUserDto.password)
+      updateUserDto.password = await hash(updateUserDto.password, 10);
 
     return this.prisma.user.update({
       where: { id },

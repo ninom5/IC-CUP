@@ -1,24 +1,14 @@
-import { axiosInstanceAPI } from "./base";
-import { toast } from "react-toastify";
+import { LoginType } from "types";
+import { api } from "./base";
+import { useMutation } from "@tanstack/react-query";
 
-export const useLogin = (
-  loginData: { email: string; password: string },
-  updateToken: () => void
-) => {
-  const axiosInstance = axiosInstanceAPI();
+const loginUser = async (loginData: LoginType) => {
+  const token = (await api.post("/auth/login", loginData)).data?.token;
+  localStorage.setItem("jwt", token);
+};
 
-  const login = async () => {
-    const response = await axiosInstance.post("/auth/login", loginData);
-    const token = response.data?.token;
-
-    if (!token) {
-      toast.error("Invalid username or password");
-      return;
-    }
-
-    localStorage.setItem("jwt", token);
-    updateToken();
-  };
-
-  return login;
+export const useLogin = () => {
+  return useMutation({
+    mutationFn: loginUser,
+  });
 };

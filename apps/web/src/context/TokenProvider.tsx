@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect, useState, FC } from "react";
-import { extractUserInfo } from "@utils/extractUserInfo";
+import { extractUserInfo } from "@utils/extractUserInfo.util";
 import { TokenContext } from "./TokenContext";
 
 export const TokenProvider: FC<PropsWithChildren> = ({ children }) => {

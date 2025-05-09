@@ -4,6 +4,7 @@ import {
   IsNotEmpty,
   IsPhoneNumber,
   IsString,
+  Matches,
   MaxLength,
   MinLength,
   Validate,
@@ -11,6 +12,7 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmailUnique } from '../../utils/isEmailUnique.decorator';
 import { Type } from 'class-transformer';
+import { Match } from 'src/utils/doesPasswordsMatch.decorator';
 
 export class CreateUserDto {
   @IsString()
@@ -37,6 +39,12 @@ export class CreateUserDto {
   @ApiProperty({ example: 'password' })
   password: string;
 
+  @IsString()
+  @MinLength(8)
+  @ApiProperty({ example: 'password' })
+  @Match('password')
+  confirmPassword: string;
+
   @ApiProperty({ example: '2000-01-01T00:00:00.000Z', type: String })
   @Type(() => Date)
   @IsDate()
@@ -45,7 +53,7 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({ example: 'somelink.com' })
-  img: string;
+  personPhoto: string;
 
   @IsString()
   @IsNotEmpty()
