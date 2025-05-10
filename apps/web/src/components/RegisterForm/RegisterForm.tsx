@@ -1,5 +1,5 @@
 import { isRegisterDataValid, generatePDF } from "@utils/index";
-import { routes } from "@routes/routes";
+import { routes } from "@routes/index";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

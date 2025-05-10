@@ -3,7 +3,7 @@ import { useToken } from "@hooks/useToken";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "@api/index";
 import { toast } from "react-toastify";
-import { routes } from "@routes/routes";
+import { routes } from "@routes/index";
 import axios from "axios";
 
 export const LoginForm = () => {

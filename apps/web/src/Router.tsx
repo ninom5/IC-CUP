@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { routes } from "./routes/routes";
+import { routes } from "./routes/index";
 import {
   CarsPage,
   HomePage,
@@ -7,7 +7,7 @@ import {
   NotFoundPage,
   RegisterPage,
 } from "@pages/index";
-// import { AdminRoutes } from "@routes/adminRoutes";
+// import { AdminRoutes } from "@routes/index ";
 
 export const Router = () => {
   return (

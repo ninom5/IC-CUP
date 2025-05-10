@@ -1,4 +1,4 @@
-import { routes } from "@routes/routes";
+import { routes } from "@routes/index";
 import { Link } from "react-router-dom";
 export const HomePage = () => {
   return (
