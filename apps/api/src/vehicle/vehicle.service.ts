@@ -31,10 +31,24 @@ export class VehicleService {
     });
   }
 
-  async getAll() {
-    return this.prisma.vehicle.findMany({
-      include: { location: true },
-    });
+  async getAll(page: number = 1, limit: number = 10) {
+    const skip = (page - 1) * limit;
+
+    const [vehicles, total] = await Promise.all([
+      this.prisma.vehicle.findMany({
+        skip,
+        take: limit,
+        include: { location: true },
+      }),
+      this.prisma.vehicle.count(),
+    ]);
+
+    return {
+      data: vehicles,
+      currentPage: page,
+      totalItems: total,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 
   async findAllUserVehicles(userId: string) {

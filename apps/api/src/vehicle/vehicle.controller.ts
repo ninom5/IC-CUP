@@ -23,8 +23,13 @@ export class VehicleController {
   }
 
   @Get()
-  getAll() {
-    return this.vehicleService.getAll();
+  async getAllVehicles(
+    @Query('page') page = '1',
+    @Query('limit') limit = '10',
+  ) {
+    const pageNumber = parseInt(page, 10);
+    const pageSize = parseInt(limit, 10);
+    return this.vehicleService.getAll(pageNumber, pageSize);
   }
 
   @Get('by-date')

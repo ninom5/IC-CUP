@@ -1,11 +1,11 @@
 import { VehicleList, CarsMap } from "@components/index";
 import { toast } from "react-toastify";
-import "./carsPage.css";
+import "./vehiclesPage.css";
 import { APIProvider } from "@vis.gl/react-google-maps";
 
-export const CarsPage = () => {
+export const VehiclesPage = () => {
   return (
-    <section className="cars-page">
+    <section className="vehicles-page">
       <VehicleList />
 
       <APIProvider

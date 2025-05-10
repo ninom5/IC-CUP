@@ -102,6 +102,288 @@ async function main() {
     },
   });
 
+  const vehicle3 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+
+  const vehicle4 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+
+  const vehicle5 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+
+  const vehicle6 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+
+  const vehicle7 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+  const vehicle8 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+  const vehicle9 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+  const vehicle10 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+  const vehicle11 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+
+  const vehicle12 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+
+  const vehicle13 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+
+  const vehicle14 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+
+  const vehicle15 = await prisma.vehicle.create({
+    data: {
+      ownerId: user2.id,
+      brand: 'Honda',
+      model: 'Civic',
+      images: [
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
+      ],
+      productionYear: 2022,
+      dailyPrice: 60.0,
+      isAvailable: true,
+      description: 'A spacious and fuel-efficient car.',
+      registration: 'XYZ789',
+      locationId: location2.id,
+      vehicleType: VehicleType.CAR,
+      details: {
+        fuelType: FuelType.DIESEL,
+        carCategory: CarCategory.MEDIUM,
+      },
+    },
+  });
+
   const rental1 = await prisma.rental.create({
     data: {
       renterId: user1.id,

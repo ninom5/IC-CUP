@@ -15,21 +15,23 @@ export const SearchBar = () => {
   };
 
   return (
-    <nav>
+    <nav className="search-navigation">
       <input type="text" />
 
-      <Link to={routes.ABOUT}>How it works</Link>
+      <div className="navigation-links">
+        <Link to={routes.ABOUT}>How it works</Link>
 
-      {token && !isExpired ? (
-        <Link to={routes.HOME} onClick={handleLogout}>
-          Logout
-        </Link>
-      ) : (
-        <>
-          <Link to={routes.REGISTER}>Register</Link>
-          <Link to={routes.LOGIN}>Login</Link>
-        </>
-      )}
+        {token && !isExpired ? (
+          <Link to={routes.HOME} onClick={handleLogout}>
+            Logout
+          </Link>
+        ) : (
+          <>
+            <Link to={routes.REGISTER}>Register</Link>
+            <Link to={routes.LOGIN}>Login</Link>
+          </>
+        )}
+      </div>
     </nav>
   );
 };

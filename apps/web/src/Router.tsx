@@ -1,26 +1,29 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { routes } from "./routes/index";
 import {
-  CarsPage,
+  VehiclesPage,
   HomePage,
   LoginPage,
   NotFoundPage,
   RegisterPage,
 } from "@pages/index";
+import { SearchBarLayout } from "@layouts/SearchBarLayout";
 // import { AdminRoutes } from "@routes/index ";
 
 export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={routes.HOME} element={<HomePage />} />
-        <Route path={routes.LOGIN} element={<LoginPage />} />
-        <Route path={routes.REGISTER} element={<RegisterPage />} />
-        <Route path={routes.CARS} element={<CarsPage />} />
+        <Route element={<SearchBarLayout />}>
+          <Route path={routes.HOME} element={<HomePage />} />
+          <Route path={routes.CARS} element={<VehiclesPage />} />
+        </Route>
         {/* <AdminRoutes>
 
-        </AdminRoutes> */}
+</AdminRoutes> */}
 
+        <Route path={routes.LOGIN} element={<LoginPage />} />
+        <Route path={routes.REGISTER} element={<RegisterPage />} />
         <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
