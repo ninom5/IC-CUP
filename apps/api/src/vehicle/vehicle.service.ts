@@ -4,10 +4,30 @@ import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 import { PrismaService } from 'src/prisma.service';
 import { instanceToPlain } from 'class-transformer';
 import { VehicleFiltersDto } from 'src/location/dto/vehicle-filters.dto';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class VehicleService {
   constructor(private readonly prisma: PrismaService) {}
+
+  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
+  async handleExpiredRegistrations() {
+    const today = new Date();
+
+    const vehiclesToUpdate = await this.prisma.vehicle.findMany({
+      where: {
+        registrationExpiration: { lte: today },
+        isAvailable: true,
+      },
+    });
+
+    for (const vehicle of vehiclesToUpdate) {
+      await this.prisma.vehicle.update({
+        where: { id: vehicle.id },
+        data: { isAvailable: false },
+      });
+    }
+  }
   async create(createVehicleDto: CreateVehicleDto) {
     const ownerExists = await this.prisma.user.findUnique({
       where: { id: createVehicleDto.ownerId },
