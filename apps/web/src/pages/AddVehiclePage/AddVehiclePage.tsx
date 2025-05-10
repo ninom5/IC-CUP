@@ -7,8 +7,39 @@ import {
   ThirdStep,
 } from "@components/index";
 
+enum CarCategory {
+  SMALL = "SMALL",
+  MEDIUM = "MEDIUM",
+  SUV = "SUV",
+  VAN = "VAN",
+  LUXURY = "LUXURY",
+}
+
+enum FuelType {
+  PETROL = "PETROL",
+  DIESEL = "DIESEL",
+  ELECTRIC = "ELECTRIC",
+  HYBRID = "HYBRID",
+}
+
+type VehicleData = {
+  registration?: string;
+  registrationExpiry?: string;
+  category?: CarCategory;
+  brand?: string;
+  model?: string;
+  year?: number;
+  seats?: number;
+  fuelType?: FuelType;
+  transmission?: "manualni" | "automatik";
+  features?: string[];
+  images?: File[];
+  price?: number;
+};
+
 export const AddVehiclePage = () => {
   const [formStep, setFormStep] = useState(1);
+  const [vehicleData, setVehicleData] = useState({});
 
   const handleNextStep = () => {
     setFormStep((prevStep) => prevStep + 1);
