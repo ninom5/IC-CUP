@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { VehicleType } from '@prisma/client';
 import {
   IsArray,
+  IsDate,
   IsEnum,
   IsNotEmpty,
   IsNumber,
@@ -117,17 +118,17 @@ export class CreateVehicleDto {
   registration: string;
 
   @IsNotEmpty({
-    message: 'Location ID is required',
+    message: 'Registration expiration date is required',
   })
-  @IsString({
-    message: 'Location ID must be a string',
+  @IsDate({
+    message: 'Registration expiration must be a valid date',
   })
   @ApiProperty({
-    description: 'Location ID',
-    example: '12345678-1234-1234-1234-123456789012',
+    description: 'Registration expiration date',
     type: 'string',
+    example: '2025-12-31',
   })
-  locationId: string;
+  registrationExpiration: Date;
 
   @IsNotEmpty({
     message: 'Vehicle type is required',
@@ -143,6 +144,52 @@ export class CreateVehicleDto {
     example: VehicleType.CAR,
   })
   vehicleType: VehicleType;
+
+  @IsNotEmpty({ message: 'Address is required' })
+  @IsString({ message: 'Address must be a string' })
+  @ApiProperty({
+    description: 'Address',
+    example: '123 Main St, Springfield, USA',
+    type: 'string',
+  })
+  pickupAddress: string;
+
+  @IsString({ message: 'City must be a string' })
+  @IsOptional()
+  @ApiProperty({
+    description: 'City',
+    example: 'Springfield',
+    type: 'string',
+  })
+  city: string;
+
+  @IsNotEmpty({ message: 'Longitude is required' })
+  @IsNumber(
+    {
+      allowNaN: false,
+    },
+    { message: 'Longitude must be a number' },
+  )
+  @ApiProperty({
+    description: 'Longitude',
+    example: -123.456,
+    type: 'number',
+  })
+  longitude: number;
+
+  @IsNotEmpty({ message: 'Latitude is required' })
+  @IsNumber(
+    {
+      allowNaN: false,
+    },
+    { message: 'Latitude must be a number' },
+  )
+  @ApiProperty({
+    description: 'Latitude',
+    example: 45.678,
+    type: 'number',
+  })
+  latitude: number;
 
   @IsNotEmpty({ message: 'Details are required' })
   @ValidateNested()

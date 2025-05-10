@@ -7,6 +7,12 @@ CREATE TYPE "RentalStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED', 'COMPLETE
 -- CreateEnum
 CREATE TYPE "VehicleType" AS ENUM ('CAR', 'MOTORCYCLE', 'BICYCLE', 'SCOOTER');
 
+-- CreateEnum
+CREATE TYPE "FuelType" AS ENUM ('PETROL', 'DIESEL', 'ELECTRIC', 'HYBRID');
+
+-- CreateEnum
+CREATE TYPE "CarCategory" AS ENUM ('SMALL', 'MEDIUM', 'SUV', 'VAN', 'LUXURY');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
@@ -51,11 +57,16 @@ CREATE TABLE "Vehicle" (
     "images" TEXT[],
     "productionYear" INTEGER NOT NULL,
     "dailyPrice" DOUBLE PRECISION NOT NULL,
-    "isAvailable" BOOLEAN NOT NULL DEFAULT true,
-    "description" TEXT NOT NULL,
+    "isAvailable" BOOLEAN NOT NULL DEFAULT false,
+    "description" TEXT,
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
     "registration" TEXT NOT NULL,
+    "registrationExpiration" TIMESTAMP(3) NOT NULL,
     "locationId" TEXT NOT NULL,
+    "pickupAddress" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
+    "longitude" DECIMAL(65,30) NOT NULL,
+    "latitude" DECIMAL(65,30) NOT NULL,
     "vehicleType" "VehicleType" NOT NULL,
     "details" JSONB NOT NULL,
 
@@ -66,10 +77,9 @@ CREATE TABLE "Vehicle" (
 CREATE TABLE "Review" (
     "id" TEXT NOT NULL,
     "rentalId" TEXT NOT NULL,
-    "rating" INTEGER NOT NULL,
-    "comment" TEXT NOT NULL,
+    "rating" DOUBLE PRECISION NOT NULL,
+    "comment" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Review_pkey" PRIMARY KEY ("id")
 );

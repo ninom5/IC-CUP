@@ -39,31 +39,31 @@ model Location {
   city      String?
   longitude Decimal 
   latitude  Decimal
-
-  vehicles  Vehicle[]
 }
 
 model Vehicle {
-  id              String   @id @default(uuid())
-  ownerId         String
-  owner           User     @relation("UserVehicles", fields: [ownerId], references: [id], onDelete: Cascade)
-  brand           String
-  model           String
-  images          String[]
-  productionYear  Int
-  dailyPrice      Float
-  isAvailable     Boolean  @default(false)
-  description     String?
-  isVerified      Boolean  @default(false)
-  registration    String
-  locationId      String
-  location        Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
-  vehicleType     VehicleType
-  details         Json
-  rentals         Rental[]
+  id                      String   @id @default(uuid())
+  ownerId                 String
+  owner                   User     @relation("UserVehicles", fields: [ownerId], references: [id], onDelete: Cascade)
+  brand                   String
+  model                   String
+  images                  String[]
+  productionYear          Int
+  dailyPrice              Float
+  isAvailable             Boolean  @default(false)
+  description             String?
+  isVerified              Boolean  @default(false)
+  registration            String
+  registrationExpiration  DateTime
+  pickupAddress           String
+  city                    String
+  longitude               Float
+  latitude                Float
+  vehicleType             VehicleType
+  details                 Json
+  rentals                 Rental[]
 
   @@index([ownerId])
-  @@index([locationId])
 }
 
 model Review {
