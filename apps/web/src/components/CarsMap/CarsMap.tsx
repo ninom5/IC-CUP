@@ -12,44 +12,60 @@ import { VehicleType } from "types";
 import { SplitLocation } from "@constants/index";
 import { toast } from "react-toastify";
 import "./carsMap.css";
+import { AutoCompleteInput } from "@components/AutoCompleteInput/AutoCompleteInput";
 
 //provjerit clusterer jel radi dobro
 
 export const CarsMap = () => {
   const { data, isLoading, error } = useFetchAllVehicles();
   const map = useMap();
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const clusterer = useRef<MarkerClusterer | null>(null);
   const markers = useRef<Marker[]>([]);
+  const [searchLocation, setSearchLocation] =
+    useState<google.maps.LatLng | null>(null);
 
   useEffect(() => {
-    if (!map || !window.google || !containerRef.current) return;
+    if (!map || !window.google) return;
 
-    const autoComplete = new google.maps.places.PlaceAutocompleteElement({});
-    autoComplete.id = "place-autocomplete-input";
-    containerRef.current.appendChild(autoComplete);
+    const geocoder = new google.maps.Geocoder();
 
-    map.controls[window.google.maps.ControlPosition.TOP_LEFT].push(
-      containerRef.current
-    );
+    const input = document.getElementById(
+      "autocomplete-input"
+    ) as HTMLInputElement;
+    if (!input) return;
 
-    autoComplete.addEventListener("gmpx-place-select", async (event: any) => {
-      const prediction = event?.prediction;
-      if (!prediction) return;
+    const autocomplete = new google.maps.places.Autocomplete(input, {
+      fields: ["geometry", "name"],
+      types: ["geocode"],
+    });
 
-      const place = prediction.toPlace();
-      await place.fetchFields({
-        fields: ["geometry", "formattedAddress", "location", "viewport"],
-      });
+    autocomplete.addListener("place_changed", () => {
+      const place = autocomplete.getPlace();
+      console.log("Selected place:", place);
 
-      if (!place.location) return;
-
-      if (place.viewport) {
-        map.fitBounds(place.viewport);
-      } else {
-        map.setCenter(place.location);
-        map.setZoom(14);
+      if (!place.geometry || !place.geometry.location) {
+        toast.error("No geometry found for selected place.");
+        setSearchLocation(null);
+        return;
       }
+
+      geocoder.geocode(
+        { location: place.geometry.location },
+        (results, status) => {
+          if (
+            status === google.maps.GeocoderStatus.OK &&
+            results &&
+            results[0]
+          ) {
+            const addressComponents = results[0].address_components;
+            console.log(addressComponents);
+          }
+        }
+      );
+
+      map.setCenter(place.geometry.location);
+      map.setZoom(12);
+      setSearchLocation(place.geometry.location);
     });
   }, [map]);
 
@@ -98,19 +114,7 @@ export const CarsMap = () => {
   return (
     <section className="map-wrapper">
       <div className="map-wrapper-inner">
-        <div
-          ref={containerRef}
-          className="map-search"
-          style={{
-            position: "absolute",
-            top: 20,
-            left: 20,
-            zIndex: 10,
-            backgroundColor: "white",
-            borderRadius: "4px",
-            boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
-          }}
-        />
+        <AutoCompleteInput />
         <Map
           defaultZoom={12}
           defaultCenter={{ lat: SplitLocation.lat, lng: SplitLocation.lng }}
@@ -133,6 +137,15 @@ export const CarsMap = () => {
                 <div className="custom-marker">{vehicle.dailyPrice}</div>
               </AdvancedMarker>
             ))}
+
+          {searchLocation && (
+            <AdvancedMarker
+              position={{
+                lat: searchLocation.lat(),
+                lng: searchLocation.lng(),
+              }}
+            />
+          )}
 
           {selectedVehicle && (
             <InfoWindow
