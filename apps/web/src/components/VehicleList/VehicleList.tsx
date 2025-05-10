@@ -13,8 +13,6 @@ export const VehicleList = () => {
     isLoading,
   } = useFetchAllVehiclesPagination();
 
-  console.log(data);
-
   const vehicles =
     data?.pages
       .flatMap((page) => page.data)

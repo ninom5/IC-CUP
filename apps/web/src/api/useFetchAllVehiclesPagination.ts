@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 const fetchAllVehiclesPagination = async (page: number, limit = 10) => {
   return await api.get<never, PaginatedVehiclesResponse>(
-    `/vehicle?page=${page}&limit=${limit}`
+    `/vehicle/pagination?page=${page}&limit=${limit}`
   );
 };
 

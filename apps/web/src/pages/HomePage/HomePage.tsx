@@ -1,3 +1,4 @@
+import { AutoCompleteInput } from "@components/index";
 import { routes } from "@routes/index";
 import { Link } from "react-router-dom";
 export const HomePage = () => {
@@ -6,6 +7,7 @@ export const HomePage = () => {
       <Link to={routes.LOGIN}>LOGIN</Link>
       <Link to={routes.REGISTER}>REGISTER</Link>
       <Link to={routes.CARS}>CARS</Link>
+      <AutoCompleteInput />
     </div>
   );
 };

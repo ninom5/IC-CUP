@@ -24,54 +24,20 @@ export const CarsMap = () => {
   const [searchLocation, setSearchLocation] =
     useState<google.maps.LatLng | null>(null);
 
-  useEffect(() => {
-    if (!map || !window.google) return;
-
-    const geocoder = new google.maps.Geocoder();
-
-    const input = document.getElementById(
-      "autocomplete-input"
-    ) as HTMLInputElement;
-    if (!input) return;
-
-    const autocomplete = new google.maps.places.Autocomplete(input, {
-      fields: ["geometry", "name"],
-      types: ["geocode"],
-    });
-
-    autocomplete.addListener("place_changed", () => {
-      const place = autocomplete.getPlace();
-      console.log("Selected place:", place);
-
-      if (!place.geometry || !place.geometry.location) {
-        toast.error("No geometry found for selected place.");
-        setSearchLocation(null);
-        return;
-      }
-
-      geocoder.geocode(
-        { location: place.geometry.location },
-        (results, status) => {
-          if (
-            status === google.maps.GeocoderStatus.OK &&
-            results &&
-            results[0]
-          ) {
-            const addressComponents = results[0].address_components;
-            console.log(addressComponents);
-          }
-        }
-      );
-
-      map.setCenter(place.geometry.location);
-      map.setZoom(12);
-      setSearchLocation(place.geometry.location);
-    });
-  }, [map]);
-
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleType | null>(
     null
   );
+
+  const handlePlaceResolved = (place: google.maps.places.PlaceResult) => {
+    if (!place.geometry?.location) {
+      toast.error("No location found for selected place");
+      return;
+    }
+    const location = place.geometry.location;
+    setSearchLocation(location);
+    map?.setCenter(location);
+    map?.setZoom(12);
+  };
 
   useEffect(() => {
     if (map && !clusterer.current) {
@@ -88,10 +54,6 @@ export const CarsMap = () => {
       }
     };
   });
-
-  const filteredVehicles = Array.isArray(data)
-    ? data.filter((vehicle) => vehicle.isAvailable && vehicle.isVerified)
-    : [];
 
   const handleMarkerClick = (
     e: google.maps.MapMouseEvent,
@@ -111,10 +73,14 @@ export const CarsMap = () => {
     });
   };
 
+  const filteredVehicles = Array.isArray(data)
+    ? data?.filter((v) => v.isAvailable && v.isVerified)
+    : [];
+
   return (
     <section className="map-wrapper">
       <div className="map-wrapper-inner">
-        <AutoCompleteInput />
+        <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
         <Map
           defaultZoom={12}
           defaultCenter={{ lat: SplitLocation.lat, lng: SplitLocation.lng }}
@@ -125,6 +91,7 @@ export const CarsMap = () => {
           cameraControl={false}
         >
           {!isLoading &&
+            // data &&
             filteredVehicles.map((vehicle) => (
               <AdvancedMarker
                 key={vehicle.id}
