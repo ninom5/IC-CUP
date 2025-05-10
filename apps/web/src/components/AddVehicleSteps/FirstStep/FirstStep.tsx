@@ -1,4 +1,4 @@
-import c from "./AddVehicleForm.module.css";
+import c from "./FirstStep.module.css";
 
 enum CarCategory {
   SMALL = "SMALL",
@@ -8,15 +8,27 @@ enum CarCategory {
   LUXURY = "LUXURY",
 }
 
-export const AddVehicleForm = () => {
+const getMinDate = () => {
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 30);
+  return minDate.toISOString().split("T")[0];
+};
+
+export const FirstStep = () => {
   return (
     <div className={c.form}>
-      <div className={c.formInputContainer}>
-        <h3>Registracija</h3>
-        <input type="text" placeholder="Registracija..." />
+      <div className="modelBrandContainer">
+        <div className="formInputContainer">
+          <h3>Registracija</h3>
+          <input type="text" placeholder="Registracija..." />
+        </div>
+        <div className="formInputContainer">
+          <h3>Istek Registracija</h3>
+          <input type="date" min={getMinDate()} />
+        </div>
       </div>
 
-      <div className={c.formInputContainer}>
+      <div className="formInputContainer">
         <h3>Slika prometne</h3>
         <input type="file" />
       </div>
@@ -32,19 +44,19 @@ export const AddVehicleForm = () => {
         </select>
       </div>
 
-      <div className={c.modelBrandContainer}>
-        <div className={c.formInputContainer}>
+      <div className="modelBrandContainer">
+        <div className="formInputContainer">
           <h3>Marka</h3>
           <input type="text" placeholder="Marka..." />
         </div>
 
-        <div className={c.formInputContainer}>
+        <div className="formInputContainer">
           <h3>Model</h3>
           <input type="text" placeholder="Model..." />
         </div>
       </div>
 
-      <div className={c.formInputContainer}>
+      <div className="formInputContainer">
         <h3>Godina</h3>
         <input type="number" placeholder="Godina..." />
       </div>

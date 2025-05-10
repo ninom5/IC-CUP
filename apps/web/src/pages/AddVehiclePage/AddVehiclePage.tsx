@@ -1,6 +1,11 @@
 import { useState } from "react";
 import c from "./AddVehiclePage.module.css";
-import { AddVehicleForm } from "@components/index";
+import {
+  FirstStep,
+  FourthStep,
+  SecondStep,
+  ThirdStep,
+} from "@components/index";
 
 export const AddVehiclePage = () => {
   const [formStep, setFormStep] = useState(1);
@@ -20,7 +25,10 @@ export const AddVehiclePage = () => {
         <p>{formStep} / 4</p>
       </div>
 
-      <AddVehicleForm />
+      {formStep === 1 && <FirstStep />}
+      {formStep === 2 && <SecondStep />}
+      {formStep === 3 && <ThirdStep />}
+      {formStep === 4 && <FourthStep />}
 
       {formStep < 4 ? (
         <button onClick={handleNextStep}>NEXT</button>

@@ -3,12 +3,12 @@
   flex-direction: column;
 }
 
-.formInputContainer {
+.form > .formInputContainer {
   display: flex;
   flex-direction: column;
 }
 
-.modelBrandContainer {
+.form > .modelBrandContainer {
   display: flex;
   gap: 20px;
 }
