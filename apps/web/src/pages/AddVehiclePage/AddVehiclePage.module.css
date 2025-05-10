@@ -1,0 +1,21 @@
+.formSteps {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.formStepBar {
+  width: 500px;
+  height: 20px;
+  border-radius: 40px;
+  background-color: #f0f0f0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.formStepBar > div {
+  height: 100%;
+  background-color: gray;
+  border-radius: 40px;
+  transition: width 0.4s ease;
+}

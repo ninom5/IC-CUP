@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { routes } from "./routes/index";
 import {
+  AddVehiclePage,
+  BecomeHostPage,
   VehiclesPage,
   HomePage,
   LoginPage,
@@ -18,6 +20,8 @@ export const Router = () => {
           <Route path={routes.HOME} element={<HomePage />} />
           <Route path={routes.CARS} element={<VehiclesPage />} />
         </Route>
+        <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
+        <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
         {/* <AdminRoutes>
 
 </AdminRoutes> */}

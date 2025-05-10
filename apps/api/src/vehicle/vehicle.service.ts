@@ -4,22 +4,36 @@ import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 import { PrismaService } from 'src/prisma.service';
 import { instanceToPlain } from 'class-transformer';
 import { VehicleFiltersDto } from 'src/location/dto/vehicle-filters.dto';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class VehicleService {
   constructor(private readonly prisma: PrismaService) {}
+
+  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
+  async handleExpiredRegistrations() {
+    const today = new Date();
+
+    const vehiclesToUpdate = await this.prisma.vehicle.findMany({
+      where: {
+        registrationExpiration: { lte: today },
+        isAvailable: true,
+      },
+    });
+
+    for (const vehicle of vehiclesToUpdate) {
+      await this.prisma.vehicle.update({
+        where: { id: vehicle.id },
+        data: { isAvailable: false },
+      });
+    }
+  }
   async create(createVehicleDto: CreateVehicleDto) {
     const ownerExists = await this.prisma.user.findUnique({
       where: { id: createVehicleDto.ownerId },
     });
 
     if (!ownerExists) throw new NotFoundException('Owner not found');
-
-    const locationExists = await this.prisma.location.findUnique({
-      where: { id: createVehicleDto.locationId },
-    });
-
-    if (!locationExists) throw new NotFoundException('Location not found');
 
     const data = {
       ...createVehicleDto,
@@ -64,9 +78,6 @@ export class VehicleService {
 
     return this.prisma.vehicle.findMany({
       where: { ownerId: userId },
-      include: {
-        location: true,
-      },
     });
   }
 
@@ -77,6 +88,8 @@ export class VehicleService {
 
     return this.prisma.vehicle.findMany({
       where: {
+        isAvailable: true,
+        isVerified: true,
         rentals: {
           none: {
             AND: [
@@ -91,9 +104,6 @@ export class VehicleService {
           },
         },
       },
-      include: {
-        location: true,
-      },
     });
   }
 
@@ -101,7 +111,6 @@ export class VehicleService {
     const vehicle = await this.prisma.vehicle.findUnique({
       where: { id },
       include: {
-        location: true,
         owner: true,
       },
     });
@@ -117,13 +126,6 @@ export class VehicleService {
     });
 
     if (!vehicleExists) throw new NotFoundException('Vehicle not found');
-
-    if (updateVehicleDto.locationId !== undefined) {
-      const locationExists = await this.prisma.location.findUnique({
-        where: { id: updateVehicleDto.locationId },
-      });
-      if (!locationExists) throw new NotFoundException('Location not found');
-    }
 
     const cleanData = Object.fromEntries(
       Object.entries(updateVehicleDto).filter(([_, v]) => v !== undefined),

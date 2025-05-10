@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsBoolean, IsEnum, IsIn, IsNotEmpty, IsString } from 'class-validator';
 import { CarCategory, FuelType } from '../enums/vehicle.enums';
 
 export class CarDetailsDto {
@@ -52,4 +52,17 @@ export class CarDetailsDto {
     example: CarCategory.SMALL,
   })
   category: CarCategory;
+
+  @IsNotEmpty({
+    message: 'Number of seats is required',
+  })
+  @IsIn([2, 5, 7], {
+    message: 'Number of seats must be either 2, 5, or 7',
+  })
+  @ApiProperty({
+    description: 'Number of seats in the car',
+    enum: [2, 5, 7],
+    example: 5,
+  })
+  numOfSeats: number;
 }
