@@ -131,19 +131,6 @@ export class CreateVehicleDto {
   registrationExpiration: Date;
 
   @IsNotEmpty({
-    message: 'Location ID is required',
-  })
-  @IsString({
-    message: 'Location ID must be a string',
-  })
-  @ApiProperty({
-    description: 'Location ID',
-    example: '12345678-1234-1234-1234-123456789012',
-    type: 'string',
-  })
-  locationId: string;
-
-  @IsNotEmpty({
     message: 'Vehicle type is required',
   })
   @IsEnum(VehicleType, {

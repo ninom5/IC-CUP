@@ -39,8 +39,6 @@ model Location {
   city      String?
   longitude Decimal 
   latitude  Decimal
-
-  vehicles  Vehicle[]
 }
 
 model Vehicle {
@@ -57,8 +55,6 @@ model Vehicle {
   isVerified              Boolean  @default(false)
   registration            String
   registrationExpiration  DateTime
-  locationId              String
-  location                Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
   pickupAddress           String
   city                    String
   longitude               Decimal
@@ -68,7 +64,6 @@ model Vehicle {
   rentals                 Rental[]
 
   @@index([ownerId])
-  @@index([locationId])
 }
 
 model Review {

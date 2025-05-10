@@ -15,12 +15,6 @@ export class VehicleService {
 
     if (!ownerExists) throw new NotFoundException('Owner not found');
 
-    const locationExists = await this.prisma.location.findUnique({
-      where: { id: createVehicleDto.locationId },
-    });
-
-    if (!locationExists) throw new NotFoundException('Location not found');
-
     const data = {
       ...createVehicleDto,
       details: instanceToPlain(createVehicleDto.details),
@@ -40,9 +34,6 @@ export class VehicleService {
 
     return this.prisma.vehicle.findMany({
       where: { ownerId: userId },
-      include: {
-        location: true,
-      },
     });
   }
 
@@ -67,9 +58,6 @@ export class VehicleService {
           },
         },
       },
-      include: {
-        location: true,
-      },
     });
   }
 
@@ -77,7 +65,6 @@ export class VehicleService {
     const vehicle = await this.prisma.vehicle.findUnique({
       where: { id },
       include: {
-        location: true,
         owner: true,
       },
     });
@@ -93,13 +80,6 @@ export class VehicleService {
     });
 
     if (!vehicleExists) throw new NotFoundException('Vehicle not found');
-
-    if (updateVehicleDto.locationId !== undefined) {
-      const locationExists = await this.prisma.location.findUnique({
-        where: { id: updateVehicleDto.locationId },
-      });
-      if (!locationExists) throw new NotFoundException('Location not found');
-    }
 
     const cleanData = Object.fromEntries(
       Object.entries(updateVehicleDto).filter(([_, v]) => v !== undefined),
