@@ -1,8 +1,28 @@
 .search-navigation {
   display: flex;
   justify-content: space-between;
-  padding: 30px 40px 0;
+  padding: 30px 40px;
   font-size: 20px;
+  width: 100%;
+  height: auto;
+}
+
+.kolo-logo {
+  cursor: pointer;
+}
+
+.location-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid gray;
+  border-radius: 8px;
+}
+.location-wrapper #autocomplete-input {
+  padding: 10px;
+  margin-left: 10px;
+  border: none;
+  width: 50%;
 }
 
 .navigation-links {

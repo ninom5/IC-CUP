@@ -1,42 +1,29 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import {
-  Map,
-  InfoWindow,
-  AdvancedMarker,
-  useMap,
-} from "@vis.gl/react-google-maps";
+import { Map, AdvancedMarker, useMap } from "@vis.gl/react-google-maps";
 import { Marker, MarkerClusterer } from "@googlemaps/markerclusterer";
 import { useFetchAllVehicles } from "@api/index";
 import { VehicleType } from "types";
 import { SplitLocation } from "@constants/index";
 import { toast } from "react-toastify";
 import "./carsMap.css";
-import { AutoCompleteInput } from "@components/AutoCompleteInput/AutoCompleteInput";
-import { CustomPriceMarker } from "@components/CustomPriceMarker/CustomPriceMarker";
+import { useMapContext } from "@hooks/index";
+import { VehicleMarkers } from "@components/index";
+import { VehicleInfoWindow } from "@components/index";
 
 export const CarsMap = () => {
   const { data, isLoading } = useFetchAllVehicles();
-  const map = useMap();
-  const clusterer = useRef<MarkerClusterer | null>(null);
-  const markers = useRef<Marker[]>([]);
-  const [searchLocation, setSearchLocation] =
-    useState<google.maps.LatLng | null>(null);
-
+  const { searchLocation, setMap } = useMapContext();
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleType | null>(
     null
   );
 
-  const handlePlaceResolved = (place: google.maps.places.PlaceResult) => {
-    if (!place.geometry?.location) {
-      toast.error("No location found for selected place");
-      return;
-    }
-    const location = place.geometry.location;
-    setSearchLocation(location);
-    map?.setCenter(location);
-    map?.setZoom(12);
-  };
+  const map = useMap();
+  const clusterer = useRef<MarkerClusterer | null>(null);
+  const markers = useRef<Marker[]>([]);
+
+  useEffect(() => {
+    if (map && setMap) setMap(map);
+  }, [map, setMap]);
 
   useEffect(() => {
     if (map && !clusterer.current) {
@@ -52,7 +39,7 @@ export const CarsMap = () => {
         clusterer.current = null;
       }
     };
-  });
+  }, [map]);
 
   const handleMarkerClick = (
     e: google.maps.MapMouseEvent,
@@ -72,14 +59,9 @@ export const CarsMap = () => {
     });
   };
 
-  const filteredVehicles = Array.isArray(data)
-    ? data?.filter((v) => v.isAvailable && v.isVerified)
-    : [];
-
   return (
     <section className="map-wrapper">
       <div className="map-wrapper-inner">
-        <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
         <Map
           defaultZoom={12}
           defaultCenter={{ lat: SplitLocation.lat, lng: SplitLocation.lng }}
@@ -89,19 +71,9 @@ export const CarsMap = () => {
           streetViewControl={false}
           cameraControl={false}
         >
-          {!isLoading &&
-            filteredVehicles.map((vehicle) => (
-              <AdvancedMarker
-                key={vehicle.id}
-                position={{
-                  lat: vehicle.latitude,
-                  lng: vehicle.longitude,
-                }}
-                onClick={(e) => handleMarkerClick(e, vehicle)}
-              >
-                <CustomPriceMarker price={vehicle.dailyPrice} />
-              </AdvancedMarker>
-            ))}
+          {!isLoading && data && (
+            <VehicleMarkers data={data} onMarkerClick={handleMarkerClick} />
+          )}
 
           {searchLocation && (
             <AdvancedMarker
@@ -113,30 +85,10 @@ export const CarsMap = () => {
           )}
 
           {selectedVehicle && (
-            <InfoWindow
-              position={{
-                lat: selectedVehicle.latitude,
-                lng: selectedVehicle.longitude,
-              }}
+            <VehicleInfoWindow
+              vehicle={selectedVehicle}
               onClose={() => setSelectedVehicle(null)}
-              className="info-window"
-            >
-              <div className="info-window-vehicle-info">
-                <h3>
-                  {selectedVehicle.brand} {selectedVehicle.model}
-                </h3>
-                <p>{selectedVehicle.description}</p>
-                <p>
-                  Daily price:/Dnevna cijena:{" "}
-                  <b>{selectedVehicle.dailyPrice}</b>
-                  <br />
-                  Rating:/Ocjena:
-                </p>
-                <Link to={`/car/${selectedVehicle.id}`}>
-                  See more details/Provjeri detalje
-                </Link>
-              </div>
-            </InfoWindow>
+            />
           )}
         </Map>
       </div>

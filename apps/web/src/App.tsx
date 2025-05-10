@@ -1,10 +1,9 @@
 import { ErrorBoundary } from "react-error-boundary";
 import { Router } from "./Router";
-import { TokenProvider } from "./context/TokenProvider";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { APIProvider } from "@vis.gl/react-google-maps";
-import { toast } from "react-toastify";
+import { TokenProvider, MapProvider } from "context/index";
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,8 +20,10 @@ function App() {
             }}
             libraries={["places"]}
           >
-            <Router />
-            <ToastContainer />
+            <MapProvider>
+              <Router />
+              <ToastContainer />
+            </MapProvider>
           </APIProvider>
         </TokenProvider>
       </QueryClientProvider>

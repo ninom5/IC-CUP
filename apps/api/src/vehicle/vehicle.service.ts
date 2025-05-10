@@ -46,7 +46,12 @@ export class VehicleService {
   }
 
   async getAll() {
-    return await this.prisma.vehicle.findMany();
+    return await this.prisma.vehicle.findMany({
+      where: {
+        isAvailable: true,
+        isVerified: true,
+      },
+    });
   }
 
   async getAllPagination(page: number = 1, limit: number = 10) {
