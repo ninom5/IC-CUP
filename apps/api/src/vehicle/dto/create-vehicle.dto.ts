@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { VehicleType } from '@prisma/client';
 import {
   IsArray,
+  IsDate,
   IsEnum,
   IsNotEmpty,
   IsNumber,
@@ -115,6 +116,19 @@ export class CreateVehicleDto {
     type: 'string',
   })
   registration: string;
+
+  @IsNotEmpty({
+    message: 'Registration expiration date is required',
+  })
+  @IsDate({
+    message: 'Registration expiration must be a valid date',
+  })
+  @ApiProperty({
+    description: 'Registration expiration date',
+    type: 'string',
+    example: '2025-12-31',
+  })
+  registrationExpiration: Date;
 
   @IsNotEmpty({
     message: 'Location ID is required',
