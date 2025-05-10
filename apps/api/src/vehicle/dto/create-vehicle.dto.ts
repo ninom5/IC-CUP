@@ -202,6 +202,7 @@ export class CreateVehicleDto {
       fuelType: FuelType.PETROL,
       isAutomatic: true,
       category: CarCategory.SMALL,
+      numOfSeats: 5,
     },
   })
   details: CarDetailsDto;
