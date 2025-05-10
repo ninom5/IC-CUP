@@ -57,8 +57,8 @@ model Vehicle {
   registrationExpiration  DateTime
   pickupAddress           String
   city                    String
-  longitude               Decimal
-  latitude                Decimal
+  longitude               Float
+  latitude                Float
   vehicleType             VehicleType
   details                 Json
   rentals                 Rental[]

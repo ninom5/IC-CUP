@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { JSX, useState } from "react";
 import c from "./AddVehiclePage.module.css";
 import {
   FirstStep,
@@ -14,6 +14,13 @@ export const AddVehiclePage = () => {
     setFormStep((prevStep) => prevStep + 1);
   };
 
+  const steps: Record<number, JSX.Element> = {
+    1: <FirstStep />,
+    2: <SecondStep />,
+    3: <ThirdStep />,
+    4: <FourthStep />,
+  };
+
   return (
     <section>
       <h1>List your car</h1>
@@ -25,10 +32,7 @@ export const AddVehiclePage = () => {
         <p>{formStep} / 4</p>
       </div>
 
-      {formStep === 1 && <FirstStep />}
-      {formStep === 2 && <SecondStep />}
-      {formStep === 3 && <ThirdStep />}
-      {formStep === 4 && <FourthStep />}
+      {steps[formStep]}
 
       {formStep < 4 ? (
         <button onClick={handleNextStep}>NEXT</button>
