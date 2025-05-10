@@ -31,7 +31,11 @@ export class VehicleService {
     });
   }
 
-  async getAll(page: number = 1, limit: number = 10) {
+  async getAll() {
+    return await this.prisma.vehicle.findMany({ include: { location: true } });
+  }
+
+  async getAllPagination(page: number = 1, limit: number = 10) {
     const skip = (page - 1) * limit;
 
     const [vehicles, total] = await Promise.all([
