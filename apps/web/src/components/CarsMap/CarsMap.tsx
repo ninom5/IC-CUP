@@ -13,11 +13,10 @@ import { SplitLocation } from "@constants/index";
 import { toast } from "react-toastify";
 import "./carsMap.css";
 import { AutoCompleteInput } from "@components/AutoCompleteInput/AutoCompleteInput";
-
-//provjerit clusterer jel radi dobro
+import { CustomPriceMarker } from "@components/CustomPriceMarker/CustomPriceMarker";
 
 export const CarsMap = () => {
-  const { data, isLoading, error } = useFetchAllVehicles();
+  const { data, isLoading } = useFetchAllVehicles();
   const map = useMap();
   const clusterer = useRef<MarkerClusterer | null>(null);
   const markers = useRef<Marker[]>([]);
@@ -91,17 +90,16 @@ export const CarsMap = () => {
           cameraControl={false}
         >
           {!isLoading &&
-            // data &&
             filteredVehicles.map((vehicle) => (
               <AdvancedMarker
                 key={vehicle.id}
                 position={{
-                  lat: vehicle.location.latitude,
-                  lng: vehicle.location.longitude,
+                  lat: vehicle.latitude,
+                  lng: vehicle.longitude,
                 }}
                 onClick={(e) => handleMarkerClick(e, vehicle)}
               >
-                <div className="custom-marker">{vehicle.dailyPrice}</div>
+                <CustomPriceMarker price={vehicle.dailyPrice} />
               </AdvancedMarker>
             ))}
 
@@ -117,8 +115,8 @@ export const CarsMap = () => {
           {selectedVehicle && (
             <InfoWindow
               position={{
-                lat: selectedVehicle.location.latitude,
-                lng: selectedVehicle.location.longitude,
+                lat: selectedVehicle.latitude,
+                lng: selectedVehicle.longitude,
               }}
               onClose={() => setSelectedVehicle(null)}
               className="info-window"

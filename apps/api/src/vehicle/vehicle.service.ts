@@ -46,7 +46,7 @@ export class VehicleService {
   }
 
   async getAll() {
-    return await this.prisma.vehicle.findMany({ include: { location: true } });
+    return await this.prisma.vehicle.findMany();
   }
 
   async getAllPagination(page: number = 1, limit: number = 10) {
@@ -56,7 +56,6 @@ export class VehicleService {
       this.prisma.vehicle.findMany({
         skip,
         take: limit,
-        include: { location: true },
       }),
       this.prisma.vehicle.count(),
     ]);

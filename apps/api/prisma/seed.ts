@@ -71,8 +71,12 @@ async function main() {
       isAvailable: true,
       description: 'A reliable car for everyday use.',
       registration: 'ABC123',
-      locationId: location1.id,
+      pickupAddress: 'some address',
+      city: 'Split',
+      longitude: 43.51813,
+      latitude: 16.45019,
       vehicleType: VehicleType.CAR,
+      registrationExpiration: '2025-12-31T00:00:00Z',
       details: {
         fuelType: FuelType.PETROL,
         carCategory: CarCategory.MEDIUM,
@@ -93,12 +97,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.54813,
+      latitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
 
@@ -115,12 +123,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.54813,
+      latitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
 
@@ -137,12 +149,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.54813,
+      latitude: 16.45419,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
 
@@ -159,12 +175,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.54813,
+      latitude: 16.45329,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
 
@@ -181,12 +201,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.54813,
+      latitude: 16.54319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
 
@@ -203,12 +227,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.51813,
+      latitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
   const vehicle8 = await prisma.vehicle.create({
@@ -224,12 +252,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.55313,
+      latitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
   const vehicle9 = await prisma.vehicle.create({
@@ -245,12 +277,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.54813,
+      latitude: 16.45221,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
   const vehicle10 = await prisma.vehicle.create({
@@ -266,12 +302,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.54831,
+      latitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
   const vehicle11 = await prisma.vehicle.create({
@@ -287,12 +327,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.54813,
+      latitude: 16.45328,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
 
@@ -309,12 +353,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.54813,
+      latitude: 16.45419,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
 
@@ -331,12 +379,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.55813,
+      latitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
 
@@ -353,12 +405,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.54813,
+      latitude: 16.45315,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
 
@@ -375,12 +431,16 @@ async function main() {
       isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
-      locationId: location2.id,
+      pickupAddress: 'some address 3',
+      city: 'Split',
+      longitude: 43.54823,
+      latitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
         carCategory: CarCategory.MEDIUM,
       },
+      registrationExpiration: '2025-12-31T00:00:00Z',
     },
   });
 

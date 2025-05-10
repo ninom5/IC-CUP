@@ -42,8 +42,8 @@ CREATE TABLE "Location" (
     "id" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "city" TEXT,
-    "longitude" DECIMAL(65,30) NOT NULL,
-    "latitude" DECIMAL(65,30) NOT NULL,
+    "longitude" DOUBLE PRECISION NOT NULL,
+    "latitude" DOUBLE PRECISION NOT NULL,
 
     CONSTRAINT "Location_pkey" PRIMARY KEY ("id")
 );
@@ -61,7 +61,11 @@ CREATE TABLE "Vehicle" (
     "description" TEXT,
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
     "registration" TEXT NOT NULL,
-    "locationId" TEXT NOT NULL,
+    "registrationExpiration" TIMESTAMP(3) NOT NULL,
+    "pickupAddress" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
+    "longitude" DOUBLE PRECISION NOT NULL,
+    "latitude" DOUBLE PRECISION NOT NULL,
     "vehicleType" "VehicleType" NOT NULL,
     "details" JSONB NOT NULL,
 
@@ -134,9 +138,6 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE INDEX "Vehicle_ownerId_idx" ON "Vehicle"("ownerId");
 
 -- CreateIndex
-CREATE INDEX "Vehicle_locationId_idx" ON "Vehicle"("locationId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Review_rentalId_key" ON "Review"("rentalId");
 
 -- CreateIndex
@@ -144,9 +145,6 @@ CREATE UNIQUE INDEX "Payment_rentalId_key" ON "Payment"("rentalId");
 
 -- AddForeignKey
 ALTER TABLE "Vehicle" ADD CONSTRAINT "Vehicle_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Vehicle" ADD CONSTRAINT "Vehicle_locationId_fkey" FOREIGN KEY ("locationId") REFERENCES "Location"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Review" ADD CONSTRAINT "Review_rentalId_fkey" FOREIGN KEY ("rentalId") REFERENCES "Rental"("id") ON DELETE CASCADE ON UPDATE CASCADE;

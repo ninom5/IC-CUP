@@ -10,4 +10,3 @@ export * from "./user.type";
 export * from "./login.type";
 export * from "./uploadFilesParams.type";
 export * from "./vehicleType";
-export * from "./location.type";
