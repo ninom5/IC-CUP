@@ -44,6 +44,8 @@ export class VehicleService {
 
     return this.prisma.vehicle.findMany({
       where: {
+        isAvailable: true,
+        isVerified: true,
         rentals: {
           none: {
             AND: [
