@@ -23,6 +23,21 @@ export class VehicleController {
   }
 
   @Get()
+  async getAllVehicles() {
+    return this.vehicleService.getAll();
+  }
+
+  @Get('/pagination')
+  async getAllVehiclesPagination(
+    @Query('page') page = '1',
+    @Query('limit') limit = '10',
+  ) {
+    const pageNumber = parseInt(page, 10);
+    const pageSize = parseInt(limit, 10);
+    return this.vehicleService.getAllPagination(pageNumber, pageSize);
+  }
+
+  @Get('by-date')
   findAll(@Query() vehicleFiltersDto: VehicleFiltersDto) {
     return this.vehicleService.findAvailable(vehicleFiltersDto);
   }

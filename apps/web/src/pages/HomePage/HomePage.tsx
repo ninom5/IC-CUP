@@ -1,4 +1,5 @@
-import { routes } from "@routes/routes";
+import { AutoCompleteInput } from "@components/index";
+import { routes } from "@routes/index";
 import { Link } from "react-router-dom";
 export const HomePage = () => {
   return (
@@ -6,6 +7,7 @@ export const HomePage = () => {
       <Link to={routes.LOGIN}>LOGIN</Link>
       <Link to={routes.REGISTER}>REGISTER</Link>
       <Link to={routes.CARS}>CARS</Link>
+      <AutoCompleteInput />
     </div>
   );
 };

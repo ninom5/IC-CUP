@@ -1,0 +1,15 @@
+.search-navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 40px 0;
+  font-size: 20px;
+}
+
+.navigation-links {
+  display: flex;
+  gap: 50px;
+}
+.navigation-links a {
+  text-decoration: none;
+  color: black;
+}

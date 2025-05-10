@@ -1,5 +1,5 @@
 import { isRegisterDataValid, generatePDF } from "@utils/index";
-import { routes } from "@routes/routes";
+import { routes } from "@routes/index";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -32,7 +32,6 @@ export const RegisterForm = () => {
   const [personPhotoFile, setPersonPhotoFile] = useState<File | null>(null);
   const [idCardFile, setIdCardFile] = useState<File[]>([]);
   const [driverLicenseFile, setDriverLicenseFile] = useState<File[]>([]);
-  const [pdfFiles, setPdfFiles] = useState<string[]>([]);
 
   const navigate = useNavigate();
 
@@ -105,6 +104,8 @@ export const RegisterForm = () => {
     );
     const idPdf = await generatePDF(idCardFile[0], idCardFile[1]);
 
+    let pdfUrls: string[] = [];
+
     if (licensePdf && idPdf) {
       const idFile = new File([idPdf], "idCard.pdf", {
         type: "application/pdf",
@@ -123,11 +124,7 @@ export const RegisterForm = () => {
         return;
       }
 
-      const pdfUrls = Object.values(response).map(
-        (value: any) => value.secure_url
-      );
-
-      setPdfFiles(pdfUrls);
+      pdfUrls = Object.values(response).map((value: any) => value.secure_url);
 
       if (pdfUrls.length !== 2) {
         toast.error("Error uploading both files");
@@ -150,15 +147,17 @@ export const RegisterForm = () => {
 
     const personPhotoLink = personPhotoResponse.secure_url;
 
-    setRegisterData((prev) => ({
-      ...prev,
-      idCard: pdfFiles[0],
-      driverLicense: pdfFiles[1],
+    const updatedRegisterData = {
+      ...registerData,
+      idCard: pdfUrls[0],
+      driverLicense: pdfUrls[1],
       personPhoto: personPhotoLink,
-    }));
+    };
+
+    setRegisterData(updatedRegisterData);
 
     try {
-      register(registerData, {
+      register(updatedRegisterData, {
         onSuccess: () => {
           toast.success("Successfully registered. Now you can login.");
 

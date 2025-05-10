@@ -45,6 +45,29 @@ export class VehicleService {
     });
   }
 
+  async getAll() {
+    return await this.prisma.vehicle.findMany();
+  }
+
+  async getAllPagination(page: number = 1, limit: number = 10) {
+    const skip = (page - 1) * limit;
+
+    const [vehicles, total] = await Promise.all([
+      this.prisma.vehicle.findMany({
+        skip,
+        take: limit,
+      }),
+      this.prisma.vehicle.count(),
+    ]);
+
+    return {
+      data: vehicles,
+      currentPage: page,
+      totalItems: total,
+      totalPages: Math.ceil(total / limit),
+    };
+  }
+
   async findAllUserVehicles(userId: string) {
     const userExists = await this.prisma.user.findUnique({
       where: { id: userId },

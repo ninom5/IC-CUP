@@ -30,7 +30,7 @@ export class CreateUserDto {
   lastName: string;
 
   @IsEmail()
-  @Validate(IsEmailUnique)
+  // @Validate(IsEmailUnique)
   @ApiProperty({ example: 'stipe@stipic.com' })
   email: string;
 
@@ -65,7 +65,7 @@ export class CreateUserDto {
   @ApiProperty({ example: 'somelink.com' })
   idCard: string;
 
-  @IsPhoneNumber()
+  // @IsPhoneNumber()
   @ApiProperty({ example: '0919876543' })
   phoneNumber: string;
 
