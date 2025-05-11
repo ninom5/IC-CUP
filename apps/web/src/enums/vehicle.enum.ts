@@ -12,3 +12,7 @@ export enum FuelType {
   ELECTRIC = "ELECTRIC",
   HYBRID = "HYBRID",
 }
+
+export enum VehicleType {
+  CAR = "CAR",
+}
