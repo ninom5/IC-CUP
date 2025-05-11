@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import c from "./ProfilePage.module.css";
-import { Role } from "enums";
 import { useFetchUserProfile } from "@api/index";
+import { Role } from "@enums/index";
 
 export const ProfilePage = () => {
   const { id: userId } = useParams();

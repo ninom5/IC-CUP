@@ -1,4 +1,4 @@
-import { Role } from "enums";
+import { Role } from "@enums/index";
 
 export type UserProfileType = {
   id: string;
