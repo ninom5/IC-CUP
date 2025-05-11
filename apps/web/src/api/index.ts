@@ -5,3 +5,4 @@ export * from "./useRegister";
 export * from "./useUploadFiles";
 export * from "./useGetUserByEmail";
 export * from "./useUploadImages";
+export * from "./useFetchUserProfile";

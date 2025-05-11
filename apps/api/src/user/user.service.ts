@@ -33,6 +33,9 @@ export class UserService {
         lastName: true,
         isSuspended: true,
         isVerified: true,
+        role: true,
+        personPhoto: true,
+        //description: true,
       },
     });
     if (!user) throw new NotFoundException('User with provided id not found');
