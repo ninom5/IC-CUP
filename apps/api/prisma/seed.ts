@@ -45,8 +45,8 @@ async function main() {
     data: {
       address: '1234 Elm St, Some City',
       city: 'Some City',
-      longitude: 12.3456,
-      latitude: 78.9012,
+      latitude: 12.3456,
+      longitude: 78.9012,
     },
   });
 
@@ -54,8 +54,8 @@ async function main() {
     data: {
       address: '5678 Oak St, Another City',
       city: 'Another City',
-      longitude: 23.4567,
-      latitude: 89.0123,
+      latitude: 23.4567,
+      longitude: 89.0123,
     },
   });
 
@@ -74,8 +74,8 @@ async function main() {
       registration: 'ABC123',
       pickupAddress: 'some address',
       city: 'Split',
-      longitude: 43.51813,
-      latitude: 16.45019,
+      latitude: 43.51813,
+      longitude: 16.45019,
       vehicleType: VehicleType.CAR,
       registrationExpiration: '2025-12-31T00:00:00Z',
       details: {
@@ -102,8 +102,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.54813,
-      latitude: 16.45319,
+      latitude: 43.54813,
+      longitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.PETROL,
@@ -130,8 +130,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.54813,
-      latitude: 16.45319,
+      latitude: 43.54813,
+      longitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
@@ -158,8 +158,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.54813,
-      latitude: 16.45419,
+      latitude: 43.54813,
+      longitude: 16.45419,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.PETROL,
@@ -186,8 +186,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.54813,
-      latitude: 16.45329,
+      latitude: 43.54813,
+      longitude: 16.45329,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.PETROL,
@@ -214,8 +214,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.54813,
-      latitude: 16.54319,
+      latitude: 43.54813,
+      longitude: 16.54319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.PETROL,
@@ -242,8 +242,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.51813,
-      latitude: 16.45319,
+      latitude: 43.51813,
+      longitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
@@ -269,8 +269,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.55313,
-      latitude: 16.45319,
+      latitude: 43.55313,
+      longitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
@@ -296,8 +296,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.54813,
-      latitude: 16.45221,
+      latitude: 43.54813,
+      longitude: 16.45221,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
@@ -323,8 +323,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.54831,
-      latitude: 16.45319,
+      latitude: 43.54831,
+      longitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
@@ -350,8 +350,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.54813,
-      latitude: 16.45328,
+      latitude: 43.54813,
+      longitude: 16.45328,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
@@ -378,8 +378,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.54813,
-      latitude: 16.45419,
+      latitude: 43.54813,
+      longitude: 16.45419,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
@@ -406,8 +406,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.55813,
-      latitude: 16.45319,
+      latitude: 43.55813,
+      longitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
@@ -434,8 +434,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.54813,
-      latitude: 16.45315,
+      latitude: 43.54813,
+      longitude: 16.45315,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
@@ -462,8 +462,8 @@ async function main() {
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
-      longitude: 43.54823,
-      latitude: 16.45319,
+      latitude: 43.54823,
+      longitude: 16.45319,
       vehicleType: VehicleType.CAR,
       details: {
         fuelType: FuelType.DIESEL,
