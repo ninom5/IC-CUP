@@ -6,6 +6,7 @@ import { logoSvg, searchSvg, filterSvg } from "assets/images/index";
 import { AutoCompleteInput } from "@components/AutoCompleteInput/AutoCompleteInput";
 import { useMapContext } from "@hooks/index";
 import { toast } from "react-toastify";
+import { FilterPopUp } from "@components/FilterPopUp/FilterPopUp";
 
 export const SearchBar = () => {
   const navigate = useNavigate();
@@ -59,16 +60,16 @@ export const SearchBar = () => {
         </div>
       </div>
       <div className="navigation-links">
-        <Link to={routes.ABOUT}>How it works</Link>
+        <Link to={routes.ABOUT}>Kako radi</Link>
 
         {token && !isExpired ? (
           <Link to={routes.HOME} onClick={handleLogout}>
-            Logout
+            Odjavi se
           </Link>
         ) : (
           <>
-            <Link to={routes.REGISTER}>Register</Link>
-            <Link to={routes.LOGIN}>Login</Link>
+            <Link to={routes.REGISTER}>Registracija</Link>
+            <Link to={routes.LOGIN}>Prijavi se</Link>
           </>
         )}
       </div>
