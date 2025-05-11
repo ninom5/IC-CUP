@@ -26,6 +26,7 @@ model User {
   isSuspended    Boolean  @default(false)
   createdAt      DateTime @default(now())
   lastModifiedAt DateTime @default(now()) @updatedAt
+  description    String?  @default("")
 
   vehicles       Vehicle[]     @relation("UserVehicles")
   rentals        Rental[]      @relation("UserRentals")

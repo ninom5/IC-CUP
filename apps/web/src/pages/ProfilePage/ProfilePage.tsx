@@ -36,7 +36,11 @@ export const ProfilePage = () => {
           {profile.firstName} {profile.lastName}
         </h2>
         <h3>OPIS</h3>
-        <p>{profile.description || "Default tekst na početku"}</p>
+        <p>
+          {profile.description?.trim()
+            ? profile.description
+            : "Default tekst na početku"}
+        </p>
       </div>
 
       {profile.role !== Role.USER && (

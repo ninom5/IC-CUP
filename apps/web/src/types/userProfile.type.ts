@@ -6,5 +6,5 @@ export type UserProfileType = {
   lastName: string;
   role: Role;
   personPhoto: string;
-  description?: string;
+  description: string;
 };
