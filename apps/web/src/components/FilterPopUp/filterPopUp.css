@@ -31,7 +31,7 @@ div > h2 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   margin-top: 10px;
   cursor: pointer;
 }

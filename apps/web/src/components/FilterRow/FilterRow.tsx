@@ -6,6 +6,8 @@ export const FilterRow = ({
   imgSrc,
   imgAlt,
   selectOptions,
+  value,
+  onChange,
 }: FilterRowProps) => {
   return (
     <div>
@@ -14,7 +16,14 @@ export const FilterRow = ({
         <div className="filter-row-wrapper">
           <img src={imgSrc} alt={imgAlt} className="icon-image" />
         </div>
-        <select className="filter-select">
+        <select
+          className="filter-select"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+        >
+          <option value="" disabled>
+            Odaberite filter
+          </option>
           {selectOptions.map((opt) => (
             <option key={opt.value} value={opt.value}>
               {opt.label}

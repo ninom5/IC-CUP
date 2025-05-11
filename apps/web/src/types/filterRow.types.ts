@@ -8,4 +8,6 @@ export interface FilterRowProps {
   imgSrc: string;
   imgAlt: string;
   selectOptions: SelectOption[];
+  value: string;
+  onChange: (val: string) => void;
 }

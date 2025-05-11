@@ -13,7 +13,7 @@ export const CustomDatePicker = () => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Box sx={{ backgroundColor: "white", borderRadius: 8 }}>
+      <Box sx={{ backgroundColor: "#fafafa", borderRadius: 8 }}>
         <DesktopDateRangePicker
           value={value}
           onChange={(newValue) => setValue(newValue)}

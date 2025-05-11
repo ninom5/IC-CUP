@@ -7,8 +7,9 @@ import { AutoCompleteInput } from "@components/AutoCompleteInput/AutoCompleteInp
 import { useMapContext } from "@hooks/index";
 import { toast } from "react-toastify";
 import { FilterPopUp } from "@components/FilterPopUp/FilterPopUp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomDatePicker } from "@components/CustomDatePicker/CustomDatePicker";
+import { FiltersType } from "types";
 
 export const SearchBar = () => {
   const navigate = useNavigate();
@@ -18,7 +19,20 @@ export const SearchBar = () => {
   } = useToken();
   const { goToLocation, setSearchLocation } = useMapContext();
 
+  const defaultFilters: FiltersType = {
+    sortBy: "",
+    category: "",
+    transmission: "",
+    seatNumber: "",
+    fuelType: "",
+  };
+
   const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState(defaultFilters);
+
+  useEffect(() => {
+    console.log(filters);
+  }, [filters]);
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
@@ -52,9 +66,7 @@ export const SearchBar = () => {
             <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
           </div>
 
-          <div>
-            <CustomDatePicker />
-          </div>
+          <CustomDatePicker />
 
           <div className="icon-wrapper">
             <img src={searchSvg} alt="Search icon" />
@@ -87,7 +99,7 @@ export const SearchBar = () => {
       {showFilters && (
         <div className="modal-overlay" onClick={() => setShowFilters(false)}>
           <div className="filter-pop-up" onClick={(e) => e.stopPropagation()}>
-            <FilterPopUp />
+            <FilterPopUp filters={filters} setFilters={setFilters} />
           </div>
         </div>
       )}

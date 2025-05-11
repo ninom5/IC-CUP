@@ -1,7 +1,7 @@
 .search-navigation {
   display: flex;
   justify-content: space-between;
-  padding: 30px 40px;
+  padding: 10px 40px;
   font-size: 20px;
   letter-spacing: 0;
   width: 100%;
@@ -72,8 +72,8 @@
   z-index: 999;
 }
 .filter-pop-up {
-  background-color: white;
+  background-color: var(--background-white);
   padding: 20px;
   border-radius: 10px;
-  width: 60%;
+  width: 50%;
 }

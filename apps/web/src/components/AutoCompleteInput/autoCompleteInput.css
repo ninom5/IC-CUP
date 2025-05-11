@@ -9,6 +9,7 @@
   width: 300px;
   padding: 8px;
   font-size: 20px;
-  border: 1px solid black;
+  border: 1px solid var(--stroke-gray);
   border-radius: 4px;
+  background-color: var(--background-white);
 }
