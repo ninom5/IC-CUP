@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "./base";
-import { VehicleType } from "types/vehicleType";
+import { VehicleType } from "types/vehicle.type";
 
 const getAllVehicles = async (): Promise<VehicleType[]> => {
   const response = await api.get<never, VehicleType[]>("/vehicle");

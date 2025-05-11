@@ -40,6 +40,8 @@ export const SearchBar = () => {
     updateToken();
   };
 
+  // const handle;
+
   const handlePlaceResolved = (place: google.maps.places.PlaceResult) => {
     const location = place.geometry?.location;
     if (!location) {
@@ -63,7 +65,9 @@ export const SearchBar = () => {
           />
 
           <div className="location-wrapper">
-            <label htmlFor="location">Lokacija</label>
+            <label htmlFor="location" className="location-label">
+              Lokacija
+            </label>
             <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
           </div>
 
@@ -73,13 +77,8 @@ export const SearchBar = () => {
             <img src={searchSvg} alt="Search icon" />
           </div>
 
-          <div className="icon-wrapper">
-            <img
-              src={filterSvg}
-              alt="Filter icon"
-              style={{ width: "22px" }}
-              onClick={() => setShowFilters(true)}
-            />
+          <div className="icon-wrapper" onClick={() => setShowFilters(true)}>
+            <img src={filterSvg} alt="Filter icon" style={{ width: "22px" }} />
           </div>
         </div>
         <div className="navigation-links">
@@ -107,7 +106,11 @@ export const SearchBar = () => {
       {showFilters && (
         <div className="modal-overlay" onClick={() => setShowFilters(false)}>
           <div className="filter-pop-up" onClick={(e) => e.stopPropagation()}>
-            <FilterPopUp filters={filters} setFilters={setFilters} />
+            <FilterPopUp
+              filters={filters}
+              setFilters={setFilters}
+              setShowFilters={setShowFilters}
+            />
           </div>
         </div>
       )}

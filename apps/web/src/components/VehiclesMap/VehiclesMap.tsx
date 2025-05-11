@@ -5,12 +5,11 @@ import { useFetchAllVehicles } from "@api/index";
 import { VehicleType } from "types";
 import { SplitLocation } from "@constants/index";
 import { toast } from "react-toastify";
-import "./carsMap.css";
+import "./vehiclesMap.css";
 import { useMapContext } from "@hooks/index";
-import { VehicleMarkers } from "@components/index";
-import { VehicleInfoWindow } from "@components/index";
+import { VehicleMarkers, VehicleInfoWindow } from "@components/index";
 
-export const CarsMap = () => {
+export const VehiclesMap = () => {
   const { data, isLoading } = useFetchAllVehicles();
   const { searchLocation, setMap } = useMapContext();
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleType | null>(

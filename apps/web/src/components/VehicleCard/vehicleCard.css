@@ -8,7 +8,7 @@
   border: 1px solid lightslategray;
   margin: 20px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.3s linear;
 
   position: relative;
 }
@@ -39,9 +39,18 @@
 .vehicle-info {
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  padding: 5px 20px;
   margin-bottom: 10px;
 }
+.vehicle-info h2 {
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+.rating-info {
+  font-size: 20px;
+}
+
 .price {
   position: absolute;
   bottom: 10px;

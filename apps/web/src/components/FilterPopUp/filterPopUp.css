@@ -5,6 +5,17 @@
   width: 100%;
   height: auto;
   padding: 20px;
+  position: relative;
+}
+
+.close-span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15px;
+  cursor: pointer;
+  font-size: 50px;
+  padding-right: 40px;
 }
 
 .filter-section > div {
@@ -35,12 +46,33 @@ div > h2 {
   margin-top: 10px;
   cursor: pointer;
 }
-
-.category-wrapper img {
-  width: 90%;
-  height: auto;
+.category-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--stroke-gray);
+  border-radius: 8px;
+  padding: 10px 0;
+  text-align: center;
+  width: 15%;
 }
-
+.category-wrapper img {
+  width: 70%;
+  height: auto;
+  padding: 10px 0;
+}
+.category-wrapper h3 {
+  font-weight: 400;
+  font-size: 20px;
+}
 #sort-select {
   margin-left: 20px;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px;
+  margin-top: 30px;
 }

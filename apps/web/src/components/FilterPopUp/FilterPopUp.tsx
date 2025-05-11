@@ -1,23 +1,24 @@
 import {
-  cabriolet,
-  coupe,
+  cabrioletSvg,
+  coupeSvg,
   fuelSvg,
-  hatchback,
+  hatchbackSvg,
   seatSvg,
-  sedan,
-  suv,
+  sedanSvg,
+  suvSvg,
   transmissionSvg,
 } from "@assets/images/index";
 import "./filterPopUp.css";
 import { FilterRow } from "@components/FilterRow/FilterRow";
 import { FilterPopUpProps, FiltersType } from "types/filter.type";
+import { ButtonAccent } from "@components/ButtonAccent/ButtonAccent";
 
 const carCategories = [
-  { label: "Coupe", value: "coupe", img: coupe },
-  { label: "Sedan", value: "sedan", img: sedan },
-  { label: "Cabriolet", value: "cabriolet", img: cabriolet },
-  { label: "SUV", value: "suv", img: suv },
-  { label: "Hatchback", value: "hatchback", img: hatchback },
+  { label: "Coupe", value: "coupe", img: coupeSvg },
+  { label: "Sedan", value: "sedan", img: sedanSvg },
+  { label: "Cabriolet", value: "cabriolet", img: cabrioletSvg },
+  { label: "SUV", value: "suv", img: suvSvg },
+  { label: "Hatchback", value: "hatchback", img: hatchbackSvg },
 ];
 
 const sortFilters = [
@@ -28,12 +29,29 @@ const sortFilters = [
   "Ocjena (viša > niža)",
 ];
 
-export const FilterPopUp = ({ filters, setFilters }: FilterPopUpProps) => {
+export const FilterPopUp = ({
+  filters,
+  setFilters,
+  setShowFilters,
+}: FilterPopUpProps) => {
   const handleChange = (key: keyof FiltersType, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
+
+  const defaultFilters: FiltersType = {
+    sortBy: "",
+    category: "",
+    transmission: "",
+    seatNumber: "",
+    fuelType: "",
+  };
+
   return (
     <div className="filters-section">
+      <span className="close-span" onClick={() => setShowFilters(false)}>
+        &times;
+      </span>
+
       <div className="sort-section">
         <h2>Sortiraj po</h2>
         <select
@@ -54,22 +72,21 @@ export const FilterPopUp = ({ filters, setFilters }: FilterPopUpProps) => {
           ))}
         </select>
       </div>
-
       <div className="vehicle-category">
         <h2>Kategorija vozila</h2>
         <div className="car-categories-images">
-          {carCategories.map(({ img, value }) => (
+          {carCategories.map(({ img, value, label }) => (
             <div
               key={img}
               className="category-wrapper"
               onClick={() => handleChange("category", value)}
             >
               <img src={img} alt="slika categorije auta" />
+              <h3>{label}</h3>
             </div>
           ))}
         </div>
       </div>
-
       <FilterRow
         label="Vrsta mjenjača"
         imgSrc={transmissionSvg}
@@ -104,6 +121,16 @@ export const FilterPopUp = ({ filters, setFilters }: FilterPopUpProps) => {
         value={filters.fuelType}
         onChange={(val: string) => handleChange("fuelType", val)}
       />
+      <div className="filter-buttons">
+        <ButtonAccent
+          content="Resetiraj"
+          onClick={() => setFilters(defaultFilters)}
+        />
+        <ButtonAccent
+          content="Primjeni"
+          onClick={() => setShowFilters(false)}
+        />
+      </div>
     </div>
   );
 };

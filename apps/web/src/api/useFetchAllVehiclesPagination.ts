@@ -1,4 +1,4 @@
-import { VehicleType } from "types/vehicleType";
+import { VehicleType } from "types/vehicle.type";
 import { api } from "./base";
 import { useInfiniteQuery } from "@tanstack/react-query";
 

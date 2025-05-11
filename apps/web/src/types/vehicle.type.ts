@@ -15,4 +15,13 @@ export type VehicleType = {
   city: string;
   longitude: number;
   latitude: number;
+  rentals: Rental[];
+};
+
+export type Rental = {
+  review: Review;
+};
+
+export type Review = {
+  rating: number;
 };

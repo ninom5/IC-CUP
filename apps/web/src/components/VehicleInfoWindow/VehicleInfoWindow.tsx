@@ -1,6 +1,8 @@
 import { InfoWindow } from "@vis.gl/react-google-maps";
 import { Link } from "react-router-dom";
-import { VehicleType } from "types/vehicleType";
+import { VehicleType } from "types/vehicle.type";
+import "./vehcileInfoWindow.css";
+import { getAverageVehicleRating } from "@utils/getAverageVehicleRating.util";
 
 export const VehicleInfoWindow = ({
   vehicle,
@@ -8,26 +10,38 @@ export const VehicleInfoWindow = ({
 }: {
   vehicle: VehicleType;
   onClose: () => void;
-}) => (
-  <InfoWindow
-    position={{
-      lat: vehicle.latitude,
-      lng: vehicle.longitude,
-    }}
-    onClose={onClose}
-    className="info-window"
-  >
-    <div className="info-window-vehicle-info">
-      <h3>
-        {vehicle.brand} {vehicle.model}
-      </h3>
-      <p>{vehicle.description}</p>
-      <p>
-        Dnevna cijena: <b>{vehicle.dailyPrice}</b>
-        <br />
-        Ocjena:
-      </p>
-      <Link to={`/car/${vehicle.id}`}>Provjeri detalje</Link>
-    </div>
-  </InfoWindow>
-);
+}) => {
+  const { totalRating, numberOfRatings } = getAverageVehicleRating(vehicle);
+
+  return (
+    <InfoWindow
+      position={{
+        lat: vehicle.latitude,
+        lng: vehicle.longitude,
+      }}
+      onClose={onClose}
+      className="info-window"
+    >
+      <div className="info-window-vehicle-info">
+        <h3>
+          {vehicle.brand} {vehicle.model}
+        </h3>
+        <p>{vehicle.description}</p>
+        <p>
+          Dnevna cijena: <b>{vehicle.dailyPrice}</b>
+          <br />
+          Ocjena:{" "}
+          {totalRating > 0 ? (
+            <>
+              {" "}
+              {totalRating / numberOfRatings} ({numberOfRatings})
+            </>
+          ) : (
+            "još nema recenzija za ovo vozilo"
+          )}
+        </p>
+        <Link to={`/car/${vehicle.id}`}>Provjeri detalje</Link>
+      </div>
+    </InfoWindow>
+  );
+};

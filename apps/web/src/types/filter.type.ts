@@ -9,4 +9,5 @@ export type FiltersType = {
 export type FilterPopUpProps = {
   filters: FiltersType;
   setFilters: React.Dispatch<React.SetStateAction<FiltersType>>;
+  setShowFilters: React.Dispatch<React.SetStateAction<boolean>>;
 };

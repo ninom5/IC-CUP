@@ -77,6 +77,22 @@ export class VehicleService {
       this.prisma.vehicle.findMany({
         skip,
         take: limit,
+        include: {
+          rentals: {
+            where: {
+              review: {
+                isNot: null,
+              },
+            },
+            include: {
+              review: {
+                select: {
+                  rating: true,
+                },
+              },
+            },
+          },
+        },
       }),
       this.prisma.vehicle.count(),
     ]);
