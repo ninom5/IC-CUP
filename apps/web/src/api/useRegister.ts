@@ -1,12 +1,22 @@
 import { RegisterDataType } from "types";
 import { api } from "./base";
-import { useMutation, UseMutationResult } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import { JwtResponse } from "./useLogin";
 
-const registerUser = async (registerData: RegisterDataType) => {
-  await api.post("/auth/register", registerData);
+const registerUser = (registerData: RegisterDataType) => {
+  return api.post<RegisterDataType, JwtResponse>(
+    "/auth/register",
+    registerData
+  );
 };
 
-export const useRegister = (): UseMutationResult<
+export const useRegister = () =>
+  useMutation({
+    mutationKey: ["register-user"],
+    mutationFn: registerUser,
+  });
+
+/*export const useRegister = (): UseMutationResult<
   void,
   Error,
   RegisterDataType,
@@ -15,4 +25,4 @@ export const useRegister = (): UseMutationResult<
   return useMutation({
     mutationFn: registerUser,
   });
-};
+};*/
