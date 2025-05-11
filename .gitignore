@@ -7,6 +7,9 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+# Turbo cache
+.turbo
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -124,6 +127,13 @@ dist
 
 # TernJS port file
 .tern-port
+
+# VS Code settings
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
