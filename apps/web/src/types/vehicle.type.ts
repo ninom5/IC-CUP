@@ -7,6 +7,7 @@ export type VehicleData = {
   productionYear: number;
   dailyPrice: number;
   description: string;
+  vehicleLicenseImg: File | null;
   registration: string;
   registrationExpiration: string;
   pickupAddress: string;
@@ -15,6 +16,7 @@ export type VehicleData = {
   latitude: number;
   vehicleType: VehicleType;
   details: VehicleDetails;
+  features: VehicleFeatures;
 };
 
 export type VehicleDetails = {
@@ -23,6 +25,17 @@ export type VehicleDetails = {
   isAutomatic: boolean;
   category: CarCategory;
   numOfSeats: number;
+};
+
+export type VehicleFeatures = {
+  airConditioning: boolean;
+  usb: boolean;
+  aux: boolean;
+  bluetooth: boolean;
+  sensors: boolean;
+  pets: boolean;
+  gps: boolean;
+  childSeat: boolean;
 };
 
 export type StepProps = {

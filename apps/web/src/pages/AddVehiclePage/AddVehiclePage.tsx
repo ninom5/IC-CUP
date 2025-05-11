@@ -18,6 +18,7 @@ export const AddVehiclePage = () => {
     productionYear: 0,
     dailyPrice: 0,
     description: "",
+    vehicleLicenseImg: null,
     registration: "",
     registrationExpiration: "",
     pickupAddress: "",
@@ -29,8 +30,18 @@ export const AddVehiclePage = () => {
       licensePlate: "",
       fuelType: FuelType.PETROL,
       isAutomatic: false,
-      category: CarCategory.SMALL,
+      category: CarCategory.CABRIOLET,
       numOfSeats: 4,
+    },
+    features: {
+      airConditioning: false,
+      usb: false,
+      aux: false,
+      bluetooth: false,
+      sensors: false,
+      pets: false,
+      gps: false,
+      childSeat: false,
     },
   });
 
@@ -57,14 +68,17 @@ export const AddVehiclePage = () => {
   console.log("Vehicle data:", vehicleData);
 
   return (
-    <section>
-      <h1>List your car</h1>
+    <section className={c.addVehiclePageSection}>
+      <div className={c.header}>
+        <h1>Dodaj kola</h1>
 
-      <div className={c.formSteps}>
-        <div className={c.formStepBar}>
-          <div style={{ width: `${formStep * 25}%` }}></div>
+        <div className={c.formSteps}>
+          <p>{formStep} / 4</p>
+
+          <div className={c.formStepBar}>
+            <div style={{ width: `${formStep * 25}%` }}></div>
+          </div>
         </div>
-        <p>{formStep} / 4</p>
       </div>
 
       {steps[formStep]}

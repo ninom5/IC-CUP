@@ -49,7 +49,7 @@ export class CarDetailsDto {
   @ApiProperty({
     description: 'Car Category',
     enum: CarCategory,
-    example: CarCategory.SMALL,
+    example: CarCategory.SUV,
   })
   category: CarCategory;
 

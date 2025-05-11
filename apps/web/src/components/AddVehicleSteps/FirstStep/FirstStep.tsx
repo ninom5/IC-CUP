@@ -2,8 +2,18 @@ import { CarCategory } from "enums";
 import { StepProps } from "../../../types";
 import c from "./FirstStep.module.css";
 import { getMinDate } from "@utils/getMinDate.util";
+import { useRef } from "react";
 
 export const FirstStep = ({ data, onDataChange }: StepProps) => {
+  const inputFileRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      onDataChange({ vehicleLicenseImg: file });
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -19,18 +29,19 @@ export const FirstStep = ({ data, onDataChange }: StepProps) => {
 
   return (
     <div className={c.form}>
-      <div className="modelBrandContainer">
-        <div className="formInputContainer">
+      <div className={c.registrationContainer}>
+        <div className={c.inputContainer}>
           <h3>Registracija</h3>
           <input
             type="text"
             name="registration"
             value={data.registration}
             onChange={handleChange}
+            placeholder="ST-8888-AA"
           />
         </div>
-        <div className="formInputContainer">
-          <h3>Istek Registracija</h3>
+        <div className={c.inputContainer}>
+          <h3>Datum isteka</h3>
           <input
             type="date"
             name="registrationExpiration"
@@ -41,13 +52,31 @@ export const FirstStep = ({ data, onDataChange }: StepProps) => {
         </div>
       </div>
 
-      <div className="formInputContainer">
-        <h3>Slika prometne</h3>
-        <input type="file" />
+      <div className={c.inputContainer}>
+        <h3>Slika prometne dozvole</h3>
+        <div>
+          <button
+            onClick={() => inputFileRef.current?.click()}
+            className={c.fileInput}
+          >
+            Prenesi
+          </button>
+          <input
+            type="file"
+            name=""
+            ref={inputFileRef}
+            onChange={handleFileChange}
+            accept="image/*"
+            style={{ display: "none" }}
+          />
+          {data.vehicleLicenseImg && (
+            <p>Odabrana: {data.vehicleLicenseImg.name}</p>
+          )}
+        </div>
       </div>
 
       <div>
-        <h3>Kategorija</h3>
+        <h3>Kategorija vozila</h3>
         <select
           name="category"
           value={data.details.category}

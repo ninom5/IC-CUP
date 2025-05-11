@@ -1,9 +1,9 @@
 export enum CarCategory {
-  SMALL = "SMALL",
-  MEDIUM = "MEDIUM",
+  COUPE = "COUPE",
+  SEDAN = "SEDAN",
+  CABRIOLET = "CABRIOLET",
   SUV = "SUV",
-  VAN = "VAN",
-  LUXURY = "LUXURY",
+  HATCHBACK = "HATCHBACK",
 }
 
 export enum FuelType {
