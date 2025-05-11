@@ -10,11 +10,13 @@ type AutocompleteProps = {
     addressComponents: google.maps.GeocoderAddressComponent[]
   ) => void;
   placeholder?: string;
+  defaultValue?: string;
 };
 
 export const AutoCompleteInput = ({
   onPlaceResolved,
   placeholder = "Pretraži lokaciju",
+  defaultValue = "Split, Hrvatska",
 }: AutocompleteProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -31,6 +33,9 @@ export const AutoCompleteInput = ({
       console.warn("google");
       return;
     }
+
+    inputRef.current.value = defaultValue;
+
     const autocomplete = new google.maps.places.Autocomplete(inputRef.current, {
       fields: ["geometry", "name", "formatted_address"],
       types: ["geocode"],

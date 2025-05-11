@@ -8,6 +8,7 @@ import { useMapContext } from "@hooks/index";
 import { toast } from "react-toastify";
 import { FilterPopUp } from "@components/FilterPopUp/FilterPopUp";
 import { useState } from "react";
+import { CustomDatePicker } from "@components/CustomDatePicker/CustomDatePicker";
 
 export const SearchBar = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ export const SearchBar = () => {
           </div>
 
           <div>
-            <input type="text" />
+            <CustomDatePicker />
           </div>
 
           <div className="icon-wrapper">

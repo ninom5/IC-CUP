@@ -13,6 +13,7 @@
   align-items: center;
   justify-content: space-around;
   width: 50%;
+  gap: 20px;
 }
 
 .kolo-logo {

@@ -21,7 +21,7 @@ export const VehicleList = () => {
   if (error) return <div>{error.message}</div>;
 
   return (
-    <section>
+    <section className="vehicle-list-section">
       <div id="scrollableContainer" className="vehicle-list-scroll-container">
         {isLoading && <div>loading...</div>}
         {!isLoading && vehicles.length === 0 && (
