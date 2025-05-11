@@ -1,12 +1,6 @@
+import { FuelType } from "enums";
 import { StepProps } from "../../../types";
 import c from "./SecondStep.module.css";
-
-enum FuelType {
-  PETROL = "PETROL",
-  DIESEL = "DIESEL",
-  ELECTRIC = "ELECTRIC",
-  HYBRID = "HYBRID",
-}
 
 export const SecondStep = ({ data, onDataChange }: StepProps) => {
   const handleChange = (
