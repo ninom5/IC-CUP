@@ -55,3 +55,19 @@
   border-radius: 40px;
   transition: width 0.4s ease;
 }
+
+.buttonContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.buttonContainer > button {
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  background: var(--stroke-grey, #c0bebe);
+  cursor: pointer;
+}

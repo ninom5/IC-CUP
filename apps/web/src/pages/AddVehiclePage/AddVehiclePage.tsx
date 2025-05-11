@@ -15,7 +15,7 @@ export const AddVehiclePage = () => {
     brand: "",
     model: "",
     images: [],
-    productionYear: 0,
+    productionYear: 2025,
     dailyPrice: 0,
     description: "",
     vehicleLicenseImg: null,
@@ -30,7 +30,7 @@ export const AddVehiclePage = () => {
       licensePlate: "",
       fuelType: FuelType.PETROL,
       isAutomatic: false,
-      category: CarCategory.CABRIOLET,
+      category: CarCategory.SEDAN,
       numOfSeats: 4,
     },
     features: {
@@ -83,14 +83,16 @@ export const AddVehiclePage = () => {
 
       {steps[formStep]}
 
-      {formStep < 4 ? (
-        <button onClick={handleNextStep}>NEXT</button>
-      ) : (
-        <button onClick={handleSubmit}>SUBMIT</button>
-      )}
-      {formStep > 1 && (
-        <button onClick={() => setFormStep((prev) => prev - 1)}>BACK</button>
-      )}
+      <div className={c.buttonContainer}>
+        {formStep < 4 ? (
+          <button onClick={handleNextStep}>NEXT</button>
+        ) : (
+          <button onClick={handleSubmit}>SUBMIT</button>
+        )}
+        {formStep > 1 && (
+          <button onClick={() => setFormStep((prev) => prev - 1)}>BACK</button>
+        )}
+      </div>
     </section>
   );
 };
