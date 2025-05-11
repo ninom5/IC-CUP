@@ -6,6 +6,8 @@ import { logoSvg, searchSvg, filterSvg } from "assets/images/index";
 import { AutoCompleteInput } from "@components/AutoCompleteInput/AutoCompleteInput";
 import { useMapContext } from "@hooks/index";
 import { toast } from "react-toastify";
+import { FilterPopUp } from "@components/FilterPopUp/FilterPopUp";
+import { useState } from "react";
 
 export const SearchBar = () => {
   const navigate = useNavigate();
@@ -14,6 +16,8 @@ export const SearchBar = () => {
     updateToken,
   } = useToken();
   const { goToLocation, setSearchLocation } = useMapContext();
+
+  const [showFilters, setShowFilters] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
@@ -32,46 +36,60 @@ export const SearchBar = () => {
   };
 
   return (
-    <nav className="search-navigation">
-      <div className="filters-wrapper">
-        <img
-          src={logoSvg}
-          alt="Kolo logo"
-          className="kolo-logo"
-          onClick={() => navigate(routes.HOME)}
-        />
+    <>
+      <nav className="search-navigation">
+        <div className="filters-wrapper">
+          <img
+            src={logoSvg}
+            alt="Kolo logo"
+            className="kolo-logo"
+            onClick={() => navigate(routes.HOME)}
+          />
 
-        <div className="location-wrapper">
-          <label htmlFor="location">Lokacija</label>
-          <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
+          <div className="location-wrapper">
+            <label htmlFor="location">Lokacija</label>
+            <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
+          </div>
+
+          <div>
+            <input type="text" />
+          </div>
+
+          <div className="icon-wrapper">
+            <img src={searchSvg} alt="Search icon" />
+          </div>
+
+          <div className="icon-wrapper">
+            <img
+              src={filterSvg}
+              alt="Filter icon"
+              style={{ width: "22px" }}
+              onClick={() => setShowFilters(true)}
+            />
+          </div>
         </div>
+        <div className="navigation-links">
+          <Link to={routes.ABOUT}>Kako radi</Link>
 
-        <div>
-          <input type="text" />
+          {token && !isExpired ? (
+            <Link to={routes.HOME} onClick={handleLogout}>
+              Odjavi se
+            </Link>
+          ) : (
+            <>
+              <Link to={routes.REGISTER}>Registracija</Link>
+              <Link to={routes.LOGIN}>Prijavi se</Link>
+            </>
+          )}
         </div>
-
-        <div className="icon-wrapper">
-          <img src={searchSvg} alt="Search icon" />
+      </nav>
+      {showFilters && (
+        <div className="modal-overlay" onClick={() => setShowFilters(false)}>
+          <div className="filter-pop-up" onClick={(e) => e.stopPropagation()}>
+            <FilterPopUp />
+          </div>
         </div>
-
-        <div className="icon-wrapper">
-          <img src={filterSvg} alt="Filter icon" style={{ width: "22px" }} />
-        </div>
-      </div>
-      <div className="navigation-links">
-        <Link to={routes.ABOUT}>How it works</Link>
-
-        {token && !isExpired ? (
-          <Link to={routes.HOME} onClick={handleLogout}>
-            Logout
-          </Link>
-        ) : (
-          <>
-            <Link to={routes.REGISTER}>Register</Link>
-            <Link to={routes.LOGIN}>Login</Link>
-          </>
-        )}
-      </div>
-    </nav>
+      )}
+    </>
   );
 };

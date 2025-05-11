@@ -1,15 +1,17 @@
 import {
-  cabrioletSvg,
-  coupeSvg,
-  gasSvg,
-  hatchbackSvg,
+  cabriolet,
+  coupe,
+  fuelSvg,
+  hatchback,
   seatSvg,
-  sedanSvg,
-  suvSvg,
+  sedan,
+  suv,
   transmissionSvg,
 } from "@assets/images/index";
+import "./filterPopUp.css";
+import { FilterRow } from "@components/FilterRow/FilterRow";
 
-const carCategories = [cabrioletSvg, coupeSvg, hatchbackSvg, sedanSvg, suvSvg];
+const carCategories = [coupe, sedan, cabriolet, suv, hatchback];
 const sortFilters = [
   // key value pari mozda?
   "Cijena (niža > viša)",
@@ -22,9 +24,9 @@ const sortFilters = [
 export const FilterPopUp = () => {
   return (
     <div className="filters-section">
-      <div>
+      <div className="sort-section">
         <h2>Sortiraj po</h2>
-        <select name="" id="" value="">
+        <select name="" id="sort-select" value="" className="filter-select">
           <option value="" disabled>
             Odaberite filter
           </option>
@@ -37,7 +39,7 @@ export const FilterPopUp = () => {
         </select>
       </div>
 
-      <div>
+      <div className="vehicle-category">
         <h2>Kategorija vozila</h2>
         <div className="car-categories-images">
           {carCategories.map((img) => (
@@ -48,39 +50,34 @@ export const FilterPopUp = () => {
         </div>
       </div>
 
-      <div>
-        <h2>Vrsta mjenjača</h2>
-        <div>
-          <img src={transmissionSvg} alt="slika mjenjaca" />
-          <select name="" id="">
-            <option value="">Ručni</option>
-            <option value="">Automatik</option>
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <h2>Broj sjedala</h2>
-        <div>
-          <img src={seatSvg} alt="slika sjedala" />
-          <select name="" id="">
-            <option value="2">2</option>
-            <option value="5">5</option>
-            <option value="7">7</option>
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <h2>Vrsta goriva</h2>
-        <div>
-          <img src={gasSvg} alt="slika goriva" />
-          <select name="" id="">
-            <option value="petrol">Benzin</option>
-            <option value="diesel">Dizel</option>
-          </select>
-        </div>
-      </div>
+      <FilterRow
+        label="Vrsta mjenjača"
+        imgSrc={transmissionSvg}
+        imgAlt="Slikica mjenjača"
+        selectOptions={[
+          { label: "Ručni", value: "manual" },
+          { label: "Automatik", value: "automatic" },
+        ]}
+      />
+      <FilterRow
+        label="Broj sjedala"
+        imgSrc={seatSvg}
+        imgAlt="Slikica sjedala"
+        selectOptions={[
+          { label: "2", value: "2" },
+          { label: "5", value: "5" },
+          { label: "7", value: "7" },
+        ]}
+      />
+      <FilterRow
+        label="Vrsta goriva"
+        imgSrc={fuelSvg}
+        imgAlt="Slikica goriva"
+        selectOptions={[
+          { label: "Benzin", value: "petrol" },
+          { label: "Dizel", value: "diesel" },
+        ]}
+      />
     </div>
   );
 };

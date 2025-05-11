@@ -13,3 +13,4 @@ export * from "./CustomPriceMarker/CustomPriceMarker";
 export * from "./VehicleMarkers/VehicleMarkers";
 export * from "./VehicleInfoWindow/VehicleInfoWindow";
 export * from "./FilterPopUp/FilterPopUp";
+export * from "./FilterRow/FilterRow";
