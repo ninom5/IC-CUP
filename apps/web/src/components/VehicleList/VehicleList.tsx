@@ -12,8 +12,7 @@ export const VehicleList = () => {
     error,
     isLoading,
   } = useFetchAllVehiclesPagination();
-
-  const vehicles =
+  const vehicles = // viska
     data?.pages
       .flatMap((page) => page.data)
       .filter((v) => v.isAvailable && v.isVerified) || [];
