@@ -53,6 +53,7 @@ model Vehicle {
   isAvailable             Boolean  @default(false)
   description             String?
   isVerified              Boolean  @default(false)
+  vehicleLicenseImg       String  
   registration            String
   registrationExpiration  DateTime
   pickupAddress           String
@@ -61,6 +62,7 @@ model Vehicle {
   latitude                Float
   vehicleType             VehicleType
   details                 Json
+  features                Json
   rentals                 Rental[]
 
   @@index([ownerId])

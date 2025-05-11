@@ -5,6 +5,7 @@ import { PrismaService } from 'src/prisma.service';
 import { instanceToPlain } from 'class-transformer';
 import { VehicleFiltersDto } from 'src/location/dto/vehicle-filters.dto';
 import { Cron, CronExpression } from '@nestjs/schedule';
+import { features } from 'process';
 
 @Injectable()
 export class VehicleService {

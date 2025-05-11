@@ -54,6 +54,8 @@ export const AddVehiclePage = () => {
     4: <FourthStep data={vehicleData} onDataChange={handleDataChange} />,
   };
 
+  console.log("Vehicle data:", vehicleData);
+
   return (
     <section>
       <h1>List your car</h1>

@@ -6,12 +6,13 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsObject,
   IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
 import { CarDetailsDto } from './car-details.dto';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { CarCategory, FuelType } from '../enums/vehicle.enums';
 
 export class CreateVehicleDto {
@@ -104,6 +105,15 @@ export class CreateVehicleDto {
     type: 'string',
   })
   description?: string;
+
+  @IsNotEmpty({ message: 'Vehicle license image is required' })
+  @IsString({ message: 'Vehicle license image must be a string' })
+  @ApiProperty({
+    description: 'Image URL from cloudinary',
+    example: 'https://example.com/license.jpg',
+    type: 'string',
+  })
+  vehicleLicenseImg: string;
 
   @IsNotEmpty({
     message: 'Registration is required',
@@ -206,4 +216,23 @@ export class CreateVehicleDto {
     },
   })
   details: CarDetailsDto;
+
+  @Transform(({ value }) => value || {})
+  @IsObject({ message: 'Features must be a JSON object' })
+  @ApiProperty({
+    description: 'Features of the vehicle (arbitrary JSON object, optional)',
+    type: 'object',
+    example: {
+      airConditioning: true,
+      usb: true,
+      aux: true,
+      bluetooth: false,
+      sensors: true,
+      pets: true,
+      gps: true,
+      childSeat: false,
+    },
+    additionalProperties: true,
+  })
+  features: Record<string, any> = {};
 }
