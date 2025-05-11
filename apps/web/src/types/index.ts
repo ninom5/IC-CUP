@@ -7,6 +7,7 @@ export * from "./registerData.type";
 export * from "./cloudinary.type";
 export * from "./errorResponse.type";
 export * from "./userProfile.type";
+export * from "./user.type";
 export * from "./login.type";
 export * from "./uploadFilesParams.type";
 export * from "./vehicleType";

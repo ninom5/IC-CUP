@@ -4,6 +4,7 @@
   },
   "scripts": {
     "dev": "turbo run dev",
+    "build": "turbo run build",
     "db:generate": "yarn workspace api run db:generate",
     "db:migrate": "yarn workspace api run db:migrate",
     "db:seed": "yarn workspace api run db:seed",

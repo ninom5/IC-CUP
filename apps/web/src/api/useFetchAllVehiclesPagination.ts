@@ -20,7 +20,7 @@ export const useFetchAllVehiclesPagination = () => {
     queryKey: ["vehicles-pagination"],
     queryFn: async ({ pageParam = 1 }) => fetchAllVehiclesPagination(pageParam),
     initialPageParam: 1,
-    getNextPageParam: (lastPage, allPages) => {
+    getNextPageParam: (lastPage) => {
       if (lastPage.currentPage >= lastPage.totalPages) return undefined;
       return lastPage.currentPage + 1;
     },
