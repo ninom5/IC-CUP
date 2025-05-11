@@ -7,6 +7,13 @@
   height: auto;
 }
 
+.filters-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 50%;
+}
+
 .kolo-logo {
   cursor: pointer;
 }
@@ -14,20 +21,36 @@
 .location-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border: 1px solid gray;
+  border: 1px solid var(--stroke-gray);
   border-radius: 8px;
+  justify-content: flex-start;
+  padding: 0 20px;
 }
 .location-wrapper #autocomplete-input {
-  padding: 10px;
   margin-left: 10px;
   border: none;
-  width: 50%;
+  width: 100%;
+  padding: 10px 0;
+}
+.location-wrapper #autocomplete-input:focus {
+  border: none;
+  outline: none;
+}
+
+.icon-wrapper {
+  border: 1px solid var(--stroke-gray);
+  padding: 10px 10px;
+  border-radius: 8px;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
 }
 
 .navigation-links {
   display: flex;
   gap: 50px;
+  justify-content: center;
+  align-items: center;
 }
 .navigation-links a {
   text-decoration: none;

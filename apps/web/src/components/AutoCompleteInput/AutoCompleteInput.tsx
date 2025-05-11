@@ -14,7 +14,7 @@ type AutocompleteProps = {
 
 export const AutoCompleteInput = ({
   onPlaceResolved,
-  placeholder = "Search place",
+  placeholder = "Pretraži lokaciju",
 }: AutocompleteProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 

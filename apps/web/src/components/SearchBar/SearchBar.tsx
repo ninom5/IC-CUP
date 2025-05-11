@@ -2,7 +2,7 @@ import { useToken } from "@hooks/index";
 import { routes } from "@routes/index";
 import { Link, useNavigate } from "react-router-dom";
 import "./searchBar.css";
-import logoSvg from "assets/images/Vector.svg";
+import { logoSvg, searchSvg, filterSvg } from "assets/images/index";
 import { AutoCompleteInput } from "@components/AutoCompleteInput/AutoCompleteInput";
 import { useMapContext } from "@hooks/index";
 import { toast } from "react-toastify";
@@ -33,17 +33,31 @@ export const SearchBar = () => {
 
   return (
     <nav className="search-navigation">
-      <img
-        src={logoSvg}
-        alt="Kolo logo"
-        className="kolo-logo"
-        onClick={() => navigate(routes.HOME)}
-      />
-      <div className="location-wrapper">
-        <label htmlFor="location">Lokacija</label>
-        <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
-      </div>
+      <div className="filters-wrapper">
+        <img
+          src={logoSvg}
+          alt="Kolo logo"
+          className="kolo-logo"
+          onClick={() => navigate(routes.HOME)}
+        />
 
+        <div className="location-wrapper">
+          <label htmlFor="location">Lokacija</label>
+          <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
+        </div>
+
+        <div>
+          <input type="text" />
+        </div>
+
+        <div className="icon-wrapper">
+          <img src={searchSvg} alt="Search icon" />
+        </div>
+
+        <div className="icon-wrapper">
+          <img src={filterSvg} alt="Filter icon" style={{ width: "22px" }} />
+        </div>
+      </div>
       <div className="navigation-links">
         <Link to={routes.ABOUT}>How it works</Link>
 
