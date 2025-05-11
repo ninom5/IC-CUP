@@ -6,9 +6,11 @@ import {
   SecondStep,
   ThirdStep,
 } from "@components/index";
+import { useFetchAllVehicles } from "@api/useFetchAllVehicles";
 
 export const AddVehiclePage = () => {
   const [formStep, setFormStep] = useState(1);
+  const { data } = useFetchAllVehicles();
 
   const handleNextStep = () => {
     setFormStep((prevStep) => prevStep + 1);
@@ -20,6 +22,8 @@ export const AddVehiclePage = () => {
     3: <ThirdStep />,
     4: <FourthStep />,
   };
+
+  console.log("Data from API:", data);
 
   return (
     <section>

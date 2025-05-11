@@ -13,7 +13,7 @@ api.interceptors.request.use(async (config) => {
   const tokenItem = localStorage.getItem("jwt");
 
   if (tokenItem) {
-    const token = JSON.parse(tokenItem);
+    const token = tokenItem;
     config.headers.Authorization = `Bearer ${token}`;
   }
 
