@@ -50,7 +50,6 @@ model Vehicle {
   images                  String[]
   productionYear          Int
   dailyPrice              Float
-  isAvailable             Boolean  @default(false)
   description             String?
   isVerified              Boolean  @default(false)
   vehicleLicenseImg       String  
@@ -64,6 +63,8 @@ model Vehicle {
   details                 Json
   features                Json
   rentals                 Rental[]
+  availabilities          VehicleAvailability[]
+
 
   @@index([ownerId])
 }
@@ -123,6 +124,19 @@ model Notification {
   message         String
   isRead          Boolean  @default(false)
   createdAt       DateTime @default(now())
+}
+
+model VehicleAvailability {
+  id        String   @id @default(uuid())
+  vehicleId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  startDate DateTime
+  endDate   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([vehicleId, startDate, endDate])
+  @@index([vehicleId])
 }
 
 enum Role {
