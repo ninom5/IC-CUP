@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 export type JwtResponse = {
-  access_token: string;
+  token: string;
 };
 
 const loginUser = async (loginData: LoginType) => {
@@ -16,7 +16,7 @@ export const useLogin = () => {
     mutationFn: loginUser,
     mutationKey: ["login-user"],
     onSuccess: (data: JwtResponse) => {
-      localStorage.setItem("jwt", JSON.stringify(data));
+      localStorage.setItem("jwt", JSON.stringify(data.token));
       toast.success("Successfully logged in");
     },
     onError(error: string) {
