@@ -51,6 +51,22 @@ export class VehicleService {
         isAvailable: true,
         isVerified: true,
       },
+      include: {
+        rentals: {
+          where: {
+            review: {
+              isNot: null,
+            },
+          },
+          include: {
+            review: {
+              select: {
+                rating: true,
+              },
+            },
+          },
+        },
+      },
     });
   }
 

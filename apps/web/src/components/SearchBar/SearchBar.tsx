@@ -1,14 +1,15 @@
-import { useToken } from "@hooks/index";
+import { useToken, useMapContext } from "@hooks/index";
 import { routes } from "@routes/index";
 import { Link, useNavigate } from "react-router-dom";
 import "./searchBar.css";
-import { logoSvg, searchSvg, filterSvg } from "assets/images/index";
-import { AutoCompleteInput } from "@components/AutoCompleteInput/AutoCompleteInput";
-import { useMapContext } from "@hooks/index";
+import { logoSvg, searchSvg, filterSvg, notifSvg } from "assets/images/index";
+import {
+  AutoCompleteInput,
+  CustomDatePicker,
+  FilterPopUp,
+} from "@components/index";
 import { toast } from "react-toastify";
-import { FilterPopUp } from "@components/FilterPopUp/FilterPopUp";
 import { useEffect, useState } from "react";
-import { CustomDatePicker } from "@components/CustomDatePicker/CustomDatePicker";
 import { FiltersType } from "types";
 
 export const SearchBar = () => {
@@ -82,14 +83,21 @@ export const SearchBar = () => {
           </div>
         </div>
         <div className="navigation-links">
-          <Link to={routes.ABOUT}>Kako radi</Link>
-
           {token && !isExpired ? (
-            <Link to={routes.HOME} onClick={handleLogout}>
-              Odjavi se
-            </Link>
+            <>
+              <Link to={routes.USERS_DRIVES}>Tvoje vožnje</Link>
+              <Link to={routes.USERS_VEHICLES}>Tvoja kola</Link>
+              <Link to={routes.HOME} onClick={handleLogout}>
+                Odjavi se
+              </Link>
+
+              <div className="icon-wrapper">
+                <img src={notifSvg} alt="slikica zvona" />
+              </div>
+            </>
           ) : (
             <>
+              <Link to={routes.ABOUT}>Kako radi</Link>
               <Link to={routes.REGISTER}>Registracija</Link>
               <Link to={routes.LOGIN}>Prijavi se</Link>
             </>

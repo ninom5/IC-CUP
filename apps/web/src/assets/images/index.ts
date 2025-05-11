@@ -14,3 +14,4 @@ export { default as cabriolet } from "./cabriolet.svg";
 export { default as hatchback } from "./hatchback.svg";
 export { default as sedan } from "./sedan.svg";
 export { default as suv } from "./suv.svg";
+export { default as notifSvg } from "./notification-icon.svg";
