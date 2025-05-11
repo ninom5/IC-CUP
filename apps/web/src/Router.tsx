@@ -8,6 +8,7 @@ import {
   LoginPage,
   NotFoundPage,
   RegisterPage,
+  ProfilePage,
 } from "@pages/index";
 import { SearchBarLayout } from "@layouts/SearchBarLayout";
 // import { AdminRoutes } from "@routes/index ";
@@ -22,6 +23,7 @@ export const Router = () => {
         </Route>
         <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
         <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
+        <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
         {/* <AdminRoutes>
 
 </AdminRoutes> */}

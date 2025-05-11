@@ -11,4 +11,5 @@ export const routes: RouteType = {
   NOT_FOUND: "*",
   BECOME_HOST: "/become-host",
   ADD_VEHICLE: "/add-vehicle",
+  PROFILE_PAGE: "/profile/:id",
 };
