@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import { IsDate, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateVehicleAvailabilityDto {
@@ -21,6 +22,7 @@ export class CreateVehicleAvailabilityDto {
   @IsNotEmpty({
     message: 'Start date is required',
   })
+  @Type(() => Date)
   @IsDate({
     message: 'Start date must be a valid date',
   })
@@ -33,6 +35,7 @@ export class CreateVehicleAvailabilityDto {
   @IsNotEmpty({
     message: 'End date is required',
   })
+  @Type(() => Date)
   @IsDate({
     message: 'End date must be a valid date',
   })

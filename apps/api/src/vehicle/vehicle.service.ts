@@ -78,6 +78,12 @@ export class VehicleService {
             ],
           },
         },
+        availabilities: {
+          some: {
+            startDate: { lte: filtersStartDate },
+            endDate: { gte: filtersEndDate },
+          },
+        },
       },
     });
   }
