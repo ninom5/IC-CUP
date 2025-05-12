@@ -1,6 +1,6 @@
 .vehicle-card {
   display: flex;
-  width: 515px;
+  width: 90%;
   min-height: 150px;
   height: 202px;
   padding: 10px 15px;
