@@ -22,7 +22,7 @@ export const VehicleCard = ({ vehicle }: { vehicle: VehicleType }) => {
 
       <div className="vehicle-info">
         <h2>
-          {vehicle.brand} {vehicle.model}
+          {vehicle.brand} {vehicle.model} {vehicle.productionYear}
         </h2>
 
         <p className="rating-info">

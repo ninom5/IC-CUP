@@ -1,0 +1,67 @@
+.login-pop-up {
+  background-color: var(--background-white);
+  padding: 30px;
+  border-radius: 10px;
+  width: 25%;
+  height: auto;
+}
+.login-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.login-section h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  margin-left: 10px;
+  border-bottom: 2px solid var(--stroke-gray);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.login-form label {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.login-form input {
+  text-align: left;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.login-section button {
+  background-color: var(--accent-color);
+  border-radius: 8px;
+  padding: 7px;
+  font-size: 16px;
+  color: var(--background-white);
+  font-weight: 400;
+  border: none;
+}
+
+.aha {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.aha h2 {
+  text-align: center;
+  padding: 0;
+}
