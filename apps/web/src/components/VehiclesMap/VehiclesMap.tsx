@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { Map, AdvancedMarker, useMap } from "@vis.gl/react-google-maps";
 import { Marker, MarkerClusterer } from "@googlemaps/markerclusterer";
-import { useFetchAllVehicles } from "@api/index";
-import { VehicleType } from "types";
-import { SplitLocation } from "@constants/index";
-import { toast } from "react-toastify";
-import "./vehiclesMap.css";
-import { useMapContext } from "@hooks/index";
 import { VehicleMarkers, VehicleInfoWindow } from "@components/index";
+import { useFetchAllVehicles } from "@api/index";
+import { SplitLocation } from "@constants/index";
+import { useMapContext } from "@hooks/index";
+import { toast } from "react-toastify";
+import { VehicleType } from "types";
+import "./vehiclesMap.css";
 
 export const VehiclesMap = () => {
   const { data, isLoading } = useFetchAllVehicles();
   const { searchLocation, setMap } = useMapContext();
+
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleType | null>(
     null
   );

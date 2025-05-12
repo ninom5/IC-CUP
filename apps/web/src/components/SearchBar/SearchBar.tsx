@@ -1,24 +1,21 @@
-import { useToken, useMapContext } from "@hooks/index";
+import { useMapContext, useFiltersContext } from "@hooks/index";
 import { routes } from "@routes/index";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./searchBar.css";
-import { logoSvg, searchSvg, filterSvg, notifSvg } from "assets/images/index";
+import { logoSvg, searchSvg, filterSvg } from "assets/images/index";
 import {
   AutoCompleteInput,
   CustomDatePicker,
   FilterPopUp,
+  SearchBarNavigationLinks,
 } from "@components/index";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { FiltersType } from "types";
-import { useFiltersContext } from "@hooks/useFiltersContext";
 
 export const SearchBar = () => {
   const navigate = useNavigate();
-  const {
-    data: { token, isExpired },
-    updateToken,
-  } = useToken();
+
   const { goToLocation, setSearchLocation } = useMapContext();
   const { setFilters } = useFiltersContext();
 
@@ -32,11 +29,6 @@ export const SearchBar = () => {
 
   const [showFilters, setShowFilters] = useState(false);
   const [userFilters, setUserFilters] = useState(defaultFilters);
-
-  const handleLogout = () => {
-    localStorage.removeItem("jwt");
-    updateToken();
-  };
 
   const handleSearch = () => {
     setFilters({
@@ -84,31 +76,11 @@ export const SearchBar = () => {
           </div>
 
           <div className="icon-wrapper" onClick={() => setShowFilters(true)}>
-            <img src={filterSvg} alt="Filter icon" style={{ width: "22px" }} />
+            <img src={filterSvg} alt="Filter icon" />
           </div>
         </div>
 
-        <div className="navigation-links">
-          {token && !isExpired ? (
-            <>
-              <Link to={routes.USERS_DRIVES}>Tvoje vožnje</Link>
-              <Link to={routes.USERS_VEHICLES}>Tvoja kola</Link>
-              <Link to={routes.HOME} onClick={handleLogout}>
-                Odjavi se
-              </Link>
-
-              <div className="icon-wrapper">
-                <img src={notifSvg} alt="slikica zvona" />
-              </div>
-            </>
-          ) : (
-            <>
-              <Link to={routes.ABOUT}>Kako radi</Link>
-              <Link to={routes.REGISTER}>Registracija</Link>
-              <Link to={routes.LOGIN}>Prijavi se</Link>
-            </>
-          )}
-        </div>
+        <SearchBarNavigationLinks />
       </nav>
 
       {showFilters && (

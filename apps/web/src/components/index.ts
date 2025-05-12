@@ -18,3 +18,4 @@ export * from "./CustomDatePicker/CustomDatePicker";
 export * from "./ButtonAccent/ButtonAccent";
 
 export * from "./GoogleAPIProvider/GoogleAPIProvider";
+export * from "./SearchBarNavigationLinks/SearchBarNavigationLinks";

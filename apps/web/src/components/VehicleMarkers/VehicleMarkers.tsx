@@ -1,6 +1,6 @@
 import { CustomPriceMarker } from "@components/index";
 import { AdvancedMarker } from "@vis.gl/react-google-maps";
-import { VehicleType } from "@types/vehicle.type";
+import { VehicleType } from "types";
 
 export const VehicleMarkers = ({
   data,

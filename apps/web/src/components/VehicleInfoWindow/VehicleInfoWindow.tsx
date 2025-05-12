@@ -30,10 +30,9 @@ export const VehicleInfoWindow = ({
         <p>
           Dnevna cijena: <b>{vehicle.dailyPrice}</b>
           <br />
-          Ocjena:{" "}
+          Ocjena: &nbsp;
           {totalRating > 0 ? (
             <>
-              {" "}
               {totalRating / numberOfRatings} ({numberOfRatings})
             </>
           ) : (

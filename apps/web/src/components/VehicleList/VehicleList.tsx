@@ -2,8 +2,8 @@ import { VehicleCard } from "@components/index";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "./vehicleList.css";
 import { useFetchAllVehiclesPagination } from "@api/useFetchAllVehiclesPagination";
-import { useFiltersContext } from "@hooks/useFiltersContext";
-import { getAverageVehicleRating } from "@utils/getAverageVehicleRating.util";
+import { useFiltersContext } from "@hooks/index";
+import { getAverageVehicleRating } from "@utils/index";
 
 export const VehicleList = () => {
   const { fuelType, carCategory, seats, transmission, sortBy } =

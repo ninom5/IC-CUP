@@ -24,6 +24,7 @@ export const VehicleCard = ({ vehicle }: { vehicle: VehicleType }) => {
         <h2>
           {vehicle.brand} {vehicle.model}
         </h2>
+
         <p className="rating-info">
           {numberOfRatings > 0 ? (
             <>
