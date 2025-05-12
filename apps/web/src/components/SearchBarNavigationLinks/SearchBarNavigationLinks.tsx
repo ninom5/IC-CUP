@@ -5,6 +5,7 @@ import { routes } from "@routes/index";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./searchBarNavigationLinks.css";
+import { RegisterForm } from "@components/RegisterForm/RegisterForm";
 
 export const SearchBarNavigationLinks = () => {
   const {
@@ -13,6 +14,7 @@ export const SearchBarNavigationLinks = () => {
   } = useToken();
 
   const [showLoginPopUp, setShowLoginPopUp] = useState(false);
+  const [showRegisterPopUp, setShowRegisterPopUp] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
@@ -36,7 +38,13 @@ export const SearchBarNavigationLinks = () => {
       ) : (
         <>
           <Link to={routes.ABOUT}>Kako radi</Link>
-          <Link to={routes.REGISTER}>Registracija</Link>
+
+          <button
+            onClick={() => setShowRegisterPopUp(true)}
+            className="register-button"
+          >
+            Registracija
+          </button>
           <button
             onClick={() => setShowLoginPopUp(true)}
             className="login-button"
@@ -47,6 +55,10 @@ export const SearchBarNavigationLinks = () => {
       )}
 
       {showLoginPopUp && <LoginForm onClose={() => setShowLoginPopUp(false)} />}
+
+      {showRegisterPopUp && (
+        <RegisterForm onClose={() => setShowRegisterPopUp(false)} />
+      )}
     </div>
   );
 };

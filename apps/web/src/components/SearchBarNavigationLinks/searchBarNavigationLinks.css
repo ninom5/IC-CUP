@@ -9,7 +9,8 @@
   color: var(--background-black);
 }
 
-.login-button {
+.login-button,
+.register-button {
   border: none;
   background-color: transparent;
   font-size: 20px;

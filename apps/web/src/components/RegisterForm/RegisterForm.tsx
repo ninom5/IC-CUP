@@ -9,8 +9,9 @@ import {
   getUserByEmail,
   useUploadImages,
 } from "@api/index";
+import "./registerForm.css";
 
-export const RegisterForm = () => {
+export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
   const { mutate: register } = useRegister();
   const { mutateAsync: uploadImages } = useUploadImages();
   const { mutateAsync: uploadFiles } = useUploadFiles();
@@ -32,6 +33,7 @@ export const RegisterForm = () => {
   const [personPhotoFile, setPersonPhotoFile] = useState<File | null>(null);
   const [idCardFile, setIdCardFile] = useState<File[]>([]);
   const [driverLicenseFile, setDriverLicenseFile] = useState<File[]>([]);
+  const [formStep, setFormStep] = useState(1);
 
   const navigate = useNavigate();
 
@@ -66,6 +68,38 @@ export const RegisterForm = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRegisterData({ ...registerData, [e.target.name]: e.target.value });
+  };
+
+  const handleNextStepClick = () => {
+    const {
+      email,
+      password,
+      confirmPassword,
+      firstName,
+      lastName,
+      phoneNumber,
+      dateOfBirth,
+    } = registerData;
+
+    if (
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !firstName ||
+      !lastName ||
+      !phoneNumber ||
+      !dateOfBirth
+    ) {
+      toast.error("Molimo ispunite sva obavezna polja prije nego nastavite.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast.error("Lozinke se ne podudaraju");
+      return;
+    }
+
+    setFormStep(formStep + 1);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -187,102 +221,151 @@ export const RegisterForm = () => {
   };
 
   return (
-    <section>
-      <h1>Register form</h1>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="register-pop-up" onClick={(e) => e.stopPropagation()}>
+        <section className="register-section">
+          <h1>Registracija</h1>
+          <span className="close-span" onClick={onClose}>
+            &times;
+          </span>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          id="firstName"
-          name="firstName"
-          value={registerData.firstName}
-          onChange={handleChange}
-          type="text"
-          placeholder="first name"
-        />
-        <input
-          id="lastName"
-          name="lastName"
-          value={registerData.lastName}
-          onChange={handleChange}
-          type="text"
-          placeholder="last name"
-        />
-        <input
-          id="dateOfBirth"
-          name="dateOfBirth"
-          value={registerData.dateOfBirth}
-          onChange={handleChange}
-          type="date"
-        />
-        <input
-          id="email"
-          name="email"
-          value={registerData.email}
-          onChange={handleChange}
-          type="email"
-          placeholder="email"
-        />
-        <input
-          id="password"
-          name="password"
-          value={registerData.password}
-          onChange={handleChange}
-          type="password"
-          placeholder="password"
-        />
-        <input
-          id="confirmPassword"
-          name="confirmPassword"
-          value={registerData.confirmPassword}
-          onChange={handleChange}
-          type="password"
-          placeholder="confirm password"
-        />
-        <input
-          id="phoneNumber"
-          name="phoneNumber"
-          value={registerData.phoneNumber}
-          onChange={handleChange}
-          type="text"
-          placeholder=""
-        />
-        <input
-          id="address"
-          name="address"
-          value={registerData.address}
-          onChange={handleChange}
-          type="text"
-          placeholder="address"
-        />
+          <form onSubmit={handleSubmit} className="register-form">
+            {formStep === 1 && (
+              <>
+                <label>Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  value={registerData.email}
+                  onChange={handleChange}
+                  type="email"
+                  placeholder="email"
+                  required
+                />
 
-        <label htmlFor="personPhoto">Person Photo</label>
-        <input
-          type="file"
-          id="personPhoto"
-          name="personPhoto"
-          onChange={handlePersonPhotoChange}
-        />
+                <label>Lozinka</label>
+                <input
+                  id="password"
+                  name="password"
+                  value={registerData.password}
+                  onChange={handleChange}
+                  type="password"
+                  placeholder="password"
+                  required
+                />
 
-        <label htmlFor="driverLicense">Driver License</label>
-        <input
-          type="file"
-          id="driverLicense"
-          name="driverLicense"
-          multiple
-          onChange={handleDriverLicenseChange}
-        />
+                <label>Ponovi lozinku</label>
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={registerData.confirmPassword}
+                  onChange={handleChange}
+                  type="password"
+                  placeholder="confirm password"
+                  required
+                />
 
-        <label htmlFor="idCard"></label>
-        <input
-          type="file"
-          id="idCard"
-          name="idCard"
-          multiple
-          onChange={handleIdCardChange}
-        />
+                <label>Ime</label>
+                <input
+                  id="firstName"
+                  name="firstName"
+                  value={registerData.firstName}
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="first name"
+                  required
+                />
 
-        <button type="submit">Submit</button>
-      </form>
-    </section>
+                <label>Prezime</label>
+                <input
+                  id="lastName"
+                  name="lastName"
+                  value={registerData.lastName}
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="last name"
+                  required
+                />
+
+                <label>Broj mobitela</label>
+                <input
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  value={registerData.phoneNumber}
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="091 **** ***"
+                  required
+                />
+
+                <label>Datum rođenja</label>
+                <input
+                  id="dateOfBirth"
+                  name="dateOfBirth"
+                  value={registerData.dateOfBirth}
+                  onChange={handleChange}
+                  type="date"
+                />
+              </>
+            )}
+
+            {formStep === 2 && (
+              <>
+                <label></label>
+                <input
+                  id="address"
+                  name="address"
+                  value={registerData.address}
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="address"
+                  required
+                />
+
+                <label htmlFor="personPhoto">Person Photo</label>
+                <input
+                  type="file"
+                  id="personPhoto"
+                  name="personPhoto"
+                  onChange={handlePersonPhotoChange}
+                />
+
+                <label htmlFor="driverLicense">Driver License</label>
+                <input
+                  type="file"
+                  id="driverLicense"
+                  name="driverLicense"
+                  multiple
+                  onChange={handleDriverLicenseChange}
+                />
+
+                <label htmlFor="idCard"></label>
+                <input
+                  type="file"
+                  id="idCard"
+                  name="idCard"
+                  multiple
+                  onChange={handleIdCardChange}
+                />
+              </>
+            )}
+
+            <div className="form-buttons">
+              {formStep > 1 && (
+                <button type="button" onClick={() => setFormStep(formStep - 1)}>
+                  Nazad
+                </button>
+              )}
+              {formStep < 2 && (
+                <button type="button" onClick={() => handleNextStepClick()}>
+                  Dalje
+                </button>
+              )}
+              {formStep === 2 && <button type="submit">Submit</button>}
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
   );
 };

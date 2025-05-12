@@ -6,7 +6,6 @@ import {
   VehiclesPage,
   HomePage,
   NotFoundPage,
-  RegisterPage,
 } from "@pages/index";
 import { SearchBarLayout } from "@layouts/SearchBarLayout";
 // import { AdminRoutes } from "@routes/index ";
@@ -25,7 +24,6 @@ export const Router = () => {
 
 </AdminRoutes> */}
 
-        <Route path={routes.REGISTER} element={<RegisterPage />} />
         <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
