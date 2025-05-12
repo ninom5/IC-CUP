@@ -98,4 +98,10 @@
   border-radius: 10px;
   border: 1px solid var(--stroke-grey, #c0bebe);
   background: var(--background-white, #fafafa);
+  color: var(--background-black, #222);
+  font-family: "Nunito Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
