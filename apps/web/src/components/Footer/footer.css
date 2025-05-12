@@ -1,0 +1,17 @@
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+}
+.footer-columns {
+  display: flex;
+  gap: 200px;
+  margin-bottom: 100px;
+}
+
+.kolo-footer-wrapper {
+  display: flex;
+}

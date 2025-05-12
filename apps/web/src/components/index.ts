@@ -10,6 +10,7 @@ export * from "./VehiclesMap/VehiclesMap";
 export * from "./AutoCompleteInput/AutoCompleteInput";
 export * from "./SearchBar/SearchBar";
 export * from "./CustomPriceMarker/CustomPriceMarker";
+
 export * from "./VehicleMarkers/VehicleMarkers";
 export * from "./VehicleInfoWindow/VehicleInfoWindow";
 export * from "./FilterPopUp/FilterPopUp";
@@ -19,3 +20,7 @@ export * from "./ButtonAccent/ButtonAccent";
 
 export * from "./GoogleAPIProvider/GoogleAPIProvider";
 export * from "./SearchBarNavigationLinks/SearchBarNavigationLinks";
+export * from "./Contact/Contact";
+export * from "./Footer/Footer";
+export * from "./SiteMapFooter/SiteMapFooter";
+

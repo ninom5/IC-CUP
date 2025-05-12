@@ -1,0 +1,12 @@
+.sitemap-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sitemap-section a {
+  font-size: 20px;
+  color: #222222;
+  font-weight: 400;
+  text-decoration: none;
+}
