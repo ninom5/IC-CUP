@@ -56,17 +56,6 @@
   cursor: pointer;
 }
 
-.navigation-links {
-  display: flex;
-  gap: 50px;
-  justify-content: center;
-  align-items: center;
-}
-.navigation-links a {
-  text-decoration: none;
-  color: var(--background-black);
-}
-
 .modal-overlay {
   position: fixed;
   top: 0;
