@@ -153,9 +153,14 @@ enum FuelType {
 }
 
 enum CarCategory {
-  SMALL
-  MEDIUM
+  COUPE
+  SEDAN
+  CABRIOLET
   SUV
-  VAN
-  LUXURY
+  HATCHBACK
+}
+
+enum Transmission{
+  AUTOMATIC
+  MANUAL
 }

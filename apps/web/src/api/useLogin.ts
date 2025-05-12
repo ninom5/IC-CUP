@@ -16,7 +16,7 @@ export const useLogin = () => {
     mutationFn: loginUser,
     mutationKey: ["login-user"],
     onSuccess: (data: JwtResponse) => {
-      localStorage.setItem("jwt", JSON.stringify(data.token));
+      localStorage.setItem("jwt", data.token);
       toast.success("Successfully logged in");
     },
     onError(error: string) {

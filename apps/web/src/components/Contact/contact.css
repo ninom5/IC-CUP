@@ -1,0 +1,41 @@
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-section h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.contact-section a {
+  font-size: 20px;
+  color: #222222;
+  font-weight: 400;
+}
+
+.contact-section h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.contact-section p {
+  font-size: 20px;
+  font-weight: 400;
+  width: 200px;
+  margin-bottom: 10px;
+}
+.social-media-icons {
+  display: flex;
+  gap: 5px;
+}
+.social-media-icon-wrapper {
+  width: 20px;
+  height: auto;
+  cursor: pointer;
+}
+
+.social-media-icon-wrapper img {
+  width: 100%;
+}

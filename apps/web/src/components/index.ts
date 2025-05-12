@@ -1,13 +1,26 @@
 export * from "./RegisterForm/RegisterForm";
-export * from "./LoginForm/LoginForm";
 export * from "./AddVehicleSteps/FirstStep/FirstStep";
 export * from "./AddVehicleSteps/SecondStep/SecondStep";
 export * from "./AddVehicleSteps/ThirdStep/ThirdStep";
 export * from "./AddVehicleSteps/FourthStep/FourthStep";
 export * from "./VehicleList/VehicleList";
 export * from "./VehicleCard/VehicleCard";
-export * from "./CarsMap/CarsMap";
+export * from "./VehiclesMap/VehiclesMap";
 export * from "./AutoCompleteInput/AutoCompleteInput";
 export * from "./SearchBar/SearchBar";
 export * from "./CustomPriceMarker/CustomPriceMarker";
+
+export * from "./VehicleMarkers/VehicleMarkers";
+export * from "./VehicleInfoWindow/VehicleInfoWindow";
+export * from "./FilterPopUp/FilterPopUp";
+export * from "./FilterRow/FilterRow";
+export * from "./CustomDatePicker/CustomDatePicker";
+export * from "./ButtonAccent/ButtonAccent";
+
+export * from "./GoogleAPIProvider/GoogleAPIProvider";
+export * from "./SearchBarNavigationLinks/SearchBarNavigationLinks";
+export * from "./Contact/Contact";
+export * from "./Footer/Footer";
+export * from "./SiteMapFooter/SiteMapFooter";
+
 export * from "./VehicleGallery/VehicleGallery";
