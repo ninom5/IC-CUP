@@ -71,31 +71,10 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
   };
 
   const handleNextStepClick = () => {
-    const {
-      email,
-      password,
-      confirmPassword,
-      firstName,
-      lastName,
-      phoneNumber,
-      dateOfBirth,
-    } = registerData;
+    const message = isRegisterDataValid(registerData);
 
-    if (
-      !email ||
-      !password ||
-      !confirmPassword ||
-      !firstName ||
-      !lastName ||
-      !phoneNumber ||
-      !dateOfBirth
-    ) {
-      toast.error("Molimo ispunite sva obavezna polja prije nego nastavite.");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      toast.error("Lozinke se ne podudaraju");
+    if (message) {
+      toast.error(message);
       return;
     }
 
@@ -232,120 +211,154 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
           <form onSubmit={handleSubmit} className="register-form">
             {formStep === 1 && (
               <>
-                <label>Email</label>
-                <input
-                  id="email"
-                  name="email"
-                  value={registerData.email}
-                  onChange={handleChange}
-                  type="email"
-                  placeholder="email"
-                  required
-                />
+                <div className="form-group">
+                  <label>Ime</label>
+                  <input
+                    id="firstName"
+                    name="firstName"
+                    value={registerData.firstName}
+                    onChange={handleChange}
+                    type="text"
+                    placeholder="Ivan"
+                    required
+                  />
+                </div>
 
-                <label>Lozinka</label>
-                <input
-                  id="password"
-                  name="password"
-                  value={registerData.password}
-                  onChange={handleChange}
-                  type="password"
-                  placeholder="password"
-                  required
-                />
+                <div className="form-group">
+                  <label>Prezime</label>
+                  <input
+                    id="lastName"
+                    name="lastName"
+                    value={registerData.lastName}
+                    onChange={handleChange}
+                    type="text"
+                    placeholder="Horvat"
+                    required
+                  />
+                </div>
 
-                <label>Ponovi lozinku</label>
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  value={registerData.confirmPassword}
-                  onChange={handleChange}
-                  type="password"
-                  placeholder="confirm password"
-                  required
-                />
+                <div className="form-group">
+                  <label>Lozinka</label>
+                  <input
+                    id="password"
+                    name="password"
+                    value={registerData.password}
+                    onChange={handleChange}
+                    type="password"
+                    placeholder="********"
+                    required
+                  />
+                </div>
 
-                <label>Ime</label>
-                <input
-                  id="firstName"
-                  name="firstName"
-                  value={registerData.firstName}
-                  onChange={handleChange}
-                  type="text"
-                  placeholder="first name"
-                  required
-                />
+                <div className="form-group">
+                  <label>Ponovi lozinku</label>
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    value={registerData.confirmPassword}
+                    onChange={handleChange}
+                    type="password"
+                    placeholder="********"
+                    required
+                  />
+                </div>
 
-                <label>Prezime</label>
-                <input
-                  id="lastName"
-                  name="lastName"
-                  value={registerData.lastName}
-                  onChange={handleChange}
-                  type="text"
-                  placeholder="last name"
-                  required
-                />
+                <div className="form-group">
+                  <label>Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    value={registerData.email}
+                    onChange={handleChange}
+                    type="email"
+                    placeholder="ivan@horvat.com"
+                    required
+                  />
+                </div>
 
-                <label>Broj mobitela</label>
-                <input
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  value={registerData.phoneNumber}
-                  onChange={handleChange}
-                  type="text"
-                  placeholder="091 **** ***"
-                  required
-                />
+                <div className="form-group">
+                  <label>Broj mobitela</label>
+                  <input
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    value={registerData.phoneNumber}
+                    onChange={handleChange}
+                    type="text"
+                    placeholder="091 **** ***"
+                    required
+                  />
+                </div>
 
-                <label>Datum rođenja</label>
-                <input
-                  id="dateOfBirth"
-                  name="dateOfBirth"
-                  value={registerData.dateOfBirth}
-                  onChange={handleChange}
-                  type="date"
-                />
+                <div className="form-group">
+                  <label htmlFor="address">Adresa</label>
+                  <input
+                    id="address"
+                    name="address"
+                    value={registerData.address}
+                    onChange={handleChange}
+                    type="text"
+                    placeholder="Adresa"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Datum rođenja</label>
+                  <input
+                    id="dateOfBirth"
+                    name="dateOfBirth"
+                    value={registerData.dateOfBirth}
+                    onChange={handleChange}
+                    type="date"
+                  />
+                </div>
               </>
             )}
 
             {formStep === 2 && (
-              <>
-                <label></label>
-                <input
-                  id="address"
-                  name="address"
-                  value={registerData.address}
-                  onChange={handleChange}
-                  type="text"
-                  placeholder="address"
-                  required
-                />
+              <section className="documents-upload">
+                <div>
+                  <h2>Vozačka dozvola</h2>
+                  <img src="" alt="" />
+                  <label htmlFor="driverLicense" className="custom-file-upload">
+                    Prenesi fotografije
+                  </label>
+                  <input
+                    type="file"
+                    id="driverLicense"
+                    name="driverLicense"
+                    className="hidden-input"
+                    multiple
+                    onChange={handleDriverLicenseChange}
+                  />
+                </div>
 
+                <div>
+                  <h2>Osobna iskaznica</h2>
+                  <label htmlFor="idCard" className="custom-file-upload">
+                    Prenesi fotografije
+                  </label>
+                  <input
+                    type="file"
+                    id="idCard"
+                    name="idCard"
+                    className="hidden-input"
+                    multiple
+                    onChange={handleIdCardChange}
+                  />
+                </div>
+              </section>
+            )}
+
+            {formStep === 3 && (
+              <>
                 <label htmlFor="personPhoto">Person Photo</label>
                 <input
                   type="file"
                   id="personPhoto"
                   name="personPhoto"
+                  className="add-photo-input"
                   onChange={handlePersonPhotoChange}
-                />
-
-                <label htmlFor="driverLicense">Driver License</label>
-                <input
-                  type="file"
-                  id="driverLicense"
-                  name="driverLicense"
-                  multiple
-                  onChange={handleDriverLicenseChange}
-                />
-
-                <label htmlFor="idCard"></label>
-                <input
-                  type="file"
-                  id="idCard"
-                  name="idCard"
-                  multiple
-                  onChange={handleIdCardChange}
                 />
               </>
             )}
@@ -356,12 +369,14 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
                   Nazad
                 </button>
               )}
-              {formStep < 2 && (
-                <button type="button" onClick={() => handleNextStepClick()}>
-                  Dalje
-                </button>
+              {formStep <= 2 && (
+                <>
+                  <button type="button" onClick={() => handleNextStepClick()}>
+                    Dalje
+                  </button>
+                </>
               )}
-              {formStep === 2 && <button type="submit">Submit</button>}
+              {formStep === 3 && <button type="submit">Submit</button>}
             </div>
           </form>
         </section>
