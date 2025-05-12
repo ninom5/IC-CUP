@@ -35,6 +35,12 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
   const [driverLicenseFile, setDriverLicenseFile] = useState<File[]>([]);
   const [formStep, setFormStep] = useState(1);
 
+  const [driverLicensePreviews, setDriverLicensePreviews] = useState<string[]>(
+    []
+  );
+  const [idCardPreviews, setIdCardPreviews] = useState<string[]>([]);
+  const [personPreview, setPersonPreview] = useState<string | null>(null);
+
   const navigate = useNavigate();
 
   const handlePersonPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +48,7 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
     if (!file) return;
 
     setPersonPhotoFile(file);
+    setPersonPreview(URL.createObjectURL(file));
   };
 
   const handleIdCardChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,6 +59,7 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
     }
 
     setIdCardFile(images);
+    setIdCardPreviews(images.map((file) => URL.createObjectURL(file)));
   };
 
   const handleDriverLicenseChange = (
@@ -64,6 +72,7 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
     }
 
     setDriverLicenseFile(images);
+    setDriverLicensePreviews(images.map((file) => URL.createObjectURL(file)));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -319,7 +328,18 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
               <section className="documents-upload">
                 <div>
                   <h2>Vozačka dozvola</h2>
-                  <img src="" alt="" />
+
+                  <div className="preview-container">
+                    {driverLicensePreviews.map((src, index) => (
+                      <img
+                        key={index}
+                        src={src}
+                        alt="Slika"
+                        className="preview-image"
+                      />
+                    ))}
+                  </div>
+
                   <label htmlFor="driverLicense" className="custom-file-upload">
                     Prenesi fotografije
                   </label>
@@ -335,6 +355,15 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
 
                 <div>
                   <h2>Osobna iskaznica</h2>
+
+                  <div className="preview-container">
+                    {idCardPreviews.map((src, index) => (
+                      <div key={index} className="preview-item">
+                        <img src={src} alt="Slika" className="preview-image" />
+                      </div>
+                    ))}
+                  </div>
+
                   <label htmlFor="idCard" className="custom-file-upload">
                     Prenesi fotografije
                   </label>
@@ -351,16 +380,36 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
             )}
 
             {formStep === 3 && (
-              <>
-                <label htmlFor="personPhoto">Person Photo</label>
+              <section className="person-photo-upload">
+                <h2>Profilna fotografija</h2>
+
+                <div className="preview-container">
+                  {personPreview && (
+                    <div className="preview-item person-preview">
+                      <img
+                        src={personPreview}
+                        alt="Slika"
+                        className="preview-image"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                <p className="person-photo-description">
+                  (Pripazi da se jasno vidi tvoje lice)
+                </p>
+
+                <label htmlFor="personPhoto" className="custom-file-upload">
+                  Prenesi fotografiju
+                </label>
                 <input
                   type="file"
                   id="personPhoto"
                   name="personPhoto"
-                  className="add-photo-input"
+                  className="hidden-input"
                   onChange={handlePersonPhotoChange}
                 />
-              </>
+              </section>
             )}
 
             <div className="form-buttons">
@@ -376,7 +425,7 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
                   </button>
                 </>
               )}
-              {formStep === 3 && <button type="submit">Submit</button>}
+              {formStep === 3 && <button type="submit">Registriraj se</button>}
             </div>
           </form>
         </section>
