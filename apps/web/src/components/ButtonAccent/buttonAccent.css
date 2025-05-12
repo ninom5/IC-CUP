@@ -1,0 +1,11 @@
+.custom-accent-button {
+  background-color: var(--accent-color);
+  color: var(--background-white);
+  padding: 5px 15px;
+  font-size: 16px;
+  font-weight: 400;
+  width: auto;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}

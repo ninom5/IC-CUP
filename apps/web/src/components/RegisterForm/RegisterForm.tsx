@@ -118,7 +118,6 @@ export const RegisterForm = () => {
       });
 
       const response = await uploadFiles([idFile, driverFile]);
-      console.log(response);
       if (!response) {
         toast.error("Response data is empty");
         return;

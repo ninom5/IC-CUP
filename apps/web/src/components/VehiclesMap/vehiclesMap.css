@@ -1,0 +1,13 @@
+.map-wrapper {
+  position: relative;
+  padding: 10px;
+  width: 60%;
+  min-height: 80vh;
+}
+
+.map-wrapper-inner {
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
