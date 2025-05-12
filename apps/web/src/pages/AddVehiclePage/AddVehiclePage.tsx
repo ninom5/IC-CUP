@@ -11,7 +11,7 @@ import { CarCategory, FuelType, VehicleType } from "enums";
 import { toast } from "react-toastify";
 import { useCreateVehicle } from "@api/useCreateVehicle";
 import { extractUserInfo } from "@utils/extractUserInfo.util";
-import { isRegistrationValid } from "@utils/isRegistrationValid";
+import { isRegistrationValid } from "@utils/isRegistrationValid.util";
 
 export const AddVehiclePage = () => {
   const userData = extractUserInfo();

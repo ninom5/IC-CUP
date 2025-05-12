@@ -3,4 +3,5 @@ export * from "./isRegisterDataValid.util";
 export * from "./validateTextFields.util";
 export * from "./generatePdf.util";
 export * from "./getMinDate.util";
-export * from "./isRegistrationValid";
+export * from "./isRegistrationValid.util";
+export * from "./isIntervalAtLeastOneDay.util";

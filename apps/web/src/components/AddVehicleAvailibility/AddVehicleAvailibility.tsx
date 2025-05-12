@@ -2,8 +2,9 @@ import { getMinDate } from "@utils/getMinDate.util";
 import c from "./AddVehicleAvailibility.module.css";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
-import xIcon from "../../assets/images/xIcon.svg";
+import xIcon from "/assets/images/xIcon.svg";
 import { AvailabilityInterval } from "../../types/index";
+import { isIntervalAtLeastOneDay } from "@utils/isIntervalAtLeastOneDay.util";
 
 export const AddVehicleAvailibility = () => {
   const [availabilityIntervals, setAvailabilityIntervals] = useState<
@@ -24,16 +25,13 @@ export const AddVehicleAvailibility = () => {
       return;
     }
 
-    const startDateTime = new Date(startDate);
-    const endDateTime = new Date(endDate);
-    const oneDayInMillis = 24 * 60 * 60 * 1000;
-
-    if (endDateTime.getTime() - startDateTime.getTime() < oneDayInMillis) {
+    if (!isIntervalAtLeastOneDay(startDate, endDate)) {
       toast.error(
         "Krajnji datum mora biti barem jedan dan nakon početnog datuma."
       );
       return;
     }
+
     const isOverlapping = availabilityIntervals.some(
       (interval) =>
         new Date(startDate) <= new Date(interval.endDate) &&
