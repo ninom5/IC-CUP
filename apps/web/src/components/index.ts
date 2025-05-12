@@ -16,3 +16,5 @@ export * from "./FilterPopUp/FilterPopUp";
 export * from "./FilterRow/FilterRow";
 export * from "./CustomDatePicker/CustomDatePicker";
 export * from "./ButtonAccent/ButtonAccent";
+
+export * from "./GoogleAPIProvider/GoogleAPIProvider";

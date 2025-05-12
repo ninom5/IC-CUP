@@ -57,6 +57,9 @@ div > h2 {
   text-align: center;
   width: 15%;
 }
+.category-wrapper.selected {
+  border: 1px solid var(--background-black);
+}
 .category-wrapper img {
   width: 70%;
   height: auto;

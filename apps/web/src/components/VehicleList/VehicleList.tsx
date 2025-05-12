@@ -2,8 +2,10 @@ import { VehicleCard } from "@components/index";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "./vehicleList.css";
 import { useFetchAllVehiclesPagination } from "@api/useFetchAllVehiclesPagination";
+import { useFiltersContext } from "@hooks/useFiltersContext";
 
 export const VehicleList = () => {
+  const { fuelType, carCategory, seats, transmission } = useFiltersContext();
   const {
     data,
     fetchNextPage,
@@ -11,7 +13,8 @@ export const VehicleList = () => {
     isFetchingNextPage,
     error,
     isLoading,
-  } = useFetchAllVehiclesPagination();
+  } = useFetchAllVehiclesPagination(fuelType, carCategory, seats, transmission);
+
   const vehicles = // viska
     data?.pages
       .flatMap((page) => page.data)
@@ -24,14 +27,14 @@ export const VehicleList = () => {
       <div id="scrollableContainer" className="vehicle-list-scroll-container">
         {isLoading && <div>loading...</div>}
         {!isLoading && vehicles.length === 0 && (
-          <div>No vehicles available</div>
+          <div>Nema dostupnih vozila</div>
         )}
 
         <InfiniteScroll
           dataLength={vehicles.length}
           next={fetchNextPage}
-          hasMore={!!hasNextPage}
-          loader={<div>Loading more...</div>}
+          hasMore={vehicles.length > 0 && !!hasNextPage}
+          loader={isFetchingNextPage ? <div>Loading more...</div> : null}
           scrollableTarget="scrollableContainer"
         >
           {vehicles.map((v) => (

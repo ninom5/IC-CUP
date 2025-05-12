@@ -11,6 +11,7 @@ import {
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { FiltersType } from "types";
+import { useFiltersContext } from "@hooks/useFiltersContext";
 
 export const SearchBar = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ export const SearchBar = () => {
     updateToken,
   } = useToken();
   const { goToLocation, setSearchLocation } = useMapContext();
+  const { setFilters } = useFiltersContext();
 
   const defaultFilters: FiltersType = {
     sortBy: "",
@@ -29,18 +31,21 @@ export const SearchBar = () => {
   };
 
   const [showFilters, setShowFilters] = useState(false);
-  const [filters, setFilters] = useState(defaultFilters);
-
-  useEffect(() => {
-    console.log(filters);
-  }, [filters]);
+  const [userFilters, setUserFilters] = useState(defaultFilters);
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
     updateToken();
   };
 
-  // const handle;
+  const handleSearch = () => {
+    setFilters({
+      fuelType: userFilters.fuelType,
+      carCategory: userFilters.category,
+      seats: userFilters.seatNumber,
+      transmission: userFilters.transmission,
+    });
+  };
 
   const handlePlaceResolved = (place: google.maps.places.PlaceResult) => {
     const location = place.geometry?.location;
@@ -73,7 +78,7 @@ export const SearchBar = () => {
 
           <CustomDatePicker />
 
-          <div className="icon-wrapper">
+          <div className="icon-wrapper" onClick={handleSearch}>
             <img src={searchSvg} alt="Search icon" />
           </div>
 
@@ -107,8 +112,8 @@ export const SearchBar = () => {
         <div className="modal-overlay" onClick={() => setShowFilters(false)}>
           <div className="filter-pop-up" onClick={(e) => e.stopPropagation()}>
             <FilterPopUp
-              filters={filters}
-              setFilters={setFilters}
+              userFilters={userFilters}
+              setUserFilters={setUserFilters}
               setShowFilters={setShowFilters}
             />
           </div>
