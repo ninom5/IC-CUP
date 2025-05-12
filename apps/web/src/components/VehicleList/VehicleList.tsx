@@ -34,10 +34,10 @@ export const VehicleList = () => {
           return a.dailyPrice - b.dailyPrice;
 
         case "rating_higher_lower":
-          return a.avgRating - b.avgRating;
+          return b.avgRating - a.avgRating;
 
         case "rating_lower_higher":
-          return b.avgRating - a.avgRating;
+          return a.avgRating - b.avgRating;
 
         default:
           return 0;

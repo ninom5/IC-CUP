@@ -12,7 +12,8 @@ import "./filterPopUp.css";
 import { FilterRow } from "@components/FilterRow/FilterRow";
 import { FilterPopUpProps, FiltersType } from "types/filter.type";
 import { ButtonAccent } from "@components/ButtonAccent/ButtonAccent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useFiltersContext } from "@hooks/useFiltersContext";
 
 const carCategories = [
   { label: "Coupe", value: "coupe", img: coupeSvg },
@@ -35,10 +36,7 @@ export const FilterPopUp = ({
   setShowFilters,
 }: FilterPopUpProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  const handleChange = (key: keyof FiltersType, value: string) => {
-    setUserFilters((prev) => ({ ...prev, [key]: value }));
-  };
+  const { setFilters } = useFiltersContext();
 
   const defaultFilters: FiltersType = {
     sortBy: "",
@@ -47,6 +45,14 @@ export const FilterPopUp = ({
     seatNumber: "",
     fuelType: "",
   };
+
+  const handleChange = (key: keyof FiltersType, value: string) => {
+    setUserFilters((prev) => ({ ...prev, [key]: value }));
+  };
+
+  useEffect(() => {
+    setSelectedCategory(userFilters.category || null);
+  }, []);
 
   return (
     <div className="filters-section">
@@ -137,6 +143,13 @@ export const FilterPopUp = ({
           onClick={() => {
             setUserFilters(defaultFilters);
             setSelectedCategory(null);
+            setFilters({
+              carCategory: "",
+              fuelType: "",
+              seats: "",
+              sortBy: "",
+              transmission: "",
+            });
           }}
         />
 
