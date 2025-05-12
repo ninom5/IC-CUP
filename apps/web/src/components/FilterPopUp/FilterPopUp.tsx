@@ -9,9 +9,8 @@ import {
   transmissionSvg,
 } from "@assets/images/index";
 import "./filterPopUp.css";
-import { FilterRow } from "@components/FilterRow/FilterRow";
+import { FilterRow, ButtonAccent } from "@components/index";
 import { FilterPopUpProps, FiltersType } from "types/filter.type";
-import { ButtonAccent } from "@components/ButtonAccent/ButtonAccent";
 import { useEffect, useState } from "react";
 import { useFiltersContext } from "@hooks/useFiltersContext";
 
@@ -56,12 +55,24 @@ export const FilterPopUp = ({
 
   return (
     <div className="filters-section">
-      <span className="close-span" onClick={() => setShowFilters(false)}>
-        &times;
-      </span>
-
       <div className="sort-section">
-        <h2>Sortiraj po</h2>
+        <div className="filter-pop-up-header">
+          <h2>Sortiraj</h2>
+          <ButtonAccent
+            content="Resetiraj filtere ×"
+            onClick={() => {
+              setUserFilters(defaultFilters);
+              setSelectedCategory(null);
+              setFilters({
+                carCategory: "",
+                fuelType: "",
+                seats: "",
+                sortBy: "",
+                transmission: "",
+              });
+            }}
+          />
+        </div>
         <select
           name=""
           id="sort-select"
@@ -138,21 +149,6 @@ export const FilterPopUp = ({
       />
 
       <div className="filter-buttons">
-        <ButtonAccent
-          content="Resetiraj"
-          onClick={() => {
-            setUserFilters(defaultFilters);
-            setSelectedCategory(null);
-            setFilters({
-              carCategory: "",
-              fuelType: "",
-              seats: "",
-              sortBy: "",
-              transmission: "",
-            });
-          }}
-        />
-
         <ButtonAccent
           content="Primjeni"
           onClick={() => setShowFilters(false)}
