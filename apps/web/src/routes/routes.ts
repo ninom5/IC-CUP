@@ -6,7 +6,7 @@ export const routes: RouteType = {
   LOGIN: "/login",
   REGISTER: "/register",
   CARS: "/cars",
-  CAR_PAGE: "/car/:id",
+  VEHICLE_PAGE: "/vehicle/:id",
   ADD_CAR: "/createCar",
   NOT_FOUND: "*",
   BECOME_HOST: "/become-host",

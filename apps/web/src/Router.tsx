@@ -29,6 +29,8 @@ export const Router = () => {
         <Route path={routes.LOGIN} element={<LoginPage />} />
         <Route path={routes.REGISTER} element={<RegisterPage />} />
         <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
+
+        <Route path={routes.VEHICLE_PAGE} />
       </Routes>
     </BrowserRouter>
   );

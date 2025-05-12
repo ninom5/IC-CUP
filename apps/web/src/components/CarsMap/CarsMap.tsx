@@ -132,7 +132,7 @@ export const CarsMap = () => {
                   <br />
                   Rating:/Ocjena:
                 </p>
-                <Link to={`/car/${selectedVehicle.id}`}>
+                <Link to={`/vehicle/${selectedVehicle.id}`}>
                   See more details/Provjeri detalje
                 </Link>
               </div>
