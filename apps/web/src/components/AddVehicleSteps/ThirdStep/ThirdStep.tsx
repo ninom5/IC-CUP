@@ -17,6 +17,15 @@ export const ThirdStep = ({ data, onDataChange }: StepProps) => {
     }
   };
 
+  const handleDescriptionChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    onDataChange({
+      ...data,
+      description: e.target.value,
+    });
+  };
+
   return (
     <div className={c.form}>
       <div className={c.imagesContainer}>
@@ -62,7 +71,11 @@ export const ThirdStep = ({ data, onDataChange }: StepProps) => {
 
       <div className={c.descriptionContainer}>
         <h3>Dodaj opis</h3>
-        <textarea maxLength={300}></textarea>
+        <textarea
+          maxLength={300}
+          value={data.description}
+          onChange={handleDescriptionChange}
+        />
       </div>
     </div>
   );

@@ -123,6 +123,7 @@ export class CreateVehicleDto {
   })
   @ApiProperty({
     description: 'Registration',
+    example: 'ST-8888-AA',
     type: 'string',
   })
   registration: string;
@@ -208,10 +209,9 @@ export class CreateVehicleDto {
     description: 'Additional vehicle details',
     type: CarDetailsDto,
     example: {
-      licensePlate: 'ABC1234',
       fuelType: FuelType.PETROL,
       isAutomatic: true,
-      category: CarCategory.SMALL,
+      category: CarCategory.SEDAN,
       numOfSeats: 5,
     },
   })

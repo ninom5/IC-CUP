@@ -1,6 +1,7 @@
 import { CarCategory, FuelType, VehicleType } from "../enums/vehicle.enum";
 
 export type VehicleData = {
+  ownerId: string;
   brand: string;
   model: string;
   images: File[];
@@ -20,7 +21,6 @@ export type VehicleData = {
 };
 
 export type VehicleDetails = {
-  licensePlate: string;
   fuelType: FuelType;
   isAutomatic: boolean;
   category: CarCategory;

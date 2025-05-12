@@ -68,6 +68,12 @@
   align-items: center;
   gap: 8px;
   border-radius: 10px;
-  background: var(--stroke-grey, #c0bebe);
+  background: var(--accent-color, #044343);
+  color: var(--background-white, #fafafa);
+  font-family: "Nunito Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
   cursor: pointer;
 }

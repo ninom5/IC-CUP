@@ -8,30 +8,35 @@ import {
 } from "@components/index";
 import { VehicleData } from "../../types";
 import { CarCategory, FuelType, VehicleType } from "enums";
+import { toast } from "react-toastify";
+import { useCreateVehicle } from "@api/useCreateVehicle";
+import { extractUserInfo } from "@utils/extractUserInfo.util";
 
 export const AddVehiclePage = () => {
+  const userData = extractUserInfo();
+
   const [formStep, setFormStep] = useState(1);
   const [vehicleData, setVehicleData] = useState<VehicleData>({
+    ownerId: "a825bd08-2605-4166-9a19-32d373c63b26",
     brand: "",
     model: "",
     images: [],
     productionYear: 2025,
-    dailyPrice: 0,
+    dailyPrice: 40.0,
     description: "",
     vehicleLicenseImg: null,
     registration: "",
     registrationExpiration: "",
-    pickupAddress: "",
-    city: "",
+    pickupAddress: "bla",
+    city: "bla",
     longitude: 0,
     latitude: 0,
     vehicleType: VehicleType.CAR,
     details: {
-      licensePlate: "",
       fuelType: FuelType.PETROL,
       isAutomatic: false,
       category: CarCategory.SEDAN,
-      numOfSeats: 4,
+      numOfSeats: 5,
     },
     features: {
       airConditioning: false,
@@ -45,16 +50,57 @@ export const AddVehiclePage = () => {
     },
   });
 
+  const createVehicleMutation = useCreateVehicle();
+
+  const canProceedToNextStep = (): boolean => {
+    if (formStep === 1) {
+      const {
+        registration,
+        registrationExpiration,
+        vehicleLicenseImg,
+        brand,
+        model,
+      } = vehicleData;
+      if (
+        !registration ||
+        !registrationExpiration ||
+        !vehicleLicenseImg ||
+        !brand ||
+        !model
+      ) {
+        toast.error("Molimo popunite sve podatke u 1. koraku.");
+        return false;
+      }
+    }
+
+    if (formStep === 3) {
+      if (vehicleData.images.length !== 5) {
+        toast.error("Morate dodati točno 5 slika vozila.");
+        return false;
+      }
+    }
+
+    if (formStep === 4) {
+      if (vehicleData.dailyPrice <= 0) {
+        toast.error("Cijena po danu mora biti veca od 0.");
+        return false;
+      }
+    }
+
+    return true;
+  };
+
   const handleDataChange = (newData: Partial<VehicleData>) => {
     setVehicleData((prev) => ({ ...prev, ...newData }));
   };
 
   const handleSubmit = () => {
-    console.log("Submitting data:", vehicleData);
-    // Ovdje dodaj API poziv
+    if (!canProceedToNextStep) return;
+    createVehicleMutation.mutate(vehicleData);
   };
 
   const handleNextStep = () => {
+    if (!canProceedToNextStep()) return;
     if (formStep < 4) setFormStep((prevStep) => prevStep + 1);
   };
 
@@ -85,12 +131,12 @@ export const AddVehiclePage = () => {
 
       <div className={c.buttonContainer}>
         {formStep < 4 ? (
-          <button onClick={handleNextStep}>NEXT</button>
+          <button onClick={handleNextStep}>Nastavi</button>
         ) : (
-          <button onClick={handleSubmit}>SUBMIT</button>
+          <button onClick={handleSubmit}>Završi</button>
         )}
         {formStep > 1 && (
-          <button onClick={() => setFormStep((prev) => prev - 1)}>BACK</button>
+          <button onClick={() => setFormStep((prev) => prev - 1)}>Nazad</button>
         )}
       </div>
     </section>
