@@ -13,6 +13,15 @@ export class VehicleAvailabilityService {
     });
   }
 
+  async createMultiple(
+    createVehicleAvailabilityDto: CreateVehicleAvailabilityDto[],
+  ) {
+    return this.prisma.vehicleAvailability.createMany({
+      data: createVehicleAvailabilityDto,
+      skipDuplicates: true,
+    });
+  }
+
   async findAll() {
     return this.prisma.vehicleAvailability.findMany();
   }

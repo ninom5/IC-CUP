@@ -2,16 +2,14 @@ import { getMinDate } from "@utils/getMinDate.util";
 import c from "./AddVehicleAvailibility.module.css";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
-
-type AvailabilityInterval = {
-  startDate: string;
-  endDate: string;
-};
+import xIcon from "../../assets/images/xIcon.svg";
+import { AvailabilityInterval } from "../../types/index";
 
 export const AddVehicleAvailibility = () => {
   const [availabilityIntervals, setAvailabilityIntervals] = useState<
     AvailabilityInterval[]
   >([]);
+
   const startDateRef = useRef<HTMLInputElement>(null);
   const endDateRef = useRef<HTMLInputElement>(null);
 
@@ -63,13 +61,6 @@ export const AddVehicleAvailibility = () => {
     setAvailabilityIntervals(updatedIntervals);
   };
 
-  const handleConfirm = () => {
-    // Here you would typically pass the intervals to a parent component
-    // or submit them to an API
-    console.log("Confirmed Intervals:", availabilityIntervals);
-    // Example: onSubmit(availabilityIntervals)
-  };
-
   return (
     <div className={c.inputContainer}>
       <h3>Unesi slobodne periode</h3>
@@ -79,15 +70,12 @@ export const AddVehicleAvailibility = () => {
           {availabilityIntervals.map((interval, index) => (
             <div key={index} className={c.intervalItem}>
               <span>
-                {interval.startDate} - {interval.endDate}
+                <strong>Od:</strong> {interval.startDate}
               </span>
-              <button
-                type="button"
-                onClick={() => handleRemoveInterval(index)}
-                className={c.removeButton}
-              >
-                Ukloni
-              </button>
+              <span>
+                <strong>Do:</strong> {interval.endDate}
+              </span>
+              <img src={xIcon} onClick={() => handleRemoveInterval(index)} />
             </div>
           ))}
         </div>

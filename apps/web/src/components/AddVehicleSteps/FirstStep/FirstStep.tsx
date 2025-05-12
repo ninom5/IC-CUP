@@ -136,9 +136,6 @@ export const FirstStep = ({ data, onDataChange }: StepProps) => {
             accept="image/*"
             style={{ display: "none" }}
           />
-          {data.vehicleLicenseImg && (
-            <p>Odabrano: {data.vehicleLicenseImg.name}</p>
-          )}
         </div>
       </div>
 

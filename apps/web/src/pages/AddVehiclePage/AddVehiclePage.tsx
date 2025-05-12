@@ -97,7 +97,7 @@ export const AddVehiclePage = () => {
   };
 
   const handleSubmit = () => {
-    if (!canProceedToNextStep) return;
+    if (!canProceedToNextStep()) return;
     createVehicleMutation.mutate(vehicleData);
   };
 
@@ -113,33 +113,43 @@ export const AddVehiclePage = () => {
     4: <FourthStep data={vehicleData} onDataChange={handleDataChange} />,
   };
 
-  console.log("Vehicle data:", vehicleData);
-
   return (
     <section className={c.addVehiclePageSection}>
-      <div className={c.header}>
-        <h1>Dodaj kola</h1>
+      <div>
+        <div className={c.header}>
+          <h1>Dodaj kola</h1>
 
-        <div className={c.formSteps}>
-          <p>{formStep} / 4</p>
+          <div className={c.formSteps}>
+            <p>{formStep} / 4</p>
 
-          <div className={c.formStepBar}>
-            <div style={{ width: `${formStep * 25}%` }}></div>
+            <div className={c.formStepBar}>
+              <div style={{ width: `${formStep * 25}%` }}></div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {steps[formStep]}
+        {steps[formStep]}
 
-      <div className={c.buttonContainer}>
-        {formStep < 4 ? (
-          <button onClick={handleNextStep}>Nastavi</button>
-        ) : (
-          <button onClick={handleSubmit}>Završi</button>
-        )}
-        {formStep > 1 && (
-          <button onClick={() => setFormStep((prev) => prev - 1)}>Nazad</button>
-        )}
+        <div className={c.buttonContainer}>
+          {formStep < 4 ? (
+            <button onClick={handleNextStep}>Nastavi</button>
+          ) : (
+            <button
+              onClick={handleSubmit}
+              disabled={createVehicleMutation.isPending}
+            >
+              {createVehicleMutation.isPending ? "Spremanje..." : "Završi"}
+            </button>
+          )}
+          {formStep > 1 && (
+            <button
+              onClick={() => setFormStep((prev) => prev - 1)}
+              disabled={createVehicleMutation.isPending}
+            >
+              Nazad
+            </button>
+          )}
+        </div>
       </div>
     </section>
   );

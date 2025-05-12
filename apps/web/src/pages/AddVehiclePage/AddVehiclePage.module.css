@@ -1,5 +1,11 @@
 .addVehiclePageSection {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addVehiclePageSection > div {
+  display: flex;
   width: 1107px;
   flex-direction: column;
   align-items: flex-start;

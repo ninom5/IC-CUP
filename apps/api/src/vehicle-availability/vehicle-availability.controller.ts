@@ -22,6 +22,15 @@ export class VehicleAvailabilityController {
     return this.vehicleAvailabilityService.create(createVehicleAvailabilityDto);
   }
 
+  @Post('create-multiple')
+  createMultiple(
+    @Body() createVehicleAvailabilityDto: CreateVehicleAvailabilityDto[],
+  ) {
+    return this.vehicleAvailabilityService.createMultiple(
+      createVehicleAvailabilityDto,
+    );
+  }
+
   @Get()
   findAll() {
     return this.vehicleAvailabilityService.findAll();

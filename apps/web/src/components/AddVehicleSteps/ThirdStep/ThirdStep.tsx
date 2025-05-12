@@ -36,6 +36,7 @@ export const ThirdStep = ({ data, onDataChange }: StepProps) => {
             <>
               {data.images[i] ? (
                 <img
+                  key={i}
                   className={c.selectedImage}
                   src={URL.createObjectURL(data.images[i])}
                   alt={`Preview ${i + 1}`}

@@ -1,6 +1,5 @@
-import { AddVehicleAvailibility } from "@components/AddVehicleAvailibility/AddVehicleAvailibility";
-import { StepProps } from "../../../types";
 import c from "./FourthStep.module.css";
+import { StepProps } from "../../../types/index";
 
 export const FourthStep = ({ data, onDataChange }: StepProps) => {
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,8 +27,6 @@ export const FourthStep = ({ data, onDataChange }: StepProps) => {
           €
         </label>
       </div>
-
-      <AddVehicleAvailibility />
     </div>
   );
 };
