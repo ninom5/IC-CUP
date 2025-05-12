@@ -11,13 +11,14 @@ import { CarCategory, FuelType, VehicleType } from "enums";
 import { toast } from "react-toastify";
 import { useCreateVehicle } from "@api/useCreateVehicle";
 import { extractUserInfo } from "@utils/extractUserInfo.util";
+import { isRegistrationValid } from "@utils/isRegistrationValid";
 
 export const AddVehiclePage = () => {
   const userData = extractUserInfo();
 
   const [formStep, setFormStep] = useState(1);
   const [vehicleData, setVehicleData] = useState<VehicleData>({
-    ownerId: "a825bd08-2605-4166-9a19-32d373c63b26",
+    ownerId: userData.data.id,
     brand: "",
     model: "",
     images: [],
@@ -62,13 +63,14 @@ export const AddVehiclePage = () => {
         model,
       } = vehicleData;
       if (
+        !isRegistrationValid(vehicleData.registration) ||
         !registration ||
         !registrationExpiration ||
         !vehicleLicenseImg ||
         !brand ||
         !model
       ) {
-        toast.error("Molimo popunite sve podatke u 1. koraku.");
+        toast.error("Molimo popunite točno sve podatke u 1. koraku.");
         return false;
       }
     }

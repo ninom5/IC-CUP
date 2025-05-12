@@ -24,8 +24,6 @@ const createVehicle = async (vehicleData: VehicleData) => {
     };
   }
 
-  console.log(newVehicleData);
-
   const response = await api.post(`/vehicle`, newVehicleData);
   return response.data;
 };
