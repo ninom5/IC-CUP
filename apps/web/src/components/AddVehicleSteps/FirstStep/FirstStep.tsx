@@ -3,19 +3,14 @@ import { StepProps } from "../../../types";
 import c from "./FirstStep.module.css";
 import { getMinDate } from "@utils/getMinDate.util";
 import { useRef } from "react";
-import coupeIcon from "../../../assets/images/coupeIcon.svg";
-import sedanIcon from "../../../assets/images/sedanIcon.svg";
-import cabrioletIcon from "../../../assets/images/cabrioletIcon.svg";
-import suvIcon from "../../../assets/images/suvIcon.svg";
-import hatchbackIcon from "../../../assets/images/hatchbackIcon.svg";
-
-const carCategoryIcons = [
-  { name: CarCategory.COUPE, icon: coupeIcon },
-  { name: CarCategory.SEDAN, icon: sedanIcon },
-  { name: CarCategory.CABRIOLET, icon: cabrioletIcon },
-  { name: CarCategory.SUV, icon: suvIcon },
-  { name: CarCategory.HATCHBACK, icon: hatchbackIcon },
-];
+import {
+  CabrioletIcon,
+  CoupeIcon,
+  HatchbackIcon,
+  SedanIcon,
+  SuvIcon,
+} from "@components/icons";
+import checkmarkIcon from "../../../assets/images/checkmarkIcon.svg";
 
 export const FirstStep = ({ data, onDataChange }: StepProps) => {
   const inputFileRef = useRef<HTMLInputElement>(null);
@@ -48,7 +43,53 @@ export const FirstStep = ({ data, onDataChange }: StepProps) => {
     });
   };
 
-  console.log(data);
+  const getIconColor = (
+    category: CarCategory,
+    selectedCategory: CarCategory
+  ) => {
+    return category === selectedCategory ? "#222" : "#C0BEBE";
+  };
+
+  const carCategoryIcons = [
+    {
+      name: CarCategory.COUPE,
+      icon: (
+        <CoupeIcon
+          color={getIconColor(CarCategory.COUPE, data.details.category)}
+        />
+      ),
+    },
+    {
+      name: CarCategory.SEDAN,
+      icon: (
+        <SedanIcon
+          color={getIconColor(CarCategory.SEDAN, data.details.category)}
+        />
+      ),
+    },
+    {
+      name: CarCategory.CABRIOLET,
+      icon: (
+        <CabrioletIcon
+          color={getIconColor(CarCategory.CABRIOLET, data.details.category)}
+        />
+      ),
+    },
+    {
+      name: CarCategory.SUV,
+      icon: (
+        <SuvIcon color={getIconColor(CarCategory.SUV, data.details.category)} />
+      ),
+    },
+    {
+      name: CarCategory.HATCHBACK,
+      icon: (
+        <HatchbackIcon
+          color={getIconColor(CarCategory.HATCHBACK, data.details.category)}
+        />
+      ),
+    },
+  ];
 
   return (
     <div className={c.form}>
@@ -77,6 +118,9 @@ export const FirstStep = ({ data, onDataChange }: StepProps) => {
 
       <div className={c.inputContainer}>
         <h3>Slika prometne dozvole</h3>
+
+        {data.vehicleLicenseImg && <img src={checkmarkIcon} alt="checkmark" />}
+
         <div>
           <button
             onClick={() => inputFileRef.current?.click()}
@@ -112,7 +156,7 @@ export const FirstStep = ({ data, onDataChange }: StepProps) => {
               }
               onClick={() => handleCategoryChange(category.name)}
             >
-              <img src={category.icon} alt={category.name} />
+              {category.icon}
               <p>{category.name}</p>
             </div>
           ))}

@@ -120,7 +120,7 @@
   border: 1px solid var(--background-black, #222);
 }
 
-.selected > img {
+.selected > svg {
   fill: var(--background-black, #222);
 }
 
