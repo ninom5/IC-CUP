@@ -5,7 +5,6 @@ import {
   BecomeHostPage,
   VehiclesPage,
   HomePage,
-  LoginPage,
   NotFoundPage,
   RegisterPage,
 } from "@pages/index";
@@ -26,7 +25,6 @@ export const Router = () => {
 
 </AdminRoutes> */}
 
-        <Route path={routes.LOGIN} element={<LoginPage />} />
         <Route path={routes.REGISTER} element={<RegisterPage />} />
         <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
       </Routes>

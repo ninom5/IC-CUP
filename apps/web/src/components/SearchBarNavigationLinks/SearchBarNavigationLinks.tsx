@@ -1,13 +1,18 @@
 import { notifSvg } from "@assets/images";
+import { LoginForm } from "@components/LoginForm/LoginForm";
 import { useToken } from "@hooks/index";
 import { routes } from "@routes/index";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import "./searchBarNavigationLinks.css";
 
 export const SearchBarNavigationLinks = () => {
   const {
     data: { token, isExpired },
     updateToken,
   } = useToken();
+
+  const [showLoginPopUp, setShowLoginPopUp] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
@@ -32,9 +37,16 @@ export const SearchBarNavigationLinks = () => {
         <>
           <Link to={routes.ABOUT}>Kako radi</Link>
           <Link to={routes.REGISTER}>Registracija</Link>
-          <Link to={routes.LOGIN}>Prijavi se</Link>
+          <button
+            onClick={() => setShowLoginPopUp(true)}
+            className="login-button"
+          >
+            Prijavi se
+          </button>
         </>
       )}
+
+      {showLoginPopUp && <LoginForm onClose={() => setShowLoginPopUp(false)} />}
     </div>
   );
 };
