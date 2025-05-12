@@ -19,6 +19,7 @@ export * from "./ButtonAccent/ButtonAccent";
 
 export * from "./GoogleAPIProvider/GoogleAPIProvider";
 export * from "./SearchBarNavigationLinks/SearchBarNavigationLinks";
+export * from "./NavBar/NavBar";
 export * from "./Contact/Contact";
 export * from "./Footer/Footer";
 export * from "./SiteMapFooter/SiteMapFooter";
