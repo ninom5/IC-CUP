@@ -2,7 +2,7 @@ import { getMinDate } from "@utils/getMinDate.util";
 import c from "./AddVehicleAvailibility.module.css";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
-import xIcon from "/assets/images/xIcon.svg";
+import xIcon from "../../assets/images/xIcon.svg";
 import { AvailabilityInterval } from "../../types/index";
 import { isIntervalAtLeastOneDay } from "@utils/isIntervalAtLeastOneDay.util";
 

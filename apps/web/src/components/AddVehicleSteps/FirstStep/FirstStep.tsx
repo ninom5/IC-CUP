@@ -12,6 +12,22 @@ import {
 } from "@components/icons";
 import checkmarkIcon from "../../../assets/images/checkmarkIcon.svg";
 
+const CAR_CATEGORIES = [
+  CarCategory.COUPE,
+  CarCategory.SEDAN,
+  CarCategory.CABRIOLET,
+  CarCategory.SUV,
+  CarCategory.HATCHBACK,
+] as const;
+
+const CATEGORY_ICONS = {
+  [CarCategory.COUPE]: CoupeIcon,
+  [CarCategory.SEDAN]: SedanIcon,
+  [CarCategory.CABRIOLET]: CabrioletIcon,
+  [CarCategory.SUV]: SuvIcon,
+  [CarCategory.HATCHBACK]: HatchbackIcon,
+};
+
 export const FirstStep = ({ data, onDataChange }: StepProps) => {
   const inputFileRef = useRef<HTMLInputElement>(null);
 
@@ -50,46 +66,25 @@ export const FirstStep = ({ data, onDataChange }: StepProps) => {
     return category === selectedCategory ? "#222" : "#C0BEBE";
   };
 
-  const carCategoryIcons = [
-    {
-      name: CarCategory.COUPE,
-      icon: (
-        <CoupeIcon
-          color={getIconColor(CarCategory.COUPE, data.details.category)}
-        />
-      ),
-    },
-    {
-      name: CarCategory.SEDAN,
-      icon: (
-        <SedanIcon
-          color={getIconColor(CarCategory.SEDAN, data.details.category)}
-        />
-      ),
-    },
-    {
-      name: CarCategory.CABRIOLET,
-      icon: (
-        <CabrioletIcon
-          color={getIconColor(CarCategory.CABRIOLET, data.details.category)}
-        />
-      ),
-    },
-    {
-      name: CarCategory.SUV,
-      icon: (
-        <SuvIcon color={getIconColor(CarCategory.SUV, data.details.category)} />
-      ),
-    },
-    {
-      name: CarCategory.HATCHBACK,
-      icon: (
-        <HatchbackIcon
-          color={getIconColor(CarCategory.HATCHBACK, data.details.category)}
-        />
-      ),
-    },
-  ];
+  const renderCategoryIcons = () => {
+    return CAR_CATEGORIES.map((category) => {
+      const Icon = CATEGORY_ICONS[category];
+      return (
+        <div
+          key={category}
+          className={
+            data.details.category === category
+              ? `${c.categoryContainer} ${c.selected}`
+              : c.categoryContainer
+          }
+          onClick={() => handleCategoryChange(category)}
+        >
+          <Icon color={getIconColor(category, data.details.category)} />
+          <p>{category}</p>
+        </div>
+      );
+    });
+  };
 
   return (
     <div className={c.form}>
@@ -142,22 +137,7 @@ export const FirstStep = ({ data, onDataChange }: StepProps) => {
       <div className={c.categoriesInputContainer}>
         <h3>Kategorija vozila</h3>
 
-        <div className={c.categoriesWrapper}>
-          {carCategoryIcons.map((category) => (
-            <div
-              key={category.name}
-              className={
-                data.details.category === category.name
-                  ? `${c.categoryContainer} ${c.selected}`
-                  : c.categoryContainer
-              }
-              onClick={() => handleCategoryChange(category.name)}
-            >
-              {category.icon}
-              <p>{category.name}</p>
-            </div>
-          ))}
-        </div>
+        <div className={c.categoriesWrapper}>{renderCategoryIcons()}</div>
       </div>
 
       <div className={c.modelBrandYearContainer}>
