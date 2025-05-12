@@ -24,6 +24,8 @@ export const isRegisterDataValid = (fullRegisterData: RegisterDataType) => {
   });
   if (message) return message;
 
+  if (!dateOfBirth) return "You must pick a date of birth";
+
   if (dateOfBirth > new Date().toISOString().split("T")[0])
     return "Date of birth can not be in the future";
   if (

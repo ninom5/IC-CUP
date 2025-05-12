@@ -1,10 +1,13 @@
 .custom-marker {
   position: relative;
   background-color: black;
-  color: white;
-  padding: 5px 15px;
+  color: var(--background-white);
+  padding: 2px 12px;
   border-radius: 7px;
   white-space: nowrap;
   transform: translateY(-100%);
-  font-size: 14px;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  font-weight: 700;
 }

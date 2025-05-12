@@ -1,0 +1,17 @@
+export { default as logoSvg } from "./kolo-logo.svg";
+export { default as searchSvg } from "./search-icon.svg";
+export { default as filterSvg } from "./filter-icon.svg";
+export { default as cabrioletSvg } from "./cabriolet-icon.svg";
+export { default as coupeSvg } from "./coupe-icon.svg";
+export { default as fuelSvg } from "./gas-icon.svg";
+export { default as hatchbackSvg } from "./hatchback-icon.svg";
+export { default as seatSvg } from "./seat-icon.svg";
+export { default as sedanSvg } from "./sedan-icon.svg";
+export { default as suvSvg } from "./suv-icon.svg";
+export { default as transmissionSvg } from "./transmission-icon.svg";
+export { default as coupe } from "./coupe.svg";
+export { default as cabriolet } from "./cabriolet.svg";
+export { default as hatchback } from "./hatchback.svg";
+export { default as sedan } from "./sedan.svg";
+export { default as suv } from "./suv.svg";
+export { default as notifSvg } from "./notification-icon.svg";

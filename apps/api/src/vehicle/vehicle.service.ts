@@ -46,16 +46,113 @@ export class VehicleService {
   }
 
   async getAll() {
-    return await this.prisma.vehicle.findMany();
+    return await this.prisma.vehicle.findMany({
+      where: {
+        isAvailable: true,
+        isVerified: true,
+      },
+      include: {
+        rentals: {
+          where: {
+            review: {
+              isNot: null,
+            },
+          },
+          include: {
+            review: {
+              select: {
+                rating: true,
+              },
+            },
+          },
+        },
+      },
+    });
   }
 
-  async getAllPagination(page: number = 1, limit: number = 10) {
+  async getAllPagination(
+    page: number = 1,
+    limit: number = 10,
+    userFilters: {
+      category?: string;
+      transmission?: string;
+      seats?: string;
+      fuel?: string;
+    },
+  ) {
+    interface FilterValue {
+      equals: string;
+    }
     const skip = (page - 1) * limit;
+
+    const filters: any = {
+      details: {},
+    };
+
+    for (const [key, value] of Object.entries(userFilters)) {
+      if (!value) {
+        continue;
+      }
+
+      switch (key) {
+        case 'fuel':
+          filters.details.fuelType = { equals: value?.toUpperCase() };
+          break;
+
+        case 'category':
+          filters.details.carCategory = { equals: value.toUpperCase() };
+          break;
+
+        case 'transmission':
+          filters.details.transmission = { equals: value.toUpperCase() };
+          break;
+
+        case 'seats':
+          filters.details.seats = { equals: value.toUpperCase() };
+          break;
+
+        default:
+          continue;
+      }
+    }
+
+    const whereConditions: Array<any> = [];
+
+    for (const [key, value] of Object.entries(filters.details)) {
+      if (key) {
+        const filterValue = value as FilterValue;
+        whereConditions.push({
+          details: {
+            path: [key],
+            equals: filterValue.equals,
+          },
+        });
+      }
+    }
 
     const [vehicles, total] = await Promise.all([
       this.prisma.vehicle.findMany({
         skip,
         take: limit,
+        include: {
+          rentals: {
+            where: {
+              review: {
+                isNot: null,
+              },
+            },
+            include: {
+              review: {
+                select: {
+                  rating: true,
+                },
+              },
+            },
+          },
+        },
+        where: {
+          AND: whereConditions,
+        },
       }),
       this.prisma.vehicle.count(),
     ]);
