@@ -5,26 +5,38 @@ import { toast } from "react-toastify";
 import { uploadFiles } from "./useUploadImages";
 
 const createVehicle = async (vehicleData: VehicleData) => {
-  let newVehicleData = {};
-  if (
-    vehicleData.vehicleLicenseImg &&
-    vehicleData.images &&
-    vehicleData.images.length > 0
-  ) {
-    const licenseImgUrl = await uploadFiles(vehicleData.vehicleLicenseImg);
+  if (vehicleData.vehicleLicenseImg && vehicleData.images?.length) {
+    try {
+      const licenseImgUrl = await uploadFiles(vehicleData.vehicleLicenseImg);
+      if (!licenseImgUrl?.secure_url) {
+        throw new Error("Neuspješan upload licence vozila");
+      }
 
-    const imageUrls = await Promise.all(
-      vehicleData.images.map((image) => uploadFiles(image))
-    );
+      const imageUrls = await Promise.all(
+        vehicleData.images.map((image) => uploadFiles(image))
+      );
 
-    newVehicleData = {
-      ...vehicleData,
-      vehicleLicenseImg: licenseImgUrl?.secure_url,
-      images: imageUrls.map((iu) => iu?.secure_url),
-    };
+      if (imageUrls.some((img) => !img?.secure_url)) {
+        throw new Error("Neuspješan upload jedne ili više slika vozila");
+      }
+
+      const newVehicleData = {
+        ...vehicleData,
+        vehicleLicenseImg: licenseImgUrl.secure_url,
+        images: imageUrls.map((img) => img?.secure_url),
+      };
+
+      const response = await api.post(`/vehicle`, newVehicleData);
+      return response.data;
+    } catch (error) {
+      console.error("Error uploading images:", error);
+      throw new Error(
+        "Greška prilikom uploada slika. Molimo pokušajte ponovno."
+      );
+    }
   }
 
-  const response = await api.post(`/vehicle`, newVehicleData);
+  const response = await api.post(`/vehicle`, vehicleData);
   return response.data;
 };
 
