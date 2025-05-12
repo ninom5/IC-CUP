@@ -1,8 +1,9 @@
 import { ErrorBoundary } from "react-error-boundary";
 import { Router } from "./Router";
-import { TokenProvider } from "./context/TokenProvider";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { TokenProvider, MapProvider, FiltersProvider } from "context/index";
+import { GooglAPIProvider } from "./components";
 
 function App() {
   const queryClient = new QueryClient();
@@ -10,8 +11,14 @@ function App() {
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
       <QueryClientProvider client={queryClient}>
         <TokenProvider>
-          <Router />
-          <ToastContainer />
+          <GooglAPIProvider>
+            <MapProvider>
+              <FiltersProvider>
+                <Router />
+                <ToastContainer />
+              </FiltersProvider>
+            </MapProvider>
+          </GooglAPIProvider>
         </TokenProvider>
       </QueryClientProvider>
     </ErrorBoundary>

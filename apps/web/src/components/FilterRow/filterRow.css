@@ -1,0 +1,32 @@
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.filter-row-wrapper {
+  width: 10%;
+  max-height: 50px;
+  padding-left: 20px;
+}
+
+.filter-row img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.filter-select {
+  padding: 10px;
+  border-radius: 8px;
+  width: 30%;
+  font-size: 20px;
+  border: 1px solid var(--stroke-gray);
+  cursor: pointer;
+  transition: 0.5s;
+}
+.filter-select option {
+  background-color: var(--background-white);
+  color: var(--background-black);
+}

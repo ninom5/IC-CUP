@@ -37,8 +37,9 @@ model Location {
   id        String @id @default(uuid())
   address   String  
   city      String?
-  longitude Decimal 
-  latitude  Decimal
+  longitude Float 
+  latitude  Float
+
 }
 
 model Vehicle {
@@ -173,4 +174,9 @@ enum CarCategory {
   CABRIOLET
   SUV
   HATCHBACK
+}
+
+enum Transmission{
+  AUTOMATIC
+  MANUAL
 }
