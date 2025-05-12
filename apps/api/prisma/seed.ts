@@ -7,6 +7,7 @@ import {
   CarCategory,
   Transmission,
 } from '@prisma/client';
+import { hash } from 'bcrypt';
 
 const prisma = new PrismaClient();
 
@@ -16,7 +17,7 @@ async function main() {
       firstName: 'John',
       lastName: 'Doe',
       email: 'john.doe@example.com',
-      password: 'hashedpassword1',
+      password: await hash('hashedpassword1', 10),
       dateOfBirth: new Date('1990-01-01'),
       personPhoto: 'https://example.com/image.jpg',
       driverLicense: 'A123456789',
@@ -31,7 +32,7 @@ async function main() {
       firstName: 'Jane',
       lastName: 'Smith',
       email: 'jane.smith@example.com',
-      password: 'hashedpassword2',
+      password: await hash('hashedpassword2', 10),
       dateOfBirth: new Date('1985-02-14'),
       personPhoto: 'https://example.com/image2.jpg',
       driverLicense: 'B987654321',

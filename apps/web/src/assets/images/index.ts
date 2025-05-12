@@ -15,3 +15,9 @@ export { default as hatchback } from "./hatchback.svg";
 export { default as sedan } from "./sedan.svg";
 export { default as suv } from "./suv.svg";
 export { default as notifSvg } from "./notification-icon.svg";
+export { default as faceSvg } from "./faceSvg.svg";
+export { default as instagramSvg } from "./instagramSvg.svg";
+export { default as tikTokSvg } from "./tikTokSvg.svg";
+export { default as lineSvg } from "./Rectangle 68.svg";
+export { default as koloFooterSvg } from "./koloFooter.svg";
+

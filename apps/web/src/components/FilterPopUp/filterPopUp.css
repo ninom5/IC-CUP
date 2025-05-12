@@ -28,6 +28,12 @@
   margin-bottom: 20px;
 }
 
+.filter-pop-up-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .vehicle-category {
   display: flex;
   flex-direction: column;
