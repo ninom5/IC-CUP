@@ -76,7 +76,7 @@ export const FilterPopUp = ({
         <select
           name=""
           id="sort-select"
-          value=""
+          value={userFilters.sortBy}
           className="filter-select"
           onChange={(e) => handleChange("sortBy", e.target.value)}
         >
