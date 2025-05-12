@@ -10,3 +10,6 @@ export * from "./CarsMap/CarsMap";
 export * from "./AutoCompleteInput/AutoCompleteInput";
 export * from "./SearchBar/SearchBar";
 export * from "./CustomPriceMarker/CustomPriceMarker";
+export * from "./Contact/Contact";
+export * from "./Footer/Footer";
+export * from "./SiteMapFooter/SiteMapFooter";
