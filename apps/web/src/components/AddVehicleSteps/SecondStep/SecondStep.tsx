@@ -122,7 +122,9 @@ export const SecondStep = ({ data, onDataChange }: StepProps) => {
               onClick={() => handleFeature(key)}
             >
               <Icon color={data.features[key] ? "#222" : "#C0BEBE"} />
-              <p>{label}</p>
+              <p style={{ color: data.features[key] ? "#222" : "#C0BEBE" }}>
+                {label}
+              </p>
             </div>
           ))}
         </div>
