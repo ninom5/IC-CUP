@@ -15,3 +15,6 @@ export { default as hatchback } from "./hatchback.svg";
 export { default as sedan } from "./sedan.svg";
 export { default as suv } from "./suv.svg";
 export { default as notifSvg } from "./notification-icon.svg";
+export { default as desert1Svg } from "./oldWheel.svg";
+export { default as wheelSvg } from "./Layer_1.svg";
+export { default as desert2Svg } from "./Group.svg";
