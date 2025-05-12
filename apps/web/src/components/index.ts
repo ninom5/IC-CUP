@@ -4,3 +4,4 @@ export * from "./AddVehicleSteps/FirstStep/FirstStep";
 export * from "./AddVehicleSteps/SecondStep/SecondStep";
 export * from "./AddVehicleSteps/ThirdStep/ThirdStep";
 export * from "./AddVehicleSteps/FourthStep/FourthStep";
+export * from "./AddVehicleAvailibility/AddVehicleAvailibility";

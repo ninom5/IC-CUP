@@ -1,7 +1,18 @@
+import { AddVehicleAvailibility } from "@components/AddVehicleAvailibility/AddVehicleAvailibility";
 import { StepProps } from "../../../types";
 import c from "./FourthStep.module.css";
 
 export const FourthStep = ({ data, onDataChange }: StepProps) => {
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    onDataChange({
+      [name]: Number(value),
+      details: {
+        ...data.details,
+      },
+    });
+  };
+
   return (
     <div className={c.form}>
       <div className={c.inputContainer}>
@@ -12,14 +23,13 @@ export const FourthStep = ({ data, onDataChange }: StepProps) => {
             name="dailyPrice"
             value={data.dailyPrice}
             placeholder="40.00"
+            onChange={handlePriceChange}
           />{" "}
           €
         </label>
       </div>
 
-      <div className={c.inputContainer}>
-        <h3>Unesi slobodne periode</h3>
-      </div>
+      <AddVehicleAvailibility />
     </div>
   );
 };
