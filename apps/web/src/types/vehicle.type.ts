@@ -1,5 +1,7 @@
 import { CarCategory, FuelType, VehicleType } from "../enums/vehicle.enum";
 
+import { CarCategory, FuelType, VehicleType } from "../enums/vehicle.enum";
+
 export type VehicleData = {
   ownerId: string;
   brand: string;
@@ -41,4 +43,32 @@ export type VehicleFeatures = {
 export type StepProps = {
   data: VehicleData;
   onDataChange: (newData: Partial<VehicleData>) => void;
+};
+
+export type VehicleType = {
+  id: string;
+  ownerId: string;
+  brand: string;
+  model: string;
+  images: string[];
+  productionYear: number;
+  dailyPrice: number;
+  isAvailable: boolean;
+  description: string;
+  isVerified: boolean;
+  registration: string;
+  vehicleTypeId: string;
+  pickupAddress: string;
+  city: string;
+  longitude: number;
+  latitude: number;
+  rentals: Rental[];
+};
+
+export type Rental = {
+  review: Review;
+};
+
+export type Review = {
+  rating: number;
 };

@@ -5,3 +5,5 @@ export * from "./generatePdf.util";
 export * from "./getMinDate.util";
 export * from "./isRegistrationValid.util";
 export * from "./isIntervalAtLeastOneDay.util";
+export * from "./extractAddressComponents.util";
+export * from "./getAverageVehicleRating.util";

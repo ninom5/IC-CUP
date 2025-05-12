@@ -1,0 +1,15 @@
+.map-search {
+  z-index: 10;
+  padding: 4px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+#autocomplete-input {
+  width: 300px;
+  padding: 8px;
+  font-size: 20px;
+  border: 1px solid var(--stroke-gray);
+  border-radius: 4px;
+  background-color: var(--background-white);
+}
