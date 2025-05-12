@@ -10,4 +10,5 @@ export type FilterPopUpProps = {
   userFilters: FiltersType;
   setUserFilters: React.Dispatch<React.SetStateAction<FiltersType>>;
   setShowFilters: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSearch: () => void;
 };

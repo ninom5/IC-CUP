@@ -90,6 +90,7 @@ export const SearchBar = () => {
               userFilters={userFilters}
               setUserFilters={setUserFilters}
               setShowFilters={setShowFilters}
+              handleSearch={handleSearch}
             />
           </div>
         </div>

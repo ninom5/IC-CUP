@@ -10,7 +10,7 @@ export const VehicleCard = ({ vehicle }: { vehicle: VehicleType }) => {
   return (
     <section
       className="vehicle-card"
-      onClick={() => navigate(`vehicle/${vehicle.id}`)}
+      onClick={() => navigate(`/vehicle/${vehicle.id}`)}
     >
       <div className="vehicle-image-wrapper">
         <img

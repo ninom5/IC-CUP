@@ -33,6 +33,7 @@ export const FilterPopUp = ({
   userFilters,
   setUserFilters,
   setShowFilters,
+  handleSearch,
 }: FilterPopUpProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const { setFilters } = useFiltersContext();
@@ -73,6 +74,7 @@ export const FilterPopUp = ({
             }}
           />
         </div>
+
         <select
           name=""
           id="sort-select"
@@ -151,7 +153,10 @@ export const FilterPopUp = ({
       <div className="filter-buttons">
         <ButtonAccent
           content="Primjeni"
-          onClick={() => setShowFilters(false)}
+          onClick={() => {
+            setShowFilters(false);
+            handleSearch();
+          }}
         />
       </div>
     </div>
