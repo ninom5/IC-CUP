@@ -7,6 +7,7 @@ export const FiltersProvider: FC<React.PropsWithChildren> = ({ children }) => {
     seats: "",
     carCategory: "",
     transmission: "",
+    sortBy: "",
   });
 
   const setFilters = useCallback(

@@ -22,13 +22,12 @@ const carCategories = [
   { label: "Hatchback", value: "hatchback", img: hatchbackSvg },
 ];
 
-const sortFilters = [
-  // key value pari mozda?
-  "Cijena (niža > viša)",
-  "Cijena (viša > niža)",
-  "Ocjena (niža > viša)",
-  "Ocjena (viša > niža)",
-];
+const sortFilters = {
+  price_lower_higher: "Cijena (niža > viša)",
+  price_higher_lower: "Cijena (viša > niža)",
+  rating_lower_higher: "Ocjena (niža > viša)",
+  rating_higher_lower: "Ocjena (viša > niža)",
+};
 
 export const FilterPopUp = ({
   userFilters,
@@ -68,13 +67,14 @@ export const FilterPopUp = ({
             Odaberite filter
           </option>
 
-          {sortFilters.map((filter) => (
-            <option key={filter} value={filter}>
-              {filter}
+          {Object.entries(sortFilters).map(([key, value]) => (
+            <option key={key} value={key}>
+              {value}
             </option>
           ))}
         </select>
       </div>
+
       <div className="vehicle-category">
         <h2>Kategorija vozila</h2>
         <div className="car-categories-images">

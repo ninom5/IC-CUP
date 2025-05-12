@@ -9,7 +9,7 @@ import {
   FilterPopUp,
 } from "@components/index";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FiltersType } from "types";
 import { useFiltersContext } from "@hooks/useFiltersContext";
 
@@ -44,6 +44,7 @@ export const SearchBar = () => {
       carCategory: userFilters.category,
       seats: userFilters.seatNumber,
       transmission: userFilters.transmission,
+      sortBy: userFilters.sortBy,
     });
   };
 
@@ -86,6 +87,7 @@ export const SearchBar = () => {
             <img src={filterSvg} alt="Filter icon" style={{ width: "22px" }} />
           </div>
         </div>
+
         <div className="navigation-links">
           {token && !isExpired ? (
             <>
@@ -108,6 +110,7 @@ export const SearchBar = () => {
           )}
         </div>
       </nav>
+
       {showFilters && (
         <div className="modal-overlay" onClick={() => setShowFilters(false)}>
           <div className="filter-pop-up" onClick={(e) => e.stopPropagation()}>
