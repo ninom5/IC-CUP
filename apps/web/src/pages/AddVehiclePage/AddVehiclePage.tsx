@@ -64,6 +64,7 @@ export const AddVehiclePage = () => {
         vehicleLicenseImg,
         brand,
         model,
+        productionYear,
       } = vehicleData;
       if (
         !isRegistrationValid(vehicleData.registration) ||
@@ -71,7 +72,8 @@ export const AddVehiclePage = () => {
         !registrationExpiration ||
         !vehicleLicenseImg ||
         !brand ||
-        !model
+        !model ||
+        productionYear > new Date().getFullYear()
       ) {
         toast.error("Molimo popunite točno sve podatke u 1. koraku.");
         return false;

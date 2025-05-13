@@ -55,7 +55,7 @@
 }
 
 .itemsContainer {
-  max-width: 1096px;
+  width: 1096px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
