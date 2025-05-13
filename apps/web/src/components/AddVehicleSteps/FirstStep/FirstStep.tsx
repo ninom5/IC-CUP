@@ -105,6 +105,7 @@ export const FirstStep = ({ data, onDataChange }: StepProps) => {
             type="date"
             name="registrationExpiration"
             min={getMinDate(30)}
+            max={getMinDate(365)}
             value={data.registrationExpiration}
             onChange={handleChange}
           />
