@@ -42,3 +42,30 @@
   font-size: 24px;
   font-weight: 700;
 }
+
+.pre-checkout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 100px;
+  align-items: flex-end;
+}
+
+.pre-checkout h1 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 40px;
+  font-weight: 700;
+  padding-bottom: 20px;
+  width: 70%;
+}
+.pre-checkout button {
+  width: 70%;
+  background-color: var(--stroke-gray);
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+}

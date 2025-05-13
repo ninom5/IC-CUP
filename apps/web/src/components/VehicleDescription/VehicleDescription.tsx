@@ -1,5 +1,5 @@
 import "./vehicleDescription.css";
-import { CarCategory, VehicleDetails, VehicleType } from "types";
+import { VehicleDetails, VehicleType } from "types";
 import { getAverageVehicleRating } from "@utils/index";
 import {
   coupeSvg,
@@ -12,24 +12,42 @@ import {
   transmissionSvg,
 } from "@assets/images";
 import { PropertyItem } from "@components/index";
+import {
+  AuxIcon,
+  BluetoothIcon,
+  ChairIcon,
+  PetsIcon,
+  SensorsIcon,
+  UsbIcon,
+} from "components/icons/index";
+import { CarCategoryEnum } from "enums";
 
-const categoryImages: Record<CarCategory, string> = {
-  coupe: coupeSvg,
-  sedan: sedanSvg,
-  suv: suvSvg,
-  cabriolet: cabrioletSvg,
-  hatchback: hatchbackSvg,
+const categoryImages: Record<CarCategoryEnum, string> = {
+  COUPE: coupeSvg,
+  SEDAN: sedanSvg,
+  SUV: suvSvg,
+  CABRIOLET: cabrioletSvg,
+  HATCHBACK: hatchbackSvg,
 };
+
+const additionalFeatures = [
+  { label: "Bluetooth", icon: BluetoothIcon },
+  { label: "USB", icon: UsbIcon },
+  { label: "Senzori", icon: SensorsIcon },
+  { label: "Pomoć pri parkiranju", icon: AuxIcon },
+  { label: "Dječije sjedište", icon: ChairIcon },
+  { label: "Kućni ljubimci", icon: PetsIcon },
+];
 
 export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
   const { brand, model, productionYear, details, owner } = vehicle;
   const { totalRating, numberOfRatings } = getAverageVehicleRating(vehicle);
 
-  const { seats, fuelType, carCategory, transmission }: VehicleDetails =
-    details;
+  const { seats, fuelType, carCategory, isAutomatic }: VehicleDetails = details;
 
-  const categoryImage = categoryImages[carCategory] || categoryImages["coupe"];
+  const categoryImage = categoryImages[carCategory] || categoryImages["COUPE"];
 
+  console.log(details);
   return (
     <section>
       <div>
@@ -55,16 +73,27 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
       <div className="vehicle-details-images">
         <PropertyItem
           label="Ikonica auta"
-          value={carCategory}
+          value={
+            carCategory.charAt(0).toLocaleUpperCase() +
+            carCategory.slice(1).toLocaleLowerCase()
+          }
           icon={categoryImage}
         />
         <PropertyItem
           label="ikonica mjenjaca"
-          value={transmission}
+          value={isAutomatic ? "Automatik" : "Ručni"}
           icon={transmissionSvg}
         />
-        <PropertyItem label="Ikonica goriva" value={fuelType} icon={fuelSvg} />
-        <PropertyItem label="Ikonica sjedala" value={seats} icon={seatSvg} />
+        <PropertyItem
+          label="Ikonica goriva"
+          value={fuelType === "PETROL" ? "Benzin" : "Dizel"}
+          icon={fuelSvg}
+        />
+        <PropertyItem
+          label="Ikonica sjedala"
+          value={seats?.toString()}
+          icon={seatSvg}
+        />
       </div>
 
       <div className="vehicle-detail-description">
@@ -72,7 +101,18 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
         <p>{vehicle.description}</p>
       </div>
 
-      <div className="additions-section"></div>
+      <div className="additions-section">
+        <h4>DODACI</h4>
+
+        <div className="additions-grid">
+          {additionalFeatures.map(({ label, icon: Icon }, index) => (
+            <div className="addition-item" key={index}>
+              <Icon color="red" />
+              <span>{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

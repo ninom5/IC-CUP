@@ -25,5 +25,6 @@ export * from "./SiteMapFooter/SiteMapFooter";
 
 export * from "./VehicleGallery/VehicleGallery";
 export * from "./VehicleDescription/VehicleDescription";
-export * from "./Insurance/Insurance";
+export * from "./InsuranceCard/InsuranceCard";
 export * from "./PropertyItem/PropertyItem";
+export * from "./InsuranceList/InsuranceList";

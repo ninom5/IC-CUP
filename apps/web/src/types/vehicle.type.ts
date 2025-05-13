@@ -1,6 +1,8 @@
-import { CarCategory, FuelType, VehicleType } from "../enums/vehicle.enum";
-
-import { CarCategory, FuelType, VehicleType } from "../enums/vehicle.enum";
+import {
+  CarCategoryEnum,
+  FuelTypeEnum,
+  VehicleEnum,
+} from "../enums/vehicle.enum";
 
 export type VehicleData = {
   ownerId: string;
@@ -17,16 +19,16 @@ export type VehicleData = {
   city: string;
   longitude: number;
   latitude: number;
-  vehicleType: VehicleType;
+  vehicleType: VehicleEnum;
   details: VehicleDetails;
   features: VehicleFeatures;
 };
 
 export type VehicleDetails = {
-  fuelType: FuelType;
+  fuelType: FuelTypeEnum;
   isAutomatic: boolean;
-  category: CarCategory;
-  numOfSeats: number;
+  carCategory: CarCategoryEnum;
+  seats: number;
 };
 
 export type VehicleFeatures = {
@@ -80,12 +82,5 @@ export type Owner = {
   lastName: string;
   personPhoto: string;
 };
-
-export interface VehicleDetails {
-  seats: string;
-  fuelType: string;
-  carCategory: CarCategory;
-  transmission: string;
-}
 
 export type CarCategory = "coupe" | "sedan" | "suv" | "cabriolet" | "hatchback";

@@ -1,0 +1,25 @@
+.insurance-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border: 1px solid var(--stroke-gray);
+  border-radius: 8px;
+  padding: 15px;
+  width: 70%;
+  cursor: pointer;
+}
+.insurance-card.selected {
+  color: var(--background-white);
+  background-color: var(--accent-color);
+}
+
+.insurance-card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.insurance-card p {
+  font-size: 20px;
+  font-weight: 400;
+}

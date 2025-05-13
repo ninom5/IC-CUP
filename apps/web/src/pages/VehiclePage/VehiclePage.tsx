@@ -1,5 +1,5 @@
 import {
-  Insurance,
+  InsuranceList,
   VehicleDescription,
   VehicleGallery,
 } from "@components/index";
@@ -37,7 +37,19 @@ export const VehiclePage = () => {
 
       <section className="about-vehicle">
         <VehicleDescription vehicle={vehicle} />
-        <Insurance />
+
+        <div>
+          <InsuranceList />
+
+          <div className="pre-checkout">
+            <h1>
+              <span>CIJENA</span>
+              <span>{vehicle.dailyPrice} €</span>
+            </h1>
+
+            <button>Nastavi</button>
+          </div>
+        </div>
       </section>
     </section>
   );

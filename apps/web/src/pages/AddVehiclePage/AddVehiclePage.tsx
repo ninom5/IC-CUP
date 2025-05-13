@@ -6,8 +6,8 @@ import {
   SecondStep,
   ThirdStep,
 } from "@components/index";
-import { VehicleData } from "../../types";
-import { CarCategory, FuelType, VehicleType } from "enums";
+import { VehicleData } from "types";
+import { CarCategoryEnum, FuelTypeEnum, VehicleEnum } from "enums";
 import { toast } from "react-toastify";
 import { useCreateVehicle } from "@api/useCreateVehicle";
 import { extractUserInfo } from "@utils/extractUserInfo.util";
@@ -32,12 +32,12 @@ export const AddVehiclePage = () => {
     city: "bla",
     longitude: 0,
     latitude: 0,
-    vehicleType: VehicleType.CAR,
+    vehicleType: VehicleEnum.CAR,
     details: {
-      fuelType: FuelType.PETROL,
+      fuelType: FuelTypeEnum.PETROL,
       isAutomatic: false,
-      category: CarCategory.SEDAN,
-      numOfSeats: 5,
+      carCategory: CarCategoryEnum.SEDAN,
+      seats: 5,
     },
     features: {
       airConditioning: false,
