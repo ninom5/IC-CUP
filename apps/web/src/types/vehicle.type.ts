@@ -3,6 +3,7 @@ import {
   FuelTypeEnum,
   VehicleEnum,
 } from "../enums/vehicle.enum";
+import { AvailabilityInterval } from "./vehicleAvailibility.type";
 
 export type VehicleData = {
   ownerId: string;
@@ -66,6 +67,7 @@ export type VehicleType = {
   longitude: number;
   latitude: number;
   rentals: Rental[];
+  availabilities: AvailabilityInterval[];
 };
 
 export type Rental = {

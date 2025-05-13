@@ -217,6 +217,7 @@ export class VehicleService {
             review: true,
           },
         },
+        availabilities: true,
       },
     });
 

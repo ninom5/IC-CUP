@@ -43,9 +43,11 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
   const { brand, model, productionYear, details, owner } = vehicle;
   const { totalRating, numberOfRatings } = getAverageVehicleRating(vehicle);
 
-  const { seats, fuelType, carCategory, isAutomatic }: VehicleDetails = details;
+  const { numOfSeats, fuelType, category, isAutomatic }: VehicleDetails =
+    details;
 
-  const categoryImage = categoryImages[carCategory] || categoryImages["COUPE"];
+  console.log(vehicle);
+  const categoryImage = categoryImages[category] || categoryImages["COUPE"];
 
   console.log(details);
   return (
@@ -74,8 +76,8 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
         <PropertyItem
           label="Ikonica auta"
           value={
-            carCategory.charAt(0).toLocaleUpperCase() +
-            carCategory.slice(1).toLocaleLowerCase()
+            category?.charAt(0).toLocaleUpperCase() +
+            category?.slice(1).toLocaleLowerCase()
           }
           icon={categoryImage}
         />
@@ -91,9 +93,18 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
         />
         <PropertyItem
           label="Ikonica sjedala"
-          value={seats?.toString()}
+          value={numOfSeats?.toString()}
           icon={seatSvg}
         />
+      </div>
+
+      <div>
+        {vehicle.availabilities.map((avail, index) => (
+          <div key={index}>
+            <strong>Dostupno od:</strong> {avail.startDate} –{" "}
+            <strong>do:</strong> {avail.endDate}
+          </div>
+        ))}
       </div>
 
       <div className="vehicle-detail-description">
