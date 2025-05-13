@@ -60,11 +60,11 @@ export class ReviewService {
       rating: review.rating,
       comment: review.comment,
       createdAt: review.createdAt,
-      user: {
+      renter: {
         id: review.rental.renter.id,
         firstName: review.rental.renter.firstName,
         lastName: review.rental.renter.lastName,
-        img: review.rental.renter.personPhoto,
+        personPhoto: review.rental.renter.personPhoto,
       },
     }));
   }
