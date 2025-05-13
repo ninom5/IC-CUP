@@ -54,11 +54,21 @@
   transform: scale(1.05);
 }
 
-.itemCard {
+.itemsContainer {
+  max-width: 1096px;
   display: flex;
-  flex: 1 0 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.itemCard {
+  position: relative;
+  display: flex;
+  width: calc(50% - 10px);
   gap: 8px;
-  padding: 17px 18px;
+  padding: 18px;
   border-radius: 10px;
   border: 1px solid var(--stroke-grey, #c0bebe);
 }
@@ -67,4 +77,47 @@
   width: 163px;
   height: 168px;
   border-radius: 10px;
+}
+
+.itemDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  width: 100%;
+}
+
+.vehicleHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vehicleHeader > img {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.vehicleHeader > img:hover {
+  background-color: var(--stroke-grey, #e3e3e3);
+}
+
+.itemDetails > h3 {
+  color: var(--background-black, #222);
+  font-family: "Nunito Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.dailyPrice {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  color: var(--background-black, #222);
+  text-align: right;
+  font-family: "Nunito Sans";
+  font-size: 24px;
+  font-style: normal;
+  line-height: normal;
 }

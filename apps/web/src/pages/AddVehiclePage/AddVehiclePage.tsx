@@ -54,7 +54,7 @@ export const AddVehiclePage = () => {
     },
   });
 
-  const createVehicleMutation = useCreateVehicle();
+  const createVehicleMutation = useCreateVehicle(navigate);
 
   const canProceedToNextStep = (): boolean => {
     if (formStep === 1) {
