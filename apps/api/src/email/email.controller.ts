@@ -7,9 +7,22 @@ export class EmailController {
 
   @Post('/send')
   async sendEmail(
-    @Body() body: { to: string; subject: string; content: string },
+    @Body()
+    body: {
+      to: string;
+      subject: string;
+      ownerName: string;
+      renterName: string;
+      link: string;
+    },
   ) {
-    await this.emailService.sendEmail(body.to, body.subject, body.content);
+    await this.emailService.sendEmail(
+      body.to,
+      body.subject,
+      body.ownerName,
+      body.renterName,
+      body.link,
+    );
 
     return { message: 'Email sent' };
   }
