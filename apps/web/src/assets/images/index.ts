@@ -23,4 +23,5 @@ export { default as instagramSvg } from "./instagramSvg.svg";
 export { default as tikTokSvg } from "./tikTokSvg.svg";
 export { default as lineSvg } from "./Rectangle 68.svg";
 export { default as koloFooterSvg } from "./koloFooter.svg";
-
+export { default as fallbackImageSvg } from "./fallbackImage.svg";
+export { default as pencilSvg } from "./pencil.svg";

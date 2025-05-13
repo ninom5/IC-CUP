@@ -1,8 +1,14 @@
 import { useParams } from "react-router-dom";
 import c from "./ProfilePage.module.css";
-import { useFetchUserProfile, useUpdateUser } from "@api/index";
+import {
+  useFetchUserProfile,
+  useUpdateUser,
+  useUploadImages,
+} from "@api/index";
 import { useToken } from "@hooks/index";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { fallbackImageSvg, pencilSvg } from "@assets/images";
 
 export const ProfilePage = () => {
   const { id: userId } = useParams();
@@ -17,12 +23,17 @@ export const ProfilePage = () => {
   const isOwnProfile = !!tokenUser?.id && userId === tokenUser.id;
 
   const { mutateAsync: updateUser } = useUpdateUser();
+  const { mutateAsync: uploadImages } = useUploadImages();
 
   const [description, setDescription] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [personPhotoPreview, setPersonPhotoPreview] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     if (profile?.description) setDescription(profile.description);
+    if (profile?.personPhoto) setPersonPhotoPreview(profile.personPhoto);
   }, [profile]);
 
   if (isLoading) return <p>Učitavanje...</p>;
@@ -34,6 +45,25 @@ export const ProfilePage = () => {
     await updateUser({ id: profile.id, description });
     refetch();
     setIsSaving(false);
+  };
+
+  const handlePersonPhotoChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setPersonPhotoPreview(URL.createObjectURL(file));
+
+    try {
+      const response = await uploadImages(file);
+      if (!response?.secure_url) return;
+
+      await updateUser({ id: profile.id, personPhoto: response.secure_url });
+      refetch();
+    } catch (err) {
+      toast.error("Greška pri uploadu profilne slike.");
+    }
   };
 
   return (
@@ -48,11 +78,32 @@ export const ProfilePage = () => {
       </div>
 
       <div className={c.section}>
-        <img
-          src={profile.personPhoto}
-          alt="Profilna slika"
-          className={c.avatar}
-        />
+        <div className={c.profilePictureWrapper}>
+          <img
+            src={personPhotoPreview || fallbackImageSvg}
+            alt="Profilna slika"
+            className={c.avatar}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.onerror = null;
+              target.src = fallbackImageSvg;
+            }}
+          />
+
+          {isOwnProfile && (
+            <>
+              <label htmlFor="upload-photo" className={c.editPhotoIcon}>
+                <img src={pencilSvg} alt="Uredi sliku" />
+              </label>
+              <input
+                type="file"
+                id="upload-photo"
+                className={c.hiddenInput}
+                onChange={handlePersonPhotoChange}
+              />
+            </>
+          )}
+        </div>
         <h2>
           {profile.firstName} {profile.lastName}
         </h2>

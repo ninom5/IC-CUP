@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 export type UpdateUserPayload = {
   id: string;
   description?: string;
+  personPhoto?: string;
 };
 
 const updateUser = async ({ id, ...data }: UpdateUserPayload) => {
