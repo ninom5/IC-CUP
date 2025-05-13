@@ -10,4 +10,7 @@ export * from "./userProfile.type";
 export * from "./user.type";
 export * from "./login.type";
 export * from "./uploadFilesParams.type";
-export * from "./vehicleType";
+export * from "./vehicle.type";
+export * from "./vehicleAvailibility.type";
+export * from "./filterRow.types";
+export * from "./filter.type";

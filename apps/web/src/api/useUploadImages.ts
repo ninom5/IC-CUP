@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { CloudinaryFileResponseType } from "types/index";
 
-const uploadFiles = async (file: File) => {
+export const uploadFiles = async (file: File) => {
   if (!file) {
     toast.error("File can't be empty");
     return null;

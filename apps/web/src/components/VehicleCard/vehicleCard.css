@@ -2,31 +2,61 @@
   display: flex;
   width: 90%;
   min-height: 150px;
-  height: auto;
-  padding: 10px;
+  height: 202px;
+  padding: 10px 15px;
   border-radius: 8px;
   border: 1px solid lightslategray;
-  margin: 10px;
-  font-family: "Nunito-sans"; /*provjerit jel radi*/
+  margin: 20px;
   cursor: pointer;
+  transition: 0.3s linear;
+
+  position: relative;
 }
+.vehicle-card:hover {
+  background-color: var(--accent-color);
+  color: var(--background-white);
+  color: white;
+}
+
 .vehicle-image-wrapper {
-  width: 35%;
+  width: 163px;
+  height: 168px;
   padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto 0;
 }
 .vehicle-image {
   object-fit: cover;
   width: 100%;
   height: auto;
   border-radius: 8px;
+  width: 163px;
+  height: 168px;
 }
 
 .vehicle-info {
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  padding: 5px 20px;
   margin-bottom: 10px;
+}
+.vehicle-info h2 {
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+.rating-info {
+  font-size: 20px;
+}
+
+.price {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+.price-span {
+  font-weight: 700;
+  font-size: 24px;
 }

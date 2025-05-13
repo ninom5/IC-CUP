@@ -5,12 +5,10 @@ import {
   BecomeHostPage,
   VehiclesPage,
   HomePage,
-  LoginPage,
   NotFoundPage,
-  RegisterPage,
   ProfilePage,
 } from "@pages/index";
-import { SearchBarLayout } from "@layouts/SearchBarLayout";
+import { SearchBarLayout, NavBarLayout } from "@layouts/index";
 // import { AdminRoutes } from "@routes/index ";
 
 export const Router = () => {
@@ -28,9 +26,9 @@ export const Router = () => {
 
 </AdminRoutes> */}
 
-        <Route path={routes.LOGIN} element={<LoginPage />} />
-        <Route path={routes.REGISTER} element={<RegisterPage />} />
-        <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
+        <Route element={<NavBarLayout />}>
+          <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

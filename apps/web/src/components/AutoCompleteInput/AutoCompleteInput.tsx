@@ -10,11 +10,13 @@ type AutocompleteProps = {
     addressComponents: google.maps.GeocoderAddressComponent[]
   ) => void;
   placeholder?: string;
+  defaultValue?: string;
 };
 
 export const AutoCompleteInput = ({
   onPlaceResolved,
-  placeholder = "Search place",
+  placeholder = "Pretraži lokaciju",
+  defaultValue = "Split, Hrvatska",
 }: AutocompleteProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -28,9 +30,12 @@ export const AutoCompleteInput = ({
       !inputRef.current ||
       !window.google.maps?.places
     ) {
-      console.warn("google");
+      console.warn("google maps not loaded yet");
       return;
     }
+
+    inputRef.current.value = defaultValue;
+
     const autocomplete = new google.maps.places.Autocomplete(inputRef.current, {
       fields: ["geometry", "name", "formatted_address"],
       types: ["geocode"],
@@ -48,17 +53,22 @@ export const AutoCompleteInput = ({
       }
 
       geocoder.geocode({ location }, (results, status) => {
-        if (status === google.maps.GeocoderStatus.OK && results && results[0]) {
-          const addressComponents = results[0].address_components;
-          console.log(addressComponents);
-
-          const adr = extractAddressComponents(addressComponents);
-          console.log(adr);
-          onPlaceResolved?.(place, addressComponents);
-        } else {
+        if (
+          status !== google.maps.GeocoderStatus.OK ||
+          !results ||
+          !results[0]
+        ) {
           toast.error("Error getting location");
           console.error("Geocoder failed:", status);
+          return;
         }
+
+        const addressComponents = results[0].address_components;
+        console.log(addressComponents);
+
+        const adr = extractAddressComponents(addressComponents);
+        console.log(adr);
+        onPlaceResolved?.(place, addressComponents);
       });
     });
 

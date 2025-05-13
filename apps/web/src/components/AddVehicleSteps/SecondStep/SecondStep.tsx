@@ -1,63 +1,132 @@
+import { FuelType } from "enums";
+import { StepProps } from "../../../types";
 import c from "./SecondStep.module.css";
+import gearBoxIcon from "../../../assets/images/gearboxIcon.svg";
+import seatIcon from "../../../assets/images/seatIcon.svg";
+import fuelIcon from "../../../assets/images/fuelIcon.svg";
+import {
+  AuxIcon,
+  BluetoothIcon,
+  ChairIcon,
+  PetsIcon,
+  SensorsIcon,
+  UsbIcon,
+} from "@components/icons";
 
-enum FuelType {
-  PETROL = "PETROL",
-  DIESEL = "DIESEL",
-  ELECTRIC = "ELECTRIC",
-  HYBRID = "HYBRID",
-}
+const featureList = [
+  { key: "usb", label: "USB", Icon: UsbIcon },
+  { key: "aux", label: "AUX", Icon: AuxIcon },
+  { key: "bluetooth", label: "Bluetooth", Icon: BluetoothIcon },
+  { key: "sensors", label: "Senzori", Icon: SensorsIcon },
+  { key: "pets", label: "Ljubimci", Icon: PetsIcon },
+  { key: "childSeat", label: "Dječja stolica", Icon: ChairIcon },
+] as const;
 
-export const SecondStep = () => {
+export const SecondStep = ({ data, onDataChange }: StepProps) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+
+    if (name === "transmission") {
+      onDataChange({
+        details: {
+          ...data.details,
+          isAutomatic: value === "automatic",
+        },
+      });
+    } else {
+      onDataChange({
+        details: {
+          ...data.details,
+          [name]: name === "numOfSeats" ? Number(value) : value,
+        },
+      });
+    }
+  };
+
+  const handleFeature = (feature: keyof typeof data.features) => {
+    onDataChange({
+      features: {
+        ...data.features,
+        [feature]: !data.features[feature],
+      },
+    });
+  };
+
   return (
     <div className={c.form}>
-      <div>
-        <div className={c.formInputContainer}>
+      <div className={c.inputsWrapper}>
+        <div className={c.inputContainer}>
+          <h3>Vrsta mjenjača</h3>
+          <div>
+            <img src={gearBoxIcon} alt="gearbox" />
+
+            <select
+              name="transmission"
+              value={data.details.isAutomatic ? "automatic" : "manual"}
+              onChange={handleChange}
+            >
+              <option value="automatic">Automatic</option>
+              <option value="manual">Manual</option>
+            </select>
+          </div>
+        </div>
+
+        <div className={c.inputContainer}>
           <h3>Broj sjedala</h3>
-          <select>
-            <option value={2}>2</option>
-            <option value={4}>4</option>
-            <option value={6}>6</option>
-          </select>
+          <div>
+            <img src={seatIcon} alt="seats" />
+
+            <select
+              name="numOfSeats"
+              value={data.details.numOfSeats}
+              onChange={handleChange}
+            >
+              {[2, 5, 7].map((seats) => (
+                <option key={seats} value={seats}>
+                  {seats}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
-        <div>
-          <h3>Gorivo</h3>
-          <select>
-            {Object.values(FuelType).map((ft) => (
-              <option key={ft} value={ft}>
-                {ft}
-              </option>
-            ))}
-          </select>
-        </div>
+        <div className={c.inputContainer}>
+          <h3>Vrsta goriva</h3>
+          <div>
+            <img src={fuelIcon} alt="fuel" />
 
-        <div>
-          <h3>Mjenjač</h3>
-          <label>
-            <input type="radio" name="mjenjac" />
-            manualni
-          </label>
-          <label>
-            <input type="radio" name="mjenjac" />
-            automatik
-          </label>
+            <select
+              name="fuelType"
+              value={data.details.fuelType}
+              onChange={handleChange}
+            >
+              {Object.values(FuelType).map((ft) => (
+                <option key={ft} value={ft}>
+                  {ft}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
-      <div>
-        Additional features
-        <div>
-          <label>
-            <input type="checkbox" />
-            Feature
-          </label>
-          <label>
-            <input type="checkbox" />
-            Feature
-          </label>
-          <label>
-            <input type="checkbox" />
-            Feature
-          </label>
+
+      <div className={c.featuresContainer}>
+        <h3>Dodatci</h3>
+        <div className={c.featuresWrapper}>
+          {featureList.map(({ key, label, Icon }) => (
+            <div
+              key={key}
+              className={c.feature}
+              onClick={() => handleFeature(key)}
+            >
+              <Icon color={data.features[key] ? "#222" : "#C0BEBE"} />
+              <p style={{ color: data.features[key] ? "#222" : "#C0BEBE" }}>
+                {label}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
