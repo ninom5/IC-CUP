@@ -641,6 +641,31 @@ async function main() {
     },
   });
 
+  await prisma.vehicleAvailability.createMany({
+    data: [
+      {
+        vehicleId: vehicle1.id,
+        startDate: new Date('2025-06-01'),
+        endDate: new Date('2025-06-10'),
+      },
+      {
+        vehicleId: vehicle1.id,
+        startDate: new Date('2025-07-01'),
+        endDate: new Date('2025-07-15'),
+      },
+      {
+        vehicleId: vehicle2.id,
+        startDate: new Date('2025-05-15'),
+        endDate: new Date('2025-05-20'),
+      },
+      {
+        vehicleId: vehicle2.id,
+        startDate: new Date('2025-06-15'),
+        endDate: new Date('2025-06-20'),
+      },
+    ],
+  });
+
   console.log('Database seeded successfully!');
 }
 
