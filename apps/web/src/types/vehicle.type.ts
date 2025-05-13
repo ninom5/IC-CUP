@@ -27,8 +27,8 @@ export type VehicleData = {
 export type VehicleDetails = {
   fuelType: FuelTypeEnum;
   isAutomatic: boolean;
-  carCategory: CarCategoryEnum;
-  seats: number;
+  category: CarCategoryEnum;
+  numOfSeats: number;
 };
 
 export type VehicleFeatures = {
