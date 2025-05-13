@@ -12,9 +12,12 @@ import { useCreateVehicle } from "@api/useCreateVehicle";
 import { extractUserInfo } from "@utils/extractUserInfo.util";
 import { isRegistrationValid } from "@utils/isRegistrationValid.util";
 import { CarCategoryEnum, FuelTypeEnum, VehicleEnum } from "enums";
+import xIcon from "../../assets/images/xIcon.svg";
+import { useNavigate } from "react-router-dom";
 
 export const AddVehiclePage = () => {
   const userData = extractUserInfo();
+  const navigate = useNavigate();
 
   const [formStep, setFormStep] = useState(1);
   const [vehicleData, setVehicleData] = useState<VehicleData>({
@@ -123,7 +126,10 @@ export const AddVehiclePage = () => {
     <section className={c.addVehiclePageSection}>
       <div>
         <div className={c.header}>
-          <h1>Dodaj kola</h1>
+          <h1>
+            Dodaj kola{" "}
+            <img src={xIcon} onClick={() => navigate("/user/vehicles")} />
+          </h1>
 
           <div className={c.formSteps}>
             <p>{formStep} / 4</p>

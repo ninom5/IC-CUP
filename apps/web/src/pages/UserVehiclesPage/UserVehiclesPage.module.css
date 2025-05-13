@@ -3,7 +3,7 @@
   flex-direction: column;
   padding: 40px 20px;
   align-items: center;
-  gap: 48px;
+  gap: 40px;
 }
 
 .userVehiclesSection > h1 {
@@ -30,7 +30,7 @@
   aspect-ratio: 1/1;
 }
 
-.callToActionContainer > button {
+.userVehiclesSection button {
   display: flex;
   padding: 14px 30px;
   justify-content: center;
@@ -50,6 +50,21 @@
   transition: ease 0.2s;
 }
 
-.callToActionContainer > button:hover {
+.userVehiclesSection button:hover {
   transform: scale(1.05);
+}
+
+.itemCard {
+  display: flex;
+  flex: 1 0 0;
+  gap: 8px;
+  padding: 17px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--stroke-grey, #c0bebe);
+}
+
+.itemCard > img {
+  width: 163px;
+  height: 168px;
+  border-radius: 10px;
 }

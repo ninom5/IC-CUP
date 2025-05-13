@@ -7,3 +7,4 @@ export * from "./useGetUserByEmail";
 export * from "./useUploadImages";
 export * from "./useCreateVehicle";
 export * from "./useCreateAvailability";
+export * from "./useFetchUserVehicles";
