@@ -4,3 +4,4 @@ export * from "./NotFoundPage/NotFoundPage";
 export * from "./BecomeHostPage/BecomeHostPage";
 export * from "./AddVehiclePage/AddVehiclePage";
 export * from "./VehiclePage/VehiclePage";
+export * from "./BlockedPage/BlockedPage";

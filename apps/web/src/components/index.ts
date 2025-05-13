@@ -28,3 +28,4 @@ export * from "./VehicleDescription/VehicleDescription";
 export * from "./InsuranceCard/InsuranceCard";
 export * from "./PropertyItem/PropertyItem";
 export * from "./InsuranceList/InsuranceList";
+export * from "./ProtectedRoute/ProtectedRoute";

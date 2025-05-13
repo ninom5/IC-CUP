@@ -11,4 +11,5 @@ export const routes: RouteType = {
   ADD_VEHICLE: "/add-vehicle",
   USERS_DRIVES: "/user/drives",
   USERS_VEHICLES: "/user/vehicles",
+  BLOCKED: "/blocked",
 };

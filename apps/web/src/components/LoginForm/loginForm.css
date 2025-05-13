@@ -51,6 +51,7 @@
   color: var(--background-white);
   font-weight: 400;
   border: none;
+  cursor: pointer;
 }
 
 .aha {

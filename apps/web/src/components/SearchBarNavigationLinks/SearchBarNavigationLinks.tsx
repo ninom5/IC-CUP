@@ -1,9 +1,8 @@
 import { notifSvg } from "@assets/images";
 import { LoginForm } from "@components/LoginForm/LoginForm";
-import { useToken } from "@hooks/index";
+import { useAuthContext, useToken } from "@hooks/index";
 import { routes } from "@routes/index";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./searchBarNavigationLinks.css";
 import { RegisterForm } from "@components/RegisterForm/RegisterForm";
 
@@ -13,12 +12,18 @@ export const SearchBarNavigationLinks = () => {
     updateToken,
   } = useToken();
 
-  const [showLoginPopUp, setShowLoginPopUp] = useState(false);
-  const [showRegisterPopUp, setShowRegisterPopUp] = useState(false);
+  const { showLogin, showRegister, setShowLogin, setShowRegister } =
+    useAuthContext();
+
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
     updateToken();
+
+    setTimeout(() => {
+      navigate(routes.HOME, { replace: true });
+    }, 0.5);
   };
 
   return (
@@ -40,25 +45,20 @@ export const SearchBarNavigationLinks = () => {
           <Link to={routes.ABOUT}>Kako radi</Link>
 
           <button
-            onClick={() => setShowRegisterPopUp(true)}
+            onClick={() => setShowRegister(true)}
             className="register-button"
           >
             Registracija
           </button>
-          <button
-            onClick={() => setShowLoginPopUp(true)}
-            className="login-button"
-          >
+          <button onClick={() => setShowLogin(true)} className="login-button">
             Prijavi se
           </button>
         </>
       )}
 
-      {showLoginPopUp && <LoginForm onClose={() => setShowLoginPopUp(false)} />}
+      {showLogin && <LoginForm />}
 
-      {showRegisterPopUp && (
-        <RegisterForm onClose={() => setShowRegisterPopUp(false)} />
-      )}
+      {showRegister && <RegisterForm />}
     </div>
   );
 };

@@ -1,7 +1,5 @@
 import { isRegisterDataValid, generatePDF } from "@utils/index";
-import { routes } from "@routes/index";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   useRegister,
@@ -10,11 +8,13 @@ import {
   useUploadImages,
 } from "@api/index";
 import "./registerForm.css";
+import { useAuthContext } from "@hooks/useAuthContext";
 
-export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
+export const RegisterForm = () => {
   const { mutate: register } = useRegister();
   const { mutateAsync: uploadImages } = useUploadImages();
   const { mutateAsync: uploadFiles } = useUploadFiles();
+  const { setShowLogin, setShowRegister } = useAuthContext();
 
   const [registerData, setRegisterData] = useState({
     firstName: "",
@@ -40,8 +40,6 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
   );
   const [idCardPreviews, setIdCardPreviews] = useState<string[]>([]);
   const [personPreview, setPersonPreview] = useState<string | null>(null);
-
-  const navigate = useNavigate();
 
   const handlePersonPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
@@ -196,7 +194,8 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
             idCard: "",
           });
 
-          navigate(routes.LOGIN);
+          setShowRegister(false);
+          setShowLogin(true);
         },
         onError: (error) => {
           toast.error(error.message || "Registration failed");
@@ -209,11 +208,11 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" onClick={() => setShowRegister(false)}>
       <div className="register-pop-up" onClick={(e) => e.stopPropagation()}>
         <section className="register-section">
           <h1>Registracija</h1>
-          <span className="close-span" onClick={onClose}>
+          <span className="close-span" onClick={() => setShowRegister(false)}>
             &times;
           </span>
 
@@ -428,6 +427,16 @@ export const RegisterForm = ({ onClose }: { onClose: () => void }) => {
               {formStep === 3 && <button type="submit">Registriraj se</button>}
             </div>
           </form>
+
+          <p
+            className="switch-auth-text"
+            onClick={() => {
+              setShowRegister(false);
+              setShowLogin(true);
+            }}
+          >
+            Imaš račun? Prijavi se
+          </p>
         </section>
       </div>
     </div>

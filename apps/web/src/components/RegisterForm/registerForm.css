@@ -147,3 +147,11 @@
   color: var(--stroke-gray);
   margin: 20px 0;
 }
+
+.switch-auth-text {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  text-decoration: underline;
+  cursor: pointer;
+}
