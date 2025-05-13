@@ -60,6 +60,39 @@ export class UserService {
     return user;
   }
 
+  async getUserRating(userId: string): Promise<{
+    averageRating: number;
+    reviewCount: number;
+  }> {
+    const vehicles = await this.prisma.vehicle.findMany({
+      where: { ownerId: userId },
+      select: {
+        rentals: {
+          select: {
+            review: {
+              select: {
+                rating: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const ratings: number[] = vehicles
+      .flatMap((v) => v.rentals)
+      .map((r) => r.review?.rating)
+      .filter((r): r is number => typeof r === 'number');
+
+    const reviewCount = ratings.length;
+    const averageRating =
+      reviewCount > 0
+        ? ratings.reduce((sum, r) => sum + r, 0) / reviewCount
+        : 0;
+
+    return { averageRating, reviewCount };
+  }
+
   async update(
     id: string,
     updateUserDto: UpdateUserDto,
