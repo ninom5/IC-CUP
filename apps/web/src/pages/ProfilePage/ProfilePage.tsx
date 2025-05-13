@@ -1,18 +1,40 @@
 import { useParams } from "react-router-dom";
 import c from "./ProfilePage.module.css";
-import { useFetchUserProfile } from "@api/index";
+import { useFetchUserProfile, useUpdateUser } from "@api/index";
 import { useToken } from "@hooks/index";
+import { useEffect, useState } from "react";
 
 export const ProfilePage = () => {
   const { id: userId } = useParams();
-  const { data: profile, isLoading, error } = useFetchUserProfile(userId || "");
+  const {
+    data: profile,
+    isLoading,
+    error,
+    refetch,
+  } = useFetchUserProfile(userId || "");
 
   const { data: tokenUser } = useToken();
   const isOwnProfile = !!tokenUser?.id && userId === tokenUser.id;
 
+  const { mutateAsync: updateUser } = useUpdateUser();
+
+  const [description, setDescription] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (profile?.description) setDescription(profile.description);
+  }, [profile]);
+
   if (isLoading) return <p>Učitavanje...</p>;
   if (error) return <p>Greška pri dohvaćanju profila.</p>;
   if (!profile) return <p>Korisnik nije pronađen.</p>;
+
+  const handleSaveDescription = async () => {
+    setIsSaving(true);
+    await updateUser({ id: profile.id, description });
+    refetch();
+    setIsSaving(false);
+  };
 
   return (
     <div className={c.profileContainer}>
@@ -39,7 +61,20 @@ export const ProfilePage = () => {
 
       <div className={c.section}>
         <h3>Opis</h3>
-        <p>{profile.description?.trim() ? profile.description : ""}</p>
+        {isOwnProfile ? (
+          <>
+            <textarea
+              className={c.textarea}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <button onClick={handleSaveDescription} disabled={isSaving}>
+              {isSaving ? "Spremanje..." : "Spremi promjene"}
+            </button>
+          </>
+        ) : (
+          <p>{profile.description?.trim() ? profile.description : ""}</p>
+        )}
       </div>
 
       <div className={c.section}>

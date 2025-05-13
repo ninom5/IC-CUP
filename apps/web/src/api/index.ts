@@ -8,3 +8,4 @@ export * from "./useUploadImages";
 export * from "./useFetchUserProfile";
 export * from "./useCreateVehicle";
 export * from "./useCreateAvailability";
+export * from "./useUpdateUser";
