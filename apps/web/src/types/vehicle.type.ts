@@ -1,8 +1,14 @@
+<<<<<<< Updated upstream
 import {
   CarCategoryEnum,
   FuelTypeEnum,
   VehicleEnum,
 } from "../enums/vehicle.enum";
+=======
+import { CarCategory, FuelType, VehicleType } from "../enums/vehicle.enum";
+
+import { CarCategory, FuelType, VehicleType } from "../enums/vehicle.enum";
+>>>>>>> Stashed changes
 
 export type VehicleData = {
   ownerId: string;
@@ -19,15 +25,25 @@ export type VehicleData = {
   city: string;
   longitude: number;
   latitude: number;
+<<<<<<< Updated upstream
   vehicleType: VehicleEnum;
+=======
+  vehicleType: VehicleType;
+>>>>>>> Stashed changes
   details: VehicleDetails;
   features: VehicleFeatures;
 };
 
 export type VehicleDetails = {
+<<<<<<< Updated upstream
   fuelType: FuelTypeEnum;
   isAutomatic: boolean;
   category: CarCategoryEnum;
+=======
+  fuelType: FuelType;
+  isAutomatic: boolean;
+  category: CarCategory;
+>>>>>>> Stashed changes
   numOfSeats: number;
 };
 
