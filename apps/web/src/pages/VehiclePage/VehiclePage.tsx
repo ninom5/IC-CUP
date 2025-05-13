@@ -1,8 +1,13 @@
-import { VehicleGallery } from "@components/index";
+import {
+  Insurance,
+  VehicleDescription,
+  VehicleGallery,
+} from "@components/index";
 import { VehicleType } from "types/vehicle.type";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFetchVehicleById } from "@api/index";
+import "./VehiclePage.css";
 
 export const VehiclePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,5 +31,14 @@ export const VehiclePage = () => {
 
   if (!vehicle) return <div>Problem with getting vehicle info</div>;
 
-  return <VehicleGallery vehicleImages={vehicle?.images} />;
+  return (
+    <section className="vehicle-page">
+      <VehicleGallery vehicle={vehicle} />
+
+      <section className="about-vehicle">
+        <VehicleDescription vehicle={vehicle} />
+        <Insurance />
+      </section>
+    </section>
+  );
 };

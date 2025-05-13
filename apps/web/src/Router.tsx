@@ -18,6 +18,7 @@ export const Router = () => {
         <Route element={<SearchBarLayout />}>
           <Route path={routes.HOME} element={<HomePage />} />
           <Route path={routes.CARS} element={<VehiclesPage />} />
+          <Route path={routes.VEHICLE_PAGE} element={<VehiclePage />} />
         </Route>
         <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
         <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
@@ -26,8 +27,6 @@ export const Router = () => {
 </AdminRoutes> */}
 
         <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
-
-        <Route path={routes.VEHICLE_PAGE} element={<VehiclePage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -208,6 +208,11 @@ export class VehicleService {
       where: { id },
       include: {
         owner: true,
+        rentals: {
+          include: {
+            review: true,
+          },
+        },
       },
     });
 

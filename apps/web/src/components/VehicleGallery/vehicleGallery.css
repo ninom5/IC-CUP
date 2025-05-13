@@ -1,0 +1,42 @@
+.gallery {
+  display: flex;
+  width: 70%;
+  padding: 20px;
+  margin-top: 50px;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.gallery-main-image-wrapper {
+  flex: 2;
+}
+
+.gallery-main-image-wrapper img {
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.side-gallery {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+}
+
+.side-gallery-image-wrapper {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.side-gallery-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+}
