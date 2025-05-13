@@ -1,4 +1,4 @@
-import { notifSvg } from "@assets/images";
+import { notifSvg, profileLogo } from "@assets/images";
 import { LoginForm } from "@components/LoginForm/LoginForm";
 import { useAuthContext, useToken } from "@hooks/index";
 import { routes } from "@routes/index";
@@ -36,6 +36,9 @@ export const SearchBarNavigationLinks = () => {
             Odjavi se
           </Link>
 
+          <div className="icon-wrapper">
+            <img src={profileLogo} alt="slikica profila" />
+          </div>
           <div className="icon-wrapper">
             <img src={notifSvg} alt="slikica zvona" />
           </div>

@@ -8,7 +8,12 @@ export const CheckoutPopUp = ({
 }: {
   setShowCheckoutForm: (value: boolean) => void;
   selectedCard: InsuranceKey | null;
-  price: { dailyPrice: number; insurancePrice: number };
+  price: {
+    dailyPrice: number;
+    totalPrice: number;
+    insurancePrice: number;
+    provisionPrice: number;
+  };
 }) => {
   return (
     <div className="modal-overlay">
@@ -74,9 +79,8 @@ export const CheckoutPopUp = ({
 
           <h4>
             Dnevna cijena: {price.dailyPrice}, osiguranje:{" "}
-            {price.insurancePrice}, provizija:{" "}
-            {(price.dailyPrice * 0.1).toFixed(2)}, ukupno:{" "}
-            {(price.dailyPrice * 1.1 + price.insurancePrice).toFixed(2)}
+            {price.insurancePrice}, provizija: {price.provisionPrice}, ukupno:{" "}
+            {price.totalPrice?.toFixed(2)}
           </h4>
 
           <button type="submit">Potvrdi rezervaciju</button>

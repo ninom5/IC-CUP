@@ -5,11 +5,10 @@ export const routes: RouteType = {
   ABOUT: "/about",
   VEHICLES: "/vehicles",
   VEHICLE_PAGE: "/vehicle/:id",
-  ADD_CAR: "/createCar",
-  NOT_FOUND: "*",
   BECOME_HOST: "/become-host",
   ADD_VEHICLE: "/add-vehicle",
   USERS_DRIVES: "/user/drives",
   USERS_VEHICLES: "/user/vehicles",
   BLOCKED: "/blocked",
+  NOT_FOUND: "*",
 };
