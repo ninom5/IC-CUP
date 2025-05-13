@@ -12,6 +12,7 @@ import { RentalModule } from './rental/rental.module';
 import { PaymentModule } from './payment/payment.module';
 import { NotificationModule } from './notification/notification.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { EmailModule } from './email/email.module';
 import { VehicleAvailabilityModule } from './vehicle-availability/vehicle-availability.module';
 
 @Module({
@@ -25,7 +26,9 @@ import { VehicleAvailabilityModule } from './vehicle-availability/vehicle-availa
     CloudinaryModule, 
     VehicleModule, 
     ReviewModule, 
-    LocationModule, VehicleAvailabilityModule
+    LocationModule, 
+    VehicleAvailabilityModule,
+    EmailModule
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
