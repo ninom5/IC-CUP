@@ -68,6 +68,7 @@ export type VehicleType = {
   latitude: number;
   rentals: Rental[];
   availabilities: AvailabilityInterval[];
+  features: VehicleFeatures;
 };
 
 export type Rental = {

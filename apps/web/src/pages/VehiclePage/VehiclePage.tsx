@@ -1,5 +1,6 @@
 import {
   CheckoutPopUp,
+  Footer,
   InsuranceList,
   VehicleDescription,
   VehicleGallery,
@@ -31,9 +32,7 @@ export const VehiclePage = () => {
 
   if (isLoading) return <div>Loading</div>;
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  if (error) return <div>Error: {error.message}</div>;
 
   if (!vehicle) return <div>Problem with getting vehicle info</div>;
 
@@ -44,44 +43,47 @@ export const VehiclePage = () => {
   const totalPrice = vehicle.dailyPrice * 1.1 + insurancePrice;
 
   return (
-    <section className="vehicle-page">
-      <VehicleGallery vehicle={vehicle} />
+    <>
+      <section className="vehicle-page">
+        <VehicleGallery vehicle={vehicle} />
 
-      <section className="about-vehicle">
-        <VehicleDescription vehicle={vehicle} />
+        <section className="about-vehicle">
+          <VehicleDescription vehicle={vehicle} />
 
-        <div>
-          <InsuranceList
-            selectedCard={selectedCard}
-            onSelect={setSelectedCard}
-          />
-
-          <div className="pre-checkout">
-            <h1>
-              <span>CIJENA</span>
-              <span>{totalPrice.toFixed(2)} €</span>
-            </h1>
-
-            <button
-              onClick={() => setShowCheckoutForm(true)}
-              disabled={selectedCard ? false : true}
-            >
-              {selectedCard ? "Nastavi" : "Odaberite osiguranje"}
-            </button>
-          </div>
-
-          {showCheckoutForm && (
-            <CheckoutPopUp
-              setShowCheckoutForm={setShowCheckoutForm}
+          <div>
+            <InsuranceList
               selectedCard={selectedCard}
-              price={{
-                dailyPrice: vehicle.dailyPrice,
-                insurancePrice: insurancePrice,
-              }}
+              onSelect={setSelectedCard}
             />
-          )}
-        </div>
+
+            <div className="pre-checkout">
+              <h1>
+                <span>CIJENA</span>
+                <span>{totalPrice.toFixed(2)} €</span>
+              </h1>
+
+              <button
+                onClick={() => setShowCheckoutForm(true)}
+                disabled={selectedCard ? false : true}
+              >
+                {selectedCard ? "Nastavi" : "Odaberite osiguranje"}
+              </button>
+            </div>
+
+            {showCheckoutForm && (
+              <CheckoutPopUp
+                setShowCheckoutForm={setShowCheckoutForm}
+                selectedCard={selectedCard}
+                price={{
+                  dailyPrice: vehicle.dailyPrice,
+                  insurancePrice: insurancePrice,
+                }}
+              />
+            )}
+          </div>
+        </section>
       </section>
-    </section>
+      <Footer />
+    </>
   );
 };

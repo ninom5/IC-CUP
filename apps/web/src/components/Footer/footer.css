@@ -15,3 +15,7 @@
 .kolo-footer-wrapper {
   display: flex;
 }
+
+#footer-road {
+  width: 100%;
+}

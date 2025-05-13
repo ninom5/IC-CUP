@@ -1,43 +1,9 @@
 import "./vehicleDescription.css";
-import { VehicleDetails, VehicleType } from "types";
+import { VehicleDetails, VehicleFeatures, VehicleType } from "types";
 import { getAverageVehicleRating } from "@utils/index";
-import {
-  coupeSvg,
-  hatchbackSvg,
-  sedanSvg,
-  suvSvg,
-  cabrioletSvg,
-  fuelSvg,
-  seatSvg,
-  transmissionSvg,
-} from "@assets/images";
+import { fuelSvg, seatSvg, transmissionSvg } from "@assets/images";
 import { PropertyItem } from "@components/index";
-import {
-  AuxIcon,
-  BluetoothIcon,
-  ChairIcon,
-  PetsIcon,
-  SensorsIcon,
-  UsbIcon,
-} from "components/icons/index";
-import { CarCategoryEnum } from "enums";
-
-const categoryImages: Record<CarCategoryEnum, string> = {
-  COUPE: coupeSvg,
-  SEDAN: sedanSvg,
-  SUV: suvSvg,
-  CABRIOLET: cabrioletSvg,
-  HATCHBACK: hatchbackSvg,
-};
-
-const additionalFeatures = [
-  { label: "Bluetooth", icon: BluetoothIcon },
-  { label: "USB", icon: UsbIcon },
-  { label: "Senzori", icon: SensorsIcon },
-  { label: "Pomoć pri parkiranju", icon: AuxIcon },
-  { label: "Dječije sjedište", icon: ChairIcon },
-  { label: "Kućni ljubimci", icon: PetsIcon },
-];
+import { additionalFeatures, categoryImages } from "@constants/index";
 
 export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
   const { brand, model, productionYear, details, owner } = vehicle;
@@ -46,10 +12,8 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
   const { numOfSeats, fuelType, category, isAutomatic }: VehicleDetails =
     details;
 
-  console.log(vehicle);
   const categoryImage = categoryImages[category] || categoryImages["COUPE"];
 
-  console.log(details);
   return (
     <section>
       <div>
@@ -81,16 +45,19 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
           }
           icon={categoryImage}
         />
+
         <PropertyItem
           label="ikonica mjenjaca"
           value={isAutomatic ? "Automatik" : "Ručni"}
           icon={transmissionSvg}
         />
+
         <PropertyItem
           label="Ikonica goriva"
           value={fuelType === "PETROL" ? "Benzin" : "Dizel"}
           icon={fuelSvg}
         />
+
         <PropertyItem
           label="Ikonica sjedala"
           value={numOfSeats?.toString()}
@@ -116,12 +83,27 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
         <h4>DODACI</h4>
 
         <div className="additions-grid">
-          {additionalFeatures.map(({ label, icon: Icon }, index) => (
-            <div className="addition-item" key={index}>
-              <Icon color="red" />
-              <span>{label}</span>
-            </div>
-          ))}
+          {additionalFeatures.map(({ label, icon: Icon }) => {
+            const normalizedFeatures: Partial<
+              Record<keyof VehicleFeatures, boolean>
+            > = Object.entries(vehicle.features).reduce(
+              (acc, [key, value]) => {
+                acc[key.toLowerCase() as keyof VehicleFeatures] = value;
+                return acc;
+              },
+              {} as Partial<Record<keyof VehicleFeatures, boolean>>
+            );
+
+            const featureKey = label.toLowerCase() as keyof VehicleFeatures;
+            const isEnabled = normalizedFeatures[featureKey];
+
+            return (
+              <div className="addition-item" key={label}>
+                <Icon color={isEnabled ? "black" : "lightgray"} />
+                <span>{label}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
