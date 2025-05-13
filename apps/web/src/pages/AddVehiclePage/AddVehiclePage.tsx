@@ -128,7 +128,7 @@ export const AddVehiclePage = () => {
         <div className={c.header}>
           <h1>
             Dodaj kola{" "}
-            <img src={xIcon} onClick={() => navigate("/user/vehicles")} />
+            <img src={xIcon} onClick={() => navigate("/user/vehicle")} />
           </h1>
 
           <div className={c.formSteps}>

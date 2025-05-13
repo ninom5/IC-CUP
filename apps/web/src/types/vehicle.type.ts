@@ -70,3 +70,8 @@ export type Rental = {
 export type Review = {
   rating: number;
 };
+
+export interface UserVehiclesType extends VehicleType {
+  avgRating: number | null;
+  reviewCount: number;
+}

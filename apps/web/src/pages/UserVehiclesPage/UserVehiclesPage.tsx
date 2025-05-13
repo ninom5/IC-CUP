@@ -6,13 +6,17 @@ import { useNavigate } from "react-router-dom";
 import starIcon from "../../assets/images/starIcon.svg";
 import pencilIcon from "../../assets/images/pencilIcon.svg";
 
-export const UserVehicles = () => {
+export const UserVehiclesPage = () => {
   const userData = extractUserInfo();
   const { data, isLoading, error } = useFetchUserVehicles(userData.data.id);
   const navigate = useNavigate();
 
   const handleAddVehicle = () => {
     navigate("/user/vehicle/add-vehicle");
+  };
+
+  const handleUserVehicle = (vehicleId: string) => {
+    navigate(`/user/vehicle/${vehicleId}`);
   };
 
   if (isLoading) {
@@ -56,7 +60,10 @@ export const UserVehicles = () => {
                     <h3>
                       {i.model} {i.brand}
                     </h3>
-                    <img src={pencilIcon} />
+                    <img
+                      src={pencilIcon}
+                      onClick={() => handleUserVehicle(i.id)}
+                    />
                   </div>
 
                   <p>
