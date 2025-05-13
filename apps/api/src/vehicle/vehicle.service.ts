@@ -48,7 +48,6 @@ export class VehicleService {
   async getAll() {
     return await this.prisma.vehicle.findMany({
       where: {
-        isAvailable: true,
         isVerified: true,
       },
       include: {
