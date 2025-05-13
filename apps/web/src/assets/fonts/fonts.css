@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("NunitoSans-VariableFont_YTLC-opsz-wdth-wght.ttf");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito Sans Italic";
+  src: url("NunitoSans-Italic-VariableFont_YTLC-opsz-wdth-wght.ttf");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Goodly";
+  src: url("goodly-regular.otf");
+  font-style: normal;
+}

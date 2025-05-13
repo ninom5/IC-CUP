@@ -12,6 +12,7 @@ import { RentalModule } from './rental/rental.module';
 import { PaymentModule } from './payment/payment.module';
 import { NotificationModule } from './notification/notification.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { VehicleAvailabilityModule } from './vehicle-availability/vehicle-availability.module';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     CloudinaryModule, 
     VehicleModule, 
     ReviewModule, 
-    LocationModule
+    LocationModule, VehicleAvailabilityModule
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

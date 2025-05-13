@@ -1,15 +1,76 @@
 .search-navigation {
   display: flex;
   justify-content: space-between;
-  padding: 30px 40px 0;
+  padding: 10px 85px;
+  padding-right: 63px;
   font-size: 20px;
+  letter-spacing: 0;
+  width: 100%;
+  height: auto;
 }
 
-.navigation-links {
+.filters-wrapper {
   display: flex;
-  gap: 50px;
+  align-items: center;
+  justify-content: space-around;
+  width: 50%;
+  gap: 20px;
 }
-.navigation-links a {
-  text-decoration: none;
-  color: black;
+
+.kolo-logo {
+  cursor: pointer;
+}
+
+.location-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--stroke-gray);
+  border-radius: 8px;
+  justify-content: flex-start;
+  padding: 0 20px;
+}
+.location-wrapper #autocomplete-input {
+  margin-left: 10px;
+  border: none;
+  width: 100%;
+  padding: 10px 0;
+}
+.location-wrapper #autocomplete-input:focus {
+  border: none;
+  outline: none;
+}
+
+.location-label {
+  font-weight: 600;
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--stroke-gray);
+  padding: 5px 20px;
+  border-radius: 8px;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.filter-pop-up {
+  background-color: var(--background-white);
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%;
 }
