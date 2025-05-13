@@ -8,7 +8,7 @@ export const routes: RouteType = {
   ADD_CAR: "/createCar",
   NOT_FOUND: "*",
   BECOME_HOST: "/become-host",
-  ADD_VEHICLE: "/add-vehicle",
-  USERS_DRIVES: "/user/drives",
   USER_VEHICLES: "/user/vehicles",
+  ADD_VEHICLE: "/user/vehicle/add-vehicle",
+  USERS_DRIVES: "/user/drives",
 };

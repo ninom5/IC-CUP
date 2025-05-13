@@ -26,7 +26,7 @@ export const SearchBarNavigationLinks = () => {
       {token && !isExpired ? (
         <>
           <Link to={routes.USERS_DRIVES}>Tvoje vožnje</Link>
-          <Link to={routes.USERS_VEHICLES}>Tvoja kola</Link>
+          <Link to={routes.USER_VEHICLES}>Tvoja kola</Link>
           <Link to={routes.HOME} onClick={handleLogout}>
             Odjavi se
           </Link>

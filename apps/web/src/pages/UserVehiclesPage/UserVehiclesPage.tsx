@@ -10,7 +10,7 @@ export const UserVehicles = () => {
   const navigate = useNavigate();
 
   const handleAddVehicle = () => {
-    navigate("/add-vehicle");
+    navigate("/user/vehicle/add-vehicle");
   };
 
   if (isLoading) {
