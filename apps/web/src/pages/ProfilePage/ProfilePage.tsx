@@ -1,15 +1,14 @@
 import { useParams } from "react-router-dom";
 import c from "./ProfilePage.module.css";
 import { useFetchUserProfile } from "@api/index";
-import { Role } from "@enums/index";
+import { useToken } from "@hooks/index";
 
 export const ProfilePage = () => {
   const { id: userId } = useParams();
   const { data: profile, isLoading, error } = useFetchUserProfile(userId || "");
-  //const { id: loggedInUserId, role } = useAuthUser();
 
-  //const isOwnProfile = userId === loggedInUserId;
-  const isOwnProfile = true; // TODO: Implement logic to check if the profile belongs to the logged-in user
+  const { data: tokenUser } = useToken();
+  const isOwnProfile = !!tokenUser?.id && userId === tokenUser.id;
 
   if (isLoading) return <p>Učitavanje...</p>;
   if (error) return <p>Greška pri dohvaćanju profila.</p>;
@@ -20,8 +19,8 @@ export const ProfilePage = () => {
       <div className={c.tabs}>
         {isOwnProfile && (
           <>
-            <button className={c.tab}>JAVNI PROFIL</button>
-            <button className={c.tab}>POSTAVKE PROFILA</button>
+            <button className={c.tab}>Moj profil</button>
+            <button className={c.tab}>Postavke računa</button>
           </>
         )}
       </div>
@@ -35,23 +34,21 @@ export const ProfilePage = () => {
         <h2>
           {profile.firstName} {profile.lastName}
         </h2>
-        <h3>OPIS</h3>
-        <p>
-          {profile.description?.trim()
-            ? profile.description
-            : "Default tekst na početku"}
-        </p>
+        {/* TODO:  lokacija + rating */}
       </div>
 
-      {profile.role !== Role.USER && (
-        <div className={c.section}>
-          <h3>PONUĐENI AUTI</h3>
-          {/* TODO: render vozila */}
-        </div>
-      )}
+      <div className={c.section}>
+        <h3>Opis</h3>
+        <p>{profile.description?.trim() ? profile.description : ""}</p>
+      </div>
 
       <div className={c.section}>
-        <h3>RECENZIJE OD GOSTIJU</h3>
+        <h3>Automobili</h3>
+        {/* TODO: render vozila */}
+      </div>
+
+      <div className={c.section}>
+        <h3>Recenzije od unajmljivača</h3>
         {/* TODO: render recenzija */}
       </div>
     </div>
