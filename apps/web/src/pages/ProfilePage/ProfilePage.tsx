@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import c from "./ProfilePage.module.css";
 import {
   useFetchUserProfile,
+  useGetUserRating,
   useUpdateUser,
   useUploadImages,
 } from "@api/index";
@@ -18,6 +19,9 @@ export const ProfilePage = () => {
     error,
     refetch,
   } = useFetchUserProfile(userId || "");
+  const { data: userRating, isLoading: isRatingLoading } = useGetUserRating(
+    userId || ""
+  );
 
   const { data: tokenUser } = useToken();
   const isOwnProfile = !!tokenUser?.id && userId === tokenUser.id;
@@ -36,7 +40,7 @@ export const ProfilePage = () => {
     if (profile?.personPhoto) setPersonPhotoPreview(profile.personPhoto);
   }, [profile]);
 
-  if (isLoading) return <p>Učitavanje...</p>;
+  if (isLoading || isRatingLoading) return <p>Učitavanje...</p>;
   if (error) return <p>Greška pri dohvaćanju profila.</p>;
   if (!profile) return <p>Korisnik nije pronađen.</p>;
 
@@ -107,7 +111,11 @@ export const ProfilePage = () => {
         <h2>
           {profile.firstName} {profile.lastName}
         </h2>
-        {/* TODO:  lokacija + rating */}
+        {userRating && (
+          <p className={c.rating}>
+            {userRating.averageRating.toFixed(1)}★({userRating.reviewCount})
+          </p>
+        )}
       </div>
 
       <div className={c.section}>

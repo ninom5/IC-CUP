@@ -8,3 +8,8 @@ export type UserProfileType = {
   personPhoto: string;
   description: string;
 };
+
+export type UserRating = {
+  averageRating: number;
+  reviewCount: number;
+};
