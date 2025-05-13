@@ -1,4 +1,4 @@
-import { FuelType } from "enums";
+import { FuelTypeEnum } from "enums";
 import { StepProps } from "../../../types";
 import c from "./SecondStep.module.css";
 import gearBoxIcon from "../../../assets/images/gearboxIcon.svg";
@@ -102,7 +102,7 @@ export const SecondStep = ({ data, onDataChange }: StepProps) => {
               value={data.details.fuelType}
               onChange={handleChange}
             >
-              {Object.values(FuelType).map((ft) => (
+              {Object.values(FuelTypeEnum).map((ft) => (
                 <option key={ft} value={ft}>
                   {ft}
                 </option>
