@@ -1,0 +1,87 @@
+.filters-section {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  position: relative;
+}
+
+.close-span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15px;
+  cursor: pointer;
+  font-size: 50px;
+  padding-right: 40px;
+}
+
+.filter-section > div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.sort-section {
+  margin-bottom: 20px;
+}
+
+.filter-pop-up-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.vehicle-category {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+div > h2 {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.car-categories-images {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.category-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--stroke-gray);
+  border-radius: 8px;
+  padding: 10px 0;
+  text-align: center;
+  width: 15%;
+}
+.category-wrapper.selected {
+  border: 1px solid var(--background-black);
+}
+.category-wrapper img {
+  width: 70%;
+  height: auto;
+  padding: 10px 0;
+}
+.category-wrapper h3 {
+  font-weight: 400;
+  font-size: 20px;
+}
+#sort-select {
+  margin-left: 20px;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px;
+  margin-top: 30px;
+}

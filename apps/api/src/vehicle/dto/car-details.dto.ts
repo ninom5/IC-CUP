@@ -3,17 +3,6 @@ import { IsBoolean, IsEnum, IsIn, IsNotEmpty, IsString } from 'class-validator';
 import { CarCategory, FuelType } from '../enums/vehicle.enums';
 
 export class CarDetailsDto {
-  @IsNotEmpty({ message: 'License plate is required' })
-  @IsString({
-    message: 'License plate must be a string',
-  })
-  @ApiProperty({
-    description: 'License plate',
-    example: 'ABC1234',
-    type: 'string',
-  })
-  licensePlate: string;
-
   @IsNotEmpty({
     message: 'Fuel type is required',
   })
@@ -49,7 +38,7 @@ export class CarDetailsDto {
   @ApiProperty({
     description: 'Car Category',
     enum: CarCategory,
-    example: CarCategory.SMALL,
+    example: CarCategory.SUV,
   })
   category: CarCategory;
 

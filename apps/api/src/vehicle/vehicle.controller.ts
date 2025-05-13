@@ -31,10 +31,21 @@ export class VehicleController {
   async getAllVehiclesPagination(
     @Query('page') page = '1',
     @Query('limit') limit = '10',
+    @Query('category') category?: string,
+    @Query('transmission') transmission?: string,
+    @Query('seats') seats?: string,
+    @Query('fuel') fuel?: string,
   ) {
     const pageNumber = parseInt(page, 10);
     const pageSize = parseInt(limit, 10);
-    return this.vehicleService.getAllPagination(pageNumber, pageSize);
+
+    const userFilters = { category, transmission, seats, fuel };
+
+    return this.vehicleService.getAllPagination(
+      pageNumber,
+      pageSize,
+      userFilters,
+    );
   }
 
   @Get('by-date')

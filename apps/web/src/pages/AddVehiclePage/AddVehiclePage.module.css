@@ -1,21 +1,85 @@
-.formSteps {
+.addVehiclePageSection {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
   align-items: center;
 }
 
+.addVehiclePageSection > div {
+  display: flex;
+  width: 1107px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.header > h1 {
+  color: var(--background-black, #222);
+  font-family: "Nunito Sans";
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.formSteps {
+  display: flex;
+  width: 1096px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.formSteps > p {
+  color: var(--stroke-grey, #c0bebe);
+  text-align: right;
+  font-family: "Nunito Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .formStepBar {
-  width: 500px;
-  height: 20px;
+  align-self: stretch;
+  height: 16px;
   border-radius: 40px;
-  background-color: #f0f0f0;
-  text-align: center;
+  background-color: var(--stroke-gray);
   overflow: hidden;
 }
 
 .formStepBar > div {
   height: 100%;
-  background-color: gray;
+  background-color: var(--accent-color-transparent);
   border-radius: 40px;
   transition: width 0.4s ease;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.buttonContainer > button {
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  background: var(--accent-color, #044343);
+  color: var(--background-white, #fafafa);
+  font-family: "Nunito Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
 }

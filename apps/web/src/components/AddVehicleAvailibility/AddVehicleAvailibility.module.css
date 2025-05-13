@@ -1,0 +1,85 @@
+.inputContainer {
+  display: flex;
+  width: 239px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.inputContainer > h3 {
+  font-family: "Nunito Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  color: var(--background-black, #222);
+}
+
+.intervalContainer {
+  display: flex;
+  width: 427px;
+  height: 48px;
+  padding: 8px 15px;
+  align-items: center;
+  gap: 15px;
+  border-radius: 10px;
+  border: 1px solid var(--stroke-grey, #c0bebe);
+  background: var(--background-white, #fafafa);
+}
+
+.intervalContainer > label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--background-black, #222);
+  font-family: "Nunito Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.intervalContainer > label > input {
+  color: var(--background-black, #222);
+  font-family: "Nunito Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid var(--stroke-grey, #c0bebe);
+  background: var(--background-white, #fafafa);
+}
+
+.inputContainer > button {
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  background: var(--accent-color, #044343);
+  color: var(--background-white, #fafafa);
+  font-family: "Nunito Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.intervalItem {
+  display: flex;
+  width: 427px;
+  height: 48px;
+  padding: 8px 15px;
+  align-items: center;
+  gap: 15px;
+  font-size: 20px;
+}
+
+.intervalItem > img {
+  cursor: pointer;
+}

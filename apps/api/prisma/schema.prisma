@@ -51,9 +51,9 @@ model Vehicle {
   images                  String[]
   productionYear          Int
   dailyPrice              Float
-  isAvailable             Boolean  @default(false)
   description             String?
   isVerified              Boolean  @default(false)
+  vehicleLicenseImg       String  
   registration            String
   registrationExpiration  DateTime
   pickupAddress           String
@@ -62,7 +62,10 @@ model Vehicle {
   latitude                Float
   vehicleType             VehicleType
   details                 Json
+  features                Json
   rentals                 Rental[]
+  availabilities          VehicleAvailability[]
+
 
   @@index([ownerId])
 }
@@ -124,6 +127,19 @@ model Notification {
   createdAt       DateTime @default(now())
 }
 
+model VehicleAvailability {
+  id        String   @id @default(uuid())
+  vehicleId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  startDate DateTime
+  endDate   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([vehicleId, startDate, endDate])
+  @@index([vehicleId])
+}
+
 enum Role {
   ADMIN
   USER
@@ -153,9 +169,14 @@ enum FuelType {
 }
 
 enum CarCategory {
-  SMALL
-  MEDIUM
+  COUPE
+  SEDAN
+  CABRIOLET
   SUV
-  VAN
-  LUXURY
+  HATCHBACK
+}
+
+enum Transmission{
+  AUTOMATIC
+  MANUAL
 }

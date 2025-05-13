@@ -24,15 +24,18 @@ export const isRegisterDataValid = (fullRegisterData: RegisterDataType) => {
   });
   if (message) return message;
 
+  if (password !== confirmPassword) return "Lozinke se ne podudaraju";
+
+  if (!dateOfBirth) return "Morate unijeti datum rođenja";
+
   if (dateOfBirth > new Date().toISOString().split("T")[0])
     return "Date of birth can not be in the future";
+
   if (
     new Date(dateOfBirth).getTime() >
     new Date().getTime() - 18 * 365 * 24 * 60 * 60 * 1000
   )
-    return "You must be at least 18 years old to register";
-
-  if (password !== confirmPassword) return "Passwords must match";
+    return "Morate imati bar 18 godina za registrirati se";
 
   return null;
 };
