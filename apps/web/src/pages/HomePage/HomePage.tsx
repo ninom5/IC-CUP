@@ -6,7 +6,7 @@ export const HomePage = () => {
   return (
     <>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <Link to={routes.CARS}>CARS</Link>
+        <Link to={routes.VEHICLES}>CARS</Link>
       </div>
 
       <Footer />

@@ -19,7 +19,7 @@ export const Router = () => {
       <Routes>
         <Route element={<SearchBarLayout />}>
           <Route path={routes.HOME} element={<HomePage />} />
-          <Route path={routes.CARS} element={<VehiclesPage />} />
+          <Route path={routes.VEHICLES} element={<VehiclesPage />} />
           <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
           <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
         </Route>

@@ -4,6 +4,7 @@ export type FiltersType = {
   transmission: string;
   seatNumber: string;
   fuelType: string;
+  dateRange?: [Date | null, Date | null];
 };
 
 export type FilterPopUpProps = {

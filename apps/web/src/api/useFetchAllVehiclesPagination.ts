@@ -10,6 +10,7 @@ const fetchAllVehiclesPagination = async (
     seats?: string;
     carCategory?: string;
     transmission?: string;
+    dateRange?: [Date | null, Date | null];
   }
 ) => {
   const params = new URLSearchParams({
@@ -19,6 +20,12 @@ const fetchAllVehiclesPagination = async (
     ...(filters?.carCategory && { category: filters.carCategory }),
     ...(filters?.transmission && { transmission: filters.transmission }),
     ...(filters?.seats && { seats: filters.seats }),
+    ...(filters?.dateRange?.[0] && {
+      startDate: filters?.dateRange?.[0].toISOString(),
+    }),
+    ...(filters?.dateRange?.[1] && {
+      endDate: filters.dateRange?.[1].toISOString(),
+    }),
   });
 
   return await api.get<never, PaginatedVehiclesResponse>(
@@ -37,7 +44,8 @@ export const useFetchAllVehiclesPagination = (
   fuelType?: string,
   carCategory?: string,
   seats?: string,
-  transmission?: string
+  transmission?: string,
+  dateRange?: [Date | null, Date | null]
 ) => {
   return useInfiniteQuery({
     queryKey: [
@@ -46,6 +54,7 @@ export const useFetchAllVehiclesPagination = (
       seats,
       carCategory,
       transmission,
+      dateRange,
     ],
     queryFn: async ({ pageParam = 1 }) =>
       fetchAllVehiclesPagination(pageParam, 10, {
@@ -53,6 +62,7 @@ export const useFetchAllVehiclesPagination = (
         seats,
         carCategory,
         transmission,
+        dateRange,
       }),
 
     initialPageParam: 1,

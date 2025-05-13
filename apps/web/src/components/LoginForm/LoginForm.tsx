@@ -36,7 +36,7 @@ export const LoginForm = () => {
         });
 
         setShowLogin(false);
-        navigate(routes.CARS);
+        navigate(routes.VEHICLES);
       },
       onError: (error: unknown) => {
         if (axios.isAxiosError(error)) {

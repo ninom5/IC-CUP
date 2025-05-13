@@ -59,6 +59,7 @@ export const FilterPopUp = ({
       <div className="sort-section">
         <div className="filter-pop-up-header">
           <h2>Sortiraj</h2>
+
           <ButtonAccent
             content="Resetiraj filtere ×"
             onClick={() => {
@@ -70,7 +71,9 @@ export const FilterPopUp = ({
                 seats: "",
                 sortBy: "",
                 transmission: "",
+                dateRange: [null, null],
               });
+              setShowFilters(false);
             }}
           />
         </div>

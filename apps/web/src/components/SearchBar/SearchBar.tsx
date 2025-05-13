@@ -19,6 +19,11 @@ export const SearchBar = () => {
   const { goToLocation, setSearchLocation } = useMapContext();
   const { setFilters } = useFiltersContext();
 
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
+    null,
+    null,
+  ]);
+
   const defaultFilters: FiltersType = {
     sortBy: "",
     category: "",
@@ -31,12 +36,14 @@ export const SearchBar = () => {
   const [userFilters, setUserFilters] = useState(defaultFilters);
 
   const handleSearch = () => {
+    navigate(routes.VEHICLES);
     setFilters({
       fuelType: userFilters.fuelType,
       carCategory: userFilters.category,
       seats: userFilters.seatNumber,
       transmission: userFilters.transmission,
       sortBy: userFilters.sortBy,
+      dateRange: dateRange,
     });
   };
 
@@ -69,7 +76,7 @@ export const SearchBar = () => {
             <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
           </div>
 
-          <CustomDatePicker />
+          <CustomDatePicker value={dateRange} onChange={setDateRange} />
 
           <div className="icon-wrapper" onClick={handleSearch}>
             <img src={searchSvg} alt="Search icon" />
