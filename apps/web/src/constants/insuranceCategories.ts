@@ -20,3 +20,9 @@ export const insuranceCategories = {
 } as const;
 
 export type InsuranceKey = keyof typeof insuranceCategories;
+
+export const insuranceLevelMap: Record<InsuranceKey, string> = {
+  highLevel: "Visoka razina osiguranja",
+  midLevel: "Srednja razina osiguranja",
+  lowLevel: "Niska razina osiguranja",
+};

@@ -64,7 +64,6 @@ export class VehicleService {
             },
           },
         },
-        availabilities: true,
       },
     });
   }

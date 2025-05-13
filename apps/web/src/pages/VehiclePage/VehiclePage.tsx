@@ -1,4 +1,5 @@
 import {
+  CheckoutPopUp,
   InsuranceList,
   VehicleDescription,
   VehicleGallery,
@@ -40,7 +41,7 @@ export const VehiclePage = () => {
     ? insuranceCategories[selectedCard].price
     : 0;
 
-  const totalPrice = vehicle.dailyPrice + insurancePrice;
+  const totalPrice = vehicle.dailyPrice * 1.1 + insurancePrice;
 
   return (
     <section className="vehicle-page">
@@ -58,46 +59,26 @@ export const VehiclePage = () => {
           <div className="pre-checkout">
             <h1>
               <span>CIJENA</span>
-              <span>{totalPrice} €</span>
+              <span>{totalPrice.toFixed(2)} €</span>
             </h1>
 
-            <button onClick={() => setShowCheckoutForm(true)}>Nastavi</button>
+            <button
+              onClick={() => setShowCheckoutForm(true)}
+              disabled={selectedCard ? false : true}
+            >
+              {selectedCard ? "Nastavi" : "Odaberite osiguranje"}
+            </button>
           </div>
 
           {showCheckoutForm && (
-            <div className="modal-overlay">
-              <div className="modal-content">
-                <button
-                  className="close-button"
-                  onClick={() => setShowCheckoutForm(false)}
-                >
-                  ×
-                </button>
-                <h2>Unesite podatke za iznajmljivanje</h2>
-
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    alert("Rezervacija uspješna!");
-                  }}
-                >
-                  <h2>Potvrdite rezervaciju</h2>
-
-                  <div>
-                    <label htmlFor="message">
-                      Možete unijeti poruku vlasniku ako želite
-                    </label>
-                    <input type="text" name="message" />
-                  </div>
-                  <div>
-                    <label>Način plaćanja</label>
-                    <p>Kartica</p>
-                  </div>
-
-                  <button type="submit">Potvrdi rezervaciju</button>
-                </form>
-              </div>
-            </div>
+            <CheckoutPopUp
+              setShowCheckoutForm={setShowCheckoutForm}
+              selectedCard={selectedCard}
+              price={{
+                dailyPrice: vehicle.dailyPrice,
+                insurancePrice: insurancePrice,
+              }}
+            />
           )}
         </div>
       </section>

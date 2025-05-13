@@ -8,7 +8,7 @@
 }
 
 .gallery-main-image-wrapper {
-  flex: 2;
+  flex: 1.5;
 }
 
 .gallery-main-image-wrapper img {
@@ -20,7 +20,7 @@
 }
 
 .side-gallery {
-  flex: 1;
+  flex: 1.25;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;

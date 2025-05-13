@@ -29,3 +29,4 @@ export * from "./InsuranceCard/InsuranceCard";
 export * from "./PropertyItem/PropertyItem";
 export * from "./InsuranceList/InsuranceList";
 export * from "./ProtectedRoute/ProtectedRoute";
+export * from "./CheckoutPopUp/CheckoutPopUp";
