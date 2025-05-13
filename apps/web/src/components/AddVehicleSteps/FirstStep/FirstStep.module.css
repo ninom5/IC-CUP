@@ -1,14 +1,135 @@
 .form {
   display: flex;
+  width: 686px;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 42px;
 }
 
-.form > .formInputContainer {
+.registrationContainer {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
-.form > .modelBrandContainer {
+.inputContainer {
   display: flex;
+  width: 203px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.inputContainer > h3 {
+  align-self: stretch;
+  color: var(--background-black, #222);
+  font-family: "Nunito Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.inputContainer > input {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  color: var(--background-black, #222);
+  font-family: "Nunito Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--stroke-grey, #c0bebe);
+  background: var(--background-white, #fafafa);
+}
+
+.inputContainer > input::placeholder {
+  color: var(--stroke-grey, #c0bebe);
+}
+
+.fileInput {
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  background: var(--accent-color, #044343);
+  color: var(--background-white, #fafafa);
+  font-family: "Nunito Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.categoriesInputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.categoriesWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.categoryContainer {
+  display: flex;
+  width: 125px;
+  height: 90px;
+  padding: 15px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border-radius: 10px;
+  border: 1px solid var(--stroke-grey, #c0bebe);
+  cursor: pointer;
+}
+
+.categoryContainer > img {
+  width: 59px;
+  height: 26px;
+  flex-shrink: 0;
+  fill: var(--stroke-grey, #c0bebe);
+}
+
+.categoryContainer > p {
+  height: 20px;
+  flex-shrink: 0;
+  align-self: stretch;
+  color: var(--stroke-grey, #c0bebe);
+  text-align: center;
+  font-family: "Nunito Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.selected {
+  border: 1px solid var(--background-black, #222);
+}
+
+.selected > svg {
+  fill: var(--background-black, #222);
+}
+
+.selected > p {
+  color: var(--background-black, #222);
+}
+
+.modelBrandYearContainer {
+  display: flex;
+  align-items: center;
   gap: 20px;
 }

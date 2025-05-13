@@ -17,14 +17,14 @@ export class VehicleService {
     const vehiclesToUpdate = await this.prisma.vehicle.findMany({
       where: {
         registrationExpiration: { lte: today },
-        isAvailable: true,
+        isVerified: true,
       },
     });
 
     for (const vehicle of vehiclesToUpdate) {
       await this.prisma.vehicle.update({
         where: { id: vehicle.id },
-        data: { isAvailable: false },
+        data: { isVerified: false },
       });
     }
   }
@@ -184,7 +184,6 @@ export class VehicleService {
 
     return this.prisma.vehicle.findMany({
       where: {
-        isAvailable: true,
         isVerified: true,
         rentals: {
           none: {
@@ -197,6 +196,12 @@ export class VehicleService {
                 },
               },
             ],
+          },
+        },
+        availabilities: {
+          some: {
+            startDate: { lte: filtersStartDate },
+            endDate: { gte: filtersEndDate },
           },
         },
       },

@@ -1,5 +1,6 @@
 @import "assets/fonts/fonts.css";
 
+
 :root {
   --background-white: #fafafa;
   --background-black: #222222;
@@ -16,6 +17,7 @@
   box-sizing: border-box;
   font-family: "Nunito Sans";
 }
+
 body {
   color: var(--background-black);
   background-color: var(--background-white);
