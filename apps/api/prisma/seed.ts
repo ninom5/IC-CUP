@@ -1,4 +1,4 @@
-import {
+/*import {
   PrismaClient,
   Role,
   VehicleType,
@@ -576,4 +576,4 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect();
-  });
+  });*/
