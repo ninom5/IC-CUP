@@ -3,7 +3,7 @@ import { RouteType } from "types/index";
 export const routes: RouteType = {
   HOME: "/",
   ABOUT: "/about",
-  CARS: "/cars",
+  CARS: "/vehicles",
   VEHICLE_PAGE: "/vehicle/:id",
   ADD_CAR: "/createCar",
   NOT_FOUND: "*",
