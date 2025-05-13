@@ -12,7 +12,6 @@ import { useCreateVehicle } from "@api/useCreateVehicle";
 import { extractUserInfo } from "@utils/extractUserInfo.util";
 import { isRegistrationValid } from "@utils/isRegistrationValid.util";
 import { CarCategoryEnum, FuelTypeEnum, VehicleEnum } from "enums";
-import { data } from "react-router-dom";
 
 export const AddVehiclePage = () => {
   const userData = extractUserInfo();
