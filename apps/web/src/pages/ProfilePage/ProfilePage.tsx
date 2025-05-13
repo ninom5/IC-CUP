@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import c from "./ProfilePage.module.css";
 import {
   useFetchUserProfile,
+  useFetchUserVehicles,
   useGetUserRating,
   useUpdateUser,
   useUploadImages,
@@ -10,18 +11,26 @@ import { useToken } from "@hooks/index";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { fallbackImageSvg, pencilSvg } from "@assets/images";
+import { routes } from "@routes/routes";
+import { VehicleCard } from "@components/index";
 
 export const ProfilePage = () => {
   const { id: userId } = useParams();
+  const navigate = useNavigate();
+
   const {
     data: profile,
     isLoading,
     error,
     refetch,
   } = useFetchUserProfile(userId || "");
+
   const { data: userRating, isLoading: isRatingLoading } = useGetUserRating(
     userId || ""
   );
+
+  const { data: userVehicles, isLoading: isLoadingVehicles } =
+    useFetchUserVehicles(userId || "");
 
   const { data: tokenUser } = useToken();
   const isOwnProfile = !!tokenUser?.id && userId === tokenUser.id;
@@ -137,8 +146,29 @@ export const ProfilePage = () => {
       </div>
 
       <div className={c.section}>
-        <h3>Automobili</h3>
-        {/* TODO: render vozila */}
+        <div className={c.sectionHeader}>
+          <h3>Automobili</h3>
+          {isOwnProfile && (
+            <img
+              src={pencilSvg}
+              alt="Uredi popis"
+              onClick={() => navigate(routes.USER_VEHICLES)}
+              className={c.editVehicleListIcon}
+            />
+          )}
+        </div>
+
+        {isLoadingVehicles ? (
+          <p>Učitavanje vozila...</p>
+        ) : userVehicles && userVehicles.length > 0 ? (
+          <div className={c.vehiclesGrid}>
+            {userVehicles.map((v) => (
+              <VehicleCard key={v.id} vehicle={v} />
+            ))}
+          </div>
+        ) : (
+          <p>Nije dodano nijedno vozilo.</p>
+        )}
       </div>
 
       <div className={c.section}>

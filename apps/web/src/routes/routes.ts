@@ -11,5 +11,5 @@ export const routes: RouteType = {
   ADD_VEHICLE: "/add-vehicle",
   PROFILE_PAGE: "/profile/:id",
   USERS_DRIVES: "/user/drives",
-  USERS_VEHICLES: "/user/vehicles",
+  USER_VEHICLES: "/user/vehicles",
 };
