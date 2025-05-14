@@ -1,4 +1,3 @@
-import { FuelTypeEnum } from "enums";
 import { StepProps } from "../../../types";
 import c from "./SecondStep.module.css";
 import gearBoxIcon from "../../../assets/images/gearboxIcon.svg";
@@ -12,6 +11,7 @@ import {
   SensorsIcon,
   UsbIcon,
 } from "@components/icons";
+import { FuelTypeEnum } from "enums";
 
 const featureList = [
   { key: "usb", label: "USB", Icon: UsbIcon },

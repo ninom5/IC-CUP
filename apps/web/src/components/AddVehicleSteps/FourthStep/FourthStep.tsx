@@ -1,5 +1,6 @@
 import c from "./FourthStep.module.css";
 import { StepProps } from "../../../types/index";
+import { AutoCompleteInput } from "@components/AutoCompleteInput/AutoCompleteInput";
 
 export const FourthStep = ({ data, onDataChange }: StepProps) => {
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -9,6 +10,32 @@ export const FourthStep = ({ data, onDataChange }: StepProps) => {
       details: {
         ...data.details,
       },
+    });
+  };
+
+  const handlePlaceResolved = (
+    place: google.maps.places.PlaceResult,
+    addressComponents: google.maps.GeocoderAddressComponent[]
+  ) => {
+    if (!place.geometry?.location) return;
+
+    const lat = place.geometry.location.lat();
+    const lng = place.geometry.location.lng();
+
+    const cityComponent = addressComponents.find(
+      (component) =>
+        component.types.includes("locality") ||
+        component.types.includes("administrative_area_level_2")
+    );
+
+    const city = cityComponent ? cityComponent.long_name : "";
+
+    onDataChange({
+      ...data,
+      city: city,
+      pickupAddress: place.formatted_address || "",
+      latitude: lat,
+      longitude: lng,
     });
   };
 
@@ -26,6 +53,11 @@ export const FourthStep = ({ data, onDataChange }: StepProps) => {
           />{" "}
           €
         </label>
+      </div>
+
+      <div className={c.inputContainer}>
+        <h3>Lokacija</h3>
+        <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
       </div>
     </div>
   );

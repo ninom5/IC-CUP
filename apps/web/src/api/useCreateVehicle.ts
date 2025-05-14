@@ -40,15 +40,14 @@ const createVehicle = async (vehicleData: VehicleData) => {
   return response.data;
 };
 
-export const useCreateVehicle = (): UseMutationResult<
-  any,
-  Error,
-  VehicleData
-> => {
+export const useCreateVehicle = (
+  navigate: (to: string) => void
+): UseMutationResult<any, Error, VehicleData> => {
   return useMutation({
     mutationFn: createVehicle,
     onSuccess: () => {
       toast.success("Vozilo uspješno dodano!");
+      navigate("/user/vehicles");
     },
     onError: (error) => {
       console.error("Error creating vehicle:", error);

@@ -7,14 +7,17 @@ import {
   ThirdStep,
 } from "@components/index";
 import { VehicleData } from "../../types";
-import { CarCategoryEnum, FuelTypeEnum, VehicleEnum } from "enums";
 import { toast } from "react-toastify";
 import { useCreateVehicle } from "@api/useCreateVehicle";
 import { extractUserInfo } from "@utils/extractUserInfo.util";
 import { isRegistrationValid } from "@utils/isRegistrationValid.util";
+import { CarCategoryEnum, FuelTypeEnum, VehicleEnum } from "enums";
+import xIcon from "../../assets/images/xIcon.svg";
+import { useNavigate } from "react-router-dom";
 
 export const AddVehiclePage = () => {
   const userData = extractUserInfo();
+  const navigate = useNavigate();
 
   const [formStep, setFormStep] = useState(1);
   const [vehicleData, setVehicleData] = useState<VehicleData>({
@@ -28,8 +31,8 @@ export const AddVehiclePage = () => {
     vehicleLicenseImg: null,
     registration: "",
     registrationExpiration: "",
-    pickupAddress: "bla",
-    city: "bla",
+    pickupAddress: "",
+    city: "",
     longitude: 0,
     latitude: 0,
     vehicleType: VehicleEnum.CAR,
@@ -51,7 +54,7 @@ export const AddVehiclePage = () => {
     },
   });
 
-  const createVehicleMutation = useCreateVehicle();
+  const createVehicleMutation = useCreateVehicle(navigate);
 
   const canProceedToNextStep = (): boolean => {
     if (formStep === 1) {
@@ -61,6 +64,7 @@ export const AddVehiclePage = () => {
         vehicleLicenseImg,
         brand,
         model,
+        productionYear,
       } = vehicleData;
       if (
         !isRegistrationValid(vehicleData.registration) ||
@@ -68,7 +72,8 @@ export const AddVehiclePage = () => {
         !registrationExpiration ||
         !vehicleLicenseImg ||
         !brand ||
-        !model
+        !model ||
+        productionYear > new Date().getFullYear()
       ) {
         toast.error("Molimo popunite točno sve podatke u 1. koraku.");
         return false;
@@ -84,7 +89,11 @@ export const AddVehiclePage = () => {
 
     if (formStep === 4) {
       if (vehicleData.dailyPrice <= 0) {
-        toast.error("Cijena po danu mora biti veca od 0.");
+        toast.error("Cijena po danu mora biti veća od 0.");
+        return false;
+      }
+      if (!vehicleData.pickupAddress || !vehicleData.city) {
+        toast.error("Molimo odaberite validnu lokaciju preuzimanja vozila.");
         return false;
       }
     }
@@ -117,7 +126,10 @@ export const AddVehiclePage = () => {
     <section className={c.addVehiclePageSection}>
       <div>
         <div className={c.header}>
-          <h1>Dodaj kola</h1>
+          <h1>
+            Dodaj kola{" "}
+            <img src={xIcon} onClick={() => navigate("/user/vehicles")} />
+          </h1>
 
           <div className={c.formSteps}>
             <p>{formStep} / 4</p>

@@ -221,8 +221,34 @@ export class VehicleService {
 
     if (!userExists) throw new NotFoundException('User not found');
 
-    return this.prisma.vehicle.findMany({
+    const vehicles = await this.prisma.vehicle.findMany({
       where: { ownerId: userId },
+      include: {
+        rentals: {
+          include: {
+            review: true,
+          },
+        },
+      },
+    });
+
+    return vehicles.map((vehicle) => {
+      const reviews = vehicle.rentals
+        .map((rental) => rental.review?.rating)
+        .filter((r): r is number => r !== undefined);
+
+      const avgRating =
+        reviews.length > 0
+          ? reviews.reduce((a, b) => a + b, 0) / reviews.length
+          : null;
+
+      const reviewCount = reviews.length;
+
+      return {
+        ...vehicle,
+        avgRating,
+        reviewCount,
+      };
     });
   }
 

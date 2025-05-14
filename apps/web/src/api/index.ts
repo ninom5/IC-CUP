@@ -7,6 +7,7 @@ export * from "./useGetUserByEmail";
 export * from "./useUploadImages";
 export * from "./useCreateVehicle";
 export * from "./useCreateAvailability";
+export * from "./useFetchUserVehicles";
 export * from "./useFetchVehicleById";
 export * from "./useFetchAllVehiclesPagination";
 export * from "./useCreateRentalPayment";

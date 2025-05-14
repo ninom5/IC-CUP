@@ -6,6 +6,7 @@ import {
   VehiclesPage,
   HomePage,
   NotFoundPage,
+  UserVehicles,
   VehiclePage,
   BlockedPage,
 } from "@pages/index";
@@ -22,6 +23,7 @@ export const Router = () => {
           <Route path={routes.VEHICLES} element={<VehiclesPage />} />
           <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
           <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
+          <Route path={routes.USER_VEHICLES} element={<UserVehicles />} />
         </Route>
 
         <Route element={<ProtectedRoute />}>

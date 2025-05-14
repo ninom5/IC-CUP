@@ -6,9 +6,9 @@ export const routes: RouteType = {
   VEHICLES: "/vehicles",
   VEHICLE_PAGE: "/vehicle/:id",
   BECOME_HOST: "/become-host",
-  ADD_VEHICLE: "/add-vehicle",
+  USER_VEHICLES: "/user/vehicles",
+  ADD_VEHICLE: "/user/vehicle/add-vehicle",
   USERS_DRIVES: "/user/drives",
-  USERS_VEHICLES: "/user/vehicles",
   BLOCKED: "/blocked",
   NOT_FOUND: "*",
 };

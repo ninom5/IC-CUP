@@ -1,4 +1,3 @@
-import { CarCategoryEnum } from "enums";
 import { StepProps } from "../../../types";
 import c from "./FirstStep.module.css";
 import { getMinDate } from "@utils/getMinDate.util";
@@ -11,6 +10,7 @@ import {
   SuvIcon,
 } from "@components/icons";
 import checkmarkIcon from "../../../assets/images/checkmarkIcon.svg";
+import { CarCategoryEnum } from "enums";
 
 const CAR_CATEGORIES = [
   CarCategoryEnum.COUPE,

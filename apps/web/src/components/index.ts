@@ -22,7 +22,7 @@ export * from "./NavBar/NavBar";
 export * from "./Contact/Contact";
 export * from "./Footer/Footer";
 export * from "./SiteMapFooter/SiteMapFooter";
-
+export * from "./AddVehicleSteps/VehicleAddedMessage/VehicleAddedMessage";
 export * from "./VehicleGallery/VehicleGallery";
 export * from "./VehicleDescription/VehicleDescription";
 export * from "./InsuranceCard/InsuranceCard";
