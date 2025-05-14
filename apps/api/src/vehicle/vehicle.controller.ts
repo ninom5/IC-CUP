@@ -60,7 +60,7 @@ export class VehicleController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.vehicleService.findOne(id);
+    return this.vehicleService.findUserVehicle(id);
   }
 
   @Patch(':id')

@@ -13,3 +13,5 @@ export * from "./useGetUserRating";
 export * from "./useFetchUserVehicles";
 export * from "./useGetUserReviews";
 export * from "./useUploadDocumentsSettingsPage";
+export * from "./useFetchUserVehicle";
+export * from "./useFetchVehicleAvailabilities";

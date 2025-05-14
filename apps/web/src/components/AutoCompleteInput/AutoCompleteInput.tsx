@@ -34,7 +34,9 @@ export const AutoCompleteInput = ({
       return;
     }
 
-    inputRef.current.value = defaultValue;
+    if (inputRef.current && !inputRef.current.value) {
+      inputRef.current.value = defaultValue;
+    }
 
     const autocomplete = new google.maps.places.Autocomplete(inputRef.current, {
       fields: ["geometry", "name", "formatted_address"],

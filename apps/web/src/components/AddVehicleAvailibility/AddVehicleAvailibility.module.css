@@ -7,7 +7,6 @@
 }
 
 .inputContainer > h3 {
-  font-family: "Nunito Sans";
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -17,7 +16,7 @@
 
 .intervalContainer {
   display: flex;
-  width: 427px;
+  width: 460px;
   height: 48px;
   padding: 8px 15px;
   align-items: center;
@@ -33,7 +32,6 @@
   align-items: center;
   flex-shrink: 0;
   color: var(--background-black, #222);
-  font-family: "Nunito Sans";
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -42,7 +40,6 @@
 
 .intervalContainer > label > input {
   color: var(--background-black, #222);
-  font-family: "Nunito Sans";
   font-size: 20px;
   font-style: normal;
   font-weight: 400;

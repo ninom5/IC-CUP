@@ -1,4 +1,3 @@
-import { FuelType } from "enums";
 import { StepProps } from "../../../types";
 import c from "./SecondStep.module.css";
 import gearBoxIcon from "../../../assets/images/gearboxIcon.svg";
@@ -12,6 +11,7 @@ import {
   SensorsIcon,
   UsbIcon,
 } from "@components/icons";
+import { FuelTypeEnum, TransmissionTypeEnum } from "enums";
 
 const featureList = [
   { key: "usb", label: "USB", Icon: UsbIcon },
@@ -28,21 +28,12 @@ export const SecondStep = ({ data, onDataChange }: StepProps) => {
   ) => {
     const { name, value } = e.target;
 
-    if (name === "transmission") {
-      onDataChange({
-        details: {
-          ...data.details,
-          isAutomatic: value === "automatic",
-        },
-      });
-    } else {
-      onDataChange({
-        details: {
-          ...data.details,
-          [name]: name === "numOfSeats" ? Number(value) : value,
-        },
-      });
-    }
+    onDataChange({
+      details: {
+        ...data.details,
+        [name]: name === "numOfSeats" ? Number(value) : value,
+      },
+    });
   };
 
   const handleFeature = (feature: keyof typeof data.features) => {
@@ -64,11 +55,14 @@ export const SecondStep = ({ data, onDataChange }: StepProps) => {
 
             <select
               name="transmission"
-              value={data.details.isAutomatic ? "automatic" : "manual"}
+              value={data.details.transmission}
               onChange={handleChange}
             >
-              <option value="automatic">Automatic</option>
-              <option value="manual">Manual</option>
+              {Object.values(TransmissionTypeEnum).map((tt) => (
+                <option key={tt} value={tt}>
+                  {tt}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -102,7 +96,7 @@ export const SecondStep = ({ data, onDataChange }: StepProps) => {
               value={data.details.fuelType}
               onChange={handleChange}
             >
-              {Object.values(FuelType).map((ft) => (
+              {Object.values(FuelTypeEnum).map((ft) => (
                 <option key={ft} value={ft}>
                   {ft}
                 </option>

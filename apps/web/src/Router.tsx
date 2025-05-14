@@ -7,6 +7,8 @@ import {
   HomePage,
   NotFoundPage,
   ProfilePage,
+  UserVehiclesPage,
+  UserVehiclePage,
 } from "@pages/index";
 import { SearchBarLayout, NavBarLayout } from "@layouts/index";
 // import { AdminRoutes } from "@routes/index ";
@@ -18,9 +20,15 @@ export const Router = () => {
         <Route element={<SearchBarLayout />}>
           <Route path={routes.HOME} element={<HomePage />} />
           <Route path={routes.CARS} element={<VehiclesPage />} />
+          <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
+          <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
+          <Route path={routes.USER_VEHICLES} element={<UserVehiclesPage />} />
+          <Route
+            path={routes.USER_VEHICLE_PROFILE}
+            element={<UserVehiclePage />}
+          />
         </Route>
-        <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
-        <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
+
         {/* <AdminRoutes>
 
 </AdminRoutes> */}

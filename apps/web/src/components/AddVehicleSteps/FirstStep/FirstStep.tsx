@@ -1,4 +1,3 @@
-import { CarCategory } from "enums";
 import { StepProps } from "../../../types";
 import c from "./FirstStep.module.css";
 import { getMinDate } from "@utils/getMinDate.util";
@@ -11,27 +10,28 @@ import {
   SuvIcon,
 } from "@components/icons";
 import checkmarkIcon from "../../../assets/images/checkmarkIcon.svg";
+import { CarCategoryEnum } from "enums";
 
 const CAR_CATEGORIES = [
-  CarCategory.COUPE,
-  CarCategory.SEDAN,
-  CarCategory.CABRIOLET,
-  CarCategory.SUV,
-  CarCategory.HATCHBACK,
+  CarCategoryEnum.COUPE,
+  CarCategoryEnum.SEDAN,
+  CarCategoryEnum.CABRIOLET,
+  CarCategoryEnum.SUV,
+  CarCategoryEnum.HATCHBACK,
 ] as const;
 
 const CATEGORY_ICONS = {
-  [CarCategory.COUPE]: CoupeIcon,
-  [CarCategory.SEDAN]: SedanIcon,
-  [CarCategory.CABRIOLET]: CabrioletIcon,
-  [CarCategory.SUV]: SuvIcon,
-  [CarCategory.HATCHBACK]: HatchbackIcon,
+  [CarCategoryEnum.COUPE]: CoupeIcon,
+  [CarCategoryEnum.SEDAN]: SedanIcon,
+  [CarCategoryEnum.CABRIOLET]: CabrioletIcon,
+  [CarCategoryEnum.SUV]: SuvIcon,
+  [CarCategoryEnum.HATCHBACK]: HatchbackIcon,
 };
 
 export const FirstStep = ({ data, onDataChange }: StepProps) => {
   const inputFileRef = useRef<HTMLInputElement>(null);
 
-  const handleCategoryChange = (category: CarCategory) => {
+  const handleCategoryChange = (category: CarCategoryEnum) => {
     onDataChange({
       details: {
         ...data.details,
@@ -60,8 +60,8 @@ export const FirstStep = ({ data, onDataChange }: StepProps) => {
   };
 
   const getIconColor = (
-    category: CarCategory,
-    selectedCategory: CarCategory
+    category: CarCategoryEnum,
+    selectedCategory: CarCategoryEnum
   ) => {
     return category === selectedCategory ? "#222" : "#C0BEBE";
   };
@@ -105,6 +105,7 @@ export const FirstStep = ({ data, onDataChange }: StepProps) => {
             type="date"
             name="registrationExpiration"
             min={getMinDate(30)}
+            max={getMinDate(365)}
             value={data.registrationExpiration}
             onChange={handleChange}
           />

@@ -1,4 +1,4 @@
-export enum CarCategory {
+export enum CarCategoryEnum {
   COUPE = "COUPE",
   SEDAN = "SEDAN",
   CABRIOLET = "CABRIOLET",
@@ -6,13 +6,18 @@ export enum CarCategory {
   HATCHBACK = "HATCHBACK",
 }
 
-export enum FuelType {
+export enum FuelTypeEnum {
   PETROL = "PETROL",
   DIESEL = "DIESEL",
   ELECTRIC = "ELECTRIC",
   HYBRID = "HYBRID",
 }
 
-export enum VehicleType {
+export enum VehicleEnum {
   CAR = "CAR",
+}
+
+export enum TransmissionTypeEnum {
+  MANUAL = "MANUAL",
+  AUTOMATIC = "AUTOMATIC",
 }

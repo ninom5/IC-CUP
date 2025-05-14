@@ -36,6 +36,11 @@ export class VehicleAvailabilityController {
     return this.vehicleAvailabilityService.findAll();
   }
 
+  @Get('/vehicle/:id')
+  findVehicleAvailabilities(@Param('id') id: string) {
+    return this.vehicleAvailabilityService.findVehicleAvailabilities(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.vehicleAvailabilityService.findOne(id);

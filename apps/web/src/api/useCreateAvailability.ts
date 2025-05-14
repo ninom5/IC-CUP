@@ -4,14 +4,14 @@ import { api } from "./base";
 import { toast } from "react-toastify";
 
 const createAvailability = async (
-  availibilityIntervals: AvailabilityInterval[]
+  availabilityInterval: AvailabilityInterval
 ) => {
   const response = await api.post(
-    `/vehicle-availability/create-multiple`,
-    availibilityIntervals
+    `/vehicle-availability`,
+    availabilityInterval
   );
 
-  return response.data;
+  return response;
 };
 
 export const useCreateAvailability = () => {
@@ -21,10 +21,7 @@ export const useCreateAvailability = () => {
       toast.success("Dostupnost vozila je uspješno kreirana!");
     },
     onError: (error: any) => {
-      const errorMessage =
-        error?.response?.data?.message ||
-        "Došlo je do greške prilikom kreiranja dostupnosti vozila.";
-      toast.error(errorMessage);
+      toast.error(error);
     },
   });
 };
