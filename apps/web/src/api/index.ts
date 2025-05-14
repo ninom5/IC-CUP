@@ -8,6 +8,8 @@ export * from "./useUploadImages";
 export * from "./useCreateVehicle";
 export * from "./useCreateAvailability";
 export * from "./useFetchUserVehicles";
+export * from "./useFetchUserVehicle";
+export * from "./useFetchVehicleAvailabilities";
 export * from "./useFetchVehicleById";
 export * from "./useFetchAllVehiclesPagination";
 export * from "./useCreateRentalPayment";

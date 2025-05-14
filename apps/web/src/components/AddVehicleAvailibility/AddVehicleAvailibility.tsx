@@ -1,20 +1,26 @@
 import { getMinDate } from "@utils/getMinDate.util";
 import c from "./AddVehicleAvailibility.module.css";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { toast } from "react-toastify";
 import xIcon from "../../assets/images/xIcon.svg";
-import { AvailabilityInterval } from "../../types/index";
 import { isIntervalAtLeastOneDay } from "@utils/isIntervalAtLeastOneDay.util";
+import { useFetchVehicleAvailabilities } from "@api/useFetchVehicleAvailabilities";
+import { useCreateAvailability } from "@api/useCreateAvailability";
+import { useDeleteVehicleAvailability } from "@api/useDeleteVehicleAvailability";
 
-export const AddVehicleAvailibility = () => {
-  const [availabilityIntervals, setAvailabilityIntervals] = useState<
-    AvailabilityInterval[]
-  >([]);
+export const AddVehicleAvailibility = ({
+  vehicleId,
+}: {
+  vehicleId: string;
+}) => {
+  const { data, isLoading, refetch } = useFetchVehicleAvailabilities(vehicleId);
+  const { mutateAsync: createAvailability } = useCreateAvailability();
+  const { mutateAsync: deleteAvailability } = useDeleteVehicleAvailability();
 
   const startDateRef = useRef<HTMLInputElement>(null);
   const endDateRef = useRef<HTMLInputElement>(null);
 
-  const handleAddInterval = () => {
+  const handleAddInterval = async () => {
     if (!startDateRef.current || !endDateRef.current) return;
 
     const startDate = startDateRef.current.value;
@@ -32,51 +38,55 @@ export const AddVehicleAvailibility = () => {
       return;
     }
 
-    const isOverlapping = availabilityIntervals.some(
-      (interval) =>
-        new Date(startDate) <= new Date(interval.endDate) &&
-        new Date(endDate) >= new Date(interval.startDate)
-    );
+    await createAvailability({
+      vehicleId,
+      startDate,
+      endDate,
+    });
 
-    if (isOverlapping) {
-      toast.error("Uneseni interval se preklapa s postojećim intervalom.");
-      return;
-    }
-
-    const newInterval: AvailabilityInterval = { startDate, endDate };
-    const updatedIntervals = [...availabilityIntervals, newInterval];
-
-    setAvailabilityIntervals(updatedIntervals);
+    await refetch();
 
     startDateRef.current.value = "";
     endDateRef.current.value = "";
   };
 
-  const handleRemoveInterval = (indexToRemove: number) => {
-    const updatedIntervals = availabilityIntervals.filter(
-      (_, index) => index !== indexToRemove
-    );
-    setAvailabilityIntervals(updatedIntervals);
+  const handleDeleteInterval = (intervalId: string) => {
+    deleteAvailability(intervalId, {
+      onSuccess: async () => {
+        await refetch();
+      },
+    });
   };
+
+  if (isLoading) return <div>Učitavanje dostupnosti...</div>;
 
   return (
     <div className={c.inputContainer}>
       <h3>Unesi slobodne periode</h3>
 
-      {availabilityIntervals.length > 0 && (
+      {data && data.length > 0 ? (
         <div className={c.intervalsList}>
-          {availabilityIntervals.map((interval, index) => (
-            <div key={index} className={c.intervalItem}>
+          {data.map((interval) => (
+            <div key={interval.id} className={c.intervalItem}>
               <span>
-                <strong>Od:</strong> {interval.startDate}
+                <strong>Od:</strong>{" "}
+                {new Date(interval.startDate).toLocaleDateString()}
               </span>
               <span>
-                <strong>Do:</strong> {interval.endDate}
+                <strong>Do:</strong>{" "}
+                {new Date(interval.endDate).toLocaleDateString()}
               </span>
-              <img src={xIcon} onClick={() => handleRemoveInterval(index)} />
+              <img
+                src={xIcon}
+                onClick={() => handleDeleteInterval(interval.id)}
+                alt="Ukloni interval"
+                className={c.deleteIcon}
+              />
             </div>
           ))}
         </div>
+      ) : (
+        <p>Trenutno nema unesenih perioda.</p>
       )}
 
       <div className={c.intervalContainer}>
@@ -89,7 +99,11 @@ export const AddVehicleAvailibility = () => {
         </label>
       </div>
 
-      <button type="button" onClick={handleAddInterval}>
+      <button
+        type="button"
+        onClick={handleAddInterval}
+        className={c.confirmButton}
+      >
         Potvrdi
       </button>
     </div>

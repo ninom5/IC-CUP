@@ -95,6 +95,16 @@ async function main() {
         numOfSeats: '7',
         transmission: Transmission.MANUAL,
       },
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -134,6 +144,16 @@ async function main() {
         transmission: Transmission.MANUAL,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -173,6 +193,16 @@ async function main() {
         transmission: Transmission.MANUAL,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -212,6 +242,16 @@ async function main() {
         transmission: Transmission.MANUAL,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -251,6 +291,16 @@ async function main() {
         transmission: Transmission.MANUAL,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -290,6 +340,16 @@ async function main() {
         transmission: Transmission.MANUAL,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -329,6 +389,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
   const vehicle8 = await prisma.vehicle.create({
@@ -367,6 +437,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
   const vehicle9 = await prisma.vehicle.create({
@@ -405,6 +485,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
   const vehicle10 = await prisma.vehicle.create({
@@ -443,6 +533,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
   const vehicle11 = await prisma.vehicle.create({
@@ -481,6 +581,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -520,6 +630,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -559,6 +679,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -598,6 +728,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -637,6 +777,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 

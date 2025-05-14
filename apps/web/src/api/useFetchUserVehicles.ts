@@ -1,11 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "./base";
-import { VehicleType } from "types/vehicle.type";
-
-interface UserVehiclesType extends VehicleType {
-  avgRating: number | null;
-  reviewCount: number;
-}
+import { UserVehiclesType } from "../types/index";
 
 const getUserVehicles = async (userId: string): Promise<UserVehiclesType[]> => {
   const response = await api.get<never, UserVehiclesType[]>(

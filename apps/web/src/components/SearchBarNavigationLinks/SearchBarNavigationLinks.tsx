@@ -1,10 +1,10 @@
 import { notifSvg, profileLogo } from "@assets/images";
 import { LoginForm } from "@components/LoginForm/LoginForm";
+import { RegisterForm } from "@components/RegisterForm/RegisterForm";
 import { useAuthContext, useToken } from "@hooks/index";
 import { routes } from "@routes/index";
 import { Link, useNavigate } from "react-router-dom";
 import "./searchBarNavigationLinks.css";
-import { RegisterForm } from "@components/RegisterForm/RegisterForm";
 
 export const SearchBarNavigationLinks = () => {
   const {
@@ -43,7 +43,7 @@ export const SearchBarNavigationLinks = () => {
         </>
       ) : (
         <>
-          <Link to={routes.ABOUT}>Kako radi</Link>
+          <NavLink to={routes.ABOUT}>Kako radi</NavLink>
 
           <button
             onClick={() => setShowRegister(true)}

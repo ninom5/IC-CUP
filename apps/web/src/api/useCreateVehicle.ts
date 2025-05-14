@@ -47,7 +47,7 @@ export const useCreateVehicle = (
     mutationFn: createVehicle,
     onSuccess: () => {
       toast.success("Vozilo uspješno dodano!");
-      navigate("/user/vehicles");
+      navigate("/user/vehicle");
     },
     onError: (error) => {
       console.error("Error creating vehicle:", error);
