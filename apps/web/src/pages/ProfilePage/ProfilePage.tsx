@@ -164,6 +164,7 @@ export const ProfilePage = () => {
                   <ButtonAccent
                     content={isSaving ? "Spremanje..." : "Spremi promjene"}
                     onClick={handleSaveDescription}
+                    disabled={isSaving}
                   />
                 </>
               ) : (
