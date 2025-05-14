@@ -320,12 +320,13 @@ export const ProfilePage = () => {
                 placeholder={profile.phoneNumber}
               />
             </div>
-
-            <ButtonAccent
-              content="Spremi promjene"
-              onClick={handleSaveBasicInfo}
-              disabled={isSaving}
-            />
+            <div>
+              <ButtonAccent
+                content="Spremi promjene"
+                onClick={handleSaveBasicInfo}
+                disabled={isSaving}
+              />
+            </div>
           </div>
           <div className={c.settingsDocuments}>
             <h2>Dokumenti</h2>
