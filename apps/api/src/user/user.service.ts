@@ -38,6 +38,8 @@ export class UserService {
         description: true,
         phoneNumber: true,
         address: true,
+        idCard: true,
+        driverLicense: true,
       },
     });
     if (!user) throw new NotFoundException('User with provided id not found');

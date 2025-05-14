@@ -9,6 +9,8 @@ export type UserProfileType = {
   description: string;
   phoneNumber: string;
   address: string;
+  idCard: string;
+  driverLicense: string;
 };
 
 export type UserRating = {

@@ -14,7 +14,12 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { fallbackImageSvg, pencilSvg } from "@assets/images";
 import { routes } from "@routes/routes";
-import { ButtonAccent, ReviewCard, VehicleCard } from "@components/index";
+import {
+  ButtonAccent,
+  DocumentsSettings,
+  ReviewCard,
+  VehicleCard,
+} from "@components/index";
 import { ReviewCardData } from "types";
 
 export const ProfilePage = () => {
@@ -321,6 +326,10 @@ export const ProfilePage = () => {
               onClick={handleSaveBasicInfo}
               disabled={isSaving}
             />
+          </div>
+          <div className={c.settingsDocuments}>
+            <h2>Dokumenti</h2>
+            <DocumentsSettings userId={profile.id} refetch={refetch} />
           </div>
         </div>
       )}

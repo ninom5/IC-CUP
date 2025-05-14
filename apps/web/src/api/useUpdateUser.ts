@@ -9,6 +9,8 @@ export type UpdateUserPayload = {
   password?: string;
   phoneNumber?: string;
   address?: string;
+  idCard?: string;
+  driverLicense?: string;
 };
 
 const updateUser = async ({ id, ...data }: UpdateUserPayload) => {
