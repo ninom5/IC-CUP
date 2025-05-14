@@ -70,6 +70,7 @@ export type VehicleType = {
   rentals: Rental[];
   availabilities: AvailabilityInterval[];
   features: VehicleFeatures;
+  ownerId: string;
 };
 
 export type Rental = {

@@ -15,7 +15,7 @@ export const VehicleCard = ({ vehicle, variant = "default" }: Props) => {
   const { totalRating, numberOfRatings } = getAverageVehicleRating(vehicle);
   return (
     <section
-      className="vehicle-card"
+      className={`${c.vehicleCard} ${isProfile ? c.profileCard : ""}`}
       onClick={() => navigate(`/vehicle/${vehicle.id}`)}
     >
       <div className={c.vehicleImageWrapper}>
