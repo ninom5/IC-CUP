@@ -193,7 +193,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className="modal-overlay" onClick={() => setShowRegister(false)}>
+    <div className="modal-overlay">
       <div className="register-pop-up" onClick={(e) => e.stopPropagation()}>
         <section className="register-section">
           <h1>Registracija</h1>

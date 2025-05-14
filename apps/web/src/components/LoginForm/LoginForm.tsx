@@ -52,7 +52,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <div className="modal-overlay" onClick={() => setShowLogin(false)}>
+    <div className="modal-overlay">
       <div className="login-pop-up" onClick={(e) => e.stopPropagation()}>
         <section className="login-section">
           <h1>Prijava</h1>

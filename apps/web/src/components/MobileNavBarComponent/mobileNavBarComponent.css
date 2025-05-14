@@ -1,0 +1,15 @@
+.mobile-nav-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-nav-component {
+  font-size: 16px;
+  font-weight: 400;
+}
+.mobile-nav-component img {
+  max-width: 30px;
+  height: auto;
+}
