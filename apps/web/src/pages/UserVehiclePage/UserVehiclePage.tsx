@@ -3,9 +3,9 @@ import c from "./UserVehiclePage.module.css";
 import { useParams } from "react-router-dom";
 import starIcon from "../../assets/images/starIcon.svg";
 import checkmarkIcon from "../../assets/images/checkmarkIcon.svg";
-import pencilIcon from "../../assets/images/pencilIcon.svg";
 import {
   AddVehicleAvailibility,
+  VehicleDescriptionEdit,
   VehiclePriceEdit,
   VehicleRegistrationEdit,
 } from "@components/index";
@@ -66,12 +66,10 @@ export const UserVehiclePage = () => {
 
         <AddVehicleAvailibility vehicleId={id || ""} />
 
-        <div className={c.descriptionContainer}>
-          <h3>
-            Opis <img src={pencilIcon} className={c.pencilIcon} />
-          </h3>
-          <p>{data.description ? data.description : "Nema opisa"}</p>
-        </div>
+        <VehicleDescriptionEdit
+          description={data.description}
+          handleUpdateVehicle={handleUpdateVehicle}
+        />
 
         <VehicleRegistrationEdit
           registration={data.registration}
