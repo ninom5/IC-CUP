@@ -135,3 +135,14 @@
   background-color: var(--background-white);
   border: 1px solid var(--stroke-gray);
 }
+
+.settingsDocuments {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.settingsDocuments h2 {
+  padding-left: 0px;
+}
