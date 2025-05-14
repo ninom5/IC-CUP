@@ -52,7 +52,7 @@ export const UserVehiclePage = () => {
           </h3>
         </div>
 
-        <AddVehicleAvailibility />
+        <AddVehicleAvailibility vehicleId={id || ""} />
 
         <div className={c.descriptionContainer}>
           <h3>

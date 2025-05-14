@@ -72,6 +72,7 @@ export type Review = {
 };
 
 export type UserVehiclesType = {
+  id: string;
   ownerId: string;
   brand: string;
   model: string;

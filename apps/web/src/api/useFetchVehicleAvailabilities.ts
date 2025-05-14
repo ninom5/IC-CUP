@@ -1,17 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "./base";
-import { UserVehiclesType } from "../types/index";
+import { AvailabilityInterval } from "../types/index";
+
+interface ExtendedAvailabilityInterval extends AvailabilityInterval {
+  id: string;
+}
 
 const getVehicleAvailaibilities = async (
   vehicleId: string
-): Promise<UserVehiclesType[]> => {
-  const response = await api.get<never, UserVehiclesType[]>(
+): Promise<ExtendedAvailabilityInterval[]> => {
+  const response = await api.get<never, ExtendedAvailabilityInterval[]>(
     `/vehicle-availability/vehicle/${vehicleId}`
   );
   return response;
 };
 
-export const useVehicleAvailabilities = (vehicleId: string) => {
+export const useFetchVehicleAvailabilities = (vehicleId: string) => {
   return useQuery({
     queryKey: ["vehicle-availabilities", vehicleId],
     queryFn: () => getVehicleAvailaibilities(vehicleId),
