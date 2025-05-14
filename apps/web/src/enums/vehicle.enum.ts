@@ -16,3 +16,8 @@ export enum FuelTypeEnum {
 export enum VehicleEnum {
   CAR = "CAR",
 }
+
+export enum TransmissionTypeEnum {
+  MANUAL = "MANUAL",
+  AUTOMATIC = "AUTOMATIC",
+}

@@ -1,4 +1,9 @@
-import { CarCategoryEnum, FuelTypeEnum, VehicleEnum } from "enums";
+import {
+  CarCategoryEnum,
+  FuelTypeEnum,
+  TransmissionTypeEnum,
+  VehicleEnum,
+} from "enums";
 
 export type VehicleData = {
   ownerId: string;
@@ -22,7 +27,7 @@ export type VehicleData = {
 
 export type VehicleDetails = {
   fuelType: FuelTypeEnum;
-  isAutomatic: boolean;
+  transmission: TransmissionTypeEnum;
   category: CarCategoryEnum;
   numOfSeats: number;
 };

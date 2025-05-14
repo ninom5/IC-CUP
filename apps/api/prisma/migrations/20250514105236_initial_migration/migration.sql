@@ -11,7 +11,10 @@ CREATE TYPE "VehicleType" AS ENUM ('CAR', 'MOTORCYCLE', 'BICYCLE', 'SCOOTER');
 CREATE TYPE "FuelType" AS ENUM ('PETROL', 'DIESEL', 'ELECTRIC', 'HYBRID');
 
 -- CreateEnum
-CREATE TYPE "CarCategory" AS ENUM ('SMALL', 'MEDIUM', 'SUV', 'VAN', 'LUXURY');
+CREATE TYPE "CarCategory" AS ENUM ('COUPE', 'SEDAN', 'CABRIOLET', 'SUV', 'HATCHBACK');
+
+-- CreateEnum
+CREATE TYPE "Transmission" AS ENUM ('AUTOMATIC', 'MANUAL');
 
 -- CreateTable
 CREATE TABLE "User" (
@@ -57,9 +60,9 @@ CREATE TABLE "Vehicle" (
     "images" TEXT[],
     "productionYear" INTEGER NOT NULL,
     "dailyPrice" DOUBLE PRECISION NOT NULL,
-    "isAvailable" BOOLEAN NOT NULL DEFAULT false,
     "description" TEXT,
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
+    "vehicleLicenseImg" TEXT NOT NULL,
     "registration" TEXT NOT NULL,
     "registrationExpiration" TIMESTAMP(3) NOT NULL,
     "pickupAddress" TEXT NOT NULL,
@@ -68,6 +71,7 @@ CREATE TABLE "Vehicle" (
     "latitude" DOUBLE PRECISION NOT NULL,
     "vehicleType" "VehicleType" NOT NULL,
     "details" JSONB NOT NULL,
+    "features" JSONB NOT NULL,
 
     CONSTRAINT "Vehicle_pkey" PRIMARY KEY ("id")
 );
@@ -131,6 +135,18 @@ CREATE TABLE "Notification" (
     CONSTRAINT "Notification_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "VehicleAvailability" (
+    "id" TEXT NOT NULL,
+    "vehicleId" TEXT NOT NULL,
+    "startDate" TIMESTAMP(3) NOT NULL,
+    "endDate" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "VehicleAvailability_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
@@ -142,6 +158,12 @@ CREATE UNIQUE INDEX "Review_rentalId_key" ON "Review"("rentalId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Payment_rentalId_key" ON "Payment"("rentalId");
+
+-- CreateIndex
+CREATE INDEX "VehicleAvailability_vehicleId_idx" ON "VehicleAvailability"("vehicleId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "VehicleAvailability_vehicleId_startDate_endDate_key" ON "VehicleAvailability"("vehicleId", "startDate", "endDate");
 
 -- AddForeignKey
 ALTER TABLE "Vehicle" ADD CONSTRAINT "Vehicle_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -169,3 +191,6 @@ ALTER TABLE "Notification" ADD CONSTRAINT "Notification_rentalId_fkey" FOREIGN K
 
 -- AddForeignKey
 ALTER TABLE "Notification" ADD CONSTRAINT "Notification_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "VehicleAvailability" ADD CONSTRAINT "VehicleAvailability_vehicleId_fkey" FOREIGN KEY ("vehicleId") REFERENCES "Vehicle"("id") ON DELETE CASCADE ON UPDATE CASCADE;

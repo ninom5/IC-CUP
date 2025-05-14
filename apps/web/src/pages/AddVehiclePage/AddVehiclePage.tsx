@@ -11,7 +11,12 @@ import { toast } from "react-toastify";
 import { useCreateVehicle } from "@api/useCreateVehicle";
 import { extractUserInfo } from "@utils/extractUserInfo.util";
 import { isRegistrationValid } from "@utils/isRegistrationValid.util";
-import { CarCategoryEnum, FuelTypeEnum, VehicleEnum } from "enums";
+import {
+  CarCategoryEnum,
+  FuelTypeEnum,
+  TransmissionTypeEnum,
+  VehicleEnum,
+} from "enums";
 import xIcon from "../../assets/images/xIcon.svg";
 import { useNavigate } from "react-router-dom";
 
@@ -38,7 +43,7 @@ export const AddVehiclePage = () => {
     vehicleType: VehicleEnum.CAR,
     details: {
       fuelType: FuelTypeEnum.PETROL,
-      isAutomatic: false,
+      transmission: TransmissionTypeEnum.MANUAL,
       category: CarCategoryEnum.SEDAN,
       numOfSeats: 5,
     },
@@ -121,6 +126,8 @@ export const AddVehiclePage = () => {
     3: <ThirdStep data={vehicleData} onDataChange={handleDataChange} />,
     4: <FourthStep data={vehicleData} onDataChange={handleDataChange} />,
   };
+
+  console.log(vehicleData);
 
   return (
     <section className={c.addVehiclePageSection}>
