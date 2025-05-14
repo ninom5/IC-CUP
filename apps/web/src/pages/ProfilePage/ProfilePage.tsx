@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { fallbackImageSvg, pencilSvg } from "@assets/images";
 import { routes } from "@routes/routes";
-import { ReviewCard, VehicleCard } from "@components/index";
+import { ButtonAccent, ReviewCard, VehicleCard } from "@components/index";
 import { ReviewCardData } from "types";
 
 export const ProfilePage = () => {
@@ -87,7 +87,7 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className={c.profileContainer}>
+    <div className={c.profilePageContainer}>
       <div className={c.tabs}>
         {isOwnProfile ? (
           <>
@@ -110,8 +110,8 @@ export const ProfilePage = () => {
       </div>
 
       {activeTab === "profile" && (
-        <div>
-          <div className={c.section}>
+        <div className={c.profileContainer}>
+          <div className={c.profileSection1}>
             <div className={c.profilePictureWrapper}>
               <img
                 src={personPhotoPreview || fallbackImageSvg}
@@ -138,74 +138,82 @@ export const ProfilePage = () => {
                 </>
               )}
             </div>
-            <h2>
-              {profile.firstName} {profile.lastName}
-            </h2>
-            {userRating && (
-              <p className={c.rating}>
-                {userRating.averageRating.toFixed(1)}★({userRating.reviewCount})
-              </p>
-            )}
+            <div className={c.profileStatsWrapper}>
+              <h1>
+                {profile.firstName} {profile.lastName}
+              </h1>
+              {userRating && (
+                <p className={c.rating}>
+                  {userRating.averageRating.toFixed(1)} ★ (
+                  {userRating.reviewCount})
+                </p>
+              )}
+            </div>
           </div>
 
-          <div className={c.section}>
-            <h3>Opis</h3>
-            {isOwnProfile ? (
-              <>
-                <textarea
-                  className={c.textarea}
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-                <button onClick={handleSaveDescription} disabled={isSaving}>
-                  {isSaving ? "Spremanje..." : "Spremi promjene"}
-                </button>
-              </>
-            ) : (
-              <p>{profile.description?.trim() ? profile.description : ""}</p>
-            )}
-          </div>
-
-          <div className={c.section}>
-            <div className={c.sectionHeader}>
-              <h3>Automobili</h3>
-              {isOwnProfile && (
-                <img
-                  src={pencilSvg}
-                  alt="Uredi popis"
-                  onClick={() => navigate(routes.USER_VEHICLES)}
-                  className={c.editVehicleListIcon}
-                />
+          <div className={c.profileSection2}>
+            <div className={c.section}>
+              <h2>Opis</h2>
+              {isOwnProfile ? (
+                <>
+                  <textarea
+                    className={c.textarea}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                  <ButtonAccent
+                    content={isSaving ? "Spremanje..." : "Spremi promjene"}
+                    onClick={handleSaveDescription}
+                  />
+                </>
+              ) : (
+                <div className={c.textarea}>
+                  {profile.description?.trim() ? profile.description : ""}
+                </div>
               )}
             </div>
 
-            {isLoadingVehicles ? (
-              <p>Učitavanje vozila...</p>
-            ) : userVehicles && userVehicles.length > 0 ? (
-              <div className={c.vehiclesGrid}>
-                {userVehicles.map((v) => (
-                  <VehicleCard key={v.id} vehicle={v} />
-                ))}
+            <div className={c.section}>
+              <div className={c.sectionHeader}>
+                <h2>Automobili</h2>
+                {isOwnProfile && (
+                  <img
+                    src={pencilSvg}
+                    alt="Uredi popis"
+                    onClick={() => navigate(routes.USER_VEHICLES)}
+                    className={c.editVehicleListIcon}
+                  />
+                )}
               </div>
-            ) : (
-              <p>Nije dodano nijedno vozilo.</p>
-            )}
-          </div>
 
-          <div className={c.section}>
-            <h3>Recenzije od unajmljivača</h3>
+              {isLoadingVehicles ? (
+                <p>Učitavanje vozila...</p>
+              ) : userVehicles && userVehicles.length > 0 ? (
+                <div className={c.vehiclesGrid}>
+                  {userVehicles.map((v) => (
+                    <VehicleCard key={v.id} vehicle={v} variant="profile" />
+                  ))}
+                </div>
+              ) : (
+                <p>Nije dodano nijedno vozilo.</p>
+              )}
+            </div>
 
-            {isLoadingReviews ? (
-              <p>Učitavanje recenzija...</p>
-            ) : userReviews && userReviews.length > 0 ? (
-              <div className={c.reviewList}>
-                {userReviews.map((review: ReviewCardData) => (
-                  <ReviewCard key={review.id} review={review} />
-                ))}
-              </div>
-            ) : (
-              <p>Korisnik još nema recenzija.</p>
-            )}
+            <div className={c.section}>
+              <h2>Recenzije od unajmljivača</h2>
+
+              {isLoadingReviews ? (
+                <p>Učitavanje recenzija...</p>
+              ) : userReviews && userReviews.length > 0 ? (
+                <div className={c.reviewList}>
+                  {userReviews.map((review: ReviewCardData) => (
+                    <ReviewCard key={review.id} review={review} />
+                  ))}
+                </div>
+              ) : (
+                <p>Korisnik još nema recenzija.</p>
+              )}
+            </div>
           </div>
         </div>
       )}

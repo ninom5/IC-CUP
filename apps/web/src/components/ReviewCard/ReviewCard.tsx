@@ -21,21 +21,23 @@ export const ReviewCard = ({ review }: Props) => {
             className={c.avatar}
             onClick={() => navigate(`/profile/${review.renter.id}`)}
           />
-          <span>{review.renter.firstName}</span>
         </div>
-        <span className={c.date}>{date}</span>
+        <div className={c.userInfo}>
+          <div className={c.nameDate}>
+            <span>{review.renter.firstName}</span>
+            <span>{date}</span>
+          </div>
+          <div className={c.stars}>
+            {Array.from({ length: Math.round(review.rating) }).map((_, i) => (
+              <span key={i}>★</span>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className={c.stars}>
-        {Array.from({ length: Math.round(review.rating) }).map((_, i) => (
-          <span key={i} className={c.filled}>
-            ★
-          </span>
-        ))}
+      <div>
+        {review.comment && <p className={c.comment}>{review.comment}</p>}
       </div>
-
-      {review.comment && <p className={c.comment}>{review.comment}</p>}
-      <hr className={c.separator} />
     </div>
   );
 };

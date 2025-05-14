@@ -1,4 +1,4 @@
-.profileContainer {
+.profilePageContainer {
   width: 985px;
   position: relative;
   top: 10px;
@@ -6,6 +6,11 @@
   display: flex;
   flex-direction: column;
   gap: 60px;
+  margin-bottom: 50px;
+}
+
+.hiddenInput {
+  display: none;
 }
 
 .tabs {
@@ -26,8 +31,19 @@
   border-bottom: 1px solid var(--background-black);
 }
 
-.hiddenInput {
-  display: none;
+.profileContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 155px;
+}
+
+.profileSection1 {
+  width: 295px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
 }
 
 .profilePictureWrapper {
@@ -50,5 +66,34 @@
   right: 0;
   height: 20px;
   width: 20px;
+  cursor: pointer;
+}
+
+.profileSection2 {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  width: 538px;
+}
+
+.profileSection2 h2 {
+  padding-left: 0px;
+}
+
+.textarea {
+  height: 202px;
+  width: 100%;
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid var(--stroke-gray);
+}
+
+.sectionHeader {
+  display: flex;
+  gap: 11px;
+}
+
+.editVehicleListIcon {
+  margin-bottom: 20px;
   cursor: pointer;
 }
