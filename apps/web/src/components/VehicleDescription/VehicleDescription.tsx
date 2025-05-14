@@ -100,33 +100,30 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
 
       <section className="reviews-section">
         <h4>RECENZIJE</h4>
-        {vehicle.rentals?.length > 0 ? (
-          vehicle.rentals.map((rental) => {
-            console.log(rental);
-            const {
-              id: renterId,
-              firstName,
-              lastName,
-              personPhoto,
-            } = rental.renter;
-            const { id, rating, comment, createdAt } = rental.review;
-            const reviewCardData = {
-              id,
-              rating,
-              comment,
-              createdAt,
-              renter: {
-                id: renterId,
-                firstName,
-                lastName,
-                personPhoto,
-              },
-            };
-            return <ReviewCard key={id} review={reviewCardData} />;
-          })
-        ) : (
-          <p>Još nema recenzija za ovo vozilo.</p>
-        )}
+        {(() => {
+          const reviews = vehicle.rentals?.filter((r) => r.review) ?? [];
+
+          return reviews.length > 0 ? (
+            reviews.map(({ renter, review }) => {
+              const reviewCardData = {
+                id: review.id,
+                rating: review.rating,
+                comment: review.comment,
+                createdAt: review.createdAt,
+                renter: {
+                  id: renter.id,
+                  firstName: renter.firstName,
+                  lastName: renter.lastName,
+                  personPhoto: renter.personPhoto,
+                },
+              };
+
+              return <ReviewCard key={review.id} review={reviewCardData} />;
+            })
+          ) : (
+            <p>Još nema recenzija za odabrano vozilo</p>
+          );
+        })()}
       </section>
     </section>
   );
