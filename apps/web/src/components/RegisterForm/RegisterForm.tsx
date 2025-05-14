@@ -9,12 +9,30 @@ import {
 } from "@api/index";
 import "./registerForm.css";
 import { useAuthContext } from "@hooks/useAuthContext";
+import { Spinner } from "@components/index";
 
 export const RegisterForm = () => {
-  const { mutate: register } = useRegister();
   const { mutateAsync: uploadImages } = useUploadImages();
   const { mutateAsync: uploadFiles } = useUploadFiles();
   const { setShowLogin, setShowRegister } = useAuthContext();
+  const { mutate: register, isPending } = useRegister(() => {
+    setRegisterData({
+      firstName: "",
+      lastName: "",
+      dateOfBirth: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      phoneNumber: "",
+      address: "",
+      personPhoto: "",
+      driverLicense: "",
+      idCard: "",
+    });
+
+    setShowRegister(false);
+    setShowLogin(true);
+  });
 
   const [registerData, setRegisterData] = useState({
     firstName: "",
@@ -171,42 +189,7 @@ export const RegisterForm = () => {
       personPhoto: personPhotoLink,
     };
 
-    setRegisterData(updatedRegisterData);
-
-    try {
-      register(updatedRegisterData, {
-        onSuccess: () => {
-          toast.success(
-            "Uspješno ste se registrirali. Sada se možete prijaviti!"
-          );
-
-          setRegisterData({
-            firstName: "",
-            lastName: "",
-            dateOfBirth: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-            phoneNumber: "",
-            address: "",
-            personPhoto: "",
-            driverLicense: "",
-            idCard: "",
-          });
-
-          setShowRegister(false);
-          setShowLogin(true);
-        },
-        onError: (error) => {
-          toast.error(error.message || "Registracija ne uspješna");
-        },
-      });
-    } catch (error: Error | any) {
-      console.error(`Error registering: ${error}`);
-      toast.error(
-        `Pogreška prilikom registracije: ${error?.response?.data?.message}`
-      );
-    }
+    register(updatedRegisterData);
   };
 
   return (
@@ -293,7 +276,7 @@ export const RegisterForm = () => {
                     name="phoneNumber"
                     value={registerData.phoneNumber}
                     onChange={handleChange}
-                    type="text"
+                    type="number"
                     placeholder="091 **** ***"
                     required
                   />
@@ -411,19 +394,28 @@ export const RegisterForm = () => {
             )}
 
             <div className="form-buttons">
-              {formStep > 1 && (
-                <button type="button" onClick={() => setFormStep(formStep - 1)}>
-                  Nazad
-                </button>
-              )}
-              {formStep <= 2 && (
+              {isPending ? (
+                <Spinner />
+              ) : (
                 <>
-                  <button type="button" onClick={() => handleNextStepClick()}>
-                    Dalje
-                  </button>
+                  {formStep > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => setFormStep(formStep - 1)}
+                    >
+                      Nazad
+                    </button>
+                  )}
+                  {formStep <= 2 && (
+                    <button type="button" onClick={handleNextStepClick}>
+                      Dalje
+                    </button>
+                  )}
+                  {formStep === 3 && (
+                    <button type="submit">Registriraj se</button>
+                  )}
                 </>
               )}
-              {formStep === 3 && <button type="submit">Registriraj se</button>}
             </div>
           </form>
 

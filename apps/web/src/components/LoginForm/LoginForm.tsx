@@ -87,7 +87,7 @@ export const LoginForm = () => {
             <button type="submit">Prijavi se</button>
           </form>
 
-          <div className="aha">
+          <div className="no-account">
             <h2>Još nemaš račun?</h2>
 
             <button

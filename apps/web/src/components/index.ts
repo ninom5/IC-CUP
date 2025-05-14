@@ -33,3 +33,4 @@ export * from "./InsuranceList/InsuranceList";
 export * from "./ProtectedRoute/ProtectedRoute";
 export * from "./CheckoutPopUp/CheckoutPopUp";
 export * from "./CustomDatePicker/CustomDatePicker";
+export * from "./Spinner/Spinner";
