@@ -33,9 +33,10 @@ export const SearchBarNavigationLinks = () => {
           <Link to={routes.USERS_DRIVES}>Tvoje vožnje</Link>
           <Link to={routes.USERS_VEHICLES}>Tvoja kola</Link>
 
-          <div className="icon-wrapper">
+          <div className="icon-wrapper" id="profile-icon">
             <img src={profileLogo} alt="slikica profila" />
           </div>
+
           <div className="icon-wrapper">
             <img src={notifSvg} alt="slikica zvona" />
           </div>

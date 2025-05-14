@@ -50,7 +50,7 @@ export const AutoCompleteInput = ({
       const location = place.geometry?.location;
 
       if (!location) {
-        toast.error("No location found for selected place.");
+        toast.error("Lokacija nije pronadena za odabrano područje");
         return;
       }
 
@@ -60,7 +60,7 @@ export const AutoCompleteInput = ({
           !results ||
           !results[0]
         ) {
-          toast.error("Error getting location");
+          toast.error("Pogreška prilikom dohvaćanja lokacije");
           console.error("Geocoder failed:", status);
           return;
         }

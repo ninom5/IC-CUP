@@ -50,7 +50,7 @@ export const SearchBar = () => {
   const handlePlaceResolved = (place: google.maps.places.PlaceResult) => {
     const location = place.geometry?.location;
     if (!location) {
-      toast.error("Location not found");
+      toast.error("Lokacija nije pronađena");
       return;
     }
 

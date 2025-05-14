@@ -52,7 +52,7 @@ export const RegisterForm = () => {
   const handleIdCardChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const images = Array.from(e.target.files || []);
     if (images.length > 2) {
-      toast.error("You can only upload 2 images for ID card.");
+      toast.error("Možete unijeti samo 2 slike za osobnu iskaznicu");
       return;
     }
 
@@ -65,7 +65,7 @@ export const RegisterForm = () => {
   ) => {
     const images = Array.from(e.target.files || []);
     if (images.length > 2) {
-      toast.error("You can only upload 2 images for Driver License card.");
+      toast.error("Možete unijeti samo 2 slike za vozačku iskaznicu");
       return;
     }
 
@@ -92,17 +92,17 @@ export const RegisterForm = () => {
     e.preventDefault();
 
     if (!personPhotoFile) {
-      toast.error("You must upload your photo");
+      toast.error("Morate dodati svoju fotografiju");
       return;
     }
 
     if (!driverLicenseFile || driverLicenseFile.length !== 2) {
-      toast.error("You must upload front and back side of driver license");
+      toast.error("Morate dodati prednju i stražnju sliku vozačke dozvole");
       return;
     }
 
     if (!idCardFile || idCardFile.length !== 2) {
-      toast.error("You must upload front and back side of id card");
+      toast.error("Morate dodati prednju i stražnju sliku osobne iskaznice");
       return;
     }
 
@@ -114,7 +114,7 @@ export const RegisterForm = () => {
 
     const user = await getUserByEmail(registerData.email);
     if (user) {
-      toast.error("User with provided email already exists");
+      toast.error("Korisnik s unesenim mailom već postoji");
       return;
     }
 
@@ -139,24 +139,22 @@ export const RegisterForm = () => {
 
       const response = await uploadFiles([idFile, driverFile]);
       if (!response) {
-        toast.error("Response data is empty");
+        toast.error("Pogreška prilikom spremanje datoteka");
         return;
       }
 
       pdfUrls = Object.values(response).map((value: any) => value.secure_url);
 
       if (pdfUrls.length !== 2) {
-        toast.error("Error uploading both files");
+        toast.error("Pogreška prilikom spremanje datoteka");
         return;
       }
-
-      toast.success("Files uploaded successfully");
     }
 
     const personPhotoResponse = await uploadImages(personPhotoFile);
 
     if (!personPhotoResponse) {
-      toast.error("Response link is empty");
+      toast.error("Pogreška prilikom spremanje datoteka");
       return;
     }
     if (Array.isArray(personPhotoResponse)) {
@@ -178,7 +176,9 @@ export const RegisterForm = () => {
     try {
       register(updatedRegisterData, {
         onSuccess: () => {
-          toast.success("Successfully registered. Now you can login.");
+          toast.success(
+            "Uspješno ste se registrirali. Sada se možete prijaviti!"
+          );
 
           setRegisterData({
             firstName: "",
@@ -198,12 +198,14 @@ export const RegisterForm = () => {
           setShowLogin(true);
         },
         onError: (error) => {
-          toast.error(error.message || "Registration failed");
+          toast.error(error.message || "Registracija ne uspješna");
         },
       });
     } catch (error: Error | any) {
       console.error(`Error registering: ${error}`);
-      toast.error(`Error while registering: ${error?.response?.data?.message}`);
+      toast.error(
+        `Pogreška prilikom registracije: ${error?.response?.data?.message}`
+      );
     }
   };
 
@@ -325,17 +327,14 @@ export const RegisterForm = () => {
 
             {formStep === 2 && (
               <section className="documents-upload">
-                <div>
+                <div className="aa">
                   <h2>Vozačka dozvola</h2>
 
                   <div className="preview-container">
                     {driverLicensePreviews.map((src, index) => (
-                      <img
-                        key={index}
-                        src={src}
-                        alt="Slika"
-                        className="preview-image"
-                      />
+                      <div key={index} className="preview-item">
+                        <img src={src} alt="Slika" className="preview-image" />
+                      </div>
                     ))}
                   </div>
 
@@ -352,7 +351,7 @@ export const RegisterForm = () => {
                   />
                 </div>
 
-                <div>
+                <div className="bb">
                   <h2>Osobna iskaznica</h2>
 
                   <div className="preview-container">

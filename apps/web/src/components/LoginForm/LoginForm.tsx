@@ -42,10 +42,9 @@ export const LoginForm = () => {
         if (axios.isAxiosError(error)) {
           const message =
             error.response?.data?.message || "Unknown error occurred";
-          toast.error(`Error logging in: ${message}`);
+          toast.error(`Pogresška prilikom prijave: ${message}`);
           console.error("Axios error:", error.response);
         } else {
-          toast.error("An unexpected error occurred. Please try again.");
           console.error("Login error:", error);
         }
       },

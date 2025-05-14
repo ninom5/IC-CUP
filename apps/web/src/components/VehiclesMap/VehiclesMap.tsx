@@ -48,7 +48,9 @@ export const VehiclesMap = () => {
     setSelectedVehicle(vehicle);
 
     if (!e.latLng) {
-      toast.error("Can't get lat & lng of vehicle");
+      toast.error(
+        "Nije moguće dohvatiti geografsku širinu i duljinu odobrane lokacije"
+      );
       return;
     }
 
