@@ -1,0 +1,29 @@
+.date-range-container {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #fff;
+  font-family: sans-serif;
+  width: fit-content;
+  gap: 8px;
+}
+
+.date-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.date-label input {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: transparent;
+}
+
+.date-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--stroke-gray);
+}

@@ -15,11 +15,33 @@ export const CheckoutPopUp = ({
   onConfirm: (message: string) => void;
 }) => {
   const [message, setMessage] = useState("");
+  const [formatted, setFormatted] = useState("");
 
   const handleCheckoutSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onConfirm(message);
   };
+
+  const thisDay = new Date();
+  let year = thisDay.getFullYear();
+  let month = thisDay.getMonth() + 2;
+
+  if (month > 12) {
+    month = 1;
+    year += 1;
+  }
+
+  const formatCardNumber = (value: string) => {
+    const digits = value.replace(/\D/g, "");
+    return digits.replace(/(.{4})/g, "$1 ").trim();
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedValue = formatCardNumber(e.target.value);
+    setFormatted(formattedValue);
+  };
+
+  const minMonth = `${year}-${month.toString().padStart(2, "0")}`;
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -42,6 +64,11 @@ export const CheckoutPopUp = ({
                 type="text"
                 placeholder="Broj kartice"
                 name="card-number"
+                required
+                minLength={19}
+                maxLength={19}
+                onChange={handleChange}
+                value={formatted}
               />
             </div>
 
@@ -52,16 +79,20 @@ export const CheckoutPopUp = ({
                 placeholder="MM/YY"
                 name="expiration-date"
                 id="expiration-date"
+                required
+                min={minMonth}
               />
             </div>
 
             <div className="form-group">
               <label htmlFor="card-cvv">CVV</label>
               <input
-                type="text"
+                type="number"
                 placeholder="123"
                 name="card-cvv"
                 id="card-cvv"
+                required
+                maxLength={3}
               />
             </div>
           </div>
@@ -78,6 +109,7 @@ export const CheckoutPopUp = ({
               type="text"
               name="message"
               onChange={(e) => setMessage(e.target.value)}
+              maxLength={100}
             />
           </div>
 

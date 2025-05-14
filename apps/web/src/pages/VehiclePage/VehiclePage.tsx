@@ -1,7 +1,7 @@
 import "./VehiclePage.css";
 import {
   CheckoutPopUp,
-  CustomDatePicker,
+  CustomAvailableDatePicker,
   Footer,
   InsuranceList,
   VehicleDescription,
@@ -61,6 +61,8 @@ export const VehiclePage = () => {
     };
 
     sendEmail.mutate(emailData);
+
+    setShowCheckoutForm(false);
   };
 
   useEffect(() => {
@@ -100,7 +102,7 @@ export const VehiclePage = () => {
           <VehicleDescription vehicle={vehicle} />
 
           <div className="booking-section">
-            <CustomDatePicker
+            <CustomAvailableDatePicker
               value={dateRange}
               onChange={setDate}
               availableDateRanges={vehicleDatesAvailabilities}
