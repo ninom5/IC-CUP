@@ -1,6 +1,8 @@
 .footer-section {
   display: flex;
   flex-direction: column;
+  margin-top: 200px;
+  padding-bottom: 100px;
 }
 .footer-content {
   display: flex;

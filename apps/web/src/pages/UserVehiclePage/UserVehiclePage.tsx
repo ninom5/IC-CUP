@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import starIcon from "../../assets/images/starIcon.svg";
 import {
   AddVehicleAvailibility,
+  Footer,
   VehicleDescriptionEdit,
   VehicleLicenseImgEdit,
   VehiclePriceEdit,
@@ -38,52 +39,55 @@ export const UserVehiclePage = () => {
   };
 
   return (
-    <section className={c.userVehicleSection}>
-      <div className={c.imagesContainer}>
-        {data.images.map((i, index) => (
-          <img key={index} src={i} />
-        ))}
-      </div>
-
-      <div className={c.vehicleTextContainer}>
-        <div className={c.vehicleHeader}>
-          <h1>
-            <span>{data.brand}</span>
-            <span>{data.model}</span>
-            <span>{data.productionYear}</span>
-          </h1>
-
-          <h3>
-            {data.avgRating ? (
-              <>
-                {data.avgRating} <img src={starIcon} /> ({data.reviewCount})
-              </>
-            ) : (
-              "Još nema recenzija za ovo vozilo"
-            )}
-          </h3>
+    <>
+      <section className={c.userVehicleSection}>
+        <div className={c.imagesContainer}>
+          {data.images.map((i, index) => (
+            <img key={index} src={i} />
+          ))}
         </div>
 
-        <AddVehicleAvailibility vehicleId={id || ""} />
+        <div className={c.vehicleTextContainer}>
+          <div className={c.vehicleHeader}>
+            <h1>
+              <span>{data.brand}</span>
+              <span>{data.model}</span>
+              <span>{data.productionYear}</span>
+            </h1>
 
-        <VehicleDescriptionEdit
-          description={data.description}
-          handleUpdateVehicle={handleUpdateVehicle}
-        />
+            <h3>
+              {data.avgRating ? (
+                <>
+                  {data.avgRating} <img src={starIcon} /> ({data.reviewCount})
+                </>
+              ) : (
+                "Još nema recenzija za ovo vozilo"
+              )}
+            </h3>
+          </div>
 
-        <VehicleRegistrationEdit
-          registration={data.registration}
-          registrationExpiration={data.registrationExpiration}
-          handleUpdateVehicle={handleUpdateVehicle}
-        />
+          <AddVehicleAvailibility vehicleId={id || ""} />
 
-        <VehicleLicenseImgEdit handleUpdateVehicle={handleUpdateVehicle} />
+          <VehicleDescriptionEdit
+            description={data.description}
+            handleUpdateVehicle={handleUpdateVehicle}
+          />
 
-        <VehiclePriceEdit
-          dailyPrice={data.dailyPrice}
-          handleUpdateVehicle={handleUpdateVehicle}
-        />
-      </div>
-    </section>
+          <VehicleRegistrationEdit
+            registration={data.registration}
+            registrationExpiration={data.registrationExpiration}
+            handleUpdateVehicle={handleUpdateVehicle}
+          />
+
+          <VehicleLicenseImgEdit handleUpdateVehicle={handleUpdateVehicle} />
+
+          <VehiclePriceEdit
+            dailyPrice={data.dailyPrice}
+            handleUpdateVehicle={handleUpdateVehicle}
+          />
+        </div>
+      </section>
+      <Footer />
+    </>
   );
 };
