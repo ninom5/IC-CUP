@@ -11,3 +11,4 @@ export * from "./useCreateAvailability";
 export * from "./useUpdateUser";
 export * from "./useGetUserRating";
 export * from "./useFetchUserVehicles";
+export * from "./useGetUserReviews";
