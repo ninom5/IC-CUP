@@ -75,6 +75,19 @@ export type Rental = {
   review: Review;
 };
 
+export type CreateRental = {
+  renterId: string;
+  vehicleId: string;
+  startDate: Date;
+  endDate: Date;
+  totalPrice: number;
+};
+
+export type RentalResponse = {
+  id: string;
+  totalPrice: number;
+};
+
 export type Review = {
   rating: number;
 };
@@ -83,6 +96,7 @@ export type Owner = {
   id: string;
   firstName: string;
   lastName: string;
+  email: string;
   personPhoto: string;
 };
 

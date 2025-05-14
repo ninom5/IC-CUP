@@ -1,20 +1,25 @@
-import { InsuranceKey, insuranceLevelMap } from "@constants/index";
 import "./checkoutPopUp.css";
+import { InsuranceKey, insuranceLevelMap } from "@constants/index";
+import { useState } from "react";
+import { CheckoutPriceProps } from "types";
 
 export const CheckoutPopUp = ({
   setShowCheckoutForm,
   selectedCard,
   price,
+  onConfirm,
 }: {
   setShowCheckoutForm: (value: boolean) => void;
   selectedCard: InsuranceKey | null;
-  price: {
-    dailyPrice: number;
-    totalPrice: number;
-    insurancePrice: number;
-    provisionPrice: number;
-  };
+  price: CheckoutPriceProps;
+  onConfirm: (message: string) => void;
 }) => {
+  const [message, setMessage] = useState("");
+
+  const handleCheckoutSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onConfirm(message);
+  };
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -25,12 +30,7 @@ export const CheckoutPopUp = ({
           ×
         </button>
 
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert("Rezervacija uspješna!");
-          }}
-        >
+        <form onSubmit={handleCheckoutSubmit}>
           <h2>Potvrdite rezervaciju</h2>
 
           <div className="checkout-card">
@@ -74,7 +74,11 @@ export const CheckoutPopUp = ({
             <label htmlFor="message">
               Možete unijeti poruku vlasniku ako želite
             </label>
-            <input type="text" name="message" />
+            <input
+              type="text"
+              name="message"
+              onChange={(e) => setMessage(e.target.value)}
+            />
           </div>
 
           <h4>

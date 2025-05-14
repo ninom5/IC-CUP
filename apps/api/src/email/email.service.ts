@@ -10,7 +10,8 @@ export class EmailService {
     subject: string,
     ownerName: string,
     renterName: string,
-    link: string,
+    // link: string,
+    message?: string,
   ) {
     await this.mailerService.sendMail({
       to,
@@ -19,7 +20,8 @@ export class EmailService {
       context: {
         ownerName,
         renterName,
-        link,
+        // link,
+        message,
       },
     });
   }

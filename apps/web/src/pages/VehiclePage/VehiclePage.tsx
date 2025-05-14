@@ -1,3 +1,4 @@
+import "./VehiclePage.css";
 import {
   CheckoutPopUp,
   CustomDatePicker,
@@ -6,16 +7,17 @@ import {
   VehicleDescription,
   VehicleGallery,
 } from "@components/index";
-import { VehicleType } from "types/vehicle.type";
+import { CreateRental, EmailSendType, VehicleType } from "types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useFetchVehicleById } from "@api/index";
-import "./VehiclePage.css";
 import {
-  insuranceCategories,
-  InsuranceKey,
-} from "@constants/insuranceCategories";
+  useCreateRentalPayment,
+  useFetchVehicleById,
+  useSendEmail,
+} from "@api/index";
+import { insuranceCategories, InsuranceKey } from "@constants/index";
 import { useFiltersContext } from "@hooks/useFiltersContext";
+import { extractUserInfo } from "@utils/extractUserInfo.util";
 
 export const VehiclePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,6 +31,37 @@ export const VehiclePage = () => {
 
   const { data, isLoading, error } = useFetchVehicleById(id);
   const { dateRange } = useFiltersContext();
+
+  const {
+    data: { id: userId },
+  } = extractUserInfo();
+
+  const createRentalPayment = useCreateRentalPayment();
+  const sendEmail = useSendEmail();
+
+  const handleConfirmCheckout = (message: string) => {
+    if (!vehicle || !date[0] || !date[1]) return;
+
+    const rentalData: CreateRental = {
+      renterId: userId,
+      vehicleId: id,
+      startDate: date[0],
+      endDate: date[1],
+      totalPrice: basePrice,
+    };
+
+    createRentalPayment.mutate(rentalData);
+
+    const emailData: EmailSendType = {
+      to: vehicle.owner.email,
+      subject: "Potvrda rezervacije",
+      ownerName: vehicle.owner.firstName,
+      renterName: "*******",
+      message: message,
+    };
+
+    sendEmail.mutate(emailData);
+  };
 
   useEffect(() => {
     if (data) setVehicle(data);
@@ -44,10 +77,10 @@ export const VehiclePage = () => {
     ? insuranceCategories[selectedCard].price
     : 0;
 
-  const basePrice =
-    date[1] && date[0]
-      ? (date[1]?.getDate() - date[0]?.getDate() + 1) * vehicle.dailyPrice
-      : 0;
+  const numberOfDays =
+    date[1] && date[0] ? date[1]?.getDate() - date[0]?.getDate() + 1 : 0;
+
+  const basePrice = numberOfDays * vehicle.dailyPrice;
 
   const provisionPrice = basePrice * 0.1;
 
@@ -100,6 +133,7 @@ export const VehiclePage = () => {
                   totalPrice: totalPrice,
                   provisionPrice: provisionPrice,
                 }}
+                onConfirm={handleConfirmCheckout}
               />
             )}
           </div>

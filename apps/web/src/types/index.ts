@@ -13,3 +13,6 @@ export * from "./vehicle.type";
 export * from "./vehicleAvailibility.type";
 export * from "./filterRow.types";
 export * from "./filter.type";
+export * from "./payment.type";
+export * from "./checkoutPriceProps.type";
+export * from "./emailSend.type";

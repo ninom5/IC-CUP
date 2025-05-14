@@ -13,7 +13,8 @@ export class EmailController {
       subject: string;
       ownerName: string;
       renterName: string;
-      link: string;
+      // link: string;
+      message?: string;
     },
   ) {
     await this.emailService.sendEmail(
@@ -21,7 +22,8 @@ export class EmailController {
       body.subject,
       body.ownerName,
       body.renterName,
-      body.link,
+      // body.link,
+      body?.message,
     );
 
     return { message: 'Email sent' };
