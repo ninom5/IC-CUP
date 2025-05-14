@@ -26,4 +26,8 @@ export { default as koloFooterSvg } from "./koloFooter.svg";
 export { default as fallbackImageSvg } from "./fallbackImage.svg";
 export { default as pencilSvg } from "./pencil.svg";
 export { default as profileLogo } from "./Vector (2).svg";
+export { default as profileWhiteLogo } from "./profile.svg";
+export { default as roadSvg } from "./road.svg";
+export { default as car } from "./car.svg";
+export { default as map } from "./map.svg";
 export { default as likeSvg } from "./like.svg";

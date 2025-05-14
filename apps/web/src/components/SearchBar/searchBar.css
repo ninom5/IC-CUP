@@ -74,3 +74,9 @@
   border-radius: 10px;
   width: 50%;
 }
+
+@media (min-width: 350px) and (max-width: 1000px) {
+  .search-navigation {
+    display: none;
+  }
+}
