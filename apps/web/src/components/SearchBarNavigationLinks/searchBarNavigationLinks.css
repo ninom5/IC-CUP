@@ -4,9 +4,30 @@
   justify-content: center;
   align-items: center;
 }
+
 .navigation-links a {
+  position: relative;
   text-decoration: none;
   color: var(--background-black);
+}
+
+.navigation-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background-color: var(--background-black);
+  transition: width 0.3s ease;
+}
+
+.navigation-links a:hover::after {
+  width: 100%;
+}
+
+.navigation-links .active::after {
+  width: 100%;
 }
 
 .login-button,
