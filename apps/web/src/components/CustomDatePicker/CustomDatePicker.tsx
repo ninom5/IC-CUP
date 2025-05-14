@@ -28,6 +28,7 @@ export const CustomDatePicker = ({
           type="date"
           value={formatDate(dateRange[0])}
           onChange={handleStartChange}
+          min={new Date().toISOString().split("T")[0]}
         />
       </label>
 

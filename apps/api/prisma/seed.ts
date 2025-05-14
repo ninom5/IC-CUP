@@ -80,6 +80,7 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
       description: 'A reliable car for everyday use.',
       registration: 'ABC123',
       pickupAddress: 'some address',
@@ -117,6 +118,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -154,6 +157,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -191,6 +196,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -228,6 +235,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -265,6 +274,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -302,6 +313,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -338,6 +351,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -374,6 +389,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -410,6 +427,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -446,6 +465,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -483,6 +504,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -520,6 +543,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -557,6 +582,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -594,6 +621,8 @@ async function main() {
         Bluetooth: true,
         Navigation: false,
       },
+      isVerified: true,
+
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',

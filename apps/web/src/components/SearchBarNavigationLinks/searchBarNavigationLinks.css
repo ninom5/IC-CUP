@@ -9,9 +9,6 @@
   color: var(--background-black);
 }
 
-#profile-icon:hover {
-}
-
 .login-button,
 .register-button {
   border: none;
