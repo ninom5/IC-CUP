@@ -15,5 +15,8 @@ export const useCreateRentalPayment = () => {
     onSuccess: () => {
       toast.success("Uspješno rezervirano vozilo i provedeno plaćanje");
     },
+    onError: () => {
+      toast.error("Pogreška prilikom rezervacije vozila");
+    },
   });
 };

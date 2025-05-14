@@ -53,7 +53,7 @@ export const VehiclePage = () => {
     const emailData: EmailSendType = {
       to: vehicle.owner.email,
       subject: "Potvrda rezervacije",
-      ownerName: vehicle.owner.firstName,
+      ownerName: vehicle.owner?.firstName,
       renterName: "*******",
       message: message,
     };
@@ -86,7 +86,7 @@ export const VehiclePage = () => {
 
   const totalPrice = basePrice + provisionPrice + insurancePrice;
 
-  const vehicleDatesAvailabilities = vehicle.availabilities.map((a) => ({
+  const vehicleDatesAvailabilities = vehicle.availabilities?.map((a) => ({
     startDate: new Date(a.startDate),
     endDate: new Date(a.endDate),
   }));

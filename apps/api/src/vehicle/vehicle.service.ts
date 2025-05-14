@@ -305,6 +305,16 @@ export class VehicleService {
   async findUserVehicle(id: string) {
     const vehicle = await this.prisma.vehicle.findUnique({
       where: { id },
+      include: {
+        owner: {
+          select: {
+            firstName: true,
+            lastName: true,
+            personPhoto: true,
+          },
+        },
+        availabilities: true,
+      },
     });
 
     if (!vehicle) throw new NotFoundException('Vehicle not found');

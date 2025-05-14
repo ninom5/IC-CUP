@@ -9,9 +9,9 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
   const { brand, model, productionYear, details, owner } = vehicle;
   const { totalRating, numberOfRatings } = getAverageVehicleRating(vehicle);
 
-  const { numOfSeats, fuelType, category, isAutomatic }: VehicleDetails =
+  const { numOfSeats, fuelType, category, transmission }: VehicleDetails =
     details;
-
+  console.log(vehicle);
   const categoryImage = categoryImages[category] || categoryImages["COUPE"];
 
   return (
@@ -27,7 +27,7 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
 
       <div className="vehicle-owner">
         <div className="vehicle-owner-image-wrapper">
-          <img src={owner.personPhoto} alt="Slika vlasnika" />
+          <img src={owner?.personPhoto} alt="Slika vlasnika" />
         </div>
 
         <div className="owner-info">
@@ -48,7 +48,7 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
 
         <PropertyItem
           label="ikonica mjenjaca"
-          value={isAutomatic ? "Automatik" : "Ručni"}
+          value={transmission === "MANUAL" ? "Manualni" : "Automatik"}
           icon={transmissionSvg}
         />
 

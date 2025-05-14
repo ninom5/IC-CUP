@@ -75,11 +75,6 @@ async function main() {
       productionYear: 2020,
       dailyPrice: 50.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
       description: 'A reliable car for everyday use.',
       registration: 'ABC123',
@@ -123,13 +118,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -172,13 +161,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -221,13 +204,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -270,13 +247,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -319,13 +290,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -368,13 +333,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -416,13 +375,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -464,13 +417,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -512,13 +459,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -560,13 +501,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -609,13 +544,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -658,13 +587,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -707,13 +630,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
@@ -756,13 +673,7 @@ async function main() {
       productionYear: 2022,
       dailyPrice: 60.0,
       vehicleLicenseImg: 'license-image.jpg',
-      features: {
-        'Air Conditioning': true,
-        Bluetooth: true,
-        Navigation: false,
-      },
       isVerified: true,
-
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',

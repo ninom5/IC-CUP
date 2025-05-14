@@ -43,7 +43,7 @@ export const SearchBarNavigationLinks = () => {
         </>
       ) : (
         <>
-          <NavLink to={routes.ABOUT}>Kako radi</NavLink>
+          <Link to={routes.ABOUT}>Kako radi</Link>
 
           <button
             onClick={() => setShowRegister(true)}
