@@ -8,3 +8,5 @@ export * from "./useUploadImages";
 export * from "./useCreateVehicle";
 export * from "./useCreateAvailability";
 export * from "./useFetchUserVehicles";
+export * from "./useFetchUserVehicle";
+export * from "./useFetchVehicleAvailabilities";

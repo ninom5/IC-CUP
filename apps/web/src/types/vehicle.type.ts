@@ -1,4 +1,9 @@
-import { CarCategoryEnum, FuelTypeEnum, VehicleEnum } from "enums";
+import {
+  CarCategoryEnum,
+  FuelTypeEnum,
+  TransmissionTypeEnum,
+  VehicleEnum,
+} from "enums";
 
 export type VehicleData = {
   ownerId: string;
@@ -22,7 +27,7 @@ export type VehicleData = {
 
 export type VehicleDetails = {
   fuelType: FuelTypeEnum;
-  isAutomatic: boolean;
+  transmission: TransmissionTypeEnum;
   category: CarCategoryEnum;
   numOfSeats: number;
 };
@@ -69,4 +74,27 @@ export type Rental = {
 
 export type Review = {
   rating: number;
+};
+
+export type UserVehiclesType = {
+  id: string;
+  ownerId: string;
+  brand: string;
+  model: string;
+  images: string[];
+  productionYear: number;
+  dailyPrice: number;
+  description: string;
+  vehicleLicenseImg: string;
+  registration: string;
+  registrationExpiration: string;
+  pickupAddress: string;
+  city: string;
+  longitude: number;
+  latitude: number;
+  vehicleType: VehicleEnum;
+  details: VehicleDetails;
+  features: VehicleFeatures;
+  avgRating: number | null;
+  reviewCount: number;
 };

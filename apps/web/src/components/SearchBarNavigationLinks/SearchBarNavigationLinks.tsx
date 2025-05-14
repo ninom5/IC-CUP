@@ -1,11 +1,11 @@
 import { notifSvg } from "@assets/images";
 import { LoginForm } from "@components/LoginForm/LoginForm";
+import { RegisterForm } from "@components/RegisterForm/RegisterForm";
 import { useToken } from "@hooks/index";
 import { routes } from "@routes/index";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./searchBarNavigationLinks.css";
-import { RegisterForm } from "@components/RegisterForm/RegisterForm";
 
 export const SearchBarNavigationLinks = () => {
   const {
@@ -25,11 +25,11 @@ export const SearchBarNavigationLinks = () => {
     <div className="navigation-links">
       {token && !isExpired ? (
         <>
-          <Link to={routes.USERS_DRIVES}>Tvoje vožnje</Link>
-          <Link to={routes.USER_VEHICLES}>Tvoja kola</Link>
-          <Link to={routes.HOME} onClick={handleLogout}>
+          <NavLink to={routes.USERS_DRIVES}>Tvoje vožnje</NavLink>
+          <NavLink to={routes.USER_VEHICLES}>Tvoja kola</NavLink>
+          <NavLink to={routes.HOME} onClick={handleLogout}>
             Odjavi se
-          </Link>
+          </NavLink>
 
           <div className="icon-wrapper">
             <img src={notifSvg} alt="slikica zvona" />
@@ -37,7 +37,7 @@ export const SearchBarNavigationLinks = () => {
         </>
       ) : (
         <>
-          <Link to={routes.ABOUT}>Kako radi</Link>
+          <NavLink to={routes.ABOUT}>Kako radi</NavLink>
 
           <button
             onClick={() => setShowRegisterPopUp(true)}

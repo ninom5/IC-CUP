@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsEnum, IsIn, IsNotEmpty, IsString } from 'class-validator';
 import { CarCategory, FuelType } from '../enums/vehicle.enums';
+import { Transmission } from '@prisma/client';
 
 export class CarDetailsDto {
   @IsNotEmpty({
@@ -17,17 +18,17 @@ export class CarDetailsDto {
   fuelType: FuelType;
 
   @IsNotEmpty({
-    message: 'isAutomatic is required',
+    message: 'Transmission type is required',
   })
-  @IsBoolean({
-    message: 'isAutomatic must be a boolean',
+  @IsEnum(Transmission, {
+    message: `Transmission type must be one of the following: ${Object.values(Transmission).join(', ')}`,
   })
   @ApiProperty({
-    description: 'isAutomatic',
-    example: true,
-    type: 'boolean',
+    description: 'Transmission type',
+    enum: Transmission,
+    example: Transmission.MANUAL,
   })
-  isAutomatic: boolean;
+  transmission: Transmission;
 
   @IsNotEmpty({
     message: 'Car Category is required',

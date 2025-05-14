@@ -1,4 +1,4 @@
-/*import {
+import {
   PrismaClient,
   Role,
   VehicleType,
@@ -70,11 +70,12 @@ async function main() {
       ],
       productionYear: 2020,
       dailyPrice: 50.0,
-      isAvailable: true,
       description: 'A reliable car for everyday use.',
       registration: 'ABC123',
       pickupAddress: 'some address',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.51813,
       longitude: 16.45019,
       vehicleType: VehicleType.CAR,
@@ -84,6 +85,16 @@ async function main() {
         carCategory: CarCategory.HATCHBACK,
         seats: '7',
         transmission: Transmission.MANUAL,
+      },
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
       },
     },
   });
@@ -98,11 +109,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.54813,
       longitude: 16.45319,
       vehicleType: VehicleType.CAR,
@@ -113,6 +125,16 @@ async function main() {
         transmission: Transmission.MANUAL,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -126,11 +148,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.54813,
       longitude: 16.45319,
       vehicleType: VehicleType.CAR,
@@ -141,6 +164,16 @@ async function main() {
         transmission: Transmission.MANUAL,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -154,11 +187,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.54813,
       longitude: 16.45419,
       vehicleType: VehicleType.CAR,
@@ -169,6 +203,16 @@ async function main() {
         transmission: Transmission.MANUAL,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -182,11 +226,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.54813,
       longitude: 16.45329,
       vehicleType: VehicleType.CAR,
@@ -197,6 +242,16 @@ async function main() {
         transmission: Transmission.MANUAL,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -210,11 +265,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.54813,
       longitude: 16.54319,
       vehicleType: VehicleType.CAR,
@@ -225,6 +281,16 @@ async function main() {
         transmission: Transmission.MANUAL,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -238,11 +304,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.51813,
       longitude: 16.45319,
       vehicleType: VehicleType.CAR,
@@ -253,6 +320,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
   const vehicle8 = await prisma.vehicle.create({
@@ -265,11 +342,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.55313,
       longitude: 16.45319,
       vehicleType: VehicleType.CAR,
@@ -280,6 +358,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
   const vehicle9 = await prisma.vehicle.create({
@@ -292,11 +380,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.54813,
       longitude: 16.45221,
       vehicleType: VehicleType.CAR,
@@ -307,6 +396,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
   const vehicle10 = await prisma.vehicle.create({
@@ -319,11 +418,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.54831,
       longitude: 16.45319,
       vehicleType: VehicleType.CAR,
@@ -334,6 +434,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
   const vehicle11 = await prisma.vehicle.create({
@@ -346,11 +456,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.54813,
       longitude: 16.45328,
       vehicleType: VehicleType.CAR,
@@ -361,6 +472,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -374,11 +495,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.54813,
       longitude: 16.45419,
       vehicleType: VehicleType.CAR,
@@ -389,6 +511,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -402,11 +534,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.55813,
       longitude: 16.45319,
       vehicleType: VehicleType.CAR,
@@ -417,6 +550,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -430,11 +573,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.54813,
       longitude: 16.45315,
       vehicleType: VehicleType.CAR,
@@ -445,6 +589,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -458,11 +612,12 @@ async function main() {
       ],
       productionYear: 2022,
       dailyPrice: 60.0,
-      isAvailable: true,
       description: 'A spacious and fuel-efficient car.',
       registration: 'XYZ789',
       pickupAddress: 'some address 3',
       city: 'Split',
+      vehicleLicenseImg:
+        'https://th.bing.com/th/id/OIP.KE-N91Vwj3pWxQpVJ9cAngHaEK?w=288&h=180&c=7&r=0&o=5&pid=1.7',
       latitude: 43.54823,
       longitude: 16.45319,
       vehicleType: VehicleType.CAR,
@@ -473,6 +628,16 @@ async function main() {
         transmission: Transmission.AUTOMATIC,
       },
       registrationExpiration: '2025-12-31T00:00:00Z',
+      features: {
+        aux: false,
+        gps: false,
+        usb: true,
+        pets: false,
+        sensors: true,
+        bluetooth: true,
+        childSeat: false,
+        airConditioning: false,
+      },
     },
   });
 
@@ -516,4 +681,4 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect();
-  });*/
+  });

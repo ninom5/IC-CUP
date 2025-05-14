@@ -164,6 +164,37 @@ export class VehicleService {
     };
   }
 
+  async findVehicleAverageRating(vehicleId: string) {
+    const rentalsWithReviews = await this.prisma.rental.findMany({
+      where: {
+        vehicleId,
+        review: {
+          isNot: null,
+        },
+      },
+      select: {
+        review: {
+          select: {
+            rating: true,
+          },
+        },
+      },
+    });
+
+    const ratings = rentalsWithReviews.map((r) => r.review!.rating);
+
+    const reviewCount = ratings.length;
+    const averageRating =
+      reviewCount > 0
+        ? ratings.reduce((sum, rating) => sum + rating, 0) / reviewCount
+        : null;
+
+    return {
+      averageRating,
+      reviewCount,
+    };
+  }
+
   async findAllUserVehicles(userId: string) {
     const userExists = await this.prisma.user.findUnique({
       where: { id: userId },
@@ -173,33 +204,21 @@ export class VehicleService {
 
     const vehicles = await this.prisma.vehicle.findMany({
       where: { ownerId: userId },
-      include: {
-        rentals: {
-          include: {
-            review: true,
-          },
-        },
-      },
     });
 
-    return vehicles.map((vehicle) => {
-      const reviews = vehicle.rentals
-        .map((rental) => rental.review?.rating)
-        .filter((r): r is number => r !== undefined);
+    const vehiclesWithRatings = await Promise.all(
+      vehicles.map(async (vehicle) => {
+        const { averageRating, reviewCount } =
+          await this.findVehicleAverageRating(vehicle.id);
+        return {
+          ...vehicle,
+          averageRating,
+          reviewCount,
+        };
+      }),
+    );
 
-      const avgRating =
-        reviews.length > 0
-          ? reviews.reduce((a, b) => a + b, 0) / reviews.length
-          : null;
-
-      const reviewCount = reviews.length;
-
-      return {
-        ...vehicle,
-        avgRating,
-        reviewCount,
-      };
-    });
+    return vehiclesWithRatings;
   }
 
   async findAvailable(vehicleFiltersDto: VehicleFiltersDto) {
@@ -231,6 +250,24 @@ export class VehicleService {
         },
       },
     });
+  }
+
+  async findUserVehicle(id: string) {
+    const vehicle = await this.prisma.vehicle.findUnique({
+      where: { id },
+    });
+
+    if (!vehicle) throw new NotFoundException('Vehicle not found');
+
+    const { averageRating, reviewCount } = await this.findVehicleAverageRating(
+      vehicle.id,
+    );
+
+    return {
+      ...vehicle,
+      averageRating,
+      reviewCount,
+    };
   }
 
   async findOne(id: string) {
