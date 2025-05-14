@@ -40,8 +40,8 @@ export const UserVehiclePage = () => {
   return (
     <section className={c.userVehicleSection}>
       <div className={c.imagesContainer}>
-        {data.images.map((i) => (
-          <img key={i} src={i} />
+        {data.images.map((i, index) => (
+          <img key={index} src={i} />
         ))}
       </div>
 
