@@ -4,6 +4,7 @@ import {
   useFetchUserProfile,
   useFetchUserVehicles,
   useGetUserRating,
+  useGetUserReviews,
   useUpdateUser,
   useUploadImages,
 } from "@api/index";
@@ -12,7 +13,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { fallbackImageSvg, pencilSvg } from "@assets/images";
 import { routes } from "@routes/routes";
-import { VehicleCard } from "@components/index";
+import { ReviewCard, VehicleCard } from "@components/index";
+import { ReviewCardData } from "types";
 
 export const ProfilePage = () => {
   const { id: userId } = useParams();
@@ -31,6 +33,10 @@ export const ProfilePage = () => {
 
   const { data: userVehicles, isLoading: isLoadingVehicles } =
     useFetchUserVehicles(userId || "");
+
+  const { data: userReviews, isLoading: isLoadingReviews } = useGetUserReviews(
+    userId || ""
+  );
 
   const { data: tokenUser } = useToken();
   const isOwnProfile = !!tokenUser?.id && userId === tokenUser.id;
@@ -173,7 +179,18 @@ export const ProfilePage = () => {
 
       <div className={c.section}>
         <h3>Recenzije od unajmljivača</h3>
-        {/* TODO: render recenzija */}
+
+        {isLoadingReviews ? (
+          <p>Učitavanje recenzija...</p>
+        ) : userReviews && userReviews.length > 0 ? (
+          <div className={c.reviewList}>
+            {userReviews.map((review: ReviewCardData) => (
+              <ReviewCard key={review.id} review={review} />
+            ))}
+          </div>
+        ) : (
+          <p>Korisnik još nema recenzija.</p>
+        )}
       </div>
     </div>
   );

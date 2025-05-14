@@ -3,7 +3,7 @@ import { api } from "./base";
 import { useQuery } from "@tanstack/react-query";
 
 const getUserReviews = async (userId: string): Promise<ReviewCardData[]> => {
-  return await api.get<never, ReviewCardData[]>(`/reviews/user/${userId}`);
+  return await api.get<never, ReviewCardData[]>(`/review/user/${userId}`);
 };
 
 export const useGetUserReviews = (userId: string) =>
