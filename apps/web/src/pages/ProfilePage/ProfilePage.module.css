@@ -1,3 +1,31 @@
+.profileContainer {
+  width: 985px;
+  position: relative;
+  top: 10px;
+  left: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.tabs {
+  display: flex;
+  gap: 60px;
+}
+
+.tab {
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 24px;
+  background-color: transparent;
+}
+
+.activeTab {
+  border-bottom: 1px solid var(--background-black);
+}
+
 .hiddenInput {
   display: none;
 }

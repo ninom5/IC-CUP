@@ -21,12 +21,12 @@ export const Router = () => {
         </Route>
         <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
         <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
-        <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
         {/* <AdminRoutes>
 
 </AdminRoutes> */}
 
         <Route element={<NavBarLayout />}>
+          <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
           <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
         </Route>
       </Routes>

@@ -44,6 +44,7 @@ export const ProfilePage = () => {
   const { mutateAsync: updateUser } = useUpdateUser();
   const { mutateAsync: uploadImages } = useUploadImages();
 
+  const [activeTab, setActiveTab] = useState<"profile" | "settings">("profile");
   const [description, setDescription] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [personPhotoPreview, setPersonPhotoPreview] = useState<string | null>(
@@ -88,110 +89,130 @@ export const ProfilePage = () => {
   return (
     <div className={c.profileContainer}>
       <div className={c.tabs}>
-        {isOwnProfile && (
-          <>
-            <button className={c.tab}>Moj profil</button>
-            <button className={c.tab}>Postavke računa</button>
-          </>
-        )}
-      </div>
-
-      <div className={c.section}>
-        <div className={c.profilePictureWrapper}>
-          <img
-            src={personPhotoPreview || fallbackImageSvg}
-            alt="Profilna slika"
-            className={c.avatar}
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.onerror = null;
-              target.src = fallbackImageSvg;
-            }}
-          />
-
-          {isOwnProfile && (
-            <>
-              <label htmlFor="upload-photo" className={c.editPhotoIcon}>
-                <img src={pencilSvg} alt="Uredi sliku" />
-              </label>
-              <input
-                type="file"
-                id="upload-photo"
-                className={c.hiddenInput}
-                onChange={handlePersonPhotoChange}
-              />
-            </>
-          )}
-        </div>
-        <h2>
-          {profile.firstName} {profile.lastName}
-        </h2>
-        {userRating && (
-          <p className={c.rating}>
-            {userRating.averageRating.toFixed(1)}★({userRating.reviewCount})
-          </p>
-        )}
-      </div>
-
-      <div className={c.section}>
-        <h3>Opis</h3>
         {isOwnProfile ? (
           <>
-            <textarea
-              className={c.textarea}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <button onClick={handleSaveDescription} disabled={isSaving}>
-              {isSaving ? "Spremanje..." : "Spremi promjene"}
+            <button
+              className={`${c.tab} ${activeTab === "profile" ? c.activeTab : ""}`}
+              onClick={() => setActiveTab("profile")}
+            >
+              Moj profil
+            </button>
+            <button
+              className={`${c.tab} ${activeTab === "settings" ? c.activeTab : ""}`}
+              onClick={() => setActiveTab("settings")}
+            >
+              Postavke računa
             </button>
           </>
         ) : (
-          <p>{profile.description?.trim() ? profile.description : ""}</p>
+          <button className={`${c.tab} ${c.activeTab}`}>Profil</button>
         )}
       </div>
 
-      <div className={c.section}>
-        <div className={c.sectionHeader}>
-          <h3>Automobili</h3>
-          {isOwnProfile && (
-            <img
-              src={pencilSvg}
-              alt="Uredi popis"
-              onClick={() => navigate(routes.USER_VEHICLES)}
-              className={c.editVehicleListIcon}
-            />
-          )}
+      {activeTab === "profile" && (
+        <div>
+          <div className={c.section}>
+            <div className={c.profilePictureWrapper}>
+              <img
+                src={personPhotoPreview || fallbackImageSvg}
+                alt="Profilna slika"
+                className={c.avatar}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = fallbackImageSvg;
+                }}
+              />
+
+              {isOwnProfile && (
+                <>
+                  <label htmlFor="upload-photo" className={c.editPhotoIcon}>
+                    <img src={pencilSvg} alt="Uredi sliku" />
+                  </label>
+                  <input
+                    type="file"
+                    id="upload-photo"
+                    className={c.hiddenInput}
+                    onChange={handlePersonPhotoChange}
+                  />
+                </>
+              )}
+            </div>
+            <h2>
+              {profile.firstName} {profile.lastName}
+            </h2>
+            {userRating && (
+              <p className={c.rating}>
+                {userRating.averageRating.toFixed(1)}★({userRating.reviewCount})
+              </p>
+            )}
+          </div>
+
+          <div className={c.section}>
+            <h3>Opis</h3>
+            {isOwnProfile ? (
+              <>
+                <textarea
+                  className={c.textarea}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+                <button onClick={handleSaveDescription} disabled={isSaving}>
+                  {isSaving ? "Spremanje..." : "Spremi promjene"}
+                </button>
+              </>
+            ) : (
+              <p>{profile.description?.trim() ? profile.description : ""}</p>
+            )}
+          </div>
+
+          <div className={c.section}>
+            <div className={c.sectionHeader}>
+              <h3>Automobili</h3>
+              {isOwnProfile && (
+                <img
+                  src={pencilSvg}
+                  alt="Uredi popis"
+                  onClick={() => navigate(routes.USER_VEHICLES)}
+                  className={c.editVehicleListIcon}
+                />
+              )}
+            </div>
+
+            {isLoadingVehicles ? (
+              <p>Učitavanje vozila...</p>
+            ) : userVehicles && userVehicles.length > 0 ? (
+              <div className={c.vehiclesGrid}>
+                {userVehicles.map((v) => (
+                  <VehicleCard key={v.id} vehicle={v} />
+                ))}
+              </div>
+            ) : (
+              <p>Nije dodano nijedno vozilo.</p>
+            )}
+          </div>
+
+          <div className={c.section}>
+            <h3>Recenzije od unajmljivača</h3>
+
+            {isLoadingReviews ? (
+              <p>Učitavanje recenzija...</p>
+            ) : userReviews && userReviews.length > 0 ? (
+              <div className={c.reviewList}>
+                {userReviews.map((review: ReviewCardData) => (
+                  <ReviewCard key={review.id} review={review} />
+                ))}
+              </div>
+            ) : (
+              <p>Korisnik još nema recenzija.</p>
+            )}
+          </div>
         </div>
+      )}
 
-        {isLoadingVehicles ? (
-          <p>Učitavanje vozila...</p>
-        ) : userVehicles && userVehicles.length > 0 ? (
-          <div className={c.vehiclesGrid}>
-            {userVehicles.map((v) => (
-              <VehicleCard key={v.id} vehicle={v} />
-            ))}
-          </div>
-        ) : (
-          <p>Nije dodano nijedno vozilo.</p>
-        )}
-      </div>
-
-      <div className={c.section}>
-        <h3>Recenzije od unajmljivača</h3>
-
-        {isLoadingReviews ? (
-          <p>Učitavanje recenzija...</p>
-        ) : userReviews && userReviews.length > 0 ? (
-          <div className={c.reviewList}>
-            {userReviews.map((review: ReviewCardData) => (
-              <ReviewCard key={review.id} review={review} />
-            ))}
-          </div>
-        ) : (
-          <p>Korisnik još nema recenzija.</p>
-        )}
-      </div>
+      {activeTab === "settings" && isOwnProfile && (
+        <>{/* SADRŽAJ ZA POSTAVKE */}</>
+      )}
     </div>
   );
 };
