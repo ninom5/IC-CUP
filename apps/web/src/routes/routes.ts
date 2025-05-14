@@ -1,6 +1,7 @@
 import { RouteType } from "types/index";
 
 export const routes: RouteType = {
+  ADMIN: "/admin",
   HOME: "/",
   ABOUT: "/about",
   VEHICLES: "/vehicles",

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { routes } from "./routes/index";
+import { AdminRoute, routes } from "./routes/index";
 import {
   AddVehiclePage,
   BecomeHostPage,
@@ -10,10 +10,10 @@ import {
   UserVehiclePage,
   VehiclePage,
   BlockedPage,
+  AdminPage,
 } from "@pages/index";
 import { SearchBarLayout, NavBarLayout } from "@layouts/index";
 import { ProtectedRoute } from "./components";
-// import { AdminRoutes } from "@routes/index ";
 
 export const Router = () => {
   return (
@@ -39,9 +39,9 @@ export const Router = () => {
             <Route path={routes.VEHICLE_PAGE} element={<VehiclePage />} />
           </Route>
         </Route>
-        {/* <AdminRoutes>
-
-</AdminRoutes> */}
+        <Route element={<AdminRoute />}>
+          <Route path={routes.ADMIN} element={<AdminPage />}></Route>
+        </Route>
 
         <Route path={routes.BLOCKED} element={<BlockedPage />} />
 
