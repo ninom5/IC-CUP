@@ -30,7 +30,6 @@ export const VehicleDescriptionEdit = ({
     }
     setIsEditing((prev) => !prev);
   };
-  console.log(textareaValue);
 
   return (
     <div className={c.descriptionContainer}>

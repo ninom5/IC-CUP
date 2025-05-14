@@ -2,10 +2,10 @@ import { useFetchUserVehicle } from "@api/useFetchUserVehicle";
 import c from "./UserVehiclePage.module.css";
 import { useParams } from "react-router-dom";
 import starIcon from "../../assets/images/starIcon.svg";
-import checkmarkIcon from "../../assets/images/checkmarkIcon.svg";
 import {
   AddVehicleAvailibility,
   VehicleDescriptionEdit,
+  VehicleLicenseImgEdit,
   VehiclePriceEdit,
   VehicleRegistrationEdit,
 } from "@components/index";
@@ -77,21 +77,7 @@ export const UserVehiclePage = () => {
           handleUpdateVehicle={handleUpdateVehicle}
         />
 
-        <div className={c.inputContainer}>
-          <h3>Slika prometne dozvole</h3>
-
-          <img src={checkmarkIcon} alt="checkmark" />
-
-          <div>
-            <button className={c.fileInput}>Promijeni</button>
-            <input
-              type="file"
-              name=""
-              accept="image/*"
-              style={{ display: "none" }}
-            />
-          </div>
-        </div>
+        <VehicleLicenseImgEdit handleUpdateVehicle={handleUpdateVehicle} />
 
         <VehiclePriceEdit
           dailyPrice={data.dailyPrice}
