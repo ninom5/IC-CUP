@@ -6,6 +6,9 @@ export type UpdateUserPayload = {
   id: string;
   description?: string;
   personPhoto?: string;
+  password?: string;
+  phoneNumber?: string;
+  address?: string;
 };
 
 const updateUser = async ({ id, ...data }: UpdateUserPayload) => {

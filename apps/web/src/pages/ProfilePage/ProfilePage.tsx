@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import c from "./ProfilePage.module.css";
 import {
+  UpdateUserPayload,
   useFetchUserProfile,
   useFetchUserVehicles,
   useGetUserRating,
@@ -50,6 +51,10 @@ export const ProfilePage = () => {
   const [personPhotoPreview, setPersonPhotoPreview] = useState<string | null>(
     null
   );
+  const [updatedAddress, setUpdatedAddress] = useState("");
+  const [updatedPhone, setUpdatedPhone] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
     if (profile?.description) setDescription(profile.description);
@@ -65,6 +70,49 @@ export const ProfilePage = () => {
     await updateUser({ id: profile.id, description });
     refetch();
     setIsSaving(false);
+  };
+
+  const handleSaveBasicInfo = async () => {
+    const updatePayload: UpdateUserPayload = { id: profile.id };
+
+    if (updatedAddress.trim()) {
+      updatePayload.address = updatedAddress;
+    }
+
+    if (updatedPhone.trim()) {
+      updatePayload.phoneNumber = updatedPhone;
+    }
+
+    if (newPassword && confirmPassword) {
+      if (newPassword !== confirmPassword) {
+        toast.error("Lozinke se ne podudaraju.");
+        return;
+      }
+
+      if (newPassword.length < 8) {
+        toast.error("Lozinka mora imati barem 8 znakova.");
+        return;
+      }
+
+      updatePayload.password = newPassword;
+    }
+
+    if (!updatedAddress.trim() && !updatedPhone.trim() && !newPassword) {
+      toast.error("Nema promjena za spremiti.");
+      return;
+    }
+
+    setIsSaving(true);
+    try {
+      await updateUser(updatePayload);
+      refetch();
+    } catch (err) {
+      toast.error("Greška pri spremanju promjena.");
+    } finally {
+      setIsSaving(false);
+      setNewPassword("");
+      setConfirmPassword("");
+    }
   };
 
   const handlePersonPhotoChange = async (
@@ -220,7 +268,61 @@ export const ProfilePage = () => {
       )}
 
       {activeTab === "settings" && isOwnProfile && (
-        <>{/* SADRŽAJ ZA POSTAVKE */}</>
+        <div className={c.settingsContainer}>
+          <div className={c.settingsBasic}>
+            <div className={c.formGroup}>
+              <label>Nova Lozinka</label>
+              <input
+                id="password"
+                name="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                type="password"
+              />
+            </div>
+
+            <div className={c.formGroup}>
+              <label>Ponovi novu lozinku</label>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                type="password"
+              />
+            </div>
+
+            <div className={c.formGroup}>
+              <label>Adresa</label>
+              <input
+                id="address"
+                name="address"
+                value={updatedAddress}
+                onChange={(e) => setUpdatedAddress(e.target.value)}
+                type="text"
+                placeholder={profile.address}
+              />
+            </div>
+
+            <div className={c.formGroup}>
+              <label>Broj mobitela</label>
+              <input
+                id="phoneNumber"
+                name="phoneNumber"
+                value={updatedPhone}
+                onChange={(e) => setUpdatedPhone(e.target.value)}
+                type="text"
+                placeholder={profile.phoneNumber}
+              />
+            </div>
+
+            <ButtonAccent
+              content="Spremi promjene"
+              onClick={handleSaveBasicInfo}
+              disabled={isSaving}
+            />
+          </div>
+        </div>
       )}
     </div>
   );

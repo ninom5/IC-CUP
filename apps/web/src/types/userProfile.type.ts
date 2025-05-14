@@ -7,6 +7,8 @@ export type UserProfileType = {
   role: Role;
   personPhoto: string;
   description: string;
+  phoneNumber: string;
+  address: string;
 };
 
 export type UserRating = {
