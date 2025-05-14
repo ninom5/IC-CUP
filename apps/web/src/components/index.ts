@@ -23,3 +23,5 @@ export * from "./Contact/Contact";
 export * from "./Footer/Footer";
 export * from "./SiteMapFooter/SiteMapFooter";
 export * from "./AddVehicleSteps/VehicleAddedMessage/VehicleAddedMessage";
+export * from "./VehicleRegistrationEdit/VehicleRegistrationEdit";
+export * from "./VehiclePriceEdit/VehiclePriceEdit";

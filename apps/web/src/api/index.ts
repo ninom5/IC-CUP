@@ -10,3 +10,4 @@ export * from "./useCreateAvailability";
 export * from "./useFetchUserVehicles";
 export * from "./useFetchUserVehicle";
 export * from "./useFetchVehicleAvailabilities";
+export * from "./useUpdateVehicle";

@@ -4,12 +4,19 @@ import { useParams } from "react-router-dom";
 import starIcon from "../../assets/images/starIcon.svg";
 import checkmarkIcon from "../../assets/images/checkmarkIcon.svg";
 import pencilIcon from "../../assets/images/pencilIcon.svg";
-import { AddVehicleAvailibility, CustomDatePicker } from "@components/index";
-import { getMinDate } from "@utils/getMinDate.util";
+import {
+  AddVehicleAvailibility,
+  VehiclePriceEdit,
+  VehicleRegistrationEdit,
+} from "@components/index";
+import { useUpdateVehicle } from "@api/useUpdateVehicle";
+import { VehicleData } from "../../types/index";
+import { toast } from "react-toastify";
 
 export const UserVehiclePage = () => {
   const { id } = useParams<{ id: string }>();
-  const { data, isLoading, error } = useFetchUserVehicle(id || "");
+  const { data, isLoading, error, refetch } = useFetchUserVehicle(id || "");
+  const updateVehicle = useUpdateVehicle();
 
   if (isLoading) {
     return <div className={c.loading}>Loading vehicle data...</div>;
@@ -23,7 +30,12 @@ export const UserVehiclePage = () => {
     return <div className={c.error}>No vehicle data found</div>;
   }
 
-  console.log(data.registrationExpiration);
+  const handleUpdateVehicle = async (data: Partial<VehicleData>) => {
+    if (!id) return toast.error("ID vozila ne postoji");
+    await updateVehicle.mutateAsync({ id, data });
+
+    await refetch();
+  };
 
   return (
     <section className={c.userVehicleSection}>
@@ -61,36 +73,11 @@ export const UserVehiclePage = () => {
           <p>{data.description ? data.description : "Nema opisa"}</p>
         </div>
 
-        <div className={c.registrationContainer}>
-          <div className={c.inputContainer}>
-            <h3>Registracija</h3>
-            <input
-              type="text"
-              name="registration"
-              placeholder="ST-1234-AB"
-              value={data.registration}
-              disabled
-            />
-          </div>
-
-          <div className={c.inputContainer}>
-            <h3>Datum isteka</h3>
-            <input
-              type="date"
-              name="registrationExpiration"
-              min={getMinDate(30)}
-              max={getMinDate(365)}
-              value={
-                new Date(data.registrationExpiration)
-                  .toISOString()
-                  .split("T")[0]
-              }
-              disabled
-            />
-          </div>
-
-          <img src={pencilIcon} className={c.pencilIcon} />
-        </div>
+        <VehicleRegistrationEdit
+          registration={data.registration}
+          registrationExpiration={data.registrationExpiration}
+          handleUpdateVehicle={handleUpdateVehicle}
+        />
 
         <div className={c.inputContainer}>
           <h3>Slika prometne dozvole</h3>
@@ -108,22 +95,10 @@ export const UserVehiclePage = () => {
           </div>
         </div>
 
-        <div className={c.inputContainer}>
-          <h3>
-            Cijena / po danu <img src={pencilIcon} className={c.pencilIcon} />
-          </h3>
-          <label className={c.priceLabel}>
-            <input
-              type="number"
-              name="dailyPrice"
-              min={1}
-              placeholder="70.00"
-              value={data.dailyPrice}
-              disabled
-            />{" "}
-            €
-          </label>
-        </div>
+        <VehiclePriceEdit
+          dailyPrice={data.dailyPrice}
+          handleUpdateVehicle={handleUpdateVehicle}
+        />
       </div>
     </section>
   );
