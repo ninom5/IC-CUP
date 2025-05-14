@@ -1,0 +1,148 @@
+.profilePageContainer {
+  width: 985px;
+  position: relative;
+  top: 10px;
+  left: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  margin-bottom: 50px;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.tabs {
+  display: flex;
+  gap: 60px;
+}
+
+.tab {
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 24px;
+  background-color: transparent;
+}
+
+.activeTab {
+  border-bottom: 1px solid var(--background-black);
+}
+
+.profileContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 155px;
+}
+
+.profileSection1 {
+  width: 295px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.profilePictureWrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--stroke-gray);
+}
+
+.editPhotoIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.profileSection2 {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  width: 538px;
+}
+
+.profileSection2 h2 {
+  padding-left: 0px;
+}
+
+.textarea {
+  height: 202px;
+  width: 100%;
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid var(--stroke-gray);
+}
+
+.sectionHeader {
+  display: flex;
+  gap: 11px;
+}
+
+.editVehicleListIcon {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.settingsContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  gap: 60px;
+  width: 662;
+  top: 150px;
+  left: 507px;
+}
+
+.settingsBasic {
+  width: 315px;
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formGroup label {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.formGroup input {
+  text-align: left;
+  border-radius: 10px;
+  padding: 8px;
+  width: 100%;
+  font-size: 20px;
+  background-color: var(--background-white);
+  border: 1px solid var(--stroke-gray);
+}
+
+.settingsDocuments {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.settingsDocuments h2 {
+  padding-left: 0px;
+}

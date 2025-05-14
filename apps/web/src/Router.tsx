@@ -6,6 +6,7 @@ import {
   VehiclesPage,
   HomePage,
   NotFoundPage,
+  ProfilePage,
   UserVehiclesPage,
   UserVehiclePage,
   VehiclePage,
@@ -46,6 +47,7 @@ export const Router = () => {
         <Route path={routes.BLOCKED} element={<BlockedPage />} />
 
         <Route element={<NavBarLayout />}>
+          <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
           <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
         </Route>
       </Routes>

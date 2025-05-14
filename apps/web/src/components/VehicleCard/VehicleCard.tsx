@@ -1,9 +1,15 @@
-import "./vehicleCard.css";
 import { VehicleType } from "types/vehicle.type";
 import { useNavigate } from "react-router-dom";
 import { getAverageVehicleRating } from "@utils/getAverageVehicleRating.util";
+import c from "./vehicleCard.module.css";
 
-export const VehicleCard = ({ vehicle }: { vehicle: VehicleType }) => {
+type Props = {
+  vehicle: VehicleType;
+  variant?: "default" | "profile";
+};
+
+export const VehicleCard = ({ vehicle, variant = "default" }: Props) => {
+  const isProfile = variant === "profile";
   const navigate = useNavigate();
 
   const { totalRating, numberOfRatings } = getAverageVehicleRating(vehicle);
@@ -12,20 +18,20 @@ export const VehicleCard = ({ vehicle }: { vehicle: VehicleType }) => {
       className="vehicle-card"
       onClick={() => navigate(`/vehicle/${vehicle.id}`)}
     >
-      <div className="vehicle-image-wrapper">
+      <div className={c.vehicleImageWrapper}>
         <img
           src={vehicle.images?.[0]}
           alt="vehicle main image"
-          className="vehicle-image"
+          className={c.vehicleImage}
         />
       </div>
 
-      <div className="vehicle-info">
+      <div className={c.vehicleInfo}>
         <h2>
           {vehicle.brand} {vehicle.model} {vehicle.productionYear}
         </h2>
 
-        <p className="rating-info">
+        <p className={c.ratingInfo}>
           {numberOfRatings > 0 ? (
             <>
               {(totalRating / numberOfRatings).toFixed(1)} &#9733; (
@@ -36,8 +42,8 @@ export const VehicleCard = ({ vehicle }: { vehicle: VehicleType }) => {
           )}
         </p>
 
-        <p className="price">
-          <span className="price-span">{vehicle.dailyPrice} €</span> / po danu
+        <p className={c.price}>
+          <span className={c.priceSpan}>{vehicle.dailyPrice} €</span> / po danu
         </p>
       </div>
     </section>

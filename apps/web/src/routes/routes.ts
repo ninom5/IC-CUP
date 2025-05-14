@@ -13,4 +13,5 @@ export const routes: RouteType = {
   USERS_DRIVES: "/user/drives",
   BLOCKED: "/blocked",
   NOT_FOUND: "*",
+  PROFILE_PAGE: "/profile/:id",
 };

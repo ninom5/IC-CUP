@@ -15,20 +15,27 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { EmailModule } from './email/email.module';
 import { VehicleAvailabilityModule } from './vehicle-availability/vehicle-availability.module';
 
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+
 @Module({
   imports: [
-    UserModule, 
-    AuthModule, 
-    IncidentModule, 
-    RentalModule, 
-    PaymentModule, 
-    NotificationModule, 
-    CloudinaryModule, 
-    VehicleModule, 
-    ReviewModule, 
-    LocationModule, 
+    UserModule,
+    AuthModule,
+    IncidentModule,
+    RentalModule,
+    PaymentModule,
+    NotificationModule,
+    CloudinaryModule,
+    VehicleModule,
+    ReviewModule,
+    LocationModule,
     VehicleAvailabilityModule,
-    EmailModule
+    EmailModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', '..', 'web', 'dist'),
+      exclude: ['/api/(.*)'],
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
