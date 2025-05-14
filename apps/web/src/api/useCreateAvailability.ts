@@ -11,7 +11,7 @@ const createAvailability = async (
     availibilityIntervals
   );
 
-  return response.data;
+  return response;
 };
 
 export const useCreateAvailability = () => {

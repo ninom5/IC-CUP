@@ -3,6 +3,7 @@ import c from "./UserVehiclePage.module.css";
 import { useParams } from "react-router-dom";
 import starIcon from "../../assets/images/starIcon.svg";
 import checkmarkIcon from "../../assets/images/checkmarkIcon.svg";
+import pencilIcon from "../../assets/images/pencilIcon.svg";
 import { AddVehicleAvailibility } from "@components/index";
 import { getMinDate } from "@utils/getMinDate.util";
 
@@ -21,6 +22,8 @@ export const UserVehiclePage = () => {
   if (!data) {
     return <div className={c.error}>No vehicle data found</div>;
   }
+
+  console.log(data.registrationExpiration);
 
   return (
     <section className={c.userVehicleSection}>
@@ -52,14 +55,22 @@ export const UserVehiclePage = () => {
         <AddVehicleAvailibility />
 
         <div className={c.descriptionContainer}>
-          <h3>Opis</h3>
+          <h3>
+            Opis <img src={pencilIcon} className={c.pencilIcon} />
+          </h3>
           <p>{data.description ? data.description : "Nema opisa"}</p>
         </div>
 
         <div className={c.registrationContainer}>
           <div className={c.inputContainer}>
             <h3>Registracija</h3>
-            <input type="text" name="registration" placeholder="ST-1234-AB" />
+            <input
+              type="text"
+              name="registration"
+              placeholder="ST-1234-AB"
+              value={data.registration}
+              disabled
+            />
           </div>
 
           <div className={c.inputContainer}>
@@ -69,8 +80,16 @@ export const UserVehiclePage = () => {
               name="registrationExpiration"
               min={getMinDate(30)}
               max={getMinDate(365)}
+              value={
+                new Date(data.registrationExpiration)
+                  .toISOString()
+                  .split("T")[0]
+              }
+              disabled
             />
           </div>
+
+          <img src={pencilIcon} className={c.pencilIcon} />
         </div>
 
         <div className={c.inputContainer}>
@@ -90,13 +109,17 @@ export const UserVehiclePage = () => {
         </div>
 
         <div className={c.inputContainer}>
-          <h3>Cijena / po danu</h3>
+          <h3>
+            Cijena / po danu <img src={pencilIcon} className={c.pencilIcon} />
+          </h3>
           <label className={c.priceLabel}>
             <input
               type="number"
               name="dailyPrice"
               min={1}
               placeholder="70.00"
+              value={data.dailyPrice}
+              disabled
             />{" "}
             €
           </label>

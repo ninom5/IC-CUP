@@ -71,7 +71,24 @@ export type Review = {
   rating: number;
 };
 
-export interface UserVehiclesType extends VehicleType {
+export type UserVehiclesType = {
+  ownerId: string;
+  brand: string;
+  model: string;
+  images: string[];
+  productionYear: number;
+  dailyPrice: number;
+  description: string;
+  vehicleLicenseImg: string;
+  registration: string;
+  registrationExpiration: string;
+  pickupAddress: string;
+  city: string;
+  longitude: number;
+  latitude: number;
+  vehicleType: VehicleEnum;
+  details: VehicleDetails;
+  features: VehicleFeatures;
   avgRating: number | null;
   reviewCount: number;
-}
+};
