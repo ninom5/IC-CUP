@@ -31,6 +31,16 @@ export class UserController {
     return this.userService.getAll();
   }
 
+  @Get(':id/rating')
+  @UseGuards(UserAuthGuard)
+  @ApiResponse({
+    status: 200,
+    description: "Average rating of user's vehicles",
+  })
+  getUserRating(@Param('id') id: string) {
+    return this.userService.getUserRating(id);
+  }
+
   @Get(':id')
   @UseGuards(UserAuthGuard)
   @ApiResponse({ status: 200, description: 'Return user by id' })

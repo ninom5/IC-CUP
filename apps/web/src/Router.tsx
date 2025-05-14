@@ -6,6 +6,7 @@ import {
   VehiclesPage,
   HomePage,
   NotFoundPage,
+  ProfilePage,
   UserVehiclesPage,
   UserVehiclePage,
 } from "@pages/index";
@@ -33,6 +34,7 @@ export const Router = () => {
 </AdminRoutes> */}
 
         <Route element={<NavBarLayout />}>
+          <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
           <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
         </Route>
       </Routes>

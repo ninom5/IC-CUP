@@ -17,6 +17,52 @@ export class ReviewService {
     });
   }
 
+  async getUserReviews(userId: string) {
+    const reviews = await this.prisma.review.findMany({
+      where: {
+        rental: {
+          vehicle: {
+            ownerId: userId,
+          },
+        },
+      },
+      select: {
+        id: true,
+        rating: true,
+        comment: true,
+        createdAt: true,
+        rental: {
+          select: {
+            renter: {
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                personPhoto: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    return reviews.map((review) => ({
+      id: review.id,
+      rating: review.rating,
+      comment: review.comment,
+      createdAt: review.createdAt,
+      renter: {
+        id: review.rental.renter.id,
+        firstName: review.rental.renter.firstName,
+        lastName: review.rental.renter.lastName,
+        personPhoto: review.rental.renter.personPhoto,
+      },
+    }));
+  }
+
   async findVehicleReviews(vehicleId: string) {
     const vehicleExists = await this.prisma.vehicle.findUnique({
       where: { id: vehicleId },
@@ -60,11 +106,11 @@ export class ReviewService {
       rating: review.rating,
       comment: review.comment,
       createdAt: review.createdAt,
-      user: {
+      renter: {
         id: review.rental.renter.id,
         firstName: review.rental.renter.firstName,
         lastName: review.rental.renter.lastName,
-        img: review.rental.renter.personPhoto,
+        personPhoto: review.rental.renter.personPhoto,
       },
     }));
   }

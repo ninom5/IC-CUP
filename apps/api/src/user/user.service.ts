@@ -33,6 +33,13 @@ export class UserService {
         lastName: true,
         isSuspended: true,
         isVerified: true,
+        role: true,
+        personPhoto: true,
+        description: true,
+        phoneNumber: true,
+        address: true,
+        idCard: true,
+        driverLicense: true,
       },
     });
     if (!user) throw new NotFoundException('User with provided id not found');
@@ -55,6 +62,39 @@ export class UserService {
       throw new NotFoundException('User with provided email not found');
 
     return user;
+  }
+
+  async getUserRating(userId: string): Promise<{
+    averageRating: number;
+    reviewCount: number;
+  }> {
+    const vehicles = await this.prisma.vehicle.findMany({
+      where: { ownerId: userId },
+      select: {
+        rentals: {
+          select: {
+            review: {
+              select: {
+                rating: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const ratings: number[] = vehicles
+      .flatMap((v) => v.rentals)
+      .map((r) => r.review?.rating)
+      .filter((r): r is number => typeof r === 'number');
+
+    const reviewCount = ratings.length;
+    const averageRating =
+      reviewCount > 0
+        ? ratings.reduce((sum, r) => sum + r, 0) / reviewCount
+        : 0;
+
+    return { averageRating, reviewCount };
   }
 
   async update(

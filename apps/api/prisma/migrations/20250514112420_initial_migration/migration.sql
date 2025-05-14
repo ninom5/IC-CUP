@@ -41,17 +41,6 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "Location" (
-    "id" TEXT NOT NULL,
-    "address" TEXT NOT NULL,
-    "city" TEXT,
-    "longitude" DOUBLE PRECISION NOT NULL,
-    "latitude" DOUBLE PRECISION NOT NULL,
-
-    CONSTRAINT "Location_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Vehicle" (
     "id" TEXT NOT NULL,
     "ownerId" TEXT NOT NULL,
@@ -74,6 +63,17 @@ CREATE TABLE "Vehicle" (
     "features" JSONB NOT NULL,
 
     CONSTRAINT "Vehicle_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Location" (
+    "id" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
+    "city" TEXT,
+    "longitude" DOUBLE PRECISION NOT NULL,
+    "latitude" DOUBLE PRECISION NOT NULL,
+
+    CONSTRAINT "Location_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable

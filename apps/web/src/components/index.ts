@@ -22,4 +22,6 @@ export * from "./NavBar/NavBar";
 export * from "./Contact/Contact";
 export * from "./Footer/Footer";
 export * from "./SiteMapFooter/SiteMapFooter";
+export * from "./ReviewCard/ReviewCard";
+export * from "./DocumentsSettings/DocumentsSettings";
 export * from "./AddVehicleSteps/VehicleAddedMessage/VehicleAddedMessage";

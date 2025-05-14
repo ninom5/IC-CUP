@@ -15,14 +15,3 @@ export const useRegister = () =>
     mutationKey: ["register-user"],
     mutationFn: registerUser,
   });
-
-/*export const useRegister = (): UseMutationResult<
-  void,
-  Error,
-  RegisterDataType,
-  unknown
-> => {
-  return useMutation({
-    mutationFn: registerUser,
-  });
-};*/

@@ -16,6 +16,11 @@ export class ReviewController {
     return this.reviewService.findVehicleReviews(id);
   }
 
+  @Get('user/:id')
+  getReviewsForUser(@Param('id') id: string) {
+    return this.reviewService.getUserReviews(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.reviewService.findOne(id);

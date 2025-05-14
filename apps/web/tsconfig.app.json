@@ -34,7 +34,8 @@
       "@utils/*": ["utils/*"],
       "@layouts/*": ["layouts/*"],
       "@hooks/*": ["hooks/*"],
-      "@context": ["context/*"]
+      "@context/*": ["context/*"],
+      "@enums/*": ["enums/*"]
     }
   },
   "include": ["src"]
