@@ -5,7 +5,7 @@ import { CloudinaryFileResponseType } from "types/index";
 
 export const uploadFiles = async (file: File) => {
   if (!file) {
-    toast.error("File can't be empty");
+    toast.error("Morate dodati dokumente");
     return null;
   }
 
@@ -30,11 +30,8 @@ export const useUploadImages = () => {
   return useMutation({
     mutationFn: uploadFiles,
     onError: (error) => {
-      toast.error("Error uploading image(s)");
+      toast.error("Greška prilikom spremanja slika");
       console.error(error);
-    },
-    onSuccess: () => {
-      toast.success("Image(s) uploaded successfully!");
     },
   });
 };

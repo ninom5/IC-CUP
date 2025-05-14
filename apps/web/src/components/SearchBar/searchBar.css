@@ -13,8 +13,8 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 50%;
-  gap: 20px;
+  width: 70%;
+  margin-right: 20px;
 }
 
 .kolo-logo {
@@ -27,7 +27,7 @@
   border: 1px solid var(--stroke-gray);
   border-radius: 8px;
   justify-content: flex-start;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 .location-wrapper #autocomplete-input {
   margin-left: 10px;
@@ -51,8 +51,8 @@
   border: 1px solid var(--stroke-gray);
   padding: 5px 20px;
   border-radius: 8px;
-  width: 48px;
-  height: 48px;
+  width: 54px;
+  height: 54px;
   cursor: pointer;
 }
 

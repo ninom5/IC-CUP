@@ -2,12 +2,11 @@
   z-index: 10;
   padding: 4px;
   border-radius: 4px;
-  width: 100%;
+  width: 50%;
 }
 
 #autocomplete-input {
   width: 300px;
-  padding: 8px;
   font-size: 20px;
   border: 1px solid var(--stroke-gray);
   border-radius: 4px;

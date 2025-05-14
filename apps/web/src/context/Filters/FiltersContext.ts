@@ -6,6 +6,7 @@ export interface FiltersContextType {
   carCategory: string;
   transmission: string;
   sortBy: string;
+  dateRange: [Date | null, Date | null];
   setFilters: (
     filters: Partial<Omit<FiltersContextType, "setFilters">>
   ) => void;
@@ -17,5 +18,6 @@ export const FiltersContext = createContext<FiltersContextType>({
   carCategory: "",
   transmission: "",
   sortBy: "",
+  dateRange: [null, null],
   setFilters: () => {},
 });

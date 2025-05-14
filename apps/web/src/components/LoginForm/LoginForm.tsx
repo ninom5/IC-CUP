@@ -6,14 +6,16 @@ import { toast } from "react-toastify";
 import { routes } from "@routes/index";
 import axios from "axios";
 import "./loginForm.css";
+import { useAuthContext } from "@hooks/useAuthContext";
 
-export const LoginForm = ({ onClose }: { onClose: () => void }) => {
+export const LoginForm = () => {
   const { updateToken } = useToken();
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
   const { mutate: login } = useLogin();
+  const { setShowLogin, setShowRegister } = useAuthContext();
 
   const navigate = useNavigate();
 
@@ -33,16 +35,16 @@ export const LoginForm = ({ onClose }: { onClose: () => void }) => {
           password: "",
         });
 
-        navigate(routes.CARS);
+        setShowLogin(false);
+        navigate(routes.VEHICLES);
       },
       onError: (error: unknown) => {
         if (axios.isAxiosError(error)) {
           const message =
             error.response?.data?.message || "Unknown error occurred";
-          toast.error(`Error logging in: ${message}`);
+          toast.error(`Pogresška prilikom prijave: ${message}`);
           console.error("Axios error:", error.response);
         } else {
-          toast.error("An unexpected error occurred. Please try again.");
           console.error("Login error:", error);
         }
       },
@@ -50,12 +52,12 @@ export const LoginForm = ({ onClose }: { onClose: () => void }) => {
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" onClick={() => setShowLogin(false)}>
       <div className="login-pop-up" onClick={(e) => e.stopPropagation()}>
         <section className="login-section">
           <h1>Prijava</h1>
 
-          <span className="close-span" onClick={onClose}>
+          <span className="close-span" onClick={() => setShowLogin(false)}>
             &times;
           </span>
 
@@ -88,7 +90,15 @@ export const LoginForm = ({ onClose }: { onClose: () => void }) => {
           <div className="aha">
             <h2>Još nemaš račun?</h2>
 
-            <button type="button">Registriraj se</button>
+            <button
+              type="button"
+              onClick={() => {
+                setShowLogin(false);
+                setShowRegister(true);
+              }}
+            >
+              Registriraj se
+            </button>
           </div>
         </section>
       </div>

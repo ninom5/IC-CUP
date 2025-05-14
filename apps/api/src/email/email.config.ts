@@ -6,6 +6,8 @@ import { MailerOptions, MailerOptionsFactory } from '@nestjs-modules/mailer';
 @Injectable()
 export class EmailConfig implements MailerOptionsFactory {
   createMailerOptions(): MailerOptions {
+    const templatesPath = join(process.cwd(), 'src', 'templates');
+
     return {
       transport: {
         service: 'gmail',
@@ -18,7 +20,7 @@ export class EmailConfig implements MailerOptionsFactory {
         from: `"Kolo" <${process.env.USER_EMAIL}>`,
       },
       template: {
-        dir: join(__dirname, 'templates'),
+        dir: templatesPath,
         adapter: new HandlebarsAdapter(),
         options: {
           strict: true,
