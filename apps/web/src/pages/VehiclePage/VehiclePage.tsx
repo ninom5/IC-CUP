@@ -101,7 +101,6 @@ export const VehiclePage = () => {
     <>
       <section className="vehicle-page">
         <VehicleGallery vehicle={vehicle} />
-
         <div className="about-vehicle">
           <VehicleDescription vehicle={vehicle} />
 
@@ -124,15 +123,16 @@ export const VehiclePage = () => {
                   <span>{totalPrice?.toFixed(2)} €</span>
                 </h1>
 
-              <button
-                onClick={() => setShowCheckoutForm(true)}
-                disabled={selectedCard && date[0] && date[1] ? false : true}
-              >
-                {selectedCard && date[0] && date[1]
-                  ? "Nastavi"
-                  : "Odaberite osiguranje i datum"}
-              </button>
-            </section>
+                <button
+                  onClick={() => setShowCheckoutForm(true)}
+                  disabled={selectedCard && date[0] && date[1] ? false : true}
+                >
+                  {selectedCard && date[0] && date[1]
+                    ? "Nastavi"
+                    : "Odaberite osiguranje i datum"}
+                </button>
+              </section>
+            )}
 
             {showCheckoutForm && (
               <CheckoutPopUp

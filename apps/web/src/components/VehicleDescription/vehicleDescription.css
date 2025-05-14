@@ -3,12 +3,10 @@
 }
 
 .car-title {
-  /* margin-top: 20px; */
   margin-right: auto;
   text-align: left;
   font-size: 40px;
   font-weight: 700;
-  /* padding: 10px; */
 }
 .car-rating {
   padding: 10px 20px;
@@ -75,4 +73,8 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.95rem;
+}
+
+.reviews-section {
+  margin-top: 100px;
 }
