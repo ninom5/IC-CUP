@@ -4,6 +4,7 @@ import {
   TransmissionTypeEnum,
   VehicleEnum,
 } from "enums";
+import { AvailabilityInterval } from "./vehicleAvailibility.type";
 
 export type VehicleData = {
   ownerId: string;
@@ -50,7 +51,7 @@ export type StepProps = {
 
 export type VehicleType = {
   id: string;
-  ownerId: string;
+  owner: Owner;
   brand: string;
   model: string;
   images: string[];
@@ -63,13 +64,29 @@ export type VehicleType = {
   vehicleTypeId: string;
   pickupAddress: string;
   city: string;
+  details: VehicleDetails;
   longitude: number;
   latitude: number;
   rentals: Rental[];
+  availabilities: AvailabilityInterval[];
+  features: VehicleFeatures;
 };
 
 export type Rental = {
   review: Review;
+};
+
+export type CreateRental = {
+  renterId: string;
+  vehicleId: string;
+  startDate: Date;
+  endDate: Date;
+  totalPrice: number;
+};
+
+export type RentalResponse = {
+  id: string;
+  totalPrice: number;
 };
 
 export type Review = {
@@ -98,3 +115,13 @@ export type UserVehiclesType = {
   avgRating: number | null;
   reviewCount: number;
 };
+
+export type Owner = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  personPhoto: string;
+};
+
+export type CarCategory = "coupe" | "sedan" | "suv" | "cabriolet" | "hatchback";

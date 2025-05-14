@@ -15,3 +15,7 @@ export * from "./useGetUserReviews";
 export * from "./useUploadDocumentsSettingsPage";
 export * from "./useFetchUserVehicle";
 export * from "./useFetchVehicleAvailabilities";
+export * from "./useFetchVehicleById";
+export * from "./useFetchAllVehiclesPagination";
+export * from "./useCreateRentalPayment";
+export * from "./useSendEmail";

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { routes } from "./routes/index";
+import { AdminRoute, routes } from "./routes/index";
 import {
   AddVehiclePage,
   BecomeHostPage,
@@ -9,9 +9,12 @@ import {
   ProfilePage,
   UserVehiclesPage,
   UserVehiclePage,
+  VehiclePage,
+  BlockedPage,
+  AdminPage,
 } from "@pages/index";
 import { SearchBarLayout, NavBarLayout } from "@layouts/index";
-// import { AdminRoutes } from "@routes/index ";
+import { ProtectedRoute } from "./components";
 
 export const Router = () => {
   return (
@@ -19,7 +22,7 @@ export const Router = () => {
       <Routes>
         <Route element={<SearchBarLayout />}>
           <Route path={routes.HOME} element={<HomePage />} />
-          <Route path={routes.CARS} element={<VehiclesPage />} />
+          <Route path={routes.VEHICLES} element={<VehiclesPage />} />
           <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
           <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
           <Route path={routes.USER_VEHICLES} element={<UserVehiclesPage />} />
@@ -29,9 +32,19 @@ export const Router = () => {
           />
         </Route>
 
-        {/* <AdminRoutes>
+        <Route element={<ProtectedRoute />}>
+          <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
+          <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
 
-</AdminRoutes> */}
+          <Route element={<SearchBarLayout />}>
+            <Route path={routes.VEHICLE_PAGE} element={<VehiclePage />} />
+          </Route>
+        </Route>
+        <Route element={<AdminRoute />}>
+          <Route path={routes.ADMIN} element={<AdminPage />}></Route>
+        </Route>
+
+        <Route path={routes.BLOCKED} element={<BlockedPage />} />
 
         <Route element={<NavBarLayout />}>
           <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />

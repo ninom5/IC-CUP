@@ -6,6 +6,8 @@ export const getAverageVehicleRating = (vehicle: VehicleType) => {
   let totalRating = 0;
   let numberOfRatings = 0;
 
+  if (!rentals) return { totalRating, numberOfRatings };
+
   rentals.forEach((rental) => {
     const review = rental.review;
 

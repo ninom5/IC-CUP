@@ -17,7 +17,7 @@ export const useLogin = () => {
     mutationKey: ["login-user"],
     onSuccess: (data: JwtResponse) => {
       localStorage.setItem("jwt", data.token);
-      toast.success("Successfully logged in");
+      toast.success("Uspješno ste se prijavili");
     },
     onError(error: string) {
       toast.error(`Error logging in: ${error}`);

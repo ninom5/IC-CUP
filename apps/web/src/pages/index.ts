@@ -6,3 +6,6 @@ export * from "./AddVehiclePage/AddVehiclePage";
 export * from "./ProfilePage/ProfilePage";
 export * from "./UserVehiclesPage/UserVehiclesPage";
 export * from "./UserVehiclePage/UserVehiclePage";
+export * from "./VehiclePage/VehiclePage";
+export * from "./BlockedPage/BlockedPage";
+export * from "./AdminPage/AdminPage";

@@ -3,7 +3,6 @@ import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 import { PrismaService } from 'src/prisma.service';
 import { instanceToPlain } from 'class-transformer';
-import { VehicleFiltersDto } from 'src/location/dto/vehicle-filters.dto';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
@@ -75,8 +74,10 @@ export class VehicleService {
     userFilters: {
       category?: string;
       transmission?: string;
-      seats?: string;
+      numOfSeats?: string;
       fuel?: string;
+      startDate?: string;
+      endDate?: string;
     },
   ) {
     interface FilterValue {
@@ -87,6 +88,19 @@ export class VehicleService {
     const filters: any = {
       details: {},
     };
+    const availabilityFilters: any = {};
+
+    if (userFilters.startDate && userFilters.endDate) {
+      const filtersStartDate = new Date(userFilters.startDate);
+      const filtersEndDate = new Date(userFilters.endDate);
+
+      availabilityFilters.some = {
+        AND: [
+          { startDate: { lte: filtersEndDate } },
+          { endDate: { gte: filtersStartDate } },
+        ],
+      };
+    }
 
     for (const [key, value] of Object.entries(userFilters)) {
       if (!value) {
@@ -99,15 +113,15 @@ export class VehicleService {
           break;
 
         case 'category':
-          filters.details.carCategory = { equals: value.toUpperCase() };
+          filters.details.category = { equals: value.toUpperCase() };
           break;
 
         case 'transmission':
           filters.details.transmission = { equals: value.toUpperCase() };
           break;
 
-        case 'seats':
-          filters.details.seats = { equals: value.toUpperCase() };
+        case 'numOfSeats':
+          filters.details.numOfSeats = { equals: value.toUpperCase() };
           break;
 
         default:
@@ -133,7 +147,26 @@ export class VehicleService {
       this.prisma.vehicle.findMany({
         skip,
         take: limit,
+        where: {
+          AND: [
+            ...whereConditions,
+            userFilters.startDate && userFilters.endDate
+              ? { availabilities: availabilityFilters }
+              : { availabilities: { some: {} } },
+          ],
+        },
         include: {
+          availabilities:
+            userFilters.startDate && userFilters.endDate
+              ? {
+                  where: {
+                    AND: [
+                      { startDate: { lte: new Date(userFilters.endDate) } },
+                      { endDate: { gte: new Date(userFilters.startDate) } },
+                    ],
+                  },
+                }
+              : true,
           rentals: {
             where: {
               review: {
@@ -149,11 +182,28 @@ export class VehicleService {
             },
           },
         },
+      }),
+      this.prisma.vehicle.count({
         where: {
-          AND: whereConditions,
+          AND: [
+            ...whereConditions,
+            userFilters.startDate && userFilters.endDate
+              ? {
+                  availabilities: {
+                    some: {
+                      startDate: { lte: new Date(userFilters.endDate) },
+                      endDate: { gte: new Date(userFilters.startDate) },
+                    },
+                  },
+                }
+              : {
+                  availabilities: {
+                    some: {},
+                  },
+                },
+          ],
         },
       }),
-      this.prisma.vehicle.count(),
     ]);
 
     return {
@@ -247,40 +297,50 @@ export class VehicleService {
     return vehiclesWithRatings;
   }
 
-  async findAvailable(vehicleFiltersDto: VehicleFiltersDto) {
-    const filtersStartDate = new Date(vehicleFiltersDto.startDate);
-    const filtersEndDate = new Date(vehicleFiltersDto.endDate);
-    filtersEndDate.setHours(23, 59, 59, 999);
+  // async findAvailable(vehicleFiltersDto: VehicleFiltersDto) {
+  //   const filtersStartDate = new Date(vehicleFiltersDto.startDate);
+  //   const filtersEndDate = new Date(vehicleFiltersDto.endDate);
+  //   filtersEndDate.setHours(23, 59, 59, 999);
 
-    return this.prisma.vehicle.findMany({
-      where: {
-        isVerified: true,
-        rentals: {
-          none: {
-            AND: [
-              {
-                startDate: { lte: filtersEndDate },
-                endDate: { gte: filtersStartDate },
-                status: {
-                  in: ['APPROVED', 'PENDING', 'COMPLETED'],
-                },
-              },
-            ],
-          },
-        },
-        availabilities: {
-          some: {
-            startDate: { lte: filtersStartDate },
-            endDate: { gte: filtersEndDate },
-          },
-        },
-      },
-    });
-  }
+  //   return this.prisma.vehicle.findMany({
+  //     where: {
+  //       isVerified: true,
+  //       rentals: {
+  //         none: {
+  //           AND: [
+  //             {
+  //               startDate: { lte: filtersEndDate },
+  //               endDate: { gte: filtersStartDate },
+  //               status: {
+  //                 in: ['APPROVED', 'PENDING', 'COMPLETED'],
+  //               },
+  //             },
+  //           ],
+  //         },
+  //       },
+  //       availabilities: {
+  //         some: {
+  //           startDate: { lte: filtersStartDate },
+  //           endDate: { gte: filtersEndDate },
+  //         },
+  //       },
+  //     },
+  //   });
+  // }
 
   async findUserVehicle(id: string) {
     const vehicle = await this.prisma.vehicle.findUnique({
       where: { id },
+      include: {
+        owner: {
+          select: {
+            firstName: true,
+            lastName: true,
+            personPhoto: true,
+          },
+        },
+        availabilities: true,
+      },
     });
 
     if (!vehicle) throw new NotFoundException('Vehicle not found');
@@ -301,6 +361,12 @@ export class VehicleService {
       where: { id },
       include: {
         owner: true,
+        rentals: {
+          include: {
+            review: true,
+          },
+        },
+        availabilities: true,
       },
     });
 
