@@ -1,0 +1,41 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--stroke-gray);
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  gap: 8px;
+  height: 64px;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 50%;
+  border-bottom: 1px solid var(--stroke-gray);
+  cursor: pointer;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nameDate {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stars {
+  display: flex;
+  gap: 8px;
+}

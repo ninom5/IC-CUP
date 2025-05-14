@@ -19,6 +19,11 @@ export const SearchBar = () => {
   const { goToLocation, setSearchLocation } = useMapContext();
   const { setFilters } = useFiltersContext();
 
+  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
+    null,
+    null,
+  ]);
+
   const defaultFilters: FiltersType = {
     sortBy: "",
     category: "",
@@ -31,19 +36,21 @@ export const SearchBar = () => {
   const [userFilters, setUserFilters] = useState(defaultFilters);
 
   const handleSearch = () => {
+    navigate(routes.VEHICLES);
     setFilters({
       fuelType: userFilters.fuelType,
       carCategory: userFilters.category,
       seats: userFilters.seatNumber,
       transmission: userFilters.transmission,
       sortBy: userFilters.sortBy,
+      dateRange: dateRange,
     });
   };
 
   const handlePlaceResolved = (place: google.maps.places.PlaceResult) => {
     const location = place.geometry?.location;
     if (!location) {
-      toast.error("Location not found");
+      toast.error("Lokacija nije pronađena");
       return;
     }
 
@@ -69,7 +76,7 @@ export const SearchBar = () => {
             <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
           </div>
 
-          <CustomDatePicker />
+          <CustomDatePicker dateRange={dateRange} setDateRange={setDateRange} />
 
           <div className="icon-wrapper" onClick={handleSearch}>
             <img src={searchSvg} alt="Search icon" />
@@ -90,6 +97,7 @@ export const SearchBar = () => {
               userFilters={userFilters}
               setUserFilters={setUserFilters}
               setShowFilters={setShowFilters}
+              handleSearch={handleSearch}
             />
           </div>
         </div>

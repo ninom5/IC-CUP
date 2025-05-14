@@ -1,24 +1,47 @@
-import { useState } from "react";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DesktopDateRangePicker } from "@mui/x-date-pickers-pro/DesktopDateRangePicker";
-import { Box } from "@mui/material";
 import "./customDatePicker.css";
 
-export const CustomDatePicker = () => {
-  const [value, setValue] = useState<[Date | null, Date | null]>([
-    new Date(),
-    new Date(),
-  ]);
+export const CustomDatePicker = ({
+  dateRange,
+  setDateRange,
+}: {
+  dateRange: [Date | null, Date | null];
+  setDateRange: (range: [Date | null, Date | null]) => void;
+}) => {
+  const formatDate = (date: Date | null) =>
+    date ? date.toISOString().slice(0, 10) : "";
+
+  const handleStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newDate = e.target.value ? new Date(e.target.value) : null;
+    setDateRange([newDate, dateRange[1]]);
+  };
+
+  const handleEndChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newDate = e.target.value ? new Date(e.target.value) : null;
+    setDateRange([dateRange[0], newDate]);
+  };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Box sx={{ backgroundColor: "#fafafa", borderRadius: 8 }}>
-        <DesktopDateRangePicker
-          value={value}
-          onChange={(newValue) => setValue(newValue)}
+    <div className="date-range-container">
+      <label className="date-label">
+        <strong>Od:</strong>
+        <input
+          type="date"
+          value={formatDate(dateRange[0])}
+          onChange={handleStartChange}
+          min={new Date().toISOString().split("T")[0]}
         />
-      </Box>
-    </LocalizationProvider>
+      </label>
+
+      <div className="date-divider" />
+
+      <label className="date-label">
+        <strong>Do:</strong>
+        <input
+          type="date"
+          value={formatDate(dateRange[1])}
+          onChange={handleEndChange}
+        />
+      </label>
+    </div>
   );
 };

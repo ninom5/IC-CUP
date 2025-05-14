@@ -1,12 +1,12 @@
 import { VehicleCard } from "@components/index";
 import InfiniteScroll from "react-infinite-scroll-component";
 import "./vehicleList.css";
-import { useFetchAllVehiclesPagination } from "@api/useFetchAllVehiclesPagination";
+import { useFetchAllVehiclesPagination } from "@api/index";
 import { useFiltersContext } from "@hooks/index";
 import { getAverageVehicleRating } from "@utils/index";
 
 export const VehicleList = () => {
-  const { fuelType, carCategory, seats, transmission, sortBy } =
+  const { fuelType, carCategory, seats, transmission, sortBy, dateRange } =
     useFiltersContext();
   const {
     data,
@@ -15,7 +15,13 @@ export const VehicleList = () => {
     isFetchingNextPage,
     error,
     isLoading,
-  } = useFetchAllVehiclesPagination(fuelType, carCategory, seats, transmission);
+  } = useFetchAllVehiclesPagination(
+    fuelType,
+    carCategory,
+    seats,
+    transmission,
+    dateRange
+  );
 
   const vehicles = data?.pages
     .flatMap((page) => page.data)

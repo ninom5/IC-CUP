@@ -1,2 +1,2 @@
 export * from "./routes";
-export * from "./adminRoutes";
+export * from "./AdminRoutes";

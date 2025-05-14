@@ -7,3 +7,4 @@ export * from "./isRegistrationValid.util";
 export * from "./isIntervalAtLeastOneDay.util";
 export * from "./extractAddressComponents.util";
 export * from "./getAverageVehicleRating.util";
+export * from "./convertStringToDate.util";

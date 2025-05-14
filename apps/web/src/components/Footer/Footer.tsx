@@ -16,7 +16,7 @@ export const Footer = () => {
           <SiteMapFooter />
         </div>
       </div>
-      <img src={lineSvg} alt="Slika ceste" style={{ width: "100%" }} />
+      <img src={lineSvg} alt="Slika ceste" id="footer-road" />
     </section>
   );
 };

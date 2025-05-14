@@ -1,0 +1,81 @@
+.vehicle-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.about-vehicle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  padding: 30px;
+}
+
+.booking-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.vehicle-owner {
+  display: flex;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.vehicle-owner-image-wrapper {
+  width: 110px;
+  height: 110px;
+  overflow: hidden;
+}
+.vehicle-owner-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.owner-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 50px;
+}
+.owner-info h3 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.pre-checkout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 100px;
+  align-items: flex-end;
+}
+.pre-checkout h1 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 40px;
+  font-weight: 700;
+  padding-bottom: 20px;
+  width: 70%;
+}
+.pre-checkout button {
+  width: 70%;
+  background-color: var(--stroke-gray);
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.7s;
+}
+.pre-checkout button:hover {
+  background-color: var(--accent-color);
+  color: var(--background-white);
+}

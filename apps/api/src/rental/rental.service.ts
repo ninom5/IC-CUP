@@ -8,7 +8,20 @@ export class RentalService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(dto: CreateRentalDto) {
-    return this.prisma.rental.create({ data: dto });
+    const result = await this.prisma.$transaction(async (tx) => {
+      const rental = await tx.rental.create({ data: dto });
+
+      const paymentResponse = await tx.payment.create({
+        data: {
+          rentalId: rental.id,
+          amount: rental.totalPrice,
+        },
+      });
+
+      return { rental, paymentResponse };
+    });
+
+    return result;
   }
 
   async findAll() {

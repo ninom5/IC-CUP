@@ -44,4 +44,16 @@ export class CloudinaryController {
 
     return { idPdf: idPdfUpload, driverPdf: driverPdfUpload };
   }
+
+  @Post('upload/raw-one-or-more')
+  @UseInterceptors(FilesInterceptor('pdfs'))
+  async uploadOneOrMoreFiles(@UploadedFiles() files: Express.Multer.File[]) {
+    if (!files || files.length === 0) {
+      throw new BadRequestException('At least one file is required');
+    }
+
+    return Promise.all(
+      files.map((file) => this.cloudinaryService.uploadFileToCloudinary(file)),
+    );
+  }
 }

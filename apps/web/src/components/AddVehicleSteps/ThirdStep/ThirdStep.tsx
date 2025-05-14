@@ -73,7 +73,7 @@ export const ThirdStep = ({ data, onDataChange }: StepProps) => {
       <div className={c.descriptionContainer}>
         <h3>Dodaj opis</h3>
         <textarea
-          maxLength={300}
+          maxLength={500}
           value={data.description}
           onChange={handleDescriptionChange}
         />

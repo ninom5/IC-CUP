@@ -3,7 +3,6 @@ import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 import { PrismaService } from 'src/prisma.service';
 import { instanceToPlain } from 'class-transformer';
-import { VehicleFiltersDto } from 'src/location/dto/vehicle-filters.dto';
 import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
@@ -75,8 +74,10 @@ export class VehicleService {
     userFilters: {
       category?: string;
       transmission?: string;
-      seats?: string;
+      numOfSeats?: string;
       fuel?: string;
+      startDate?: string;
+      endDate?: string;
     },
   ) {
     interface FilterValue {
@@ -87,6 +88,19 @@ export class VehicleService {
     const filters: any = {
       details: {},
     };
+    const availabilityFilters: any = {};
+
+    if (userFilters.startDate && userFilters.endDate) {
+      const filtersStartDate = new Date(userFilters.startDate);
+      const filtersEndDate = new Date(userFilters.endDate);
+
+      availabilityFilters.some = {
+        AND: [
+          { startDate: { lte: filtersEndDate } },
+          { endDate: { gte: filtersStartDate } },
+        ],
+      };
+    }
 
     for (const [key, value] of Object.entries(userFilters)) {
       if (!value) {
@@ -99,15 +113,15 @@ export class VehicleService {
           break;
 
         case 'category':
-          filters.details.carCategory = { equals: value.toUpperCase() };
+          filters.details.category = { equals: value.toUpperCase() };
           break;
 
         case 'transmission':
           filters.details.transmission = { equals: value.toUpperCase() };
           break;
 
-        case 'seats':
-          filters.details.seats = { equals: value.toUpperCase() };
+        case 'numOfSeats':
+          filters.details.numOfSeats = { equals: value.toUpperCase() };
           break;
 
         default:
@@ -133,7 +147,26 @@ export class VehicleService {
       this.prisma.vehicle.findMany({
         skip,
         take: limit,
+        where: {
+          AND: [
+            ...whereConditions,
+            userFilters.startDate && userFilters.endDate
+              ? { availabilities: availabilityFilters }
+              : { availabilities: { some: {} } },
+          ],
+        },
         include: {
+          availabilities:
+            userFilters.startDate && userFilters.endDate
+              ? {
+                  where: {
+                    AND: [
+                      { startDate: { lte: new Date(userFilters.endDate) } },
+                      { endDate: { gte: new Date(userFilters.startDate) } },
+                    ],
+                  },
+                }
+              : true,
           rentals: {
             where: {
               review: {
@@ -149,11 +182,28 @@ export class VehicleService {
             },
           },
         },
+      }),
+      this.prisma.vehicle.count({
         where: {
-          AND: whereConditions,
+          AND: [
+            ...whereConditions,
+            userFilters.startDate && userFilters.endDate
+              ? {
+                  availabilities: {
+                    some: {
+                      startDate: { lte: new Date(userFilters.endDate) },
+                      endDate: { gte: new Date(userFilters.startDate) },
+                    },
+                  },
+                }
+              : {
+                  availabilities: {
+                    some: {},
+                  },
+                },
+          ],
         },
       }),
-      this.prisma.vehicle.count(),
     ]);
 
     return {
@@ -164,6 +214,37 @@ export class VehicleService {
     };
   }
 
+  async findVehicleAverageRating(vehicleId: string) {
+    const rentalsWithReviews = await this.prisma.rental.findMany({
+      where: {
+        vehicleId,
+        review: {
+          isNot: null,
+        },
+      },
+      select: {
+        review: {
+          select: {
+            rating: true,
+          },
+        },
+      },
+    });
+
+    const ratings = rentalsWithReviews.map((r) => r.review!.rating);
+
+    const reviewCount = ratings.length;
+    const averageRating =
+      reviewCount > 0
+        ? ratings.reduce((sum, rating) => sum + rating, 0) / reviewCount
+        : null;
+
+    return {
+      averageRating,
+      reviewCount,
+    };
+  }
+
   async findAllUserVehicles(userId: string) {
     const userExists = await this.prisma.user.findUnique({
       where: { id: userId },
@@ -171,40 +252,108 @@ export class VehicleService {
 
     if (!userExists) throw new NotFoundException('User not found');
 
-    return this.prisma.vehicle.findMany({
+    const vehicles = await this.prisma.vehicle.findMany({
       where: { ownerId: userId },
-    });
-  }
-
-  async findAvailable(vehicleFiltersDto: VehicleFiltersDto) {
-    const filtersStartDate = new Date(vehicleFiltersDto.startDate);
-    const filtersEndDate = new Date(vehicleFiltersDto.endDate);
-    filtersEndDate.setHours(23, 59, 59, 999);
-
-    return this.prisma.vehicle.findMany({
-      where: {
-        isVerified: true,
+      include: {
         rentals: {
-          none: {
-            AND: [
-              {
-                startDate: { lte: filtersEndDate },
-                endDate: { gte: filtersStartDate },
-                status: {
-                  in: ['APPROVED', 'PENDING', 'COMPLETED'],
-                },
-              },
-            ],
-          },
-        },
-        availabilities: {
-          some: {
-            startDate: { lte: filtersStartDate },
-            endDate: { gte: filtersEndDate },
+          include: {
+            review: true,
           },
         },
       },
     });
+
+    return vehicles.map((vehicle) => {
+      const reviews = vehicle.rentals
+        .map((rental) => rental.review?.rating)
+        .filter((r): r is number => r !== undefined);
+
+      const avgRating =
+        reviews.length > 0
+          ? reviews.reduce((a, b) => a + b, 0) / reviews.length
+          : null;
+
+      const reviewCount = reviews.length;
+
+      return {
+        ...vehicle,
+        avgRating,
+        reviewCount,
+      };
+    });
+
+    const vehiclesWithRatings = await Promise.all(
+      vehicles.map(async (vehicle) => {
+        const { averageRating, reviewCount } =
+          await this.findVehicleAverageRating(vehicle.id);
+        return {
+          ...vehicle,
+          averageRating,
+          reviewCount,
+        };
+      }),
+    );
+
+    return vehiclesWithRatings;
+  }
+
+  // async findAvailable(vehicleFiltersDto: VehicleFiltersDto) {
+  //   const filtersStartDate = new Date(vehicleFiltersDto.startDate);
+  //   const filtersEndDate = new Date(vehicleFiltersDto.endDate);
+  //   filtersEndDate.setHours(23, 59, 59, 999);
+
+  //   return this.prisma.vehicle.findMany({
+  //     where: {
+  //       isVerified: true,
+  //       rentals: {
+  //         none: {
+  //           AND: [
+  //             {
+  //               startDate: { lte: filtersEndDate },
+  //               endDate: { gte: filtersStartDate },
+  //               status: {
+  //                 in: ['APPROVED', 'PENDING', 'COMPLETED'],
+  //               },
+  //             },
+  //           ],
+  //         },
+  //       },
+  //       availabilities: {
+  //         some: {
+  //           startDate: { lte: filtersStartDate },
+  //           endDate: { gte: filtersEndDate },
+  //         },
+  //       },
+  //     },
+  //   });
+  // }
+
+  async findUserVehicle(id: string) {
+    const vehicle = await this.prisma.vehicle.findUnique({
+      where: { id },
+      include: {
+        owner: {
+          select: {
+            firstName: true,
+            lastName: true,
+            personPhoto: true,
+          },
+        },
+        availabilities: true,
+      },
+    });
+
+    if (!vehicle) throw new NotFoundException('Vehicle not found');
+
+    const { averageRating, reviewCount } = await this.findVehicleAverageRating(
+      vehicle.id,
+    );
+
+    return {
+      ...vehicle,
+      averageRating,
+      reviewCount,
+    };
   }
 
   async findOne(id: string) {
@@ -212,6 +361,12 @@ export class VehicleService {
       where: { id },
       include: {
         owner: true,
+        rentals: {
+          include: {
+            review: true,
+          },
+        },
+        availabilities: true,
       },
     });
 

@@ -1,14 +1,17 @@
 import { RouteType } from "types/index";
 
 export const routes: RouteType = {
+  ADMIN: "/admin",
   HOME: "/",
   ABOUT: "/about",
-  CARS: "/cars",
-  CAR_PAGE: "/car/:id",
-  ADD_CAR: "/createCar",
-  NOT_FOUND: "*",
+  VEHICLES: "/vehicles",
+  VEHICLE_PAGE: "/vehicle/:id",
   BECOME_HOST: "/become-host",
-  ADD_VEHICLE: "/add-vehicle",
+  USER_VEHICLES: "/user/vehicle",
+  USER_VEHICLE_PROFILE: "/user/vehicle/:id",
+  ADD_VEHICLE: "/user/vehicle/add-vehicle",
   USERS_DRIVES: "/user/drives",
-  USERS_VEHICLES: "/user/vehicles",
+  BLOCKED: "/blocked",
+  NOT_FOUND: "*",
+  PROFILE_PAGE: "/profile/:id",
 };

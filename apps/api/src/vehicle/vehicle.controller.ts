@@ -11,7 +11,7 @@ import {
 import { VehicleService } from './vehicle.service';
 import { CreateVehicleDto } from './dto/create-vehicle.dto';
 import { UpdateVehicleDto } from './dto/update-vehicle.dto';
-import { VehicleFiltersDto } from 'src/location/dto/vehicle-filters.dto';
+import { VehicleFilterDto } from './dto/vehicle-filter.dto';
 
 @Controller('vehicle')
 export class VehicleController {
@@ -29,29 +29,24 @@ export class VehicleController {
 
   @Get('/pagination')
   async getAllVehiclesPagination(
+    @Query() filterDto: VehicleFilterDto,
     @Query('page') page = '1',
     @Query('limit') limit = '10',
-    @Query('category') category?: string,
-    @Query('transmission') transmission?: string,
-    @Query('seats') seats?: string,
-    @Query('fuel') fuel?: string,
   ) {
     const pageNumber = parseInt(page, 10);
     const pageSize = parseInt(limit, 10);
 
-    const userFilters = { category, transmission, seats, fuel };
-
     return this.vehicleService.getAllPagination(
       pageNumber,
       pageSize,
-      userFilters,
+      filterDto,
     );
   }
 
-  @Get('by-date')
-  findAll(@Query() vehicleFiltersDto: VehicleFiltersDto) {
-    return this.vehicleService.findAvailable(vehicleFiltersDto);
-  }
+  // @Get('by-date')
+  // findAll(@Query() vehicleFiltersDto: VehicleFiltersDto) {
+  //   return this.vehicleService.findAvailable(vehicleFiltersDto);
+  // }
 
   @Get('user/:id')
   findAllUserVehicles(@Param('id') id: string) {
@@ -60,7 +55,7 @@ export class VehicleController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.vehicleService.findOne(id);
+    return this.vehicleService.findUserVehicle(id);
   }
 
   @Patch(':id')
