@@ -79,3 +79,19 @@
   background-color: var(--accent-color);
   color: var(--background-white);
 }
+
+@media (min-width: 700px) and (max-width: 1250px) {
+  .about-vehicle {
+    width: 80%;
+  }
+  .pre-checkout button {
+    width: 80%;
+  }
+
+  @media (max-width: 1000px) {
+    .about-vehicle {
+      width: 90%;
+      padding: 15px;
+    }
+  }
+}

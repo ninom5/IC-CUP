@@ -61,3 +61,16 @@
   border-radius: 8px;
   cursor: pointer;
 }
+
+@media (min-width: 700px) and (max-width: 1250px) {
+  .gallery {
+    width: 80%;
+  }
+
+  @media (max-width: 1000px) {
+    .gallery {
+      width: 90%;
+      padding: 15px;
+    }
+  }
+}
