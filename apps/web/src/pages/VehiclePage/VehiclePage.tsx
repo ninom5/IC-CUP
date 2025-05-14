@@ -20,7 +20,6 @@ import { extractUserInfo } from "@utils/extractUserInfo.util";
 
 export const VehiclePage = () => {
   const { id } = useParams<{ id: string }>();
-
   if (!id) return;
 
   const [vehicle, setVehicle] = useState<VehicleType | null>(null);
@@ -110,19 +109,22 @@ export const VehiclePage = () => {
               selectedCard={selectedCard}
               onSelect={setSelectedCard}
             />
-            <section className="pre-checkout">
-              <h1>
-                <span>CIJENA</span>
-                <span>{totalPrice?.toFixed(2)} €</span>
-              </h1>
 
-              <button
-                onClick={() => setShowCheckoutForm(true)}
-                disabled={selectedCard ? false : true}
-              >
-                {selectedCard ? "Nastavi" : "Odaberite osiguranje"}
-              </button>
-            </section>
+            {userId !== vehicle.ownerId && (
+              <section className="pre-checkout">
+                <h1>
+                  <span>CIJENA</span>
+                  <span>{totalPrice?.toFixed(2)} €</span>
+                </h1>
+
+                <button
+                  onClick={() => setShowCheckoutForm(true)}
+                  disabled={selectedCard ? false : true}
+                >
+                  {selectedCard ? "Nastavi" : "Odaberite osiguranje"}
+                </button>
+              </section>
+            )}
 
             {showCheckoutForm && (
               <CheckoutPopUp

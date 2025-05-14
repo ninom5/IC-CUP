@@ -7,3 +7,12 @@
 .vehicle-list-section {
   width: 35%;
 }
+
+@media (max-width: 700px) {
+  .vehicle-list-section {
+    width: 100%;
+  }
+  .vehicle-list-scroll-container {
+    height: 100%;
+  }
+}
