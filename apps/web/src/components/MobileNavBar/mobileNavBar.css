@@ -9,6 +9,8 @@
   position: absolute;
   width: 100%;
   bottom: 0;
+  z-index: 10;
+  padding: 10px 0;
 }
 
 @media (min-width: 700px) {

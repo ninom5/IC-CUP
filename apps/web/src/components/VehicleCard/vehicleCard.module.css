@@ -67,3 +67,12 @@
   font-weight: 700;
   font-size: 24px;
 }
+
+@media (max-width: 700px) {
+  .vehicleInfo h2 {
+    font-size: 20px;
+  }
+  .ratingInfo {
+    font-size: 16px;
+  }
+}

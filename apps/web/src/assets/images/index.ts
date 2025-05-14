@@ -29,3 +29,4 @@ export { default as profileLogo } from "./Vector (2).svg";
 export { default as profileWhiteLogo } from "./profile.svg";
 export { default as roadSvg } from "./road.svg";
 export { default as car } from "./car.svg";
+export { default as map } from "./map.svg";
