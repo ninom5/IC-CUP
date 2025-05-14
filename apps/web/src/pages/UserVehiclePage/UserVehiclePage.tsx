@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import starIcon from "../../assets/images/starIcon.svg";
 import checkmarkIcon from "../../assets/images/checkmarkIcon.svg";
 import pencilIcon from "../../assets/images/pencilIcon.svg";
-import { AddVehicleAvailibility } from "@components/index";
+import { AddVehicleAvailibility, CustomDatePicker } from "@components/index";
 import { getMinDate } from "@utils/getMinDate.util";
 
 export const UserVehiclePage = () => {
