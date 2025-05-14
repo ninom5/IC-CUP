@@ -86,6 +86,13 @@ export const VehiclePage = () => {
 
   const totalPrice = basePrice + provisionPrice + insurancePrice;
 
+  const priceProps = {
+    dailyPrice: vehicle.dailyPrice,
+    insurancePrice: insurancePrice,
+    totalPrice: totalPrice,
+    provisionPrice: provisionPrice,
+  };
+
   const vehicleDatesAvailabilities = vehicle.availabilities?.map((a) => ({
     startDate: new Date(a.startDate),
     endDate: new Date(a.endDate),
@@ -118,22 +125,18 @@ export const VehiclePage = () => {
 
               <button
                 onClick={() => setShowCheckoutForm(true)}
-                disabled={selectedCard ? false : true}
+                disabled={selectedCard && date[0] && date[1] ? false : true}
               >
-                {selectedCard ? "Nastavi" : "Odaberite osiguranje"}
+                {selectedCard && date[0] && date[1]
+                  ? "Nastavi"
+                  : "Odaberite osiguranje i datum"}
               </button>
             </section>
 
             {showCheckoutForm && (
               <CheckoutPopUp
                 setShowCheckoutForm={setShowCheckoutForm}
-                selectedCard={selectedCard}
-                price={{
-                  dailyPrice: vehicle.dailyPrice,
-                  insurancePrice: insurancePrice,
-                  totalPrice: totalPrice,
-                  provisionPrice: provisionPrice,
-                }}
+                price={priceProps}
                 onConfirm={handleConfirmCheckout}
               />
             )}
