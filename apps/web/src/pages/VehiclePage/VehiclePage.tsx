@@ -16,7 +16,6 @@ import {
   useSendEmail,
 } from "@api/index";
 import { insuranceCategories, InsuranceKey } from "@constants/index";
-import { useFiltersContext } from "@hooks/useFiltersContext";
 import { extractUserInfo } from "@utils/extractUserInfo.util";
 
 export const VehiclePage = () => {
@@ -30,7 +29,6 @@ export const VehiclePage = () => {
   const [date, setDate] = useState<[Date | null, Date | null]>([null, null]);
 
   const { data, isLoading, error } = useFetchVehicleById(id);
-  const { dateRange } = useFiltersContext();
 
   const {
     data: { id: userId },
@@ -103,7 +101,7 @@ export const VehiclePage = () => {
 
           <div className="booking-section">
             <CustomAvailableDatePicker
-              value={dateRange}
+              value={date}
               onChange={setDate}
               availableDateRanges={vehicleDatesAvailabilities}
             />
@@ -125,6 +123,7 @@ export const VehiclePage = () => {
                 {selectedCard ? "Nastavi" : "Odaberite osiguranje"}
               </button>
             </section>
+
             {showCheckoutForm && (
               <CheckoutPopUp
                 setShowCheckoutForm={setShowCheckoutForm}

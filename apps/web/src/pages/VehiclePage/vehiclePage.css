@@ -23,6 +23,7 @@
 .vehicle-owner {
   display: flex;
   margin-top: 50px;
+  margin-bottom: 20px;
 }
 
 .vehicle-owner-image-wrapper {

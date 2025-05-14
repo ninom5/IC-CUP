@@ -76,7 +76,7 @@ export const SearchBar = () => {
             <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
           </div>
 
-          {/* <CustomDatePicker dateRange={dateRange} setDateRange={setDateRange} /> */}
+          <CustomDatePicker dateRange={dateRange} setDateRange={setDateRange} />
 
           <div className="icon-wrapper" onClick={handleSearch}>
             <img src={searchSvg} alt="Search icon" />

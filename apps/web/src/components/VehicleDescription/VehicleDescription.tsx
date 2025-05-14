@@ -15,7 +15,7 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
   const categoryImage = categoryImages[category] || categoryImages["COUPE"];
 
   return (
-    <section>
+    <section className="vehicle-description">
       <div>
         <h1 className="car-title">{`${brand} ${model} ${productionYear}`}</h1>
         <h3 className="car-rating">
@@ -63,15 +63,6 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
           value={numOfSeats?.toString()}
           icon={seatSvg}
         />
-      </div>
-
-      <div>
-        {vehicle.availabilities.map((avail, index) => (
-          <div key={index}>
-            <strong>Dostupno od:</strong> {avail.startDate} –{" "}
-            <strong>do:</strong> {avail.endDate}
-          </div>
-        ))}
       </div>
 
       <div className="vehicle-detail-description">
