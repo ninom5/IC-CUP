@@ -68,7 +68,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 60px;
-  padding-left: 20px;
+  padding: 0 20px;
 }
 
 .stepHeader {
@@ -134,4 +134,54 @@
 
 .active {
   text-decoration: underline;
+}
+
+@media (max-width: 1040px) {
+  .stepsContainer {
+    bottom: 15%;
+  }
+
+  .pathImage {
+    bottom: 15%;
+  }
+}
+
+@media (max-width: 700px) {
+  .stepsContainer {
+    left: 20px;
+  }
+
+  .step {
+    width: calc(100vw - 40px);
+  }
+}
+
+@media (max-width: 650px) {
+  .howItWorksSection {
+    padding: 120px 20px;
+  }
+
+  .howItWorksHeader > h1 {
+    font-size: 60px;
+  }
+
+  .actionsHeader {
+    gap: 12px;
+  }
+
+  .actionsHeader > h3 {
+    font-size: 18px;
+  }
+
+  .howItWorksHeader {
+    gap: 0;
+  }
+
+  .stepHeader > h3 {
+    font-size: 20px;
+  }
+
+  .stepHeader > p {
+    font-size: 16px;
+  }
 }

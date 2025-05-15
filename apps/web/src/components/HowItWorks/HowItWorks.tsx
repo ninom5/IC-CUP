@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import c from "./HowItWorks.module.css";
 import {
   howItWorksPath,
@@ -9,17 +9,37 @@ import {
 
 export const HowItWorks = () => {
   const [step, setStep] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 0
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleSlideRight = () => {
-    setStep((prev) => prev + 1);
+    if (step < 4) setStep((prev) => prev + 1);
   };
 
   const handleSlideLeft = () => {
-    setStep((prev) => prev - 1);
+    if (step > 0) setStep((prev) => prev - 1);
   };
 
-  const stepWidth = 50;
-  const gap = 37.5;
+  const isMobile = windowWidth < 700;
+  const stepWidth = isMobile ? 100 : 50;
+  const gap = isMobile ? 0 : 37.5;
+
+  const transformValue = isMobile
+    ? `translateX(-${step * 100}vw)`
+    : `translateX(calc(-${step * (stepWidth + gap)}vw - 20px))`;
+
+  console.log("isMobile:", isMobile);
+  console.log("transformValue:", transformValue);
 
   return (
     <section className={c.howItWorksSection}>
@@ -35,7 +55,9 @@ export const HowItWorks = () => {
       <div
         className={c.stepsContainer}
         style={{
-          transform: `translateX(-${step * (stepWidth + gap)}vw)`,
+          transform: isMobile
+            ? `translateX(-${step * 100}vw)`
+            : `translateX(calc(-${step * (stepWidth + gap)}vw - 20px))`,
           transition: "transform 0.5s ease-in-out",
         }}
       >
@@ -87,24 +109,12 @@ export const HowItWorks = () => {
           <img src={stopSign} alt="znak stop" />
         </div>
 
-        <div className={c.step}>
-          <div className={c.stepHeader}>
-            <h3>2. ODABERI LOKACIJU I DATUM</h3>
-            <p>
-              Biraj gdje, kada i koliko dugo ti je potrebno vozilo, a mi ćemo ti
-              ponuditi najbolje opcije za tebe
-            </p>
-          </div>
-
-          <img src={stopSign} alt="znak stop" />
-        </div>
-
         <img src={howItWorksCar} alt="car" className={c.carImage} />
       </div>
 
       <img src={howItWorksPath} alt="staza" className={c.pathImage} />
 
-      {step < 5 && (
+      {step < 4 && (
         <img
           src={arrowIcon}
           alt="ikona strelice"
