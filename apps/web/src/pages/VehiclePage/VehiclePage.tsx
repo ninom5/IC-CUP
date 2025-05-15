@@ -1,5 +1,6 @@
 import "./vehiclePage.css";
 import {
+  ButtonAccent,
   CheckoutPopUp,
   CustomAvailableDatePicker,
   Footer,
@@ -26,6 +27,15 @@ export const VehiclePage = () => {
   const [selectedCard, setSelectedCard] = useState<InsuranceKey | null>(null);
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
   const [date, setDate] = useState<[Date | null, Date | null]>([null, null]);
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+
+  const openSideMenu = () => {
+    setIsSideMenuOpen(true);
+  };
+
+  const closeSideMenu = () => {
+    setIsSideMenuOpen(false);
+  };
 
   const { data, isLoading, error } = useFetchVehicleById(id);
 
@@ -142,6 +152,64 @@ export const VehiclePage = () => {
               />
             )}
           </div>
+        </div>
+
+        {isSideMenuOpen && (
+          <div className="full-screen-menu-overlay" onClick={closeSideMenu}>
+            <div
+              className="full-screen-menu"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className="close-btn" onClick={closeSideMenu}>
+                ✕
+              </button>
+
+              <div className="mobile-menu-list">
+                <CustomAvailableDatePicker
+                  value={date}
+                  onChange={setDate}
+                  availableDateRanges={vehicleDatesAvailabilities}
+                />
+
+                <InsuranceList
+                  selectedCard={selectedCard}
+                  onSelect={setSelectedCard}
+                />
+
+                {userId !== vehicle.ownerId && (
+                  <section className="pre-checkout mobile-pre-checkout">
+                    <h1>
+                      <span>CIJENA</span>
+                      <span>{totalPrice?.toFixed(2)} €</span>
+                    </h1>
+
+                    <button
+                      onClick={() => setShowCheckoutForm(true)}
+                      disabled={
+                        selectedCard && date[0] && date[1] ? false : true
+                      }
+                    >
+                      {selectedCard && date[0] && date[1]
+                        ? "Nastavi"
+                        : "Odaberite osiguranje i datum"}
+                    </button>
+                  </section>
+                )}
+
+                {showCheckoutForm && (
+                  <CheckoutPopUp
+                    setShowCheckoutForm={setShowCheckoutForm}
+                    price={priceProps}
+                    onConfirm={handleConfirmCheckout}
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="mobile-reserve-button">
+          <ButtonAccent content="Rezerviraj" onClick={openSideMenu} />
         </div>
       </section>
       <Footer />

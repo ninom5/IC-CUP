@@ -80,6 +80,52 @@
   color: var(--background-white);
 }
 
+.full-screen-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-screen-menu {
+  background: white;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  overflow-y: auto;
+  animation: slideInFullScreen 0.3s ease-in-out;
+  position: relative;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.mobile-reserve-button {
+  display: none;
+}
+
+@keyframes slideInFullScreen {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 @media (min-width: 800px) and (max-width: 1250px) {
   .about-vehicle {
     width: 80%;
@@ -111,5 +157,16 @@
   .vehicle-details-images {
     width: 100%;
     justify-content: space-between;
+  }
+  .mobile-pre-checkout {
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
+  .mobile-pre-checkout h1 {
+    font-size: 30px;
+  }
+  .mobile-reserve-button {
+    display: block;
   }
 }

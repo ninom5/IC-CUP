@@ -10,4 +10,11 @@
   .insurance-list {
     display: none;
   }
+
+  .mobile-insurance-list {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
 }
