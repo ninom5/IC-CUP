@@ -1,5 +1,5 @@
 .accordion {
-  width: 650px;
+  width: 600px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -32,4 +32,25 @@
 
 .content {
   padding-bottom: 8px;
+  width: 600px;
+}
+
+@media (max-width: 1120px) {
+  .accordion {
+    width: 100%;
+  }
+
+  .content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  .accordion {
+    font-size: 12px;
+  }
+
+  .title h2 {
+    font-size: 18px;
+  }
 }

@@ -9,8 +9,8 @@ export const FAQSection = () => {
         <h1>Česta pitanja</h1>
         <Accordion />
       </div>
-      <div className={c.faqImage}>
-        <img src={faqAuto} alt="Car with ??" />
+      <div>
+        <img src={faqAuto} className={c.faqImage} alt="Car with ??" />
       </div>
     </div>
   );
