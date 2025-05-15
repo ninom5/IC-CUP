@@ -32,26 +32,26 @@ export const Router = () => {
             />
           </Route>
 
+          <Route element={<ProtectedRoute />}>
+            <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
+            <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
+
+            <Route element={<SearchBarLayout />}>
+              <Route path={routes.VEHICLE_PAGE} element={<VehiclePage />} />
+            </Route>
+          </Route>
+          <Route element={<AdminRoute />}>
+            <Route path={routes.ADMIN} element={<AdminPage />}></Route>
+          </Route>
+
+          <Route path={routes.BLOCKED} element={<BlockedPage />} />
+
           <Route element={<NavBarLayout />}>
             <Route path={routes.HOME} element={<HomePage />} />
             <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
             <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
           </Route>
         </Route>
-
-        <Route element={<ProtectedRoute />}>
-          <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
-          <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
-
-          <Route element={<SearchBarLayout />}>
-            <Route path={routes.VEHICLE_PAGE} element={<VehiclePage />} />
-          </Route>
-        </Route>
-        <Route element={<AdminRoute />}>
-          <Route path={routes.ADMIN} element={<AdminPage />}></Route>
-        </Route>
-
-        <Route path={routes.BLOCKED} element={<BlockedPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -10,7 +10,7 @@ const uploadDocumentsForProfile = async (files: File[]) => {
   }
 
   const formData = new FormData();
-  files.forEach((file) => formData.append("pdfs", file));
+  files.forEach((file) => formData.append("update_pdf", file));
 
   const response = await api.post<File[], CloudinaryFileResponseType[]>(
     "/cloudinary/upload/raw-one-or-more",

@@ -11,6 +11,8 @@ COPY ./apps/api/prisma ./apps/api/prisma
 
 RUN yarn install
 
+COPY ./apps/web/.env ./apps/web/.env
+
 COPY . .
 
 RUN yarn run build
