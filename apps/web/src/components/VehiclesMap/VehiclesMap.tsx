@@ -67,7 +67,7 @@ export const VehiclesMap = () => {
         <Map
           defaultZoom={12}
           defaultCenter={{ lat: SplitLocation.lat, lng: SplitLocation.lng }}
-          mapId={import.meta.env.VITE_APP_MAP_ID}
+          mapId="83bc94c68d72a376"
           mapTypeControl={false}
           fullscreenControl={false}
           streetViewControl={false}
