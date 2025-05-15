@@ -23,7 +23,7 @@ export const LandingSearch = () => {
 
   return (
     <div className="landing-search">
-      <div className="location-wrapper">
+      <div className="location-wrapper landing-location">
         <label htmlFor="location" className="location-label">
           Lokacija
         </label>
