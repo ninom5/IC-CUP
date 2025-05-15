@@ -2,7 +2,7 @@ import "./vehicleDescription.css";
 import { VehicleDetails, VehicleFeatures, VehicleType } from "types";
 import { getAverageVehicleRating } from "@utils/index";
 import { fuelSvg, seatSvg, transmissionSvg } from "@assets/images";
-import { PropertyItem } from "@components/index";
+import { PropertyItem, ReviewCard } from "@components/index";
 import { additionalFeatures, categoryImages } from "@constants/index";
 
 export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
@@ -97,6 +97,34 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
           })}
         </div>
       </div>
+
+      <section className="reviews-section">
+        <h4>RECENZIJE</h4>
+        {(() => {
+          const reviews = vehicle.rentals?.filter((r) => r.review) ?? [];
+
+          return reviews.length > 0 ? (
+            reviews.map(({ renter, review }) => {
+              const reviewCardData = {
+                id: review.id,
+                rating: review.rating,
+                comment: review.comment,
+                createdAt: review.createdAt,
+                renter: {
+                  id: renter.id,
+                  firstName: renter.firstName,
+                  lastName: renter.lastName,
+                  personPhoto: renter.personPhoto,
+                },
+              };
+
+              return <ReviewCard key={review.id} review={reviewCardData} />;
+            })
+          ) : (
+            <p>Još nema recenzija za odabrano vozilo</p>
+          );
+        })()}
+      </section>
     </section>
   );
 };

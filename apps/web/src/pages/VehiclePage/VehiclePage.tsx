@@ -20,7 +20,6 @@ import { extractUserInfo } from "@utils/extractUserInfo.util";
 
 export const VehiclePage = () => {
   const { id } = useParams<{ id: string }>();
-
   if (!id) return;
 
   const [vehicle, setVehicle] = useState<VehicleType | null>(null);
@@ -86,6 +85,13 @@ export const VehiclePage = () => {
 
   const totalPrice = basePrice + provisionPrice + insurancePrice;
 
+  const priceProps = {
+    dailyPrice: vehicle.dailyPrice,
+    insurancePrice: insurancePrice,
+    totalPrice: totalPrice,
+    provisionPrice: provisionPrice,
+  };
+
   const vehicleDatesAvailabilities = vehicle.availabilities?.map((a) => ({
     startDate: new Date(a.startDate),
     endDate: new Date(a.endDate),
@@ -95,7 +101,6 @@ export const VehiclePage = () => {
     <>
       <section className="vehicle-page">
         <VehicleGallery vehicle={vehicle} />
-
         <div className="about-vehicle">
           <VehicleDescription vehicle={vehicle} />
 
@@ -110,30 +115,29 @@ export const VehiclePage = () => {
               selectedCard={selectedCard}
               onSelect={setSelectedCard}
             />
-            <section className="pre-checkout">
-              <h1>
-                <span>CIJENA</span>
-                <span>{totalPrice?.toFixed(2)} €</span>
-              </h1>
 
-              <button
-                onClick={() => setShowCheckoutForm(true)}
-                disabled={selectedCard ? false : true}
-              >
-                {selectedCard ? "Nastavi" : "Odaberite osiguranje"}
-              </button>
-            </section>
+            {userId !== vehicle.ownerId && (
+              <section className="pre-checkout">
+                <h1>
+                  <span>CIJENA</span>
+                  <span>{totalPrice?.toFixed(2)} €</span>
+                </h1>
+
+                <button
+                  onClick={() => setShowCheckoutForm(true)}
+                  disabled={selectedCard && date[0] && date[1] ? false : true}
+                >
+                  {selectedCard && date[0] && date[1]
+                    ? "Nastavi"
+                    : "Odaberite osiguranje i datum"}
+                </button>
+              </section>
+            )}
 
             {showCheckoutForm && (
               <CheckoutPopUp
                 setShowCheckoutForm={setShowCheckoutForm}
-                selectedCard={selectedCard}
-                price={{
-                  dailyPrice: vehicle.dailyPrice,
-                  insurancePrice: insurancePrice,
-                  totalPrice: totalPrice,
-                  provisionPrice: provisionPrice,
-                }}
+                price={priceProps}
                 onConfirm={handleConfirmCheckout}
               />
             )}

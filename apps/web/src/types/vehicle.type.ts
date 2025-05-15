@@ -51,7 +51,7 @@ export type StepProps = {
 
 export type VehicleType = {
   id: string;
-  owner: Owner;
+  owner: User;
   brand: string;
   model: string;
   images: string[];
@@ -70,10 +70,12 @@ export type VehicleType = {
   rentals: Rental[];
   availabilities: AvailabilityInterval[];
   features: VehicleFeatures;
+  ownerId: string;
 };
 
 export type Rental = {
   review: Review;
+  renter: User;
 };
 
 export type CreateRental = {
@@ -90,7 +92,10 @@ export type RentalResponse = {
 };
 
 export type Review = {
+  id: string;
   rating: number;
+  comment: string;
+  createdAt: string;
 };
 
 export type UserVehiclesType = {
@@ -116,7 +121,7 @@ export type UserVehiclesType = {
   reviewCount: number;
 };
 
-export type Owner = {
+export type User = {
   id: string;
   firstName: string;
   lastName: string;

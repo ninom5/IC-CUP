@@ -75,3 +75,13 @@
   cursor: pointer;
   margin-top: 9px;
 }
+
+@media (max-width: 530px) {
+  .descriptionContainer > textarea {
+    padding: 10px 33px 40px 10px;
+    font-size: 18px;
+  }
+  .descriptionContainer > p {
+    font-size: 18px;
+  }
+}

@@ -101,7 +101,7 @@
   background-color: var(--stroke-grey, #e3e3e3);
 }
 
-.itemDetails > h3 {
+.vehicleHeader > h3 {
   color: var(--background-black, #222);
   font-family: "Nunito Sans";
   font-size: 24px;
@@ -120,4 +120,62 @@
   font-size: 24px;
   font-style: normal;
   line-height: normal;
+}
+
+.ratingParagraph {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+@media (max-width: 1150px) {
+  .itemsContainer {
+    width: 100%;
+  }
+}
+
+@media (max-width: 850px) {
+  .itemsContainer {
+    flex-wrap: wrap;
+  }
+
+  .itemCard {
+    width: 100%;
+  }
+}
+
+@media (max-width: 440px) {
+  .userVehiclesSection {
+    padding: 30px 10px;
+  }
+
+  .itemCard > img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .vehicleHeader > h3 {
+    font-size: 18px;
+  }
+
+  .ratingParagraph {
+    font-size: 13px;
+  }
+
+  .dailyPrice {
+    font-size: 18px;
+  }
+
+  .vehicleHeader > img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .userVehiclesSection button {
+    padding: 10px 22px;
+  }
+
+  .userVehiclesSection > h1 {
+    font-size: 36px;
+  }
 }

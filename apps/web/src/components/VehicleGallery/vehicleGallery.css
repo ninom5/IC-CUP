@@ -8,6 +8,26 @@
   margin-bottom: 20px;
 }
 
+.modal-gallery {
+  position: relative;
+  width: 50%;
+  height: auto;
+}
+.modal-gallery img {
+  width: 100%;
+  height: auto;
+}
+.modal-gallery button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  cursor: pointer;
+}
+
 .gallery-main-image-wrapper {
   flex: 1.5;
 }

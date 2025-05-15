@@ -340,6 +340,19 @@ export class VehicleService {
           },
         },
         availabilities: true,
+        rentals: {
+          include: {
+            review: true,
+            renter: {
+              select: {
+                id: true,
+                firstName: true,
+                lastName: true,
+                personPhoto: true,
+              },
+            },
+          },
+        },
       },
     });
 

@@ -1,0 +1,41 @@
+.neanderthal-section {
+  display: flex;
+  height: auto;
+  min-height: 100vh;
+  flex-direction: column;
+  position: relative;
+  padding: 20px;
+}
+
+.entering-text {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  padding: 50px;
+}
+.entering-text h1 {
+  font-size: 96px;
+  font-weight: 600;
+  font-family: "Goodly";
+  margin-bottom: 50px;
+}
+.entering-text p {
+  font-size: 20px;
+  font-weight: 400;
+}
+#neanderthal {
+  position: absolute;
+  bottom: 15px;
+  right: 120px;
+}
+#wheel {
+  position: absolute;
+  bottom: 0;
+  left: 37%;
+}
+#path {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
