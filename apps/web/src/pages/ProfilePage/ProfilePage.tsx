@@ -17,7 +17,6 @@ import { routes } from "@routes/routes";
 import {
   ButtonAccent,
   DocumentsSettings,
-  Footer,
   ReviewCard,
   VehicleCard,
 } from "@components/index";
