@@ -42,7 +42,7 @@ export const CheckoutPopUp = ({
   const minMonth = `${year}-${month.toString().padStart(2, "0")}`;
   return (
     <div className="modal-overlay">
-      <div className="modal-content">
+      <div className="modal-content modal-checkout-mobile">
         <button
           className="close-button"
           onClick={() => setShowCheckoutForm(false)}

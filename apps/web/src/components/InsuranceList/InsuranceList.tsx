@@ -10,7 +10,7 @@ export const InsuranceList = ({
   onSelect: (key: InsuranceKey) => void;
 }) => {
   return (
-    <section className="insurance-list">
+    <section className="insurance-list mobile-insurance-list">
       {Object.entries(insuranceCategories).map(([key, value]) => (
         <InsuranceCard
           key={key}
