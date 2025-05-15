@@ -9,7 +9,7 @@ interface MapsProviderProps {
 export const GooglAPIProvider = ({ children }: MapsProviderProps) => {
   return (
     <APIProvider
-      apiKey={import.meta.env.VITE_APP_MAPS_API}
+      apiKey="AIzaSyBucHP2Uvo12xp_l3_m1GsNbtXmBz4nFTM"
       onLoad={() => console.log("Successfully loaded map")}
       onError={(error: Error | any) => {
         console.error(`Error loading map: ${error}`);

@@ -34,7 +34,10 @@ import { join } from 'path';
     EmailModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', '..', 'web', 'dist'),
-      exclude: ['/api/(.*)'],
+      exclude: ['/api', '/api/'],
+      serveStaticOptions: {
+        index: false,
+      },
     }),
   ],
   controllers: [AppController],

@@ -1,12 +1,19 @@
-import { routes } from "@routes/index";
-import { Link } from "react-router-dom";
-import { Footer, Spinner, Neanderthal } from "@components/index";
+import { Neanderthal } from "@components/index";
 import { kolo } from "assets/videos";
+import { spinnerSvg } from "assets/images/index";
 
 export const HomePage = () => {
   return (
     <>
-      <video loop autoPlay muted playsInline width="100%">
+      <video
+        loop
+        autoPlay
+        muted
+        playsInline
+        preload="none"
+        poster={spinnerSvg}
+        width="100%"
+      >
         <source src={kolo} type="video/mp4" />
       </video>
 
