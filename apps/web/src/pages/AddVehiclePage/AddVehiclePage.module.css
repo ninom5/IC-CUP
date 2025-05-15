@@ -104,3 +104,9 @@
     width: 100%;
   }
 }
+
+@media (max-width: 700px) {
+  .addVehiclePageSection {
+    padding: 40px 20px 100px 20px;
+  }
+}
