@@ -127,8 +127,6 @@ export const AddVehiclePage = () => {
     4: <FourthStep data={vehicleData} onDataChange={handleDataChange} />,
   };
 
-  console.log(vehicleData);
-
   return (
     <section className={c.addVehiclePageSection}>
       <div>

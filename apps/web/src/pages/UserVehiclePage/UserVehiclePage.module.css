@@ -39,8 +39,9 @@
 
 .vehicleHeader > h1 {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  gap: 0 16px;
   align-self: stretch;
   color: var(--background-black, #222);
   font-size: 40px;
@@ -160,4 +161,23 @@
   border-radius: 10px;
   border: 1px solid var(--stroke-grey, #c0bebe);
   background: var(--background-white, #fafafa);
+}
+
+@media (max-width: 1120px) {
+  .userVehicleSection {
+    width: 100%;
+  }
+
+  .imagesContainer {
+    overflow-x: scroll;
+    gap: 20px;
+    padding: 5px 0;
+  }
+}
+
+@media (max-width: 530px) {
+  .imagesContainer > img {
+    width: 150px;
+    height: 150px;
+  }
 }
