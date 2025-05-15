@@ -1,4 +1,4 @@
-import "./VehiclePage.css";
+import "./vehiclePage.css";
 import {
   CheckoutPopUp,
   CustomAvailableDatePicker,
