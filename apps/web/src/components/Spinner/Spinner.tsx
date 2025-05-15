@@ -1,3 +1,10 @@
+import "./spinner.css";
+import { spinnerSvg } from "@assets/images";
+
 export const Spinner = () => {
-  return <div>loading...</div>;
+  return (
+    <section className="spinner">
+      <img src={spinnerSvg} alt="spinner wheel" />
+    </section>
+  );
 };

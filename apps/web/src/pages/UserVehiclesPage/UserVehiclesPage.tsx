@@ -5,6 +5,7 @@ import { extractUserInfo } from "@utils/extractUserInfo.util";
 import { useNavigate } from "react-router-dom";
 import starIcon from "../../assets/images/starIcon.svg";
 import pencilIcon from "../../assets/images/pencilIcon.svg";
+import { Footer } from "@components/index";
 
 export const UserVehiclesPage = () => {
   const userData = extractUserInfo();
@@ -36,35 +37,36 @@ export const UserVehiclesPage = () => {
   }
 
   return (
-    <section className={c.userVehiclesSection}>
-      {data?.length === 0 ? (
-        <>
-          <h1>Nisi još dodao svoje vozilo!</h1>
-          <div className={c.callToActionContainer}>
-            <img src={interiorMirror} alt="Dodaj vozilo" />
+    <>
+      <section className={c.userVehiclesSection}>
+        {data?.length === 0 ? (
+          <>
+            <h1>Nisi još dodao svoje vozilo!</h1>
+            <div className={c.callToActionContainer}>
+              <img src={interiorMirror} alt="Dodaj vozilo" />
+              <button onClick={handleAddVehicle}>Dodaj vozilo</button>
+            </div>
+          </>
+        ) : (
+          <>
+            <h1>Tvoja vozila</h1>
+
             <button onClick={handleAddVehicle}>Dodaj vozilo</button>
-          </div>
-        </>
-      ) : (
-        <>
-          <h1>Tvoja vozila</h1>
 
-          <button onClick={handleAddVehicle}>Dodaj vozilo</button>
-
-          <div className={c.itemsContainer}>
-            {data?.map((i) => (
-              <div key={i.id} className={c.itemCard}>
-                <img src={i.images[0]} />
-                <div className={c.itemDetails}>
-                  <div className={c.vehicleHeader}>
-                    <h3>
-                      {i.model} {i.brand}
-                    </h3>
-                    <img
-                      src={pencilIcon}
-                      onClick={() => handleUserVehicle(i.id)}
-                    />
-                  </div>
+            <div className={c.itemsContainer}>
+              {data?.map((i) => (
+                <div key={i.id} className={c.itemCard}>
+                  <img src={i.images[0]} />
+                  <div className={c.itemDetails}>
+                    <div className={c.vehicleHeader}>
+                      <h3>
+                        {i.model} {i.brand}
+                      </h3>
+                      <img
+                        src={pencilIcon}
+                        onClick={() => handleUserVehicle(i.id)}
+                      />
+                    </div>
 
                   <p className={c.ratingParagraph}>
                     {i.reviewCount ? (
@@ -76,15 +78,17 @@ export const UserVehiclesPage = () => {
                     )}
                   </p>
 
-                  <p className={c.dailyPrice}>
-                    <strong>{i.dailyPrice} €</strong> / po danu
-                  </p>
+                    <p className={c.dailyPrice}>
+                      <strong>{i.dailyPrice} €</strong> / po danu
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-    </section>
+              ))}
+            </div>
+          </>
+        )}
+      </section>
+      <Footer />
+    </>
   );
 };

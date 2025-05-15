@@ -12,6 +12,7 @@
   margin-top: 0;
   margin-bottom: 20px;
   text-align: center;
+  padding-left: 0;
 }
 
 .modal-content form div {
@@ -29,17 +30,17 @@
   width: 100%;
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--stroke-gray);
 }
 
 .modal-content button[type="submit"] {
   width: 100%;
   padding: 12px;
   background-color: var(--accent-color);
-  color: white;
+  color: var(--background-white);
   border: none;
   border-radius: 6px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   margin-top: 10px;
 }
@@ -57,8 +58,7 @@
 .checkout-card {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  background-color: var(--stroke-gray);
+  gap: 17px;
   padding: 10px;
   border-radius: 8px;
 }
@@ -70,13 +70,31 @@
 #card-number {
   width: 100%;
 }
+.message-container {
+  padding: 10px;
+}
+#message-input {
+  padding: 10px;
+}
 
-.insurance-level-checkout {
-  border-radius: 8px;
-  background-color: var(--accent-color);
-  padding: 10px 0;
-  text-align: center;
-  color: var(--background-white);
-  font-size: 24px;
-  font-weight: 700;
+.total-price {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+.total-price h3 {
+  font-size: 20px;
+}
+
+.price-details {
+  padding-right: 10px;
+  text-align: end;
+  color: var(--stroke-gray);
+}
+
+.free-cancellation {
+  width: 100%;
+  padding: 10px;
+  font-size: 21px;
+  letter-spacing: 0.26px;
 }

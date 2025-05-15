@@ -30,6 +30,8 @@ export { default as profileWhiteLogo } from "./profile.svg";
 export { default as roadSvg } from "./road.svg";
 export { default as car } from "./car.svg";
 export { default as map } from "./map.svg";
+export { default as likeSvg } from "./like.svg";
+export { default as spinnerSvg } from "./spinner.svg";
 export { default as neanderthal } from "./neandertalac.svg";
 export { default as path } from "./path.svg";
 export { default as neanderthalKolo } from "./kolo neandertalac.svg";

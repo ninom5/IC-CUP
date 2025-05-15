@@ -1,16 +1,14 @@
 import "./checkoutPopUp.css";
-import { InsuranceKey, insuranceLevelMap } from "@constants/index";
 import { useState } from "react";
 import { CheckoutPriceProps } from "types";
+import { likeSvg } from "@assets/images";
 
 export const CheckoutPopUp = ({
   setShowCheckoutForm,
-  selectedCard,
   price,
   onConfirm,
 }: {
   setShowCheckoutForm: (value: boolean) => void;
-  selectedCard: InsuranceKey | null;
   price: CheckoutPriceProps;
   onConfirm: (message: string) => void;
 }) => {
@@ -53,8 +51,6 @@ export const CheckoutPopUp = ({
         </button>
 
         <form onSubmit={handleCheckoutSubmit}>
-          <h2>Potvrdite rezervaciju</h2>
-
           <div className="checkout-card">
             <h2>Kreditna kartica</h2>
 
@@ -97,29 +93,34 @@ export const CheckoutPopUp = ({
             </div>
           </div>
 
-          <div className="insurance-level-checkout">
-            {selectedCard && insuranceLevelMap[selectedCard]}
-          </div>
-
-          <div>
-            <label htmlFor="message">
-              Možete unijeti poruku vlasniku ako želite
-            </label>
+          <div className="message-container">
+            <label htmlFor="message">Ostavi poruku za vlasniku</label>
             <input
               type="text"
               name="message"
+              id="message-input"
               onChange={(e) => setMessage(e.target.value)}
               maxLength={100}
             />
           </div>
 
-          <h4>
-            Dnevna cijena: {price.dailyPrice}, osiguranje:{" "}
-            {price.insurancePrice}, provizija: {price.provisionPrice}, ukupno:{" "}
-            {price.totalPrice?.toFixed(2)}
-          </h4>
+          <div className="total-price">
+            <h3>Ukupna cijena </h3>
+            <h3>{price.totalPrice}€</h3>
+          </div>
 
-          <button type="submit">Potvrdi rezervaciju</button>
+          <div className="price-details">
+            <p>Osiguranje {price.insurancePrice}€</p>
+            <p>Dnevna cijena {price.dailyPrice}€</p>
+            <p>Provizija {price.provisionPrice}€</p>
+          </div>
+
+          <h3 className="free-cancellation">
+            <img src={likeSvg} alt="like" /> BESPLATNO otkaži vožnju do 24h
+            prije
+          </h3>
+
+          <button type="submit">Plati</button>
         </form>
       </div>
     </div>
