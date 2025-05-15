@@ -10,6 +10,9 @@ import {
 import "./registerForm.css";
 import { useAuthContext } from "@hooks/useAuthContext";
 import { Spinner } from "@components/index";
+import { RegisterStep1 } from "@components/RegisterForm/RegisterSteps/RegisterStep1";
+import { RegisterStep2 } from "@components/RegisterForm/RegisterSteps/RegisterStep2";
+import { RegisterStep3 } from "@components/RegisterForm/RegisterSteps/RegisterStep3";
 
 export const RegisterForm = () => {
   const { mutateAsync: uploadImages } = useUploadImages();
@@ -203,194 +206,26 @@ export const RegisterForm = () => {
 
           <form onSubmit={handleSubmit} className="register-form">
             {formStep === 1 && (
-              <>
-                <div className="form-group">
-                  <label>Ime</label>
-                  <input
-                    id="firstName"
-                    name="firstName"
-                    value={registerData.firstName}
-                    onChange={handleChange}
-                    type="text"
-                    placeholder="Ivan"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Prezime</label>
-                  <input
-                    id="lastName"
-                    name="lastName"
-                    value={registerData.lastName}
-                    onChange={handleChange}
-                    type="text"
-                    placeholder="Horvat"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Lozinka</label>
-                  <input
-                    id="password"
-                    name="password"
-                    value={registerData.password}
-                    onChange={handleChange}
-                    type="password"
-                    placeholder="********"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Ponovi lozinku</label>
-                  <input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    value={registerData.confirmPassword}
-                    onChange={handleChange}
-                    type="password"
-                    placeholder="********"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    value={registerData.email}
-                    onChange={handleChange}
-                    type="email"
-                    placeholder="ivan@horvat.com"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Broj mobitela</label>
-                  <input
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    value={registerData.phoneNumber}
-                    onChange={handleChange}
-                    type="number"
-                    placeholder="091 **** ***"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="address">Adresa</label>
-                  <input
-                    id="address"
-                    name="address"
-                    value={registerData.address}
-                    onChange={handleChange}
-                    type="text"
-                    placeholder="Adresa"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Datum rođenja</label>
-                  <input
-                    id="dateOfBirth"
-                    name="dateOfBirth"
-                    value={registerData.dateOfBirth}
-                    onChange={handleChange}
-                    type="date"
-                  />
-                </div>
-              </>
+              <RegisterStep1
+                registerData={registerData}
+                handleChange={handleChange}
+              />
             )}
 
             {formStep === 2 && (
-              <section className="documents-upload">
-                <div className="aa">
-                  <h2>Vozačka dozvola</h2>
-
-                  <div className="preview-container">
-                    {driverLicensePreviews.map((src, index) => (
-                      <div key={index} className="preview-item">
-                        <img src={src} alt="Slika" className="preview-image" />
-                      </div>
-                    ))}
-                  </div>
-
-                  <label htmlFor="driverLicense" className="custom-file-upload">
-                    Prenesi fotografije
-                  </label>
-                  <input
-                    type="file"
-                    id="driverLicense"
-                    name="driverLicense"
-                    className="hidden-input"
-                    multiple
-                    onChange={handleDriverLicenseChange}
-                  />
-                </div>
-
-                <div className="bb">
-                  <h2>Osobna iskaznica</h2>
-
-                  <div className="preview-container">
-                    {idCardPreviews.map((src, index) => (
-                      <div key={index} className="preview-item">
-                        <img src={src} alt="Slika" className="preview-image" />
-                      </div>
-                    ))}
-                  </div>
-
-                  <label htmlFor="idCard" className="custom-file-upload">
-                    Prenesi fotografije
-                  </label>
-                  <input
-                    type="file"
-                    id="idCard"
-                    name="idCard"
-                    className="hidden-input"
-                    multiple
-                    onChange={handleIdCardChange}
-                  />
-                </div>
-              </section>
+              <RegisterStep2
+                driverLicensePreviews={driverLicensePreviews}
+                handleDriverLicenseChange={handleDriverLicenseChange}
+                idCardPreviews={idCardPreviews}
+                handleIdCardChange={handleIdCardChange}
+              />
             )}
 
             {formStep === 3 && (
-              <section className="person-photo-upload">
-                <h2>Profilna fotografija</h2>
-
-                <div className="preview-container">
-                  {personPreview && (
-                    <div className="preview-item person-preview">
-                      <img
-                        src={personPreview}
-                        alt="Slika"
-                        className="preview-image"
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <p className="person-photo-description">
-                  (Pripazi da se jasno vidi tvoje lice)
-                </p>
-
-                <label htmlFor="personPhoto" className="custom-file-upload">
-                  Prenesi fotografiju
-                </label>
-                <input
-                  type="file"
-                  id="personPhoto"
-                  name="personPhoto"
-                  className="hidden-input"
-                  onChange={handlePersonPhotoChange}
-                />
-              </section>
+              <RegisterStep3
+                personPreview={personPreview}
+                handlePersonPhotoChange={handlePersonPhotoChange}
+              />
             )}
 
             <div className="form-buttons">
