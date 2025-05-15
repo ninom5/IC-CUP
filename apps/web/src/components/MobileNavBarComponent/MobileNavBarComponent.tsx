@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./mobileNavBarComponent.css";
 
 export const MobileNavBarComponent = ({
@@ -13,11 +13,14 @@ export const MobileNavBarComponent = ({
   path: string;
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isActive = location.pathname === path;
 
   return (
     <div className="mobile-nav-component" onClick={() => navigate(path)}>
-      <Icon aria-label={imgAlt} />
-      <p>{text}</p>
+      <Icon aria-label={imgAlt} fill={isActive ? "#222" : "#C0BEBE"} />
+      <p className={isActive ? "active" : ""}>{text}</p>
     </div>
   );
 };

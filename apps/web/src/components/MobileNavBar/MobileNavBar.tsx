@@ -26,14 +26,14 @@ export const MobileNavBar = () => {
         Icon={CarIcon}
         imgAlt="auto"
         text="Vozila"
-        path="./user/vehicle"
+        path="/user/vehicle"
       />
 
       <MobileNavBarComponent
         Icon={ProfileIcon}
         imgAlt="profil"
         text="Profil"
-        path={`./profile/${userData.id}`}
+        path={`/profile/${userData.id}`}
       />
     </nav>
   );
