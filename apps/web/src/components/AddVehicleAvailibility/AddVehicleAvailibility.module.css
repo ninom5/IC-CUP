@@ -17,7 +17,6 @@
 .intervalContainer {
   display: flex;
   width: 460px;
-  height: 48px;
   padding: 8px 15px;
   align-items: center;
   gap: 15px;
@@ -28,6 +27,7 @@
 
 .intervalContainer > label {
   display: flex;
+  gap: 5px;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
@@ -67,11 +67,17 @@
   cursor: pointer;
 }
 
+.intervalsList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 .intervalItem {
   display: flex;
   width: 427px;
-  height: 48px;
-  padding: 8px 15px;
+  padding: 0px 15px;
   align-items: center;
   gap: 15px;
   font-size: 20px;
@@ -79,4 +85,40 @@
 
 .intervalItem > img {
   cursor: pointer;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+}
+
+.intervalItem > img:hover {
+  background-color: var(--stroke-grey, #e3e3e3);
+}
+
+@media (max-width: 530px) {
+  .inputContainer {
+    width: 100%;
+  }
+
+  .intervalContainer {
+    width: min-content;
+    flex-wrap: wrap;
+  }
+
+  .intervalItem {
+    width: 100%;
+    gap: 10px;
+    padding: 0 8px;
+  }
+
+  .intervalItem > span {
+    font-size: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .intervalItem > img {
+    width: 30px;
+    height: 30px;
+  }
 }
