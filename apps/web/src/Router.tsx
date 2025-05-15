@@ -15,6 +15,8 @@ import {
 } from "@pages/index";
 import { SearchBarLayout, NavBarLayout, MobileLayout } from "@layouts/index";
 import { ProtectedRoute } from "./components";
+import { RegisterPage } from "@pages/RegisterPage/RegisterPage";
+import { LoginPage } from "@pages/LoginPage/LoginPage";
 
 export const Router = () => {
   return (
@@ -46,11 +48,12 @@ export const Router = () => {
 
           <Route path={routes.BLOCKED} element={<BlockedPage />} />
 
-          <Route element={<NavBarLayout />}>
-            <Route path={routes.HOME} element={<HomePage />} />
-            <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
-            <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
-          </Route>
+        <Route element={<NavBarLayout />}>
+          <Route path={routes.HOME} element={<HomePage />} />
+          <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
+          <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
+          <Route path={routes.REGISTER_PAGE} element={<RegisterPage />} />
+          <Route path={routes.LOGIN_PAGE} element={<LoginPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

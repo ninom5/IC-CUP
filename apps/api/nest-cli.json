@@ -6,7 +6,7 @@
     "deleteOutDir": true,
     "assets": [
       {
-        "include": "src/api/templates/**/*",
+        "include": "api/templates/**/*",
         "outDir": "dist/api/templates"
       }
     ],
