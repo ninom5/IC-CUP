@@ -43,3 +43,6 @@ export * from "./MobileNavBarComponent/MobileNavBarComponent";
 export * from "./Neanderthal/Neanderthal";
 export * from "./Blogs/Blogs";
 export * from "./HowItWorks/HowItWorks";
+export * from "./HeroSection/HeroSection";
+export * from "./LandingSearch/LandingSearch";
+export * from "./GetRentLandingSection/GetRentLandingSection";
