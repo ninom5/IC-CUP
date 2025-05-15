@@ -23,3 +23,30 @@
   font-size: 20px;
   font-weight: 400;
 }
+
+@media (min-width: 700px) and (max-width: 1250px) {
+  .insurance-card {
+    width: 80%;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 880px) {
+  .insurance-card h2 {
+    font-size: 20px;
+  }
+  .insurance-card p {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 350px) and (max-width: 800px) {
+  .insurance-card {
+    width: 90%;
+    margin-bottom: 30px;
+  }
+  .mobile-menu-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+  }
+}

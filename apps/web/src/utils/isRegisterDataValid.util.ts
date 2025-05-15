@@ -13,14 +13,16 @@ export const isRegisterDataValid = (fullRegisterData: RegisterDataType) => {
     address,
   } = fullRegisterData;
 
+  const phonePattern = /^\+?[0-9\s\-]{7,15}$/;
+
   const message = validateTextFields({
-    "first name": firstName,
-    "last name": lastName,
+    Ime: firstName,
+    Prezime: lastName,
     " email": email,
-    " password": password,
-    "confirm password": confirmPassword,
-    "phone number": phoneNumber,
-    " address": address,
+    " lozinka": password,
+    "potvrdi lozinku": confirmPassword,
+    "broj mobitela": phoneNumber,
+    " adresa": address,
   });
   if (message) return message;
 
@@ -28,8 +30,11 @@ export const isRegisterDataValid = (fullRegisterData: RegisterDataType) => {
 
   if (!dateOfBirth) return "Morate unijeti datum rođenja";
 
+  if (!phonePattern.test(phoneNumber.trim()))
+    return "Unesite validan broj mobitela";
+
   if (dateOfBirth > new Date().toISOString().split("T")[0])
-    return "Date of birth can not be in the future";
+    return "Datum rođenja ne može biti u budućnosti";
 
   if (
     new Date(dateOfBirth).getTime() >

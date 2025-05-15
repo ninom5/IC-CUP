@@ -1,19 +1,33 @@
-import { routes } from "@routes/index";
-import { Link } from "react-router-dom";
-import { Footer, Spinner, Neanderthal } from "@components/index";
-import { kolo } from "assets/videos";
-
+import { Neanderthal } from "@components/index";
+import c from "./HomePage.module.css";
+import { NavLink } from "react-router-dom";
+import koloLogo from "assets/images/kolo-logo.svg";
+import {
+  FAQSection,
+  Footer,
+  Blogs,
+  HeroSection,
+  HowItWorks,
+  Neanderthal,
+  GetRentLandingSection,
+} from "@components/index";
 
 export const HomePage = () => {
   return (
-    <>
-
-      <video loop autoPlay muted playsInline width="100%">
-        <source src={kolo} type="video/mp4" />
-      </video>
+    <main>
+       <nav className={c.navBar}>
+        <img src={koloLogo} />
+        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/register">Register</NavLink>
+      </nav>
+      <HeroSection />
 
       <Neanderthal />
-      {/* <Footer /> */}
-    </>
+      <Blogs />
+      <GetRentLandingSection />
+      <HowItWorks />
+      <FAQSection />
+      <Footer />
+    </main>
   );
 };

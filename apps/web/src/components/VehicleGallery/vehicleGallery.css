@@ -61,3 +61,27 @@
   border-radius: 8px;
   cursor: pointer;
 }
+
+@media (min-width: 800px) and (max-width: 1250px) {
+  .gallery {
+    width: 80%;
+  }
+
+  @media (max-width: 1000px) {
+    .gallery {
+      width: 90%;
+      padding: 15px;
+    }
+  }
+}
+
+@media (min-width: 350px) and (max-width: 800px) {
+  .side-gallery {
+    display: none;
+  }
+  .gallery {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}

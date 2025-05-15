@@ -10,6 +10,9 @@ import {
 import "./registerForm.css";
 import { useAuthContext } from "@hooks/useAuthContext";
 import { Spinner } from "@components/index";
+import { RegisterStep1 } from "@components/RegisterForm/RegisterSteps/RegisterStep1";
+import { RegisterStep2 } from "@components/RegisterForm/RegisterSteps/RegisterStep2";
+import { RegisterStep3 } from "@components/RegisterForm/RegisterSteps/RegisterStep3";
 
 export const RegisterForm = () => {
   const { mutateAsync: uploadImages } = useUploadImages();
@@ -276,8 +279,10 @@ export const RegisterForm = () => {
                     name="phoneNumber"
                     value={registerData.phoneNumber}
                     onChange={handleChange}
-                    type="number"
+                    type="text"
                     placeholder="091 **** ***"
+                    minLength={8}
+                    maxLength={15}
                     required
                   />
                 </div>
@@ -309,88 +314,19 @@ export const RegisterForm = () => {
             )}
 
             {formStep === 2 && (
-              <section className="documents-upload">
-                <div className="aa">
-                  <h2>Vozačka dozvola</h2>
-
-                  <div className="preview-container">
-                    {driverLicensePreviews.map((src, index) => (
-                      <div key={index} className="preview-item">
-                        <img src={src} alt="Slika" className="preview-image" />
-                      </div>
-                    ))}
-                  </div>
-
-                  <label htmlFor="driverLicense" className="custom-file-upload">
-                    Prenesi fotografije
-                  </label>
-                  <input
-                    type="file"
-                    id="driverLicense"
-                    name="driverLicense"
-                    className="hidden-input"
-                    multiple
-                    onChange={handleDriverLicenseChange}
-                  />
-                </div>
-
-                <div className="bb">
-                  <h2>Osobna iskaznica</h2>
-
-                  <div className="preview-container">
-                    {idCardPreviews.map((src, index) => (
-                      <div key={index} className="preview-item">
-                        <img src={src} alt="Slika" className="preview-image" />
-                      </div>
-                    ))}
-                  </div>
-
-                  <label htmlFor="idCard" className="custom-file-upload">
-                    Prenesi fotografije
-                  </label>
-                  <input
-                    type="file"
-                    id="idCard"
-                    name="idCard"
-                    className="hidden-input"
-                    multiple
-                    onChange={handleIdCardChange}
-                  />
-                </div>
-              </section>
+              <RegisterStep2
+                driverLicensePreviews={driverLicensePreviews}
+                handleDriverLicenseChange={handleDriverLicenseChange}
+                idCardPreviews={idCardPreviews}
+                handleIdCardChange={handleIdCardChange}
+              />
             )}
 
             {formStep === 3 && (
-              <section className="person-photo-upload">
-                <h2>Profilna fotografija</h2>
-
-                <div className="preview-container">
-                  {personPreview && (
-                    <div className="preview-item person-preview">
-                      <img
-                        src={personPreview}
-                        alt="Slika"
-                        className="preview-image"
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <p className="person-photo-description">
-                  (Pripazi da se jasno vidi tvoje lice)
-                </p>
-
-                <label htmlFor="personPhoto" className="custom-file-upload">
-                  Prenesi fotografiju
-                </label>
-                <input
-                  type="file"
-                  id="personPhoto"
-                  name="personPhoto"
-                  className="hidden-input"
-                  onChange={handlePersonPhotoChange}
-                />
-              </section>
+              <RegisterStep3
+                personPreview={personPreview}
+                handlePersonPhotoChange={handlePersonPhotoChange}
+              />
             )}
 
             <div className="form-buttons">

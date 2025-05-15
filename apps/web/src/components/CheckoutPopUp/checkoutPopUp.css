@@ -98,3 +98,27 @@
   font-size: 21px;
   letter-spacing: 0.26px;
 }
+
+@media (min-width: 350px) and (max-width: 600px) {
+  .modal-checkout-mobile {
+    width: 90%;
+    padding: 20px;
+  }
+  .form-group {
+    width: 40%;
+  }
+  .checkout-card {
+    justify-content: space-between;
+    margin-bottom: 0;
+  }
+  .modal-checkout-mobile input {
+    width: 100%;
+  }
+
+  .free-cancellation {
+    font-size: 16px;
+  }
+  .message-container {
+    margin-bottom: 5px;
+  }
+}

@@ -11,7 +11,7 @@ export const VehicleDescription = ({ vehicle }: { vehicle: VehicleType }) => {
 
   const { numOfSeats, fuelType, category, transmission }: VehicleDetails =
     details;
-  console.log(vehicle);
+
   const categoryImage = categoryImages[category] || categoryImages["COUPE"];
 
   return (

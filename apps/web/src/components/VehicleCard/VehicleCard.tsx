@@ -1,10 +1,10 @@
-import { VehicleType } from "types/vehicle.type";
+import { VehicleType, VehicleType2 } from "types/vehicle.type";
 import { useNavigate } from "react-router-dom";
 import { getAverageVehicleRating } from "@utils/getAverageVehicleRating.util";
 import c from "./vehicleCard.module.css";
 
 type Props = {
-  vehicle: VehicleType;
+  vehicle: VehicleType2;
   variant?: "default" | "profile";
 };
 
@@ -12,7 +12,9 @@ export const VehicleCard = ({ vehicle, variant = "default" }: Props) => {
   const isProfile = variant === "profile";
   const navigate = useNavigate();
 
-  const { totalRating, numberOfRatings } = getAverageVehicleRating(vehicle);
+  const { totalRating, numberOfRatings } = getAverageVehicleRating(
+    vehicle as VehicleType
+  );
   return (
     <section
       className={`${c.vehicleCard} ${isProfile ? c.profileCard : ""}`}

@@ -1,9 +1,8 @@
-import { API_URL } from "@constants/urls";
 import axios from "axios";
 import { ErrorResponseType } from "types/index";
 
 export const api = axios.create({
-  baseURL: API_URL,
+  baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
   },
