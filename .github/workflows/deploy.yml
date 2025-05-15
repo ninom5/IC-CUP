@@ -30,6 +30,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create .env file
+        run: |
+          echo "VITE_APP_MAPS_API=${{ secrets.VITE_APP_MAPS_API }}" >> apps/web/.env
+          echo "VITE_APP_MAP_ID=${{ secrets.VITE_APP_MAP_ID }}" >> apps/web/.env
+
       - name: Build and push docker image
         uses: docker/build-push-action@v4
         with:
