@@ -12,7 +12,7 @@ export const accordionData = [
   {
     question: "Kako se osigurava vozilo?",
     answer:
-      "Svako vozilo osigurano je obveznim auto osiguranjem, osim obveznog osiguranja pri svakom iznajmljivanju moguće je odabrati razinu osiguranja kojom se pokriva šteta nastala za vrijeme najma. Moguće je izabrati između 3 razine osiguranja: Low - prekriva samo osnovne štete, a odgovornost od strane korisnika je u visini do 90% iznosa štete. Mid - pokriva dio troškova za vrijeme trajanja najam a odgovornost od strane korisnika je u visini do 50% iznosa štete. High - pokriva veliki dio troškova za vrijeme trajanja najma, a odgovornost od strane korisnika je u visini do 20% iznosa štete.",
+      "Svako vozilo osigurano je obveznim auto osiguranjem, osim obveznog osiguranja pri svakom iznajmljivanju moguće je odabrati razinu osiguranja kojom se pokriva šteta nastala za vrijeme najma. Moguće je izabrati između 3 razine osiguranja: Niska razina osiguranja - prekriva samo osnovne štete, a odgovornost od strane korisnika je u visini do 90% iznosa štete. Srednja razina osiguranja - pokriva dio troškova za vrijeme trajanja najam a odgovornost od strane korisnika je u visini do 50% iznosa štete. Visoka razina osiguranja - pokriva veliki dio troškova za vrijeme trajanja najma, a odgovornost od strane korisnika je u visini do 20% iznosa štete.",
   },
   {
     question: "Kako se vrši plaćanje najma?",
