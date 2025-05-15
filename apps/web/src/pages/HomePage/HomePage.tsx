@@ -4,7 +4,7 @@ import { spinnerSvg } from "assets/images/index";
 
 export const HomePage = () => {
   return (
-    <>
+    <main>
       <video
         loop
         autoPlay
