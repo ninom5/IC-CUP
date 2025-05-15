@@ -18,6 +18,7 @@ import {
   ButtonAccent,
   DocumentsSettings,
   ReviewCard,
+  Spinner,
   VehicleCard,
 } from "@components/index";
 import { ReviewCardData } from "types";
@@ -66,7 +67,7 @@ export const ProfilePage = () => {
     if (profile?.personPhoto) setPersonPhotoPreview(profile.personPhoto);
   }, [profile]);
 
-  if (isLoading || isRatingLoading) return <p>Učitavanje...</p>;
+  if (isLoading || isRatingLoading) return <Spinner />;
   if (error) return <p>Greška pri dohvaćanju profila.</p>;
   if (!profile) return <p>Korisnik nije pronađen.</p>;
 
@@ -148,17 +149,17 @@ export const ProfilePage = () => {
               className={`${c.tab} ${activeTab === "profile" ? c.activeTab : ""}`}
               onClick={() => setActiveTab("profile")}
             >
-              Moj profil
+              MOJ PROFIL
             </button>
             <button
               className={`${c.tab} ${activeTab === "settings" ? c.activeTab : ""}`}
               onClick={() => setActiveTab("settings")}
             >
-              Postavke računa
+              POSTAVKE RAČUNA
             </button>
           </>
         ) : (
-          <button className={`${c.tab} ${c.activeTab}`}>Profil</button>
+          <button className={`${c.tab} ${c.activeTab}`}>PROFIL</button>
         )}
       </div>
 
@@ -206,7 +207,7 @@ export const ProfilePage = () => {
 
           <div className={c.profileSection2}>
             <div className={c.section}>
-              <h2>Opis</h2>
+              <h2>OPIS</h2>
               {isOwnProfile ? (
                 <>
                   <textarea
@@ -229,7 +230,7 @@ export const ProfilePage = () => {
 
             <div className={c.section}>
               <div className={c.sectionHeader}>
-                <h2>Automobili</h2>
+                <h2>AUTOMOBILI</h2>
                 {isOwnProfile && (
                   <img
                     src={pencilSvg}
@@ -241,7 +242,7 @@ export const ProfilePage = () => {
               </div>
 
               {isLoadingVehicles ? (
-                <p>Učitavanje vozila...</p>
+                <Spinner />
               ) : userVehicles && userVehicles.length > 0 ? (
                 <div className={c.vehiclesGrid}>
                   {userVehicles.map((v) => (
@@ -254,10 +255,10 @@ export const ProfilePage = () => {
             </div>
 
             <div className={c.section}>
-              <h2>Recenzije od unajmljivača</h2>
+              <h2>RECENZIJE OD UNAJMLJIVAČA</h2>
 
               {isLoadingReviews ? (
-                <p>Učitavanje recenzija...</p>
+                <Spinner />
               ) : userReviews && userReviews.length > 0 ? (
                 <div className={c.reviewList}>
                   {userReviews.map((review: ReviewCardData) => (
