@@ -1,4 +1,4 @@
-import { Neanderthal } from "@components/index";
+import { Accordion, Neanderthal } from "@components/index";
 import { kolo } from "assets/videos";
 import { spinnerSvg } from "assets/images/index";
 
@@ -18,6 +18,7 @@ export const HomePage = () => {
       </video>
 
       <Neanderthal />
+      <Accordion />
       {/* <Footer /> */}
     </>
   );

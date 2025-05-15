@@ -41,3 +41,4 @@ export * from "./Spinner/Spinner";
 export * from "./MobileNavBar/MobileNavBar";
 export * from "./MobileNavBarComponent/MobileNavBarComponent";
 export * from "./Neanderthal/Neanderthal";
+export * from "./Accordion/Accordion";
