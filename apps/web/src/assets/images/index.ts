@@ -35,6 +35,9 @@ export { default as spinnerSvg } from "./spinner.svg";
 export { default as neanderthal } from "./neandertalac.svg";
 export { default as path } from "./path.svg";
 export { default as neanderthalKolo } from "./kolo neandertalac.svg";
+export { default as downFAQ } from "./downFAQ.svg";
+export { default as upFAQ } from "./upFAQ.svg";
+export { default as faqAuto } from "./faqAuto.svg";
 export { default as arrowIcon } from "./arrowIcon.svg";
 export { default as stopSign } from "./stopSign.svg";
 export { default as howItWorksPath } from "./howItWorksPath.svg";
@@ -43,3 +46,4 @@ export { default as rent } from "./rent.svg";
 export { default as get } from "./get.svg";
 export { default as blackArrowRight } from "./blackArrowRight.svg";
 export { default as blackArrowLeft } from "./blackArrowLeft.svg";
+

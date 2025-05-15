@@ -1,5 +1,6 @@
-
 import {
+  FAQSection,
+  Footer,
   Blogs,
   HeroSection,
   HowItWorks,
@@ -33,7 +34,7 @@ export const HomePage = () => {
       <Blogs />
       <GetRentLandingSection />
       <HowItWorks />
-
+      <FAQSection />
       <Footer />
     </main>
   );
