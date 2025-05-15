@@ -27,7 +27,6 @@
   align-items: center;
   width: 100%;
   color: var(--background-black, #222);
-  font-family: "Nunito Sans";
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
@@ -54,7 +53,6 @@
 .formSteps > p {
   color: var(--stroke-grey, #c0bebe);
   text-align: right;
-  font-family: "Nunito Sans";
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -90,10 +88,19 @@
   border-radius: 10px;
   background: var(--accent-color, #044343);
   color: var(--background-white, #fafafa);
-  font-family: "Nunito Sans";
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   cursor: pointer;
+}
+
+@media (max-width: 1170px) {
+  .addVehiclePageSection > div {
+    width: 100%;
+  }
+
+  .formSteps {
+    width: 100%;
+  }
 }

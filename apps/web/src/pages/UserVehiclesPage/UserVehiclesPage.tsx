@@ -66,7 +66,7 @@ export const UserVehiclesPage = () => {
                     />
                   </div>
 
-                  <p>
+                  <p className={c.ratingParagraph}>
                     {i.reviewCount ? (
                       <>
                         {i.avgRating} <img src={starIcon} /> ({i.reviewCount})
