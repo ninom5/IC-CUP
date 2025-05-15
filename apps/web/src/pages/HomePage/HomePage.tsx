@@ -1,4 +1,4 @@
-import { Blogs, HowItWorks, Neanderthal } from "@components/index";
+import { Blogs, Footer, HowItWorks, Neanderthal } from "@components/index";
 import { kolo } from "assets/videos";
 
 export const HomePage = () => {
@@ -12,7 +12,7 @@ export const HomePage = () => {
       <Blogs />
       <HowItWorks />
 
-      {/* <Footer /> */}
+      <Footer />
     </main>
   );
 };
