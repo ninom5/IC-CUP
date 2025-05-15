@@ -17,7 +17,9 @@ import { routes } from "@routes/routes";
 import {
   ButtonAccent,
   DocumentsSettings,
+  Footer,
   ReviewCard,
+  Spinner,
   VehicleCard,
 } from "@components/index";
 import { ReviewCardData } from "types";
@@ -66,7 +68,7 @@ export const ProfilePage = () => {
     if (profile?.personPhoto) setPersonPhotoPreview(profile.personPhoto);
   }, [profile]);
 
-  if (isLoading || isRatingLoading) return <p>Učitavanje...</p>;
+  if (isLoading || isRatingLoading) return <Spinner />;
   if (error) return <p>Greška pri dohvaćanju profila.</p>;
   if (!profile) return <p>Korisnik nije pronađen.</p>;
 
@@ -140,200 +142,203 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className={c.profilePageContainer}>
-      <div className={c.tabs}>
-        {isOwnProfile ? (
-          <>
-            <button
-              className={`${c.tab} ${activeTab === "profile" ? c.activeTab : ""}`}
-              onClick={() => setActiveTab("profile")}
-            >
-              Moj profil
-            </button>
-            <button
-              className={`${c.tab} ${activeTab === "settings" ? c.activeTab : ""}`}
-              onClick={() => setActiveTab("settings")}
-            >
-              Postavke računa
-            </button>
-          </>
-        ) : (
-          <button className={`${c.tab} ${c.activeTab}`}>Profil</button>
-        )}
-      </div>
+    <>
+      <div className={c.profilePageContainer}>
+        <div className={c.tabs}>
+          {isOwnProfile ? (
+            <>
+              <button
+                className={`${c.tab} ${activeTab === "profile" ? c.activeTab : ""}`}
+                onClick={() => setActiveTab("profile")}
+              >
+                MOJ PROFIL
+              </button>
+              <button
+                className={`${c.tab} ${activeTab === "settings" ? c.activeTab : ""}`}
+                onClick={() => setActiveTab("settings")}
+              >
+                POSTAVKE RAČUNA
+              </button>
+            </>
+          ) : (
+            <button className={`${c.tab} ${c.activeTab}`}>PROFIL</button>
+          )}
+        </div>
 
-      {activeTab === "profile" && (
-        <div className={c.profileContainer}>
-          <div className={c.profileSection1}>
-            <div className={c.profilePictureWrapper}>
-              <img
-                src={personPhotoPreview || fallbackImageSvg}
-                alt="Profilna slika"
-                className={c.avatar}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null;
-                  target.src = fallbackImageSvg;
-                }}
-              />
+        {activeTab === "profile" && (
+          <div className={c.profileContainer}>
+            <div className={c.profileSection1}>
+              <div className={c.profilePictureWrapper}>
+                <img
+                  src={personPhotoPreview || fallbackImageSvg}
+                  alt="Profilna slika"
+                  className={c.avatar}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = fallbackImageSvg;
+                  }}
+                />
 
-              {isOwnProfile && (
-                <>
-                  <label htmlFor="upload-photo" className={c.editPhotoIcon}>
-                    <img src={pencilSvg} alt="Uredi sliku" />
-                  </label>
-                  <input
-                    type="file"
-                    id="upload-photo"
-                    className={c.hiddenInput}
-                    onChange={handlePersonPhotoChange}
-                  />
-                </>
-              )}
-            </div>
-            <div className={c.profileStatsWrapper}>
-              <h1>
-                {profile.firstName} {profile.lastName}
-              </h1>
-              {userRating && (
-                <p className={c.rating}>
-                  {userRating.averageRating.toFixed(1)} ★ (
-                  {userRating.reviewCount})
-                </p>
-              )}
-            </div>
-          </div>
-
-          <div className={c.profileSection2}>
-            <div className={c.section}>
-              <h2>Opis</h2>
-              {isOwnProfile ? (
-                <>
-                  <textarea
-                    className={c.textarea}
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                  />
-                  <ButtonAccent
-                    content={isSaving ? "Spremanje..." : "Spremi promjene"}
-                    onClick={handleSaveDescription}
-                    disabled={isSaving}
-                  />
-                </>
-              ) : (
-                <div className={c.textarea}>
-                  {profile.description?.trim() ? profile.description : ""}
-                </div>
-              )}
-            </div>
-
-            <div className={c.section}>
-              <div className={c.sectionHeader}>
-                <h2>Automobili</h2>
                 {isOwnProfile && (
-                  <img
-                    src={pencilSvg}
-                    alt="Uredi popis"
-                    onClick={() => navigate(routes.USER_VEHICLES)}
-                    className={c.editVehicleListIcon}
-                  />
+                  <>
+                    <label htmlFor="upload-photo" className={c.editPhotoIcon}>
+                      <img src={pencilSvg} alt="Uredi sliku" />
+                    </label>
+                    <input
+                      type="file"
+                      id="upload-photo"
+                      className={c.hiddenInput}
+                      onChange={handlePersonPhotoChange}
+                    />
+                  </>
+                )}
+              </div>
+              <div className={c.profileStatsWrapper}>
+                <h1>
+                  {profile.firstName} {profile.lastName}
+                </h1>
+                {userRating && (
+                  <p className={c.rating}>
+                    {userRating.averageRating.toFixed(1)} ★ (
+                    {userRating.reviewCount})
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className={c.profileSection2}>
+              <div className={c.section}>
+                <h2>OPIS</h2>
+                {isOwnProfile ? (
+                  <>
+                    <textarea
+                      className={c.textarea}
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                    />
+                    <ButtonAccent
+                      content={isSaving ? "Spremanje..." : "Spremi promjene"}
+                      onClick={handleSaveDescription}
+                      disabled={isSaving}
+                    />
+                  </>
+                ) : (
+                  <div className={c.textarea}>
+                    {profile.description?.trim() ? profile.description : ""}
+                  </div>
                 )}
               </div>
 
-              {isLoadingVehicles ? (
-                <p>Učitavanje vozila...</p>
-              ) : userVehicles && userVehicles.length > 0 ? (
-                <div className={c.vehiclesGrid}>
-                  {userVehicles.map((v) => (
-                    <VehicleCard key={v.id} vehicle={v} variant="profile" />
-                  ))}
+              <div className={c.section}>
+                <div className={c.sectionHeader}>
+                  <h2>AUTOMOBILI</h2>
+                  {isOwnProfile && (
+                    <img
+                      src={pencilSvg}
+                      alt="Uredi popis"
+                      onClick={() => navigate(routes.USER_VEHICLES)}
+                      className={c.editVehicleListIcon}
+                    />
+                  )}
                 </div>
-              ) : (
-                <p>Nije dodano nijedno vozilo.</p>
-              )}
-            </div>
 
-            <div className={c.section}>
-              <h2>Recenzije od unajmljivača</h2>
+                {isLoadingVehicles ? (
+                  <Spinner />
+                ) : userVehicles && userVehicles.length > 0 ? (
+                  <div className={c.vehiclesGrid}>
+                    {userVehicles.map((v) => (
+                      <VehicleCard key={v.id} vehicle={v} variant="profile" />
+                    ))}
+                  </div>
+                ) : (
+                  <p>Nije dodano nijedno vozilo.</p>
+                )}
+              </div>
 
-              {isLoadingReviews ? (
-                <p>Učitavanje recenzija...</p>
-              ) : userReviews && userReviews.length > 0 ? (
-                <div className={c.reviewList}>
-                  {userReviews.map((review: ReviewCardData) => (
-                    <ReviewCard key={review.id} review={review} />
-                  ))}
-                </div>
-              ) : (
-                <p>Korisnik još nema recenzija.</p>
-              )}
+              <div className={c.section}>
+                <h2>RECENZIJE OD UNAJMLJIVAČA</h2>
+
+                {isLoadingReviews ? (
+                  <Spinner />
+                ) : userReviews && userReviews.length > 0 ? (
+                  <div className={c.reviewList}>
+                    {userReviews.map((review: ReviewCardData) => (
+                      <ReviewCard key={review.id} review={review} />
+                    ))}
+                  </div>
+                ) : (
+                  <p>Korisnik još nema recenzija.</p>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {activeTab === "settings" && isOwnProfile && (
-        <div className={c.settingsContainer}>
-          <div className={c.settingsBasic}>
-            <div className={c.formGroup}>
-              <label>Nova Lozinka</label>
-              <input
-                id="password"
-                name="password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                type="password"
-              />
-            </div>
+        {activeTab === "settings" && isOwnProfile && (
+          <div className={c.settingsContainer}>
+            <div className={c.settingsBasic}>
+              <div className={c.formGroup}>
+                <label>Nova Lozinka</label>
+                <input
+                  id="password"
+                  name="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  type="password"
+                />
+              </div>
 
-            <div className={c.formGroup}>
-              <label>Ponovi novu lozinku</label>
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                type="password"
-              />
-            </div>
+              <div className={c.formGroup}>
+                <label>Ponovi novu lozinku</label>
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  type="password"
+                />
+              </div>
 
-            <div className={c.formGroup}>
-              <label>Adresa</label>
-              <input
-                id="address"
-                name="address"
-                value={updatedAddress}
-                onChange={(e) => setUpdatedAddress(e.target.value)}
-                type="text"
-                placeholder={profile.address}
-              />
-            </div>
+              <div className={c.formGroup}>
+                <label>Adresa</label>
+                <input
+                  id="address"
+                  name="address"
+                  value={updatedAddress}
+                  onChange={(e) => setUpdatedAddress(e.target.value)}
+                  type="text"
+                  placeholder={profile.address}
+                />
+              </div>
 
-            <div className={c.formGroup}>
-              <label>Broj mobitela</label>
-              <input
-                id="phoneNumber"
-                name="phoneNumber"
-                value={updatedPhone}
-                onChange={(e) => setUpdatedPhone(e.target.value)}
-                type="text"
-                placeholder={profile.phoneNumber}
-              />
+              <div className={c.formGroup}>
+                <label>Broj mobitela</label>
+                <input
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  value={updatedPhone}
+                  onChange={(e) => setUpdatedPhone(e.target.value)}
+                  type="text"
+                  placeholder={profile.phoneNumber}
+                />
+              </div>
+              <div>
+                <ButtonAccent
+                  content="Spremi promjene"
+                  onClick={handleSaveBasicInfo}
+                  disabled={isSaving}
+                />
+              </div>
             </div>
-            <div>
-              <ButtonAccent
-                content="Spremi promjene"
-                onClick={handleSaveBasicInfo}
-                disabled={isSaving}
-              />
+            <div className={c.settingsDocuments}>
+              <h2>Dokumenti</h2>
+              <DocumentsSettings userId={profile.id} refetch={refetch} />
             </div>
           </div>
-          <div className={c.settingsDocuments}>
-            <h2>Dokumenti</h2>
-            <DocumentsSettings userId={profile.id} refetch={refetch} />
-          </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+      <Footer />
+    </>
   );
 };

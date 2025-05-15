@@ -39,3 +39,17 @@
   display: flex;
   gap: 8px;
 }
+
+@media (max-width: 700px) {
+  .card {
+    gap: 16px;
+    padding: 16px;
+  }
+  .header {
+    height: 48px;
+  }
+  .avatar {
+    width: 48px;
+    height: 48px;
+  }
+}
