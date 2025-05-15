@@ -68,15 +68,15 @@ export const UserVehiclesPage = () => {
                       />
                     </div>
 
-                    <p>
-                      {i.reviewCount ? (
-                        <>
-                          {i.avgRating} <img src={starIcon} /> ({i.reviewCount})
-                        </>
-                      ) : (
-                        "Još nema recenzija za ovo vozilo"
-                      )}
-                    </p>
+                  <p className={c.ratingParagraph}>
+                    {i.reviewCount ? (
+                      <>
+                        {i.avgRating} <img src={starIcon} /> ({i.reviewCount})
+                      </>
+                    ) : (
+                      "Još nema recenzija za ovo vozilo"
+                    )}
+                  </p>
 
                     <p className={c.dailyPrice}>
                       <strong>{i.dailyPrice} €</strong> / po danu

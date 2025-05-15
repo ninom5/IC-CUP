@@ -1,15 +1,24 @@
-import { routes } from "@routes/index";
-import { Link } from "react-router-dom";
-import { Footer, Spinner } from "@components/index";
+import { Neanderthal } from "@components/index";
+import { kolo } from "assets/videos";
+import { spinnerSvg } from "assets/images/index";
 
 export const HomePage = () => {
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <Link to={routes.VEHICLES}>CARS</Link>
-      </div>
-      <Spinner />
-      <Footer />
+      <video
+        loop
+        autoPlay
+        muted
+        playsInline
+        preload="none"
+        poster={spinnerSvg}
+        width="100%"
+      >
+        <source src={kolo} type="video/mp4" />
+      </video>
+
+      <Neanderthal />
+      {/* <Footer /> */}
     </>
   );
 };

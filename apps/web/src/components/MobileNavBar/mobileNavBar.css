@@ -6,8 +6,8 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   background-color: var(--background-white);
-  position: absolute;
-  width: 100%;
+  position: fixed;
+  width: 100vw;
   bottom: 0;
   z-index: 10;
   padding: 10px 0;

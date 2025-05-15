@@ -9,3 +9,7 @@ export * from "./ChairIcon";
 export * from "./PetsIcon";
 export * from "./SensorsIcon";
 export * from "./UsbIcon";
+export * from "./SearchIcon";
+export * from "./ProfileIcon";
+export * from "./CarIcon";
+export * from "./RoadIcon";

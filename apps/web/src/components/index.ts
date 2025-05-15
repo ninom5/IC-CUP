@@ -40,3 +40,4 @@ export * from "./CustomDatePicker/CustomDatePicker";
 export * from "./Spinner/Spinner";
 export * from "./MobileNavBar/MobileNavBar";
 export * from "./MobileNavBarComponent/MobileNavBarComponent";
+export * from "./Neanderthal/Neanderthal";

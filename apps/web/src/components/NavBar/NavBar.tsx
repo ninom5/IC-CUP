@@ -2,6 +2,7 @@ import { logoSvg } from "@assets/images";
 import { SearchBarNavigationLinks } from "@components/index";
 import { routes } from "@routes/index";
 import { useNavigate } from "react-router-dom";
+import "./navBar.css";
 
 export const NavBar = () => {
   const navigate = useNavigate();

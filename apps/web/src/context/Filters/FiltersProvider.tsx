@@ -8,6 +8,7 @@ export const FiltersProvider: FC<React.PropsWithChildren> = ({ children }) => {
     carCategory: "",
     transmission: "",
     sortBy: "",
+    dateRange: [null, null] as [Date | null, Date | null],
   });
 
   const setFilters = useCallback(
