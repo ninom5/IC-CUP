@@ -1,24 +1,39 @@
 import { MobileNavBarComponent } from "@components/MobileNavBarComponent/MobileNavBarComponent";
 import "./mobileNavBar.css";
-import { searchSvg, roadSvg, profileWhiteLogo, car } from "assets/images/index";
+import { extractUserInfo } from "@utils/extractUserInfo.util";
+import { SearchIcon, ProfileIcon, CarIcon, RoadIcon } from "@components/icons";
 
 export const MobileNavBar = () => {
+  const { data: userData } = extractUserInfo();
+
   return (
     <nav className="mobile-navigation">
       <MobileNavBarComponent
-        imgSrc={searchSvg}
+        Icon={SearchIcon}
         imgAlt="povecalo"
         text="Traži"
+        path="/vehicles"
       />
 
-      <MobileNavBarComponent imgSrc={roadSvg} imgAlt="cesta" text="Vožnje" />
-
-      <MobileNavBarComponent imgSrc={car} imgAlt="auto" text="Vozila" />
+      <MobileNavBarComponent
+        Icon={RoadIcon}
+        imgAlt="cesta"
+        text="Vožnje"
+        path="/user/drives"
+      />
 
       <MobileNavBarComponent
-        imgSrc={profileWhiteLogo}
+        Icon={CarIcon}
+        imgAlt="auto"
+        text="Vozila"
+        path="./user/vehicle"
+      />
+
+      <MobileNavBarComponent
+        Icon={ProfileIcon}
         imgAlt="profil"
         text="Profil"
+        path={`./profile/${userData.id}`}
       />
     </nav>
   );
