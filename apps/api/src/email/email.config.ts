@@ -7,8 +7,10 @@ import { existsSync } from 'fs';
 @Injectable()
 export class EmailConfig implements MailerOptionsFactory {
   createMailerOptions(): MailerOptions {
-    const devPath = join(process.cwd(), 'src', 'api', 'templates');
-    const prodPath = join(process.cwd(), 'dist', 'api', 'templates');
+    const rootDir = process.cwd();
+
+    const devPath = join(rootDir, 'templates');
+    const prodPath = join(rootDir, 'dist', 'templates');
 
     const templatesPath = existsSync(prodPath) ? prodPath : devPath;
 
