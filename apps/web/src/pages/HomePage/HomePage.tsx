@@ -1,10 +1,22 @@
-import { FAQSection, Footer, Neanderthal } from "@components/index";
+import {
+  FAQSection,
+  Footer,
+  Blogs,
+  HeroSection,
+  HowItWorks,
+  Neanderthal,
+  GetRentLandingSection,
+} from "@components/index";
 import { kolo } from "assets/videos";
 import { spinnerSvg } from "assets/images/index";
 
+
 export const HomePage = () => {
   return (
-    <>
+    <main>
+
+      <HeroSection />
+
       <video
         loop
         autoPlay
@@ -17,9 +29,13 @@ export const HomePage = () => {
         <source src={kolo} type="video/mp4" />
       </video>
 
+
       <Neanderthal />
+      <Blogs />
+      <GetRentLandingSection />
+      <HowItWorks />
       <FAQSection />
       <Footer />
-    </>
+    </main>
   );
 };

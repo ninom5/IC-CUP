@@ -36,7 +36,7 @@ export const VehicleGallery = ({ vehicle }: { vehicle: VehicleType }) => {
       </div>
 
       {selectedImage && (
-        <div className="modal-overlay">
+        <div className="modal-overlay" onClick={() => setSelectedImage(null)}>
           <div className="modal-gallery" onClick={(e) => e.stopPropagation()}>
             <img src={selectedImage} />
             <button onClick={handleClose}>x</button>
