@@ -1,13 +1,9 @@
-import { Blogs, HowItWorks, Neanderthal } from "@components/index";
-import { kolo } from "assets/videos";
+import { Blogs, HeroSection, HowItWorks, Neanderthal } from "@components/index";
 
 export const HomePage = () => {
   return (
     <main>
-      <video loop autoPlay muted playsInline width="100%">
-        <source src={kolo} type="video/mp4" />
-      </video>
-
+      <HeroSection />
       <Neanderthal />
       <Blogs />
       <HowItWorks />
