@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { AvailabilityInterval } from "../types/index";
-import { api } from "./base";
+import { AvailabilityInterval } from "../../types/index";
+import { api } from "@api/index";
 import { toast } from "react-toastify";
 
 const createAvailability = async (

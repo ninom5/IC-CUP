@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "./base";
+import { api } from "@api/index";
 import { UserRating } from "types";
 
 const getUserRating = async (userId: string) => {

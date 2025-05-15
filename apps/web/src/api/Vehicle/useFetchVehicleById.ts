@@ -1,5 +1,5 @@
 import { VehicleType } from "types/vehicle.type";
-import { api } from "./base";
+import { api } from "@api/index";
 import { useQuery } from "@tanstack/react-query";
 
 const fetchVehicleById = async (id: string): Promise<VehicleType> => {

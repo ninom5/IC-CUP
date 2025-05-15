@@ -1,7 +1,7 @@
 import { RegisterDataType } from "types";
-import { api } from "./base";
+import { api } from "@api/index";
 import { useMutation } from "@tanstack/react-query";
-import { JwtResponse } from "./useLogin";
+import { JwtResponse } from "@api/index";
 import { toast } from "react-toastify";
 
 const registerUser = (registerData: RegisterDataType) => {

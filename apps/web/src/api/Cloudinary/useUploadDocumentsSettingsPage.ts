@@ -1,5 +1,5 @@
 import { CloudinaryFileResponseType } from "types";
-import { api } from "./base";
+import { api } from "@api/index";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 

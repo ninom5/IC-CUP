@@ -1,4 +1,4 @@
-import { useFetchUserVehicles } from "@api/useFetchUserVehicles";
+import { useFetchUserVehicles } from "@api/User/useFetchUserVehicles";
 import interiorMirror from "../../assets/images/interiorMirror.svg";
 import c from "./UserVehiclesPage.module.css";
 import { extractUserInfo } from "@utils/extractUserInfo.util";
@@ -68,15 +68,15 @@ export const UserVehiclesPage = () => {
                       />
                     </div>
 
-                  <p className={c.ratingParagraph}>
-                    {i.reviewCount ? (
-                      <>
-                        {i.avgRating} <img src={starIcon} /> ({i.reviewCount})
-                      </>
-                    ) : (
-                      "Još nema recenzija za ovo vozilo"
-                    )}
-                  </p>
+                    <p className={c.ratingParagraph}>
+                      {i.reviewCount ? (
+                        <>
+                          {i.avgRating} <img src={starIcon} /> ({i.reviewCount})
+                        </>
+                      ) : (
+                        "Još nema recenzija za ovo vozilo"
+                      )}
+                    </p>
 
                     <p className={c.dailyPrice}>
                       <strong>{i.dailyPrice} €</strong> / po danu

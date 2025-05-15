@@ -8,7 +8,7 @@ import {
 } from "@components/index";
 import { VehicleData } from "../../types";
 import { toast } from "react-toastify";
-import { useCreateVehicle } from "@api/useCreateVehicle";
+import { useCreateVehicle } from "@api/index";
 import { extractUserInfo } from "@utils/extractUserInfo.util";
 import { isRegistrationValid } from "@utils/isRegistrationValid.util";
 import {
