@@ -37,3 +37,4 @@ export { default as path } from "./path.svg";
 export { default as neanderthalKolo } from "./kolo neandertalac.svg";
 export { default as downFAQ } from "./downFAQ.svg";
 export { default as upFAQ } from "./upFAQ.svg";
+export { default as faqAuto } from "./faqAuto.svg";

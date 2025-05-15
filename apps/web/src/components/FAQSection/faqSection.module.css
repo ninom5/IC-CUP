@@ -1,0 +1,20 @@
+.faqSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 100px 70px;
+}
+
+.faqSection h1 {
+  font-family: "Goodly";
+  font-weight: 600;
+  font-size: 96px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+
+.faqContent {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
