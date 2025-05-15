@@ -35,3 +35,5 @@ export { default as spinnerSvg } from "./spinner.svg";
 export { default as neanderthal } from "./neandertalac.svg";
 export { default as path } from "./path.svg";
 export { default as neanderthalKolo } from "./kolo neandertalac.svg";
+export { default as downFAQ } from "./downFAQ.svg";
+export { default as upFAQ } from "./upFAQ.svg";
