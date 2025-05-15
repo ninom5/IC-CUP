@@ -73,6 +73,24 @@ export type VehicleType = {
   ownerId: string;
 };
 
+export type VehicleType2 = {
+  id: string;
+  brand: string;
+  model: string;
+  images: string[];
+  productionYear: number;
+  dailyPrice: number;
+  description: string;
+  registration: string;
+  pickupAddress: string;
+  city: string;
+  details: VehicleDetails;
+  longitude: number;
+  latitude: number;
+  features: VehicleFeatures;
+  ownerId: string;
+};
+
 export type Rental = {
   review: Review;
   renter: User;
