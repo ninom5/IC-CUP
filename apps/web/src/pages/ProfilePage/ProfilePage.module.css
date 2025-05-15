@@ -101,10 +101,10 @@
 .settingsContainer {
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: relative;
   gap: 60px;
   width: 662;
-  top: 150px;
+  top: 50px;
   left: 507px;
 }
 
