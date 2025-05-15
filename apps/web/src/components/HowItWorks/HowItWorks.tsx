@@ -30,16 +30,18 @@ export const HowItWorks = () => {
     if (step > 0) setStep((prev) => prev - 1);
   };
 
-  const isMobile = windowWidth < 700;
-  const stepWidth = isMobile ? 100 : 50;
-  const gap = isMobile ? 0 : 37.5;
+  const isMobile = windowWidth <= 700;
 
-  const transformValue = isMobile
-    ? `translateX(-${step * 100}vw)`
-    : `translateX(calc(-${step * (stepWidth + gap)}vw - 20px))`;
-
-  console.log("isMobile:", isMobile);
-  console.log("transformValue:", transformValue);
+  // Calculate transformation value based on device type
+  const getTransformValue = () => {
+    if (isMobile) {
+      // For mobile: slide full viewport width (adjusted for padding)
+      return `translateX(-${step * (windowWidth - 40)}px)`;
+    } else {
+      // For desktop: original calculation but with fixed parentheses
+      return `translateX(calc(-${step * (50 + 37.5)}vw - 20px))`;
+    }
+  };
 
   return (
     <section className={c.howItWorksSection}>
@@ -55,9 +57,7 @@ export const HowItWorks = () => {
       <div
         className={c.stepsContainer}
         style={{
-          transform: isMobile
-            ? `translateX(-${step * 100}vw)`
-            : `translateX(calc(-${step * (stepWidth + gap)}vw - 20px))`,
+          transform: getTransformValue(),
           transition: "transform 0.5s ease-in-out",
         }}
       >

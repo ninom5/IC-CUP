@@ -149,10 +149,16 @@
 @media (max-width: 700px) {
   .stepsContainer {
     left: 20px;
+    gap: 0;
   }
 
   .step {
     width: calc(100vw - 40px);
+    flex-shrink: 0;
+  }
+
+  .carImage {
+    width: 50vw;
   }
 }
 
