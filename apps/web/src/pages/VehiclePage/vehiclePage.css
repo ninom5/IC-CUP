@@ -23,7 +23,7 @@
 .vehicle-owner {
   display: flex;
   margin-top: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .vehicle-owner-image-wrapper {
@@ -80,11 +80,15 @@
   color: var(--background-white);
 }
 
-@media (min-width: 700px) and (max-width: 1250px) {
+@media (min-width: 800px) and (max-width: 1250px) {
   .about-vehicle {
     width: 80%;
   }
   .pre-checkout button {
+    width: 80%;
+    font-size: 20px;
+  }
+  .pre-checkout h1 {
     width: 80%;
   }
 
@@ -93,5 +97,19 @@
       width: 90%;
       padding: 15px;
     }
+  }
+}
+
+@media (min-width: 350px) and (max-width: 800px) {
+  .booking-section {
+    display: none;
+  }
+  .about-vehicle {
+    width: 100%;
+    padding: 15px;
+  }
+  .vehicle-details-images {
+    width: 100%;
+    justify-content: space-between;
   }
 }

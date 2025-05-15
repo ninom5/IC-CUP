@@ -29,3 +29,12 @@
     width: 80%;
   }
 }
+
+@media (min-width: 800px) and (max-width: 880px) {
+  .insurance-card h2 {
+    font-size: 20px;
+  }
+  .insurance-card p {
+    font-size: 16px;
+  }
+}
