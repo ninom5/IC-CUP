@@ -123,9 +123,15 @@
 }
 
 @media (max-width: 740px) {
+  .imagePlaceholder,
   .selectedImage {
     width: 150px;
     height: 150px;
+  }
+
+  .imagePlaceholder > img {
+    width: 65px;
+    height: 65px;
   }
 }
 
@@ -144,8 +150,14 @@
 }
 
 @media (max-width: 375px) {
+  .imagePlaceholder,
   .selectedImage {
     width: 130px;
     height: 130px;
+  }
+
+  .imagePlaceholder > img {
+    width: 55px;
+    height: 55px;
   }
 }
