@@ -1,11 +1,11 @@
 .profilePageContainer {
-  width: 985px;
+  width: 100%;
   position: relative;
   top: 10px;
-  left: 60px;
   display: flex;
   flex-direction: column;
   gap: 60px;
+  padding: 0px 10px 0px 60px;
   margin-bottom: 50px;
 }
 
@@ -73,7 +73,6 @@
   display: flex;
   flex-direction: column;
   gap: 80px;
-  width: 538px;
 }
 
 .profileSection2 h2 {
@@ -103,9 +102,8 @@
   flex-direction: column;
   position: relative;
   gap: 60px;
-  width: 662;
-  top: 50px;
-  left: 507px;
+  width: 100%;
+  padding: 50px 0px 0px 507px;
 }
 
 .settingsBasic {
@@ -145,4 +143,58 @@
 
 .settingsDocuments h2 {
   padding-left: 0px;
+}
+
+@media (max-width: 1000px) {
+  .settingsContainer {
+    padding: 0px;
+    align-items: center;
+  }
+
+  .settingsDocuments {
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .profilePageContainer {
+    top: 68px;
+    padding: 0px 16px 80px 16px;
+    margin-bottom: 0px;
+    gap: 39px;
+  }
+
+  .tabs {
+    gap: 0px;
+    justify-content: space-between;
+  }
+
+  .tab {
+    padding: 0px;
+    font-size: 20px;
+  }
+
+  .profileContainer {
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .profileSection1 {
+    gap: 16px;
+  }
+
+  .profileSection2 {
+    width: 100%;
+    gap: 60px;
+  }
+
+  .textarea {
+    height: 100px;
+  }
+
+  .profileSection2 h2 {
+    font-size: 20px;
+  }
 }
