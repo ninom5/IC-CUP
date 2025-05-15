@@ -1,0 +1,12 @@
+.autoComplete-container > .map-search > input {
+  color: var(--background-black, #222);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border-radius: 6px;
+  border: 1px solid var(--stroke-grey, #c0bebe);
+  background: var(--background-white, #fafafa);
+  padding: 8px 15px;
+  border-radius: 10px !important;
+}

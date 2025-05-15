@@ -1,4 +1,5 @@
 import c from "./FourthStep.module.css";
+import "./FourthStepAutoCompleteInput.css";
 import { StepProps } from "../../../types/index";
 import { AutoCompleteInput } from "@components/AutoCompleteInput/AutoCompleteInput";
 
@@ -55,7 +56,7 @@ export const FourthStep = ({ data, onDataChange }: StepProps) => {
         </label>
       </div>
 
-      <div className={c.inputContainer}>
+      <div className={`${c.inputContainer} autoComplete-container`}>
         <h3>Lokacija</h3>
         <AutoCompleteInput onPlaceResolved={handlePlaceResolved} />
       </div>

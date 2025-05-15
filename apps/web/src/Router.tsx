@@ -24,6 +24,12 @@ export const Router = () => {
           <Route element={<SearchBarLayout />}>
             <Route path={routes.VEHICLES} element={<VehiclesPage />} />
             <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
+            <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
+            <Route path={routes.USER_VEHICLES} element={<UserVehiclesPage />} />
+            <Route
+              path={routes.USER_VEHICLE_PROFILE}
+              element={<UserVehiclePage />}
+            />
           </Route>
 
           <Route element={<ProtectedRoute />}>
@@ -43,12 +49,6 @@ export const Router = () => {
           <Route element={<NavBarLayout />}>
             <Route path={routes.HOME} element={<HomePage />} />
             <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
-            <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
-            <Route path={routes.USER_VEHICLES} element={<UserVehiclesPage />} />
-            <Route
-              path={routes.USER_VEHICLE_PROFILE}
-              element={<UserVehiclePage />}
-            />
             <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
           </Route>
         </Route>
