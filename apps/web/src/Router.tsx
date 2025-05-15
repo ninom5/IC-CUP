@@ -31,6 +31,12 @@ export const Router = () => {
               element={<UserVehiclePage />}
             />
           </Route>
+
+          <Route element={<NavBarLayout />}>
+            <Route path={routes.HOME} element={<HomePage />} />
+            <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
+            <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
+          </Route>
         </Route>
 
         <Route element={<ProtectedRoute />}>
@@ -46,12 +52,6 @@ export const Router = () => {
         </Route>
 
         <Route path={routes.BLOCKED} element={<BlockedPage />} />
-
-        <Route element={<NavBarLayout />}>
-          <Route path={routes.HOME} element={<HomePage />} />
-          <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
-          <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
-        </Route>
       </Routes>
     </BrowserRouter>
   );
