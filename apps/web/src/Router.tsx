@@ -22,7 +22,6 @@ export const Router = () => {
       <Routes>
         <Route element={<MobileLayout />}>
           <Route element={<SearchBarLayout />}>
-            <Route path={routes.HOME} element={<HomePage />} />
             <Route path={routes.VEHICLES} element={<VehiclesPage />} />
             <Route path={routes.BECOME_HOST} element={<BecomeHostPage />} />
             <Route path={routes.ADD_VEHICLE} element={<AddVehiclePage />} />
@@ -49,6 +48,7 @@ export const Router = () => {
         <Route path={routes.BLOCKED} element={<BlockedPage />} />
 
         <Route element={<NavBarLayout />}>
+          <Route path={routes.HOME} element={<HomePage />} />
           <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
           <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
         </Route>
