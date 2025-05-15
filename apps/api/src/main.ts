@@ -33,6 +33,7 @@ async function bootstrap() {
       'http://localhost:5173',
       'http://localhost:5174',
       'http://3.76.29.30',
+      'http://localhost:3000',
     ],
     methods: 'GET,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization',
