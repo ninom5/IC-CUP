@@ -1,9 +1,23 @@
+import { useState } from "react";
 import c from "./Blogs.module.css";
+import { blackArrowRight, blackArrowLeft } from "@assets/images";
 
 export const Blogs = () => {
+  const [slide, setSlide] = useState<"left" | "right">("left");
+
+  const handleSlide = (direction: "left" | "right") => {
+    setSlide(direction);
+  };
+
   return (
     <section className={c.blogsSection}>
-      <div className={c.blogsContainer}>
+      <div
+        className={c.blogsContainer}
+        style={{
+          transform: `translateX(${slide === "right" ? "-50%" : "0"})`,
+          transition: "transform 0.5s ease-in-out",
+        }}
+      >
         <div className={c.blogItem}>
           <div className={c.blogText}>
             <h2>ŠTO JE KOLO I KAKO JE NASTALO?</h2>
@@ -39,7 +53,37 @@ export const Blogs = () => {
 
           <button>SAZNAJ VIŠE</button>
         </div>
+
+        <div className={c.blogItem}>
+          <div className={c.blogText}>
+            <h2>TVOJA VOŽNJA ZA SVAKU PRILIKU</h2>
+
+            <h3>ŽELIŠ NEŠTO DRUGAČIJE ZA SVOJ POSEBAN DAN U ŽIVOTU?</h3>
+
+            <p>
+              Kolo ti nudi mogućnost da svoj poseban dan pamtiš i po posebnom
+              prijevozu. Od elegantnih vozila ako želiš dodati dašak luksuza pa
+              do oldtimera ako želiš da tvoj dan bude putovanje kroz vrijeme.
+            </p>
+          </div>
+
+          <button>SAZNAJ VIŠE</button>
+        </div>
       </div>
+
+      <img
+        src={blackArrowRight}
+        alt="crna strelica u desno"
+        className={`${c.blackArrowRight} ${slide === "right" ? "" : c.display}`}
+        onClick={() => handleSlide("right")}
+      />
+
+      <img
+        src={blackArrowLeft}
+        alt="crna strelica u lijevo"
+        className={`${c.blackArrowLeft} ${slide === "left" ? "" : c.display}`}
+        onClick={() => handleSlide("left")}
+      />
     </section>
   );
 };
