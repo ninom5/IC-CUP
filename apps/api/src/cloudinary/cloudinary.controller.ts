@@ -46,7 +46,7 @@ export class CloudinaryController {
   }
 
   @Post('upload/raw-one-or-more')
-  @UseInterceptors(FilesInterceptor('pdfs'))
+  @UseInterceptors(FilesInterceptor('update_pdf'))
   async uploadOneOrMoreFiles(@UploadedFiles() files: Express.Multer.File[]) {
     if (!files || files.length === 0) {
       throw new BadRequestException('At least one file is required');
