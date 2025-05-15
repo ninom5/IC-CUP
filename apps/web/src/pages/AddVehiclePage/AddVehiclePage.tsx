@@ -148,6 +148,14 @@ export const AddVehiclePage = () => {
         {steps[formStep]}
 
         <div className={c.buttonContainer}>
+          {formStep > 1 && (
+            <button
+              onClick={() => setFormStep((prev) => prev - 1)}
+              disabled={createVehicleMutation.isPending}
+            >
+              Nazad
+            </button>
+          )}
           {formStep < 4 ? (
             <button onClick={handleNextStep}>Nastavi</button>
           ) : (
@@ -156,14 +164,6 @@ export const AddVehiclePage = () => {
               disabled={createVehicleMutation.isPending}
             >
               {createVehicleMutation.isPending ? "Spremanje..." : "Završi"}
-            </button>
-          )}
-          {formStep > 1 && (
-            <button
-              onClick={() => setFormStep((prev) => prev - 1)}
-              disabled={createVehicleMutation.isPending}
-            >
-              Nazad
             </button>
           )}
         </div>

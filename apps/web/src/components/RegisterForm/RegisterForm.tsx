@@ -276,8 +276,10 @@ export const RegisterForm = () => {
                     name="phoneNumber"
                     value={registerData.phoneNumber}
                     onChange={handleChange}
-                    type="number"
+                    type="text"
                     placeholder="091 **** ***"
+                    minLength={8}
+                    maxLength={15}
                     required
                   />
                 </div>
