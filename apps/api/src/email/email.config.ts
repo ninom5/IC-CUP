@@ -2,11 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { join } from 'path';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { MailerOptions, MailerOptionsFactory } from '@nestjs-modules/mailer';
+import { existsSync } from 'fs';
 
 @Injectable()
 export class EmailConfig implements MailerOptionsFactory {
   createMailerOptions(): MailerOptions {
-    const templatesPath = join(process.cwd(), 'src', 'templates');
+    const rootDir = process.cwd();
+
+    const devPath = join(rootDir, 'templates');
+    const prodPath = join(rootDir, 'dist', 'templates');
+
+    const templatesPath = existsSync(prodPath) ? prodPath : devPath;
 
     return {
       transport: {

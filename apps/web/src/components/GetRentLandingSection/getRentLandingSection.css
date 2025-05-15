@@ -1,0 +1,67 @@
+.get-rent-section {
+  display: flex;
+  width: 100%;
+  height: auto;
+}
+.get-rent-section > div {
+  position: relative;
+  width: 50%;
+  margin: 0;
+  padding: 0;
+}
+.get-rent-section img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.get-rent-section h2 {
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  font-size: 64px;
+  font-weight: 600;
+  font-family: "Goodly";
+  padding: 20px;
+}
+
+.get-rent-section > div:first-child h2 {
+  top: 10%;
+  left: 10%;
+}
+
+.get-rent-section > div:last-child h2 {
+  bottom: 10%;
+  right: 10%;
+}
+
+@media (min-width: 1000px) and (max-width: 1300px) {
+  .get-rent-section h2 {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 1000px) {
+  .get-rent-section h2 {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 700px) {
+  .get-rent-section h2 {
+    font-size: 20px;
+  }
+  .get-rent-section > div:last-child h2 {
+    bottom: 1%;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 500px) {
+  .get-rent-section h2 {
+    font-size: 16px;
+    padding: 0;
+    font-weight: 400;
+  }
+  .get-rent-section > div:last-child h2 {
+    bottom: 1%;
+  }
+}

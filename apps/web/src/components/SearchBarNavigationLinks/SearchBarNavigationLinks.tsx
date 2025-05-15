@@ -11,7 +11,7 @@ export const SearchBarNavigationLinks = () => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const {
-    data: { token, isExpired },
+    data: { id, token, isExpired },
     updateToken,
   } = useToken();
 
@@ -44,7 +44,9 @@ export const SearchBarNavigationLinks = () => {
             <img src={profileLogo} alt="slikica profila" />
             {showProfileMenu && (
               <div className="profile-menu">
-                <p>Uđi u profil</p>
+                <button onClick={() => navigate(`/profile/${id}`)}>
+                  Uđi u profil
+                </button>
                 <button onClick={handleLogout}>Odjavi se</button>{" "}
               </div>
             )}
