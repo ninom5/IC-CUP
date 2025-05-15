@@ -39,3 +39,5 @@ export { default as arrowIcon } from "./arrowIcon.svg";
 export { default as stopSign } from "./stopSign.svg";
 export { default as howItWorksPath } from "./howItWorksPath.svg";
 export { default as howItWorksCar } from "./howItWorksCar.svg";
+export { default as rent } from "./rent.svg";
+export { default as get } from "./get.svg";

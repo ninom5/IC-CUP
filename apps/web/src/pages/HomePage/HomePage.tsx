@@ -1,4 +1,10 @@
-import { Blogs, HeroSection, HowItWorks, Neanderthal } from "@components/index";
+import {
+  Blogs,
+  HeroSection,
+  HowItWorks,
+  Neanderthal,
+  GetRentLandingSection,
+} from "@components/index";
 
 export const HomePage = () => {
   return (
@@ -8,6 +14,7 @@ export const HomePage = () => {
       <Blogs />
       <HowItWorks />
 
+      <GetRentLandingSection />
       {/* <Footer /> */}
     </main>
   );

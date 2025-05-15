@@ -1,0 +1,35 @@
+.get-rent-section {
+  display: flex;
+  width: 100%;
+  height: auto;
+}
+.get-rent-section > div {
+  position: relative;
+  width: 50%;
+  margin: 0;
+  padding: 0;
+}
+.get-rent-section img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.get-rent-section h2 {
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  font-size: 64px;
+  font-weight: 600;
+  font-family: "Goodly";
+  padding: 20px;
+}
+
+.get-rent-section > div:first-child h2 {
+  top: 50px;
+  left: 100px;
+}
+
+.get-rent-section > div:last-child h2 {
+  bottom: 50px;
+  right: 100px;
+}
