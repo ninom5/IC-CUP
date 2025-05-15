@@ -12,9 +12,9 @@ export const HomePage = () => {
       <HeroSection />
       <Neanderthal />
       <Blogs />
+      <GetRentLandingSection />
       <HowItWorks />
 
-      <GetRentLandingSection />
       {/* <Footer /> */}
     </main>
   );
