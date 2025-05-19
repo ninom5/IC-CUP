@@ -78,3 +78,18 @@
 .reviews-section {
   margin-top: 100px;
 }
+
+@media (min-width: 700px) and (max-width: 1250px) {
+  .vehicle-description {
+    width: 100%;
+  }
+  .car-rating {
+    padding: 20px 0;
+  }
+}
+
+@media (min-width: 350px) and (max-width: 800px) {
+  .vehicle-description {
+    width: 100%;
+  }
+}

@@ -7,13 +7,14 @@ import {
   getUserByEmail,
   useUploadImages,
 } from "@api/index";
-import "./registerForm.css";
+import "./RegisterPage.css";
 import { useAuthContext } from "@hooks/useAuthContext";
 import { Spinner } from "@components/index";
+import { RegisterStep1 } from "@components/RegisterForm/RegisterSteps/RegisterStep1";
 import { RegisterStep2 } from "@components/RegisterForm/RegisterSteps/RegisterStep2";
 import { RegisterStep3 } from "@components/RegisterForm/RegisterSteps/RegisterStep3";
 
-export const RegisterForm = () => {
+export const RegisterPage = () => {
   const { mutateAsync: uploadImages } = useUploadImages();
   const { mutateAsync: uploadFiles } = useUploadFiles();
   const { setShowLogin, setShowRegister } = useAuthContext();
@@ -205,111 +206,10 @@ export const RegisterForm = () => {
 
           <form onSubmit={handleSubmit} className="register-form">
             {formStep === 1 && (
-              <>
-                <div className="form-group">
-                  <label>Ime</label>
-                  <input
-                    id="firstName"
-                    name="firstName"
-                    value={registerData.firstName}
-                    onChange={handleChange}
-                    type="text"
-                    placeholder="Ivan"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Prezime</label>
-                  <input
-                    id="lastName"
-                    name="lastName"
-                    value={registerData.lastName}
-                    onChange={handleChange}
-                    type="text"
-                    placeholder="Horvat"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Lozinka</label>
-                  <input
-                    id="password"
-                    name="password"
-                    value={registerData.password}
-                    onChange={handleChange}
-                    type="password"
-                    placeholder="********"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Ponovi lozinku</label>
-                  <input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    value={registerData.confirmPassword}
-                    onChange={handleChange}
-                    type="password"
-                    placeholder="********"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    value={registerData.email}
-                    onChange={handleChange}
-                    type="email"
-                    placeholder="ivan@horvat.com"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Broj mobitela</label>
-                  <input
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    value={registerData.phoneNumber}
-                    onChange={handleChange}
-                    type="text"
-                    placeholder="091 **** ***"
-                    minLength={8}
-                    maxLength={15}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="address">Adresa</label>
-                  <input
-                    id="address"
-                    name="address"
-                    value={registerData.address}
-                    onChange={handleChange}
-                    type="text"
-                    placeholder="Adresa"
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label>Datum rođenja</label>
-                  <input
-                    id="dateOfBirth"
-                    name="dateOfBirth"
-                    value={registerData.dateOfBirth}
-                    onChange={handleChange}
-                    type="date"
-                  />
-                </div>
-              </>
+              <RegisterStep1
+                registerData={registerData}
+                handleChange={handleChange}
+              />
             )}
 
             {formStep === 2 && (

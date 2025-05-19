@@ -14,4 +14,6 @@ export const routes: RouteType = {
   BLOCKED: "/blocked",
   NOT_FOUND: "*",
   PROFILE_PAGE: "/profile/:id",
+  LOGIN_PAGE: "/login",
+  REGISTER_PAGE: "/register",
 };

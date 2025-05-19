@@ -39,7 +39,7 @@ export const VehicleInfoWindow = ({
             "još nema recenzija za ovo vozilo"
           )}
         </p>
-        <Link to={`/car/${vehicle.id}`}>Provjeri detalje</Link>
+        <Link to={`/vehicle/${vehicle.id}`}>Provjeri detalje</Link>
       </div>
     </InfoWindow>
   );

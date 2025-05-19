@@ -1,0 +1,30 @@
+.navBar {
+  display: none;
+  top: 0;
+  justify-content: space-around;
+  align-items: center;
+  border: none;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: var(--background-white);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  padding: 10px 0;
+}
+
+.navBar > a {
+  text-decoration: none;
+  color: var(--background-black);
+  font-size: 20px;
+}
+
+.navBar > a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1000px) {
+  .navBar {
+    display: flex;
+  }
+}
