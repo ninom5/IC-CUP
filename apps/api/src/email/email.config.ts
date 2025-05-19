@@ -12,9 +12,10 @@ export class EmailConfig implements MailerOptionsFactory {
     console.log('root dir', rootDir);
 
     const devPath = join(rootDir, 'templates');
-    const prodPath = join(rootDir, 'dist', 'templates');
+    const prodPath = join(rootDir, 'dist', 'apps', 'api', 'templates');
 
     const templatesPath = existsSync(prodPath) ? prodPath : devPath;
+    console.log('Templates path being used:', templatesPath);
 
     return {
       transport: {
