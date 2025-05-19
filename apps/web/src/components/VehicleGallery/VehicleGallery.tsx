@@ -1,4 +1,4 @@
-import { VehicleType } from "types/vehicle.type";
+import { VehicleType } from "types";
 import "./vehicleGallery.css";
 import { useState } from "react";
 

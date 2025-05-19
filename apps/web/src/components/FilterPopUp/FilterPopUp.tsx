@@ -10,9 +10,9 @@ import {
 } from "@assets/images/index";
 import "./filterPopUp.css";
 import { FilterRow, ButtonAccent } from "@components/index";
-import { FilterPopUpProps, FiltersType } from "@types/FilterTypes/filter.type";
+import { FilterPopUpProps, FiltersType } from "types";
 import { useEffect, useState } from "react";
-import { useFiltersContext } from "@hooks/useFiltersContext";
+import { useFiltersContext } from "@hooks/index";
 
 const carCategories = [
   { label: "Coupe", value: "coupe", img: coupeSvg },
