@@ -4,7 +4,7 @@ import {
   AddVehiclePage,
   BecomeHostPage,
   VehiclesPage,
-  HomePage,
+  LandingPage,
   NotFoundPage,
   ProfilePage,
   UserVehiclesPage,
@@ -49,7 +49,7 @@ export const Router = () => {
           <Route path={routes.BLOCKED} element={<BlockedPage />} />
 
           <Route element={<NavBarLayout />}>
-            <Route path={routes.HOME} element={<HomePage />} />
+            <Route path={routes.HOME} element={<LandingPage />} />
             <Route path={routes.PROFILE_PAGE} element={<ProfilePage />} />
             <Route path={routes.NOT_FOUND} element={<NotFoundPage />} />
             <Route path={routes.REGISTER_PAGE} element={<RegisterPage />} />

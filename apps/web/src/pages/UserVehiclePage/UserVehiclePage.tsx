@@ -3,7 +3,7 @@ import c from "./UserVehiclePage.module.css";
 import { useParams } from "react-router-dom";
 import starIcon from "../../assets/images/starIcon.svg";
 import {
-  AddVehicleAvailibility,
+  AddVehicleAvailability,
   Footer,
   VehicleDescriptionEdit,
   VehicleLicenseImgEdit,
@@ -66,7 +66,7 @@ export const UserVehiclePage = () => {
             </h3>
           </div>
 
-          <AddVehicleAvailibility vehicleId={id || ""} />
+          <AddVehicleAvailability vehicleId={id || ""} />
 
           <VehicleDescriptionEdit
             description={data.description}

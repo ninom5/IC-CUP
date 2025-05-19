@@ -1,5 +1,5 @@
 import { getMinDate } from "@utils/getMinDate.util";
-import c from "./AddVehicleAvailibility.module.css";
+import c from "./AddVehicleAvailability.module.css";
 import { useRef } from "react";
 import { toast } from "react-toastify";
 import xIcon from "../../assets/images/xIcon.svg";
@@ -8,7 +8,7 @@ import { useFetchVehicleAvailabilities } from "@api/Availability/useFetchVehicle
 import { useCreateAvailability } from "@api/Availability/useCreateAvailability";
 import { useDeleteVehicleAvailability } from "@api/Availability/useDeleteVehicleAvailability";
 
-export const AddVehicleAvailibility = ({
+export const AddVehicleAvailability = ({
   vehicleId,
 }: {
   vehicleId: string;
