@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import "./autoCompleteInput.css";
 import { toast } from "react-toastify";
-import { extractAddressComponents } from "@utils/extractAddressComponents.util";
 import { useMapsLibrary } from "@vis.gl/react-google-maps";
 
 type AutocompleteProps = {
@@ -66,10 +65,7 @@ export const AutoCompleteInput = ({
         }
 
         const addressComponents = results[0].address_components;
-        console.log(addressComponents);
 
-        const adr = extractAddressComponents(addressComponents);
-        console.log(adr);
         onPlaceResolved?.(place, addressComponents);
       });
     });

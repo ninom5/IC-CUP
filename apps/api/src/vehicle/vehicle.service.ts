@@ -297,37 +297,6 @@ export class VehicleService {
     return vehiclesWithRatings;
   }
 
-  // async findAvailable(vehicleFiltersDto: VehicleFiltersDto) {
-  //   const filtersStartDate = new Date(vehicleFiltersDto.startDate);
-  //   const filtersEndDate = new Date(vehicleFiltersDto.endDate);
-  //   filtersEndDate.setHours(23, 59, 59, 999);
-
-  //   return this.prisma.vehicle.findMany({
-  //     where: {
-  //       isVerified: true,
-  //       rentals: {
-  //         none: {
-  //           AND: [
-  //             {
-  //               startDate: { lte: filtersEndDate },
-  //               endDate: { gte: filtersStartDate },
-  //               status: {
-  //                 in: ['APPROVED', 'PENDING', 'COMPLETED'],
-  //               },
-  //             },
-  //           ],
-  //         },
-  //       },
-  //       availabilities: {
-  //         some: {
-  //           startDate: { lte: filtersStartDate },
-  //           endDate: { gte: filtersEndDate },
-  //         },
-  //       },
-  //     },
-  //   });
-  // }
-
   async findUserVehicle(id: string) {
     const vehicle = await this.prisma.vehicle.findUnique({
       where: { id },
@@ -337,6 +306,7 @@ export class VehicleService {
             firstName: true,
             lastName: true,
             personPhoto: true,
+            email: true,
           },
         },
         availabilities: true,

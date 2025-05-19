@@ -9,6 +9,8 @@ export class EmailConfig implements MailerOptionsFactory {
   createMailerOptions(): MailerOptions {
     const rootDir = process.cwd();
 
+    console.log('root dir', rootDir);
+
     const devPath = join(rootDir, 'templates');
     const prodPath = join(rootDir, 'dist', 'templates');
 
