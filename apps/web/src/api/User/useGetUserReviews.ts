@@ -1,5 +1,5 @@
 import { ReviewCardData } from "types";
-import { api } from "./base";
+import { api } from "@api/index";
 import { useQuery } from "@tanstack/react-query";
 
 const getUserReviews = async (userId: string): Promise<ReviewCardData[]> => {

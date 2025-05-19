@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { api } from "./base";
+import { api } from "@api/index";
 import { toast } from "react-toastify";
-import { CloudinaryFileResponseType, VehicleData } from "../types/index";
-import { uploadFiles } from "./useUploadImages";
+import { CloudinaryFileResponseType, VehicleData } from "types";
+import { uploadFiles } from "@api/index";
 
 const updateVehicle = async ({
   id,

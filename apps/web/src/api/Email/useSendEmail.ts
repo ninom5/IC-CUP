@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { api } from "./base";
+import { api } from "@api/index";
 import { EmailSendType } from "types";
 import { toast } from "react-toastify";
 

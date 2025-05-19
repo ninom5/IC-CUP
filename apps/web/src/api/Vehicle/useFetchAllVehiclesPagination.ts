@@ -1,5 +1,5 @@
 import { VehicleType } from "types/vehicle.type";
-import { api } from "./base";
+import { api } from "@api/index";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 const fetchAllVehiclesPagination = async (

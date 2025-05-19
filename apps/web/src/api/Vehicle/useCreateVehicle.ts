@@ -1,8 +1,8 @@
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
-import { VehicleData } from "../types";
-import { api } from "./base";
+import { VehicleData } from "../../types";
+import { api } from "@api/index";
 import { toast } from "react-toastify";
-import { uploadFiles } from "./useUploadImages";
+import { uploadFiles } from "../Cloudinary/useUploadImages";
 
 const createVehicle = async (vehicleData: VehicleData) => {
   if (vehicleData.vehicleLicenseImg && vehicleData.images?.length) {

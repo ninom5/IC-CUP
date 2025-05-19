@@ -4,7 +4,7 @@ import {
   TransmissionTypeEnum,
   VehicleEnum,
 } from "enums";
-import { AvailabilityInterval } from "./vehicleAvailibility.type";
+import { AvailabilityInterval } from "types";
 
 export type VehicleData = {
   ownerId: string;

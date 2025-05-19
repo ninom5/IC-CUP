@@ -4,9 +4,9 @@ import { useRef } from "react";
 import { toast } from "react-toastify";
 import xIcon from "../../assets/images/xIcon.svg";
 import { isIntervalAtLeastOneDay } from "@utils/isIntervalAtLeastOneDay.util";
-import { useFetchVehicleAvailabilities } from "@api/useFetchVehicleAvailabilities";
-import { useCreateAvailability } from "@api/useCreateAvailability";
-import { useDeleteVehicleAvailability } from "@api/useDeleteVehicleAvailability";
+import { useFetchVehicleAvailabilities } from "@api/Availability/useFetchVehicleAvailabilities";
+import { useCreateAvailability } from "@api/Availability/useCreateAvailability";
+import { useDeleteVehicleAvailability } from "@api/Availability/useDeleteVehicleAvailability";
 
 export const AddVehicleAvailibility = ({
   vehicleId,

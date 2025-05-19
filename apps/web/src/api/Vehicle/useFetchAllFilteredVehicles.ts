@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { api } from "./base";
+import { api } from "@api/index";
 
 interface Filters {
   fuelType?: string;
