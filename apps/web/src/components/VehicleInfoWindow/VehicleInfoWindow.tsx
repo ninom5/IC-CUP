@@ -1,6 +1,6 @@
 import { InfoWindow } from "@vis.gl/react-google-maps";
 import { Link } from "react-router-dom";
-import { VehicleType } from "types/vehicle.type";
+import { VehicleType } from "types";
 import "./vehcileInfoWindow.css";
 import { getAverageVehicleRating } from "@utils/getAverageVehicleRating.util";
 

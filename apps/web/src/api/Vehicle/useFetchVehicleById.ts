@@ -1,4 +1,4 @@
-import { VehicleType } from "types/vehicle.type";
+import { VehicleType } from "types";
 import { api } from "@api/index";
 import { useQuery } from "@tanstack/react-query";
 

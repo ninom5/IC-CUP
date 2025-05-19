@@ -1,4 +1,4 @@
-import { VehicleType, VehicleType2 } from "types/vehicle.type";
+import { VehicleType, VehicleType2 } from "types";
 import { useNavigate } from "react-router-dom";
 import { getAverageVehicleRating } from "@utils/getAverageVehicleRating.util";
 import c from "./vehicleCard.module.css";
