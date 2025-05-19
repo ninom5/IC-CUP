@@ -1,7 +1,7 @@
 import c from "./FourthStep.module.css";
 import "./FourthStepAutoCompleteInput.css";
-import { StepProps } from "../../../types/index";
-import { AutoCompleteInput } from "@components/AutoCompleteInput/AutoCompleteInput";
+import { StepProps } from "types";
+import { AutoCompleteInput } from "@components/index";
 
 export const FourthStep = ({ data, onDataChange }: StepProps) => {
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {

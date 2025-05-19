@@ -1,4 +1,4 @@
-import { MobileNavBarComponent } from "@components/MobileNavBarComponent/MobileNavBarComponent";
+import { MobileNavBarComponent } from "@components/Nav/MobileNavBarComponent/MobileNavBarComponent";
 import "./mobileNavBar.css";
 import { extractUserInfo } from "@utils/extractUserInfo.util";
 import { SearchIcon, ProfileIcon, CarIcon, RoadIcon } from "@components/icons";

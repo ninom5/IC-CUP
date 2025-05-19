@@ -8,11 +8,13 @@ import {
   useUploadImages,
 } from "@api/index";
 import "./registerForm.css";
-import { useAuthContext } from "@hooks/useAuthContext";
-import { Spinner } from "@components/index";
-import { RegisterStep2 } from "@components/RegisterForm/RegisterSteps/RegisterStep2";
-import { RegisterStep3 } from "@components/RegisterForm/RegisterSteps/RegisterStep3";
-import { RegisterStep1 } from "./RegisterSteps/RegisterStep1";
+import { useAuthContext } from "@hooks/index";
+import {
+  Spinner,
+  RegisterStep1,
+  RegisterStep2,
+  RegisterStep3,
+} from "@components/index";
 
 export const RegisterForm = () => {
   const { mutateAsync: uploadImages } = useUploadImages();

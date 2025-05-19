@@ -1,6 +1,5 @@
 import { notifSvg, profileLogo } from "@assets/images";
-import { LoginForm } from "@components/LoginForm/LoginForm";
-import { RegisterForm } from "@components/RegisterForm/RegisterForm";
+import { RegisterForm, LoginForm } from "@components/index";
 import { useAuthContext, useToken } from "@hooks/index";
 import { routes } from "@routes/index";
 import { Link, useNavigate } from "react-router-dom";
