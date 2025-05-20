@@ -6,7 +6,7 @@ import {
   SecondStep,
   ThirdStep,
 } from "@components/index";
-import { VehicleData } from "../../types";
+import { VehicleData } from "types";
 import { toast } from "react-toastify";
 import { useCreateVehicle } from "@api/index";
 import { extractUserInfo } from "@utils/extractUserInfo.util";
@@ -17,7 +17,7 @@ import {
   TransmissionTypeEnum,
   VehicleEnum,
 } from "enums";
-import xIcon from "../../assets/images/xIcon.svg";
+import xIcon from "assets/images/xIcon.svg";
 import { useNavigate } from "react-router-dom";
 
 export const AddVehiclePage = () => {

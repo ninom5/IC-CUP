@@ -9,7 +9,7 @@ import {
   SedanIcon,
   SuvIcon,
 } from "@components/icons";
-import checkmarkIcon from "../../../assets/images/checkmarkIcon.svg";
+import checkmarkIcon from "assets/images/checkmarkIcon.svg";
 import { CarCategoryEnum } from "enums";
 
 const CAR_CATEGORIES = [
