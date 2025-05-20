@@ -1,8 +1,8 @@
 import c from "./VehicleDescriptionEdit.module.css";
-import pencilIcon from "../../assets/images/pencilIcon.svg";
-import xIcon from "../../assets/images/xIcon.svg";
+import pencilIcon from "assets/images/pencilIcon.svg";
+import xIcon from "assets/images/xIcon.svg";
 import { useState } from "react";
-import { VehicleData } from "../../types/index";
+import { VehicleData } from "types";
 
 export const VehicleDescriptionEdit = ({
   description,

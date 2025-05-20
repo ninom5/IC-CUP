@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@api/index";
-import { AvailabilityInterval } from "../../types/index";
+import { AvailabilityInterval } from "types";
 
 interface ExtendedAvailabilityInterval extends AvailabilityInterval {
   id: string;

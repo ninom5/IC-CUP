@@ -1,7 +1,7 @@
-import { useFetchUserVehicle } from "@api/index";
+import { useFetchUserVehicle, useUpdateVehicle } from "@api/index";
 import c from "./UserVehiclePage.module.css";
 import { useParams } from "react-router-dom";
-import starIcon from "../../assets/images/starIcon.svg";
+import starIcon from "assets/images/starIcon.svg";
 import {
   AddVehicleAvailability,
   Footer,
@@ -10,8 +10,7 @@ import {
   VehiclePriceEdit,
   VehicleRegistrationEdit,
 } from "@components/index";
-import { useUpdateVehicle } from "@api/index";
-import { VehicleData } from "../../types/index";
+import { VehicleData } from "types/index";
 import { toast } from "react-toastify";
 
 export const UserVehiclePage = () => {

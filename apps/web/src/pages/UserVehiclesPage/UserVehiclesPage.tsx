@@ -1,10 +1,10 @@
-import { useFetchUserVehicles } from "@api/User/useFetchUserVehicles";
-import interiorMirror from "../../assets/images/interiorMirror.svg";
+import { useFetchUserVehicles } from "@api/index";
+import interiorMirror from "assets/images/interiorMirror.svg";
 import c from "./UserVehiclesPage.module.css";
-import { extractUserInfo } from "@utils/extractUserInfo.util";
+import { extractUserInfo } from "@utils/index";
 import { useNavigate } from "react-router-dom";
-import starIcon from "../../assets/images/starIcon.svg";
-import pencilIcon from "../../assets/images/pencilIcon.svg";
+import starIcon from "assets/images/starIcon.svg";
+import pencilIcon from "assets/images/pencilIcon.svg";
 import { Footer } from "@components/index";
 
 export const UserVehiclesPage = () => {
