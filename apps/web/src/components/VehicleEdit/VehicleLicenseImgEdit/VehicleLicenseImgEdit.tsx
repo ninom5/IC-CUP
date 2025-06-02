@@ -1,8 +1,8 @@
 import c from "./VehicleLicenseImgEdit.module.css";
-import checkmarkIcon from "../../assets/images/checkmarkIcon.svg";
-import xIcon from "../../assets/images/xIcon.svg";
+import checkmarkIcon from "assets/images/checkmarkIcon.svg";
+import xIcon from "assets/images/xIcon.svg";
 import { useRef, useState } from "react";
-import { VehicleData } from "../../types/index";
+import { VehicleData } from "types";
 
 export const VehicleLicenseImgEdit = ({
   handleUpdateVehicle,

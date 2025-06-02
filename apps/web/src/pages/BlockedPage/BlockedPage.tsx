@@ -1,4 +1,4 @@
-import { LoginForm } from "@components/LoginForm/LoginForm";
+import { LoginForm } from "@components/index";
 import { useToken } from "@hooks/index";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";

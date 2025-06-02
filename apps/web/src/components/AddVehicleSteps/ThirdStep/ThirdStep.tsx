@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { StepProps } from "../../../types";
+import { StepProps } from "types";
 import c from "./ThirdStep.module.css";
-import imagePlaceholder from "../../../assets/images/imagePlaceholder.svg";
+import imagePlaceholder from "assets/images/imagePlaceholder.svg";
 
 export const ThirdStep = ({ data, onDataChange }: StepProps) => {
   const inputFilesRef = useRef<HTMLInputElement>(null);

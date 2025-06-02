@@ -1,4 +1,4 @@
-import vehicleAddedIcon from "../../../assets/images/vehicleAddedIcon.svg";
+import vehicleAddedIcon from "assets/images/vehicleAddedIcon.svg";
 
 export const VehicleAddedMessage = () => {
   return (

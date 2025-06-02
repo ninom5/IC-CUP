@@ -1,8 +1,8 @@
-import { StepProps } from "../../../types";
+import { StepProps } from "types";
 import c from "./SecondStep.module.css";
-import gearBoxIcon from "../../../assets/images/gearboxIcon.svg";
-import seatIcon from "../../../assets/images/seatIcon.svg";
-import fuelIcon from "../../../assets/images/fuelIcon.svg";
+import gearBoxIcon from "assets/images/gearboxIcon.svg";
+import seatIcon from "assets/images/seatIcon.svg";
+import fuelIcon from "assets/images/fuelIcon.svg";
 import {
   AuxIcon,
   BluetoothIcon,

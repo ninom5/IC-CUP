@@ -1,14 +1,16 @@
-import { getMinDate } from "@utils/getMinDate.util";
-import c from "./AddVehicleAvailibility.module.css";
+import { getMinDate } from "@utils/index";
+import c from "./AddVehicleAvailability.module.css";
 import { useRef } from "react";
 import { toast } from "react-toastify";
-import xIcon from "../../assets/images/xIcon.svg";
+import xIcon from "assets/images/xIcon.svg";
 import { isIntervalAtLeastOneDay } from "@utils/isIntervalAtLeastOneDay.util";
-import { useFetchVehicleAvailabilities } from "@api/Availability/useFetchVehicleAvailabilities";
-import { useCreateAvailability } from "@api/Availability/useCreateAvailability";
-import { useDeleteVehicleAvailability } from "@api/Availability/useDeleteVehicleAvailability";
+import {
+  useDeleteVehicleAvailability,
+  useCreateAvailability,
+  useFetchVehicleAvailabilities,
+} from "@api/index";
 
-export const AddVehicleAvailibility = ({
+export const AddVehicleAvailability = ({
   vehicleId,
 }: {
   vehicleId: string;

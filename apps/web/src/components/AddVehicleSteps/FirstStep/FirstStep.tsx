@@ -1,6 +1,6 @@
-import { StepProps } from "../../../types";
+import { StepProps } from "types";
 import c from "./FirstStep.module.css";
-import { getMinDate } from "@utils/getMinDate.util";
+import { getMinDate } from "@utils/index";
 import { useRef } from "react";
 import {
   CabrioletIcon,
@@ -9,7 +9,7 @@ import {
   SedanIcon,
   SuvIcon,
 } from "@components/icons";
-import checkmarkIcon from "../../../assets/images/checkmarkIcon.svg";
+import checkmarkIcon from "assets/images/checkmarkIcon.svg";
 import { CarCategoryEnum } from "enums";
 
 const CAR_CATEGORIES = [

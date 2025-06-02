@@ -1,10 +1,9 @@
-import { getMinDate } from "@utils/getMinDate.util";
+import { getMinDate, convertStringToDate } from "@utils/index";
 import c from "./VehicleRegistrationEdit.module.css";
-import pencilIcon from "../../assets/images/pencilIcon.svg";
-import xIcon from "../../assets/images/xIcon.svg";
+import pencilIcon from "assets/images/pencilIcon.svg";
+import xIcon from "assets/images/xIcon.svg";
 import { useState } from "react";
-import { convertStringToDate } from "@utils/convertStringToDate.util";
-import { VehicleData } from "../../types/index";
+import { VehicleData } from "types";
 
 export const VehicleRegistrationEdit = ({
   registration,

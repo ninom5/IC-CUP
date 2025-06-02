@@ -20,3 +20,4 @@ export * from "./Vehicle/useFetchVehicleById";
 export * from "./Vehicle/useFetchAllVehiclesPagination";
 export * from "./Rental/useCreateRentalPayment";
 export * from "./Email/useSendEmail";
+export * from "./Availability/useDeleteVehicleAvailability";

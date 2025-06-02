@@ -1,4 +1,4 @@
-import c from "./HomePage.module.css";
+import c from "./LandingPage.module.css";
 import { NavLink } from "react-router-dom";
 import koloLogo from "assets/images/kolo-logo.svg";
 import {
@@ -11,7 +11,7 @@ import {
   GetRentLandingSection,
 } from "@components/index";
 
-export const HomePage = () => {
+export const LandingPage = () => {
   return (
     <main>
       <nav className={c.navBar}>
